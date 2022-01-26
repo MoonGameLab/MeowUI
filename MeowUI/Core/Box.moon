@@ -1,5 +1,5 @@
 ----
--- A box class that wraps a table
+-- A box class (rectangle)
 -- @classmod Box
 -- @usage b = Box!
 
@@ -66,3 +66,4 @@ class Box
       "width and height must be of type number."
     @width, @height = width, height
 
+Box
