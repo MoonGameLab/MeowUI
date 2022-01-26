@@ -1,0 +1,4 @@
+----
+-- A box class that wraps a table
+-- @classmod Box
+-- @usage b = Box!
