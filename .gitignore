@@ -39,12 +39,6 @@ luac.out
 *.x86_64
 *.hex
 
-/test
-/main.lua
-/dox
-/btn.lua
-btn.lua
-/UITheme.lua
-/ctn.lua
-/font
-/debugGraph.lua
+
+/main.moon
+/run

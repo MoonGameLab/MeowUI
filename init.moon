@@ -3,4 +3,10 @@
 -- * Credit : wilhantian (https://github.com/wilhantian)
 --@author Tourahi Amine  (tourahi.amine@gmail.com)
 --@license TODO
---@module ldtkLove
+--@module MeowUI
+
+
+export MeowUI = {
+  cwd: (...)\gsub('%.init$', '') .. "."
+}
+
