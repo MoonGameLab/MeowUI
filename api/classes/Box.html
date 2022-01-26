@@ -26,12 +26,23 @@
 <br/>
 <h1>MeowUI</h1>
 
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
 
+<h2>Contents</h2>
+<ul>
+<li><a href="#Methods">Methods</a></li>
+</ul>
 
 
 <h2>Classes</h2>
 <ul class="nowrap">
   <li><strong>Box</strong></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/ldtkLove.html">ldtkLove</a></li>
 </ul>
 <h2>Topics</h2>
 <ul class="">
@@ -54,18 +65,281 @@
     </ul>
 
 
+<h2><a href="#Methods">Methods</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Box\new">Box\new (x, y, width, height)</a></td>
+	<td class="summary">constructor passed a pos (<code>x</code>, <code>y</code>) and <code>width</code>/<code>height</code> which must be <code>numbers</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Box\contains">Box\contains (x, y)</a></td>
+	<td class="summary">tests if a given point is inside the box.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Box\getPosition">Box\getPosition ()</a></td>
+	<td class="summary">getter for the box position.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Box\getSize">Box\getSize ()</a></td>
+	<td class="summary">getter for the box size.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Box\getWidth">Box\getWidth ()</a></td>
+	<td class="summary">getter for the box width.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Box\getHeight">Box\getHeight ()</a></td>
+	<td class="summary">getter for the box height.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Box\setPosition">Box\setPosition (x, y)</a></td>
+	<td class="summary">setter for the box position.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Box\setSize">Box\setSize (width, height)</a></td>
+	<td class="summary">setter for the box size.</td>
+	</tr>
+</table>
 
 <br/>
 <br/>
 
 
+    <h2 class="section-header "><a name="Methods"></a>Methods</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Box\new"></a>
+    <strong>Box\new (x, y, width, height)</strong>
+    </dt>
+    <dd>
+    constructor passed a pos (<code>x</code>, <code>y</code>) and <code>width</code>/<code>height</code> which must be <code>numbers</code>.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Box\contains"></a>
+    <strong>Box\contains (x, y)</strong>
+    </dt>
+    <dd>
+    tests if a given point is inside the box.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Box\getPosition"></a>
+    <strong>Box\getPosition ()</strong>
+    </dt>
+    <dd>
+    getter for the box position.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Box\getSize"></a>
+    <strong>Box\getSize ()</strong>
+    </dt>
+    <dd>
+    getter for the box size.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Box\getWidth"></a>
+    <strong>Box\getWidth ()</strong>
+    </dt>
+    <dd>
+    getter for the box width.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Box\getHeight"></a>
+    <strong>Box\getHeight ()</strong>
+    </dt>
+    <dd>
+    getter for the box height.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Box\setPosition"></a>
+    <strong>Box\setPosition (x, y)</strong>
+    </dt>
+    <dd>
+    setter for the box position.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Box\setSize"></a>
+    <strong>Box\setSize (width, height)</strong>
+    </dt>
+    <dd>
+    setter for the box size.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
 
 
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2022-01-26 01:12:28 </i>
+<i style="float:right;">Last updated 2022-01-26 14:26:05 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

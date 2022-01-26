@@ -1,6 +1,6 @@
 project = 'MeowUI'
 title = 'MeowUI documentation'
-full_description = "Lol"
+full_description = "TODO"
 format = 'markdown'
 backtick_references = true
 file = '.'
