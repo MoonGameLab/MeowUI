@@ -3,8 +3,8 @@ title = 'MeowUI documentation'
 full_description = "TODO"
 format = 'markdown'
 backtick_references = true
-file = '.'
 dir = './api'
+file = {'.',exclude = {'main.moon'}}
 readme = 'README.md'
 
 

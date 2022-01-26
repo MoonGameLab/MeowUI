@@ -1,0 +1,419 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>MeowUI documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>MeowUI</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Tables">Tables</a></li>
+<li><a href="#Methods">Methods</a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/Box.html">Box</a></li>
+  <li><a href="../classes/Circle.html">Circle</a></li>
+  <li><strong>Event</strong></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/MeowUI.html">MeowUI</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>Event</code></h1>
+<p>Event class</p>
+<p>
+
+</p>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">e: Event!
+</pre>
+    </ul>
+
+
+<h2><a href="#Tables">Tables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Event.eventsDef">Event.eventsDef</a></td>
+	<td class="summary">a table of event constants.</td>
+	</tr>
+</table>
+<h2><a href="#Methods">Methods</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Event\new">Event\new ()</a></td>
+	<td class="summary">constructor</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Event\getEvent">Event\getEvent (ename)</a></td>
+	<td class="summary">getter for an event from event constants table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Event\drop">Event\drop ()</a></td>
+	<td class="summary">drops all the handlers of an event instance.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Event\on">Event\on (name, callback, target)</a></td>
+	<td class="summary">attaches a handler to an event.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Event\dispatch">Event\dispatch (name, ...)</a></td>
+	<td class="summary">runs the callback associated to an event name.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Event\remove">Event\remove (event, id)</a></td>
+	<td class="summary">removes an event handler.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Event.eventsDef"></a>
+    <strong>Event.eventsDef</strong>
+    </dt>
+    <dd>
+    a table of event constants.
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">UI_MOUSE_DOWN</span>
+
+
+
+        </li>
+        <li><span class="parameter">UI_MOUSE_UP</span>
+
+
+
+        </li>
+        <li><span class="parameter">UI_MOUSE_MOVE</span>
+
+
+
+        </li>
+        <li><span class="parameter">UI_MOUSE_ENTER</span>
+
+
+
+        </li>
+        <li><span class="parameter">UI_MOUSE_LEAVE</span>
+
+
+
+        </li>
+        <li><span class="parameter">UI_WHELL_MOVE</span>
+
+
+
+        </li>
+        <li><span class="parameter">UI_CLICK</span>
+
+
+
+        </li>
+        <li><span class="parameter">UI_DB_CLICK</span>
+
+
+
+        </li>
+        <li><span class="parameter">UI_DB_CLICK</span>
+
+
+
+        </li>
+        <li><span class="parameter">UI_FOCUS</span>
+
+
+
+        </li>
+        <li><span class="parameter">UI_UN_FOCUS</span>
+
+
+
+        </li>
+        <li><span class="parameter">UI_KEY_DOWN</span>
+
+
+
+        </li>
+        <li><span class="parameter">UI_KEY_UP</span>
+
+
+
+        </li>
+        <li><span class="parameter">UI_TEXT_INPUT</span>
+
+
+
+        </li>
+        <li><span class="parameter">UI_TEXT_CHANGE</span>
+
+
+
+        </li>
+        <li><span class="parameter">UI_DRAW</span>
+
+
+
+        </li>
+        <li><span class="parameter">UI_MOVE</span>
+
+
+
+        </li>
+        <li><span class="parameter">UI_ON_ADD</span>
+
+
+
+        </li>
+        <li><span class="parameter">UI_ON_REMOVE</span>
+
+
+
+        </li>
+        <li><span class="parameter">UI_ON_SCROLL</span>
+
+
+
+        </li>
+        <li><span class="parameter">UI_ON_SELECT</span>
+
+
+
+        </li>
+        <li><span class="parameter">TIMER_DONE</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Methods"></a>Methods</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Event\new"></a>
+    <strong>Event\new ()</strong>
+    </dt>
+    <dd>
+    constructor
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Event\getEvent"></a>
+    <strong>Event\getEvent (ename)</strong>
+    </dt>
+    <dd>
+    getter for an event from event constants table.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">ename</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Event\drop"></a>
+    <strong>Event\drop ()</strong>
+    </dt>
+    <dd>
+    drops all the handlers of an event instance.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Event\on"></a>
+    <strong>Event\on (name, callback, target)</strong>
+    </dt>
+    <dd>
+    attaches a handler to an event.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">callback</span>
+            <span class="types"><span class="type">function</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">target</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        handler
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Event\dispatch"></a>
+    <strong>Event\dispatch (name, ...)</strong>
+    </dt>
+    <dd>
+    runs the callback associated to an event name.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">...</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         (params)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Event\remove"></a>
+    <strong>Event\remove (event, id)</strong>
+    </dt>
+    <dd>
+    removes an event handler.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">event</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">id</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2022-01-26 22:45:59 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
