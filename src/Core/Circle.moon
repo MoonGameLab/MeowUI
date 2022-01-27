@@ -40,32 +40,32 @@ class Circle
     if pointToPointDist(@x, @y, x, y) < @radius then return true
     false
 
-  --- getter for the circle's' position.
+  --- getter for the circle position.
   -- @treturn table
   getPosition: =>
     @x, @y
 
-  --- getter for the circle's' x position.
+  --- getter for the circle x position.
   -- @treturn number
   getX: =>
     @x
 
-  --- getter for the circle's' y position.
+  --- getter for the circle y position.
   -- @treturn number
   getY: =>
     @y
 
-  --- getter for the circle's' radius.
+  --- getter for the circle radius.
   -- @treturn number
   getRadius: =>
     @radius
 
-  --- getter for the circle's' radius.
+  --- getter for the circle radius.
   -- @treturn number
   getSize: =>
     @getRadius!
 
-  --- getter for the circle's' width.
+  --- getter for the circle width.
   -- @treturn number
   getWidth: =>
     @getRadius! - @x
