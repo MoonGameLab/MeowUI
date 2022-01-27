@@ -1,7 +1,7 @@
 ----
--- A Chrono class (timer)
+-- A Chrono class (extends @{Singleton})
 -- @classmod Chrono
--- @usage b = Chrono!
+-- @usage c = Chrono.getInstance!
 
 Tinsert   = table.insert
 Utils     = assert require MeowUI.cwd .. "Core.Utils"
