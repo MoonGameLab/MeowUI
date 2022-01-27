@@ -5,8 +5,9 @@
 --@license TODO
 --@module MeowUI
 
+path = ...
 
 export MeowUI = {
-  cwd: (...)\gsub('%.init$', '') .. "."
+  cwd: path .. ".src."
 }
 

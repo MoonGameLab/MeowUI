@@ -4,7 +4,7 @@ full_description = "TODO"
 format = 'markdown'
 backtick_references = true
 dir = './api'
-file = {'.',exclude = {'main.moon'}}
+file = {'.',exclude = {}}
 readme = 'README.md'
 
 

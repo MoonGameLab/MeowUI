@@ -5,7 +5,8 @@
 
 Tinsert = table.insert
 Tremove = table.remove
-Utils = MeowUI.cwd .. "Core.Utils"
+
+Utils = assert require MeowUI.cwd .. "Core.Utils"
 
 class Event
   --- a table of event constants.
