@@ -1,6 +1,6 @@
 ----
 -- A Utils module
--- @module Chrono
+-- @module Utils
 
 import random from love.math
 

@@ -75,6 +75,21 @@ class Circle
   getHeight: =>
     @getRadius! - @y
 
+  --- setter for the circle position.
+  -- @tparam number x
+  -- @tparam number y
+  setPosition: (x, y) =>
+    assert (type(x) == 'number') and (type(y) == 'number'),
+      "x and y must be of type number."
+    @x, @y = x, y
+
+  --- setter for the circle radius.
+  -- @tparam number radius
+  setRadius: (radius) =>
+    assert type(radius) == 'number',
+      "radius must be of type number."
+    @radius = radius
+
 
 
 
