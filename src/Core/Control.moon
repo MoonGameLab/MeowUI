@@ -14,6 +14,9 @@ Tremove = table.remove
 
 class Control
   @root: {}
+
+  --- constructor
+  -- @tparam string boxT Bounding box type[Box, Circle]
   new: (boxT) =>
     @id = Utils.Uid!
     @x = 0
@@ -32,7 +35,7 @@ class Control
     @requireConform = false
     @worldX = 0
     @worldY = 0
-    @timer = nil
+    @chrono = nil
     @onTimerDone = nil
     @radius = nil
 
@@ -42,15 +45,24 @@ class Control
       @boundingBox = Circle!
 
 
+  --- getter for the root control.
+  -- @treturn Control root
   getRoot: =>
     @@root
 
+  --- getter for the boundingbox.
+  -- @treturn table boundingBox
   getBoundingBox: =>
     @boundingBox
 
+  -- @local
   needConforming: (f) =>
     @requireConform = f
 
+  --- converts a local position to window position.
+  -- @tparam number x
+  -- @tparam number y
+  -- @treturn table boundingBox
   localToGlobal: (x = 0, y = 0) =>
     x = x + @x
     y = y + @y
@@ -60,6 +72,10 @@ class Control
 
     x, y
 
+  --- converts a window position to local position.
+  -- @tparam number x
+  -- @tparam number y
+  -- @treturn table boundingBox
   globalToLocal: (x = 0, y = 0) =>
     x = x - @x
     y = y - @y
@@ -69,7 +85,8 @@ class Control
 
     x, y
 
-
+  --- conform the boundingbox size/pos to the content entity.
+  -- @local
   conform: =>
     if not @requireConform then return
     x, y = @localToGlobal!
@@ -93,7 +110,7 @@ class Control
 
     @needConforming false
 
-
+  -- @local
   hitTest: (x, y) =>
     if not @getBoundingBox!\contains x, y then return nil
 
@@ -106,26 +123,37 @@ class Control
     if @enabled then return @
     return nil
 
+  --- setter for the content parent.
+  -- @tparam Content p
   setParent: (p) =>
     @parent = p
     @needConforming true
 
+  --- getter for the content parent.
+  -- @treturn Content p
   getParent: =>
     @parent
 
+  -- @local
   sortChildren: =>
     table.sort @children, (a, b) ->
       a.depth < b.depth
 
+  --- setter for the content depth.
+  -- @tparam number depth
   setDepth: (depth) =>
     @depth = depth
     if @parent then @parent\sortChildren!
 
+  -- @local
   childExists: (id) =>
     for _, child in ipairs @children
       if child.id == id then return true
     false
 
+  --- attach a a child to the content entity.
+  -- @tparam Content child
+  -- @tparam number depth
   addChild: (child, depth) =>
     assert child.__class.__parent == Control,
       "child must be a subclass of Control."
@@ -141,6 +169,9 @@ class Control
     events = child.events
     events\dispatch events\getEvent "UI_ON_ADD"
 
+  --- setter for the content anchor.
+  -- @tparam number x
+  -- @tparam number y
   setAnchor: (x, y) =>
     assert (type(x) == 'number') and (type(y) == 'number'),
       "x and y must be of type number."
@@ -148,29 +179,41 @@ class Control
     @anchorX, @anchorY = x, y
     @needConforming true
 
-
+  --- getter for the content anchor.
+  -- @treturn table anchor
   getAnchor: =>
     @anchorX, @anchorY
 
 
+  --- setter for the content anchorX.
+  -- @tparam number x
   setAnchorX: (x) =>
     assert type(x) == 'number',
       "x must be of type number."
     @anchorX = x
     @needConforming true
 
+  --- getter for the content anchorX.
+  -- @treturn number anchorX
   getAnchorX: =>
     @anchorX
 
+  --- setter for the content anchorY.
+  -- @tparam number y
   setAnchorY: (y) =>
     assert type(y) == 'number',
       "y must be of type number."
     @anchorX = y
     @needConforming true
 
+  --- getter for the content anchorY.
+  -- @treturn number anchorY
   getAnchorY: =>
     @anchorY
 
+  --- setter for the content position.
+  -- @tparam number x
+  -- @tparam number y
   setPos: (x, y) =>
     assert (type(x) == 'number') and (type(y) == 'number'),
       "x and y must be of type number."
@@ -179,9 +222,13 @@ class Control
     @needConforming true
     @events\dispatch @events\getEvent "UI_ON_ADD"
 
+  --- getter for the content position.
+  -- @treturn table position
   getPos: =>
     @x, @y
 
+  --- setter for the content x position.
+  -- @tparam number x
   setX: (x)=>
     assert type(x) == 'number',
       "x must be of type number."
@@ -189,9 +236,13 @@ class Control
     @x = x
     @needConforming true
 
+  --- getter for the content x position.
+  -- @treturn number x
   getX: =>
     @x
 
+  --- setter for the content y position.
+  -- @tparam number y
   setY: (y)=>
     assert type(y) == 'number',
       "y must be of type number."
@@ -199,6 +250,8 @@ class Control
     @y = y
     @needConforming true
 
+  --- getter for the content y position.
+  -- @treturn number y
   getY: =>
     @y
 
@@ -217,12 +270,16 @@ class Control
   getHeight: =>
     @height
 
+  --- setter for the content width.
+  -- @tparam number w
   setWidth: (w) =>
     assert type(w) == 'number',
       "w must be of type number."
     @width = w
     @needConforming true
 
+  --- setter for the content height.
+  -- @tparam number h
   setHeight: (h) =>
     assert type(h) == 'number',
       "h must be of type number."
@@ -239,26 +296,39 @@ class Control
     @width, @height = width, height
     @needConforming true
 
-
+  --- setter for the control enabled property.
+  -- @tparam boolean enabled
   setEnabled: (enabled) =>
     @enabled = enabled
 
+  --- getter for the control enabled property.
+  -- @treturn boolean enabled
   isEnabled: =>
     @enabled
 
+  --- setter for the control childrenEnabled property.
+  -- @tparam boolean enabled
   setChildrenEnabled: (enabled) =>
     @childrenEnabled = enabled
 
+  --- getter for the control childrenEnabled property.
+  -- @treturn boolean childrenEnabled
   isChildrenEnabled: =>
     @childrenEnabled
 
+  --- setter for the control depth.
+  -- @tparam number depth
   setDepth: (depth) =>
     @depth = depth
     if @parent then @parent\sortChildren!
 
+  --- getter for the control depth.
+  -- @treturn number depth
   getDepth: =>
     @depth
 
+  --- remove an attached child.
+  -- @tparam number id
   removeChild: (id) =>
     for i, child in ipairs @children
       if child.id == id
@@ -266,18 +336,24 @@ class Control
         child.events\dispatch child.events\getEvent "UI_ON_REMOVE"
         break
 
+  --- drops the control children.
   dropChildren: =>
     @children = {}
 
+  --- disables the control children.
   disableChildren: =>
     for _, child in ipairs @children do child\setEnabled false
 
+  --- enables the control children.
   enableChildren: =>
     for _, child in ipairs @children do child\setEnabled true
 
+  -- getter for the control children.
   getChildren: =>
     @children
 
+  --- attaches a handler to an event.
+  -- @see Event
   on: (event, callback, target) =>
     assert type(event) == 'string',
       "event must be of type string."
@@ -286,25 +362,35 @@ class Control
     assert target.__class.__parent == Control,
       "target must be a subclass of Control."
 
-  addTimer: (duration, onDone) =>
+    @events\on @events\getEvent "UI_UPDATE", callback, target
+
+  -- adds a chrono to the control.
+  -- @tparam number duration
+  -- @tparam function onDone
+  addChrono: (duration, onDone) =>
     chrono = Chrono.getInstance!
     if not @chrono
       @chrono = chrono\create duration, onDone
 
+  -- @local
   updateChildren: (dt) =>
     for _, child in ipairs @children
       child\update dt
 
+  -- @local
   drawChildren: =>
     for _, child in ipairs @children
       child\draw!
 
+  --- updates the control.
+  -- @tparam number dt
   update: (dt) =>
     Chrono.getInstance!\update self, dt
     @conform!
     @events\dispatch @events\getEvent "UI_UPDATE", dt
     @updateChildren dt
 
+  --- draws the control.
   draw: =>
     if not @visible then return
     @events\dispatch @events\getEvent "UI_DRAW"

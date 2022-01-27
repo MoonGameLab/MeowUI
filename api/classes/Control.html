@@ -74,8 +74,164 @@
 <h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
+	<td class="name" nowrap><a href="#Control\new">Control\new (boxT)</a></td>
+	<td class="summary">constructor</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\getRoot">Control\getRoot ()</a></td>
+	<td class="summary">getter for the root control.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\getBoundingBox">Control\getBoundingBox ()</a></td>
+	<td class="summary">getter for the boundingbox.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\localToGlobal">Control\localToGlobal (x, y)</a></td>
+	<td class="summary">converts a local position to window position.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\globalToLocal">Control\globalToLocal (x, y)</a></td>
+	<td class="summary">converts a window position to local position.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\setParent">Control\setParent (p)</a></td>
+	<td class="summary">setter for the content parent.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\getParent">Control\getParent ()</a></td>
+	<td class="summary">getter for the content parent.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#Control\setDepth">Control\setDepth (depth)</a></td>
-	<td class="summary">TODO</td>
+	<td class="summary">setter for the content depth.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\addChild">Control\addChild (child, depth)</a></td>
+	<td class="summary">attach a a child to the content entity.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\setAnchor">Control\setAnchor (x, y)</a></td>
+	<td class="summary">setter for the content anchor.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\getAnchor">Control\getAnchor ()</a></td>
+	<td class="summary">getter for the content anchor.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\setAnchorX">Control\setAnchorX (x)</a></td>
+	<td class="summary">setter for the content anchorX.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\getAnchorX">Control\getAnchorX ()</a></td>
+	<td class="summary">getter for the content anchorX.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\setAnchorY">Control\setAnchorY (y)</a></td>
+	<td class="summary">setter for the content anchorY.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\getAnchorY">Control\getAnchorY ()</a></td>
+	<td class="summary">getter for the content anchorY.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\setPos">Control\setPos (x, y)</a></td>
+	<td class="summary">setter for the content position.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\getPos">Control\getPos ()</a></td>
+	<td class="summary">getter for the content position.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\setX">Control\setX (x)</a></td>
+	<td class="summary">setter for the content x position.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\getX">Control\getX ()</a></td>
+	<td class="summary">getter for the content x position.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\setY">Control\setY (y)</a></td>
+	<td class="summary">setter for the content y position.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\getY">Control\getY ()</a></td>
+	<td class="summary">getter for the content y position.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\getSize">Control\getSize ()</a></td>
+	<td class="summary">getter for the control size.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\getWidth">Control\getWidth ()</a></td>
+	<td class="summary">getter for the control width.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\getHeight">Control\getHeight ()</a></td>
+	<td class="summary">getter for the control height.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\setWidth">Control\setWidth (w)</a></td>
+	<td class="summary">setter for the content width.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\setHeight">Control\setHeight (h)</a></td>
+	<td class="summary">setter for the content height.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\setSize">Control\setSize (width, height)</a></td>
+	<td class="summary">setter for the control size.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\setEnabled">Control\setEnabled (enabled)</a></td>
+	<td class="summary">setter for the control enabled property.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\isEnabled">Control\isEnabled ()</a></td>
+	<td class="summary">getter for the control enabled property.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\setChildrenEnabled">Control\setChildrenEnabled (enabled)</a></td>
+	<td class="summary">setter for the control childrenEnabled property.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\isChildrenEnabled">Control\isChildrenEnabled ()</a></td>
+	<td class="summary">getter for the control childrenEnabled property.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\setDepth">Control\setDepth (depth)</a></td>
+	<td class="summary">setter for the control depth.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\getDepth">Control\getDepth ()</a></td>
+	<td class="summary">getter for the control depth.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\removeChild">Control\removeChild (id)</a></td>
+	<td class="summary">remove an attached child.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\dropChildren">Control\dropChildren ()</a></td>
+	<td class="summary">drops the control children.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\disableChildren">Control\disableChildren ()</a></td>
+	<td class="summary">disables the control children.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\enableChildren">Control\enableChildren ()</a></td>
+	<td class="summary">enables the control children.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\on">Control\on (event, callback, target)</a></td>
+	<td class="summary">attaches a handler to an event.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\update">Control\update (dt)</a></td>
+	<td class="summary">updates the control.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Control\draw">Control\draw ()</a></td>
+	<td class="summary">draws the control.</td>
 	</tr>
 </table>
 
@@ -87,21 +243,903 @@
 
     <dl class="function">
     <dt>
-    <a name = "Control\setDepth"></a>
-    <strong>Control\setDepth (depth)</strong>
+    <a name = "Control\new"></a>
+    <strong>Control\new (boxT)</strong>
     </dt>
     <dd>
-    TODO
+    constructor
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">depth</span>
+        <li><span class="parameter">boxT</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         Bounding box type[Box, Circle]
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\getRoot"></a>
+    <strong>Control\getRoot ()</strong>
+    </dt>
+    <dd>
+    getter for the root control.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Control.html#">Control</a></span>
+        root
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\getBoundingBox"></a>
+    <strong>Control\getBoundingBox ()</strong>
+    </dt>
+    <dd>
+    getter for the boundingbox.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        boundingBox
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\localToGlobal"></a>
+    <strong>Control\localToGlobal (x, y)</strong>
+    </dt>
+    <dd>
+    converts a local position to window position.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
 
 
 
         </li>
     </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        boundingBox
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\globalToLocal"></a>
+    <strong>Control\globalToLocal (x, y)</strong>
+    </dt>
+    <dd>
+    converts a window position to local position.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        boundingBox
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\setParent"></a>
+    <strong>Control\setParent (p)</strong>
+    </dt>
+    <dd>
+    setter for the content parent.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">p</span>
+            <span class="types"><span class="type">Content</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\getParent"></a>
+    <strong>Control\getParent ()</strong>
+    </dt>
+    <dd>
+    getter for the content parent.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">Content</span></span>
+        p
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\setDepth"></a>
+    <strong>Control\setDepth (depth)</strong>
+    </dt>
+    <dd>
+    setter for the content depth.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">depth</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\addChild"></a>
+    <strong>Control\addChild (child, depth)</strong>
+    </dt>
+    <dd>
+    attach a a child to the content entity.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">child</span>
+            <span class="types"><span class="type">Content</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">depth</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\setAnchor"></a>
+    <strong>Control\setAnchor (x, y)</strong>
+    </dt>
+    <dd>
+    setter for the content anchor.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\getAnchor"></a>
+    <strong>Control\getAnchor ()</strong>
+    </dt>
+    <dd>
+    getter for the content anchor.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        anchor
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\setAnchorX"></a>
+    <strong>Control\setAnchorX (x)</strong>
+    </dt>
+    <dd>
+    setter for the content anchorX.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\getAnchorX"></a>
+    <strong>Control\getAnchorX ()</strong>
+    </dt>
+    <dd>
+    getter for the content anchorX.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        anchorX
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\setAnchorY"></a>
+    <strong>Control\setAnchorY (y)</strong>
+    </dt>
+    <dd>
+    setter for the content anchorY.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\getAnchorY"></a>
+    <strong>Control\getAnchorY ()</strong>
+    </dt>
+    <dd>
+    getter for the content anchorY.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        anchorY
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\setPos"></a>
+    <strong>Control\setPos (x, y)</strong>
+    </dt>
+    <dd>
+    setter for the content position.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\getPos"></a>
+    <strong>Control\getPos ()</strong>
+    </dt>
+    <dd>
+    getter for the content position.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        position
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\setX"></a>
+    <strong>Control\setX (x)</strong>
+    </dt>
+    <dd>
+    setter for the content x position.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\getX"></a>
+    <strong>Control\getX ()</strong>
+    </dt>
+    <dd>
+    getter for the content x position.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        x
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\setY"></a>
+    <strong>Control\setY (y)</strong>
+    </dt>
+    <dd>
+    setter for the content y position.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\getY"></a>
+    <strong>Control\getY ()</strong>
+    </dt>
+    <dd>
+    getter for the content y position.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        y
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\getSize"></a>
+    <strong>Control\getSize ()</strong>
+    </dt>
+    <dd>
+    getter for the control size.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\getWidth"></a>
+    <strong>Control\getWidth ()</strong>
+    </dt>
+    <dd>
+    getter for the control width.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\getHeight"></a>
+    <strong>Control\getHeight ()</strong>
+    </dt>
+    <dd>
+    getter for the control height.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\setWidth"></a>
+    <strong>Control\setWidth (w)</strong>
+    </dt>
+    <dd>
+    setter for the content width.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">w</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\setHeight"></a>
+    <strong>Control\setHeight (h)</strong>
+    </dt>
+    <dd>
+    setter for the content height.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">h</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\setSize"></a>
+    <strong>Control\setSize (width, height)</strong>
+    </dt>
+    <dd>
+    setter for the control size.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\setEnabled"></a>
+    <strong>Control\setEnabled (enabled)</strong>
+    </dt>
+    <dd>
+    setter for the control enabled property.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">enabled</span>
+            <span class="types"><span class="type">boolean</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\isEnabled"></a>
+    <strong>Control\isEnabled ()</strong>
+    </dt>
+    <dd>
+    getter for the control enabled property.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        enabled
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\setChildrenEnabled"></a>
+    <strong>Control\setChildrenEnabled (enabled)</strong>
+    </dt>
+    <dd>
+    setter for the control childrenEnabled property.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">enabled</span>
+            <span class="types"><span class="type">boolean</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\isChildrenEnabled"></a>
+    <strong>Control\isChildrenEnabled ()</strong>
+    </dt>
+    <dd>
+    getter for the control childrenEnabled property.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        childrenEnabled
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\setDepth"></a>
+    <strong>Control\setDepth (depth)</strong>
+    </dt>
+    <dd>
+    setter for the control depth.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">depth</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\getDepth"></a>
+    <strong>Control\getDepth ()</strong>
+    </dt>
+    <dd>
+    getter for the control depth.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        depth
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\removeChild"></a>
+    <strong>Control\removeChild (id)</strong>
+    </dt>
+    <dd>
+    remove an attached child.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\dropChildren"></a>
+    <strong>Control\dropChildren ()</strong>
+    </dt>
+    <dd>
+    drops the control children.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\disableChildren"></a>
+    <strong>Control\disableChildren ()</strong>
+    </dt>
+    <dd>
+    disables the control children.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\enableChildren"></a>
+    <strong>Control\enableChildren ()</strong>
+    </dt>
+    <dd>
+    enables the control children.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\on"></a>
+    <strong>Control\on (event, callback, target)</strong>
+    </dt>
+    <dd>
+    attaches a handler to an event.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">event</span>
+
+
+
+        </li>
+        <li><span class="parameter">callback</span>
+
+
+
+        </li>
+        <li><span class="parameter">target</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/Event.html#">Event</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "Control\update"></a>
+    <strong>Control\update (dt)</strong>
+    </dt>
+    <dd>
+    updates the control.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">dt</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Control\draw"></a>
+    <strong>Control\draw ()</strong>
+    </dt>
+    <dd>
+    draws the control.
+
+
 
 
 
@@ -115,7 +1153,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2022-01-27 14:26:21 </i>
+<i style="float:right;">Last updated 2022-01-27 19:52:42 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
