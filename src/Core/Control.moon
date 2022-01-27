@@ -13,11 +13,9 @@ Chrono     = assert require MeowUI.cwd .. "Core.Chrono"
 Tremove = table.remove
 
 class Control
-  @root: {}
-
   --- constructor
   -- @tparam string boxT Bounding box type[Box, Circle]
-  new: (boxT) =>
+  new: (boxT = "Box") =>
     @id = Utils.Uid!
     @x = 0
     @y = 0
@@ -155,8 +153,8 @@ class Control
   -- @tparam Content child
   -- @tparam number depth
   addChild: (child, depth) =>
-    assert child.__class.__parent == Control,
-      "child must be a subclass of Control."
+    assert (child.__class.__parent == Control) or (child.__class == Control),
+      "child must be Control or a subclass of Control."
     assert type(depth) == 'number',
       "depth must be of type number."
 

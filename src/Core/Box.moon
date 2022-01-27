@@ -9,7 +9,7 @@ class Box
   -- @tparam number y
   -- @tparam number width
   -- @tparam number height
-  new: (x = 0, y = 0, width, height) =>
+  new: (x = 0, y = 0, width = 0, height = 0) =>
     assert (type(x) == 'number') and (type(y) == 'number'),
       "x and y must be of type number."
     assert (type(width) == 'number') and (type(height) == 'number'),
