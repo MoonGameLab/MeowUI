@@ -291,6 +291,25 @@ class Control
     if not @chrono
       @chrono = chrono\create duration, onDone
 
+  updateChildren: (dt) =>
+    for _, child in ipairs @children
+      child\update dt
+
+  drawChildren: =>
+    for _, child in ipairs @children
+      child\draw!
+
+  update: (dt) =>
+    Chrono.getInstance!\update self, dt
+    @conform!
+    @events\dispatch @events\getEvent "UI_UPDATE", dt
+    @updateChildren dt
+
+  draw: =>
+    if not @visible then return
+    @events\dispatch @events\getEvent "UI_DRAW"
+    @drawChildren!
+
 
 
 
