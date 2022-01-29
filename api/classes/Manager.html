@@ -1,0 +1,499 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>MeowUI documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>MeowUI</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Methods">Methods</a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/Box.html">Box</a></li>
+  <li><a href="../classes/Chrono.html">Chrono</a></li>
+  <li><a href="../classes/Circle.html">Circle</a></li>
+  <li><a href="../classes/Control.html">Control</a></li>
+  <li><a href="../classes/Event.html">Event</a></li>
+  <li><strong>Manager</strong></li>
+  <li><a href="../classes/Root.html">Root</a></li>
+  <li><a href="../classes/Singleton.html">Singleton</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/MeowUI.html">MeowUI</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>Manager</code></h1>
+<p>A Manager class (extends <a href="../classes/Singleton.html#">Singleton</a>)</p>
+<p>
+
+</p>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">m = Root.getInstance!
+</pre>
+    </ul>
+
+
+<h2><a href="#Methods">Methods</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Manager\new">Manager\new ()</a></td>
+	<td class="summary">constructor.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Manager\getRoot">Manager\getRoot ()</a></td>
+	<td class="summary">getter for the root control.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Manager\update">Manager\update (dt)</a></td>
+	<td class="summary">updates the manager.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Manager\draw">Manager\draw ()</a></td>
+	<td class="summary">draws the manager.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Manager\mousemoved">Manager\mousemoved (x, y, dx, dy)</a></td>
+	<td class="summary">callback function triggered when the mouse is moved.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Manager\setFocuse">Manager\setFocuse (control)</a></td>
+	<td class="summary">focuse on given control.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Manager\mousepressed">Manager\mousepressed (x, y, button, isTouch)</a></td>
+	<td class="summary">callback function triggered when a mouse button is pressed.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Manager\mousereleased">Manager\mousereleased (x, y, button, isTouch)</a></td>
+	<td class="summary">callback function triggered when a mouse button is released.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Manager\wheelmoved">Manager\wheelmoved (x, y)</a></td>
+	<td class="summary">callback function triggered when the mouse wheel is moved.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Manager\keypressed">Manager\keypressed (key, scancode, isrepeat)</a></td>
+	<td class="summary">callback function triggered when a key is pressed.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Manager\keyreleased">Manager\keyreleased (key)</a></td>
+	<td class="summary">callback function triggered when a keyboard key is released.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Manager\textinput">Manager\textinput (text)</a></td>
+	<td class="summary">called when text has been entered by the user.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Manager\resize">Manager\resize (w, h)</a></td>
+	<td class="summary">resize the root control</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Methods"></a>Methods</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Manager\new"></a>
+    <strong>Manager\new ()</strong>
+    </dt>
+    <dd>
+    constructor.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Manager\getRoot"></a>
+    <strong>Manager\getRoot ()</strong>
+    </dt>
+    <dd>
+    getter for the root control.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Manager\update"></a>
+    <strong>Manager\update (dt)</strong>
+    </dt>
+    <dd>
+    updates the manager.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">dt</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Manager\draw"></a>
+    <strong>Manager\draw ()</strong>
+    </dt>
+    <dd>
+    draws the manager.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Manager\mousemoved"></a>
+    <strong>Manager\mousemoved (x, y, dx, dy)</strong>
+    </dt>
+    <dd>
+    callback function triggered when the mouse is moved.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">dx</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">dy</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Manager\setFocuse"></a>
+    <strong>Manager\setFocuse (control)</strong>
+    </dt>
+    <dd>
+    focuse on given control.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">control</span>
+            <span class="types"><a class="type" href="../classes/Control.html#">Control</a></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Manager\mousepressed"></a>
+    <strong>Manager\mousepressed (x, y, button, isTouch)</strong>
+    </dt>
+    <dd>
+    callback function triggered when a mouse button is pressed.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">button</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">isTouch</span>
+            <span class="types"><span class="type">boolean</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Manager\mousereleased"></a>
+    <strong>Manager\mousereleased (x, y, button, isTouch)</strong>
+    </dt>
+    <dd>
+    callback function triggered when a mouse button is released.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">button</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">isTouch</span>
+            <span class="types"><span class="type">boolean</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Manager\wheelmoved"></a>
+    <strong>Manager\wheelmoved (x, y)</strong>
+    </dt>
+    <dd>
+    callback function triggered when the mouse wheel is moved.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Manager\keypressed"></a>
+    <strong>Manager\keypressed (key, scancode, isrepeat)</strong>
+    </dt>
+    <dd>
+    callback function triggered when a key is pressed.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">key</span>
+            <span class="types"><span class="type">KeyConstant</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">scancode</span>
+            <span class="types"><span class="type">scancode</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">isrepeat</span>
+            <span class="types"><span class="type">boolean</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Manager\keyreleased"></a>
+    <strong>Manager\keyreleased (key)</strong>
+    </dt>
+    <dd>
+    callback function triggered when a keyboard key is released.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">key</span>
+            <span class="types"><span class="type">KeyConstant</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Manager\textinput"></a>
+    <strong>Manager\textinput (text)</strong>
+    </dt>
+    <dd>
+    called when text has been entered by the user.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">text</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Manager\resize"></a>
+    <strong>Manager\resize (w, h)</strong>
+    </dt>
+    <dd>
+    resize the root control
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">w</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">h</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2022-01-29 09:20:24 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

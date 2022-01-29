@@ -1,0 +1,454 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>MeowUI documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>MeowUI</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Methods">Methods</a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/Box.html">Box</a></li>
+  <li><a href="../classes/Chrono.html">Chrono</a></li>
+  <li><a href="../classes/Circle.html">Circle</a></li>
+  <li><a href="../classes/Control.html">Control</a></li>
+  <li><a href="../classes/Event.html">Event</a></li>
+  <li><a href="../classes/Manager.html">Manager</a></li>
+  <li><strong>Root</strong></li>
+  <li><a href="../classes/Singleton.html">Singleton</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/MeowUI.html">MeowUI</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>Root</code></h1>
+<p>A Root class (extends <a href="../classes/Control.html#">Control</a>)</p>
+<p>
+
+</p>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">r = Root!
+</pre>
+    </ul>
+
+
+<h2><a href="#Methods">Methods</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Root\new">Root\new ()</a></td>
+	<td class="summary">constructor.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Root\initContainers">Root\initContainers (w, h)</a></td>
+	<td class="summary">initializes the containers.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Root\clear">Root\clear ()</a></td>
+	<td class="summary">drops the children of all root containers.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Root\clearCore">Root\clearCore ()</a></td>
+	<td class="summary">drops the children of the core container.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Root\clearPopup">Root\clearPopup ()</a></td>
+	<td class="summary">drops the children of the popup container.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Root\clearOption">Root\clearOption ()</a></td>
+	<td class="summary">drops the children of the option container.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Root\clearTip">Root\clearTip ()</a></td>
+	<td class="summary">drops the children of the tip container.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Root\addCoreChild">Root\addCoreChild (child)</a></td>
+	<td class="summary">attaches a child control to the core container.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Root\addPopupChild">Root\addPopupChild (child)</a></td>
+	<td class="summary">attaches a child control to the popup container.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Root\addOptionChild">Root\addOptionChild (child)</a></td>
+	<td class="summary">attaches a child control to the option container.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Root\addTipChild">Root\addTipChild (child)</a></td>
+	<td class="summary">attaches a child control to the tip container.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Root\removeCoreChild">Root\removeCoreChild (id)</a></td>
+	<td class="summary">removes a child control from the core container.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Root\removePopupChild">Root\removePopupChild (id)</a></td>
+	<td class="summary">removes a child control from the popup container.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Root\removeOptionChild">Root\removeOptionChild (id)</a></td>
+	<td class="summary">removes a child control from the option container.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Root\removeTipChild">Root\removeTipChild (id)</a></td>
+	<td class="summary">removes a child control from the tip container.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Methods"></a>Methods</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Root\new"></a>
+    <strong>Root\new ()</strong>
+    </dt>
+    <dd>
+    constructor.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Root\initContainers"></a>
+    <strong>Root\initContainers (w, h)</strong>
+    </dt>
+    <dd>
+    initializes the containers.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">w</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">h</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Root\clear"></a>
+    <strong>Root\clear ()</strong>
+    </dt>
+    <dd>
+    drops the children of all root containers.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Root\clearCore"></a>
+    <strong>Root\clearCore ()</strong>
+    </dt>
+    <dd>
+    drops the children of the core container.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Root\clearPopup"></a>
+    <strong>Root\clearPopup ()</strong>
+    </dt>
+    <dd>
+    drops the children of the popup container.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Root\clearOption"></a>
+    <strong>Root\clearOption ()</strong>
+    </dt>
+    <dd>
+    drops the children of the option container.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Root\clearTip"></a>
+    <strong>Root\clearTip ()</strong>
+    </dt>
+    <dd>
+    drops the children of the tip container.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Root\addCoreChild"></a>
+    <strong>Root\addCoreChild (child)</strong>
+    </dt>
+    <dd>
+    attaches a child control to the core container.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">child</span>
+            <span class="types"><a class="type" href="../classes/Control.html#">Control</a></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Root\addPopupChild"></a>
+    <strong>Root\addPopupChild (child)</strong>
+    </dt>
+    <dd>
+    attaches a child control to the popup container.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">child</span>
+            <span class="types"><a class="type" href="../classes/Control.html#">Control</a></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Root\addOptionChild"></a>
+    <strong>Root\addOptionChild (child)</strong>
+    </dt>
+    <dd>
+    attaches a child control to the option container.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">child</span>
+            <span class="types"><a class="type" href="../classes/Control.html#">Control</a></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Root\addTipChild"></a>
+    <strong>Root\addTipChild (child)</strong>
+    </dt>
+    <dd>
+    attaches a child control to the tip container.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">child</span>
+            <span class="types"><a class="type" href="../classes/Control.html#">Control</a></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Root\removeCoreChild"></a>
+    <strong>Root\removeCoreChild (id)</strong>
+    </dt>
+    <dd>
+    removes a child control from the core container.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Root\removePopupChild"></a>
+    <strong>Root\removePopupChild (id)</strong>
+    </dt>
+    <dd>
+    removes a child control from the popup container.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Root\removeOptionChild"></a>
+    <strong>Root\removeOptionChild (id)</strong>
+    </dt>
+    <dd>
+    removes a child control from the option container.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Root\removeTipChild"></a>
+    <strong>Root\removeTipChild (id)</strong>
+    </dt>
+    <dd>
+    removes a child control from the tip container.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2022-01-29 09:20:24 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

@@ -1,6 +1,4 @@
-----
--- A Utils module
--- @module Utils
+-- @local
 
 import random from love.math
 
