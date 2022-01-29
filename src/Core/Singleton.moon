@@ -7,6 +7,6 @@ class Singleton
   --- Whenever a class inherits from Singleton, it sends a message to the Singleton class by calling this method.
   __inherited: (By) =>
     By.getInstance = (...) ->
-      if I = @Instance then return I
+      if I = By.Instance then return I
       with I = By ...
-        @Instance = I
+        By.Instance = I

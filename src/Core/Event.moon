@@ -83,7 +83,7 @@ class Event
     assert type(name) == 'string',
       "Event name must be of type string."
     assert type(callback) == 'function',
-      "Callback name must be a function."
+      "Callback must be a function."
     assert type(target) == 'table',
       "Target must be a table."
 

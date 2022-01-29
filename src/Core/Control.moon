@@ -54,29 +54,29 @@ class Control
     @boundingBox
 
   -- @local
-  needConforming: (f) =>
-    @requireConform = f
+  needConforming: =>
+    @requireConform = true
 
   --- converts a local position to window position.
   -- @tparam number x
   -- @tparam number y
   -- @treturn table boundingBox
   localToGlobal: (x = 0, y = 0) =>
-    x = x + @x
-    y = y + @y
+    x += @x
+    y += @y
 
-    if @parent
-      x, y = @parent\localToGlobal x, y
+    if @parent then
+      x , y = @parent\localToGlobal(x , y)
 
-    x, y
+    return x, y
 
   --- converts a window position to local position.
   -- @tparam number x
   -- @tparam number y
   -- @treturn table boundingBox
   globalToLocal: (x = 0, y = 0) =>
-    x = x - @x
-    y = y - @y
+    x -= @x
+    y -= @y
 
     if @parent
       x, y = @parent\globalToLocal x, y
@@ -88,23 +88,24 @@ class Control
   conform: =>
     if not @requireConform then return
     x, y = @localToGlobal!
-    w, h = @width * @anchorX, @height * @anchorY
-    @worldX, @worldY = x - w, y - h
-    box = @boundingBox
+    w = @width * @anchorX
+    h = @height * @anchorY
+    @worldX = x - w
+    @worldY = y - h
 
+    box = @boundingBox
     if box.__class == Box
       with box
-        \setPosition @worldX, @worldX
+        \setPosition @worldX, @worldY
         \setSize @worldX + @width, @worldY + @height
     elseif box.__class == Circle
       with box
-        \setPosition @worldX, @worldX
+        \setPosition @worldX, @worldY
         \setRadius @radius
 
-    for _, child in ipairs @children
-      with child
-        \needConforming true
-        \conform!
+    for _, v in ipairs(@children)
+      v\needConforming true
+      v\conform!
 
     @needConforming false
 
@@ -155,13 +156,11 @@ class Control
   addChild: (child, depth) =>
     assert (child.__class.__parent == Control) or (child.__class == Control),
       "child must be Control or a subclass of Control."
-    assert type(depth) == 'number',
-      "depth must be of type number."
 
     if @childExists child.id then return
 
     @children[#@children + 1] = child
-    @setParent self
+    child\setParent self
 
     if depth then child\setDepth depth
     events = child.events
@@ -218,7 +217,7 @@ class Control
 
     @x, @y = x, y
     @needConforming true
-    @events\dispatch @events\getEvent "UI_ON_ADD"
+    @events\dispatch @events\getEvent "UI_MOVE"
 
   --- getter for the content position.
   -- @treturn table position
@@ -360,7 +359,7 @@ class Control
     assert target.__class.__parent == Control,
       "target must be a subclass of Control."
 
-    @events\on @events\getEvent "UI_UPDATE", callback, target
+    @events\on @events\getEvent(event), callback, target
 
   -- adds a chrono to the control.
   -- @tparam number duration
@@ -385,13 +384,13 @@ class Control
   update: (dt) =>
     Chrono.getInstance!\update self, dt
     @conform!
-    @events\dispatch @events\getEvent "UI_UPDATE", dt
+    @events\dispatch @events\getEvent("UI_UPDATE"), dt
     @updateChildren dt
 
   --- draws the control.
   draw: =>
     if not @visible then return
-    @events\dispatch @events\getEvent "UI_DRAW"
+    @events\dispatch @events\getEvent("UI_DRAW")
     @drawChildren!
 
 

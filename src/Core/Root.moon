@@ -12,21 +12,22 @@ class Root extends Control
 
 
   initContainers: (w, h) =>
-
     with @coreContainer = Control!
       \setSize w, h
+
     with @popupContainer = Control!
       \setSize w, h
+
     with @optionContainer = Control!
       \setSize w, h
+
     with @tipContainer = Control!
       \setSize w, h
 
-    with @
-      \addChild @coreContainer, 1
-      \addChild @popupContainer, 2
-      \addChild @optionContainer, 3
-      \addChild @tipContainer, 4
+    @addChild @coreContainer, 1
+    @addChild @popupContainer, 2
+    @addChild @optionContainer, 3
+    @addChild @tipContainer, 4
 
   clear: =>
     @coreContainer\dropChildren!

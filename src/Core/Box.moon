@@ -26,8 +26,10 @@ class Box
   contains: (x, y) =>
     assert (type(x) == 'number') and (type(y) == 'number'),
       "x and y must be of type number."
-    if x < @x or x >= @width or y < @y or @y >= @height then return false
-    true
+
+    if x < @x or x >= @width or y < @y or y >= @height
+      return false
+    return true
 
 
   --- getter for the box position.
@@ -43,12 +45,12 @@ class Box
   --- getter for the box width.
   -- @treturn number
   getWidth: =>
-    @width
+    @width - @x
 
   --- getter for the box height.
   -- @treturn number
   getHeight: =>
-    @height
+    @height - @y
 
   --- setter for the box position.
   -- @tparam number x
