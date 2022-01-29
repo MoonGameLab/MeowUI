@@ -38,9 +38,9 @@
 
 <h2>Classes</h2>
 <ul class="nowrap">
-  <li><a href="../classes/Box.html">Box</a></li>
+  <li><strong>Box</strong></li>
   <li><a href="../classes/Chrono.html">Chrono</a></li>
-  <li><strong>Circle</strong></li>
+  <li><a href="../classes/Circle.html">Circle</a></li>
   <li><a href="../classes/Control.html">Control</a></li>
   <li><a href="../classes/Event.html">Event</a></li>
   <li><a href="../classes/Manager.html">Manager</a></li>
@@ -60,14 +60,14 @@
 
 <div id="content">
 
-<h1>Class <code>Circle</code></h1>
-<p>A circle class</p>
+<h1>Class <code>Box</code></h1>
+<p>A box class (rectangle)</p>
 <p>
 
 </p>
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">c = Circle!
+        <pre class="example">b = Box!
 </pre>
     </ul>
 
@@ -75,48 +75,36 @@
 <h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Circle\new">Circle\new (x, y, radius)</a></td>
-	<td class="summary">constructor passed a pos (<code>x</code>, <code>y</code>) and <code>radius</code> which must be <code>numbers</code>.</td>
+	<td class="name" nowrap><a href="#Box\new">Box\new (x, y, width, height)</a></td>
+	<td class="summary">constructor passed a pos (<code>x</code>, <code>y</code>) and <code>width</code>/<code>height</code> which must be <code>numbers</code>.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Circle\contains">Circle\contains (x, y)</a></td>
-	<td class="summary">tests if a given point is inside the circle.</td>
+	<td class="name" nowrap><a href="#Box\contains">Box\contains (x, y)</a></td>
+	<td class="summary">tests if a given point is inside the box.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Circle\getPosition">Circle\getPosition ()</a></td>
-	<td class="summary">getter for the circle position.</td>
+	<td class="name" nowrap><a href="#Box\getPosition">Box\getPosition ()</a></td>
+	<td class="summary">getter for the box position.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Circle\getX">Circle\getX ()</a></td>
-	<td class="summary">getter for the circle x position.</td>
+	<td class="name" nowrap><a href="#Box\getSize">Box\getSize ()</a></td>
+	<td class="summary">getter for the box size.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Circle\getY">Circle\getY ()</a></td>
-	<td class="summary">getter for the circle y position.</td>
+	<td class="name" nowrap><a href="#Box\getWidth">Box\getWidth ()</a></td>
+	<td class="summary">getter for the box width.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Circle\getRadius">Circle\getRadius ()</a></td>
-	<td class="summary">getter for the circle radius.</td>
+	<td class="name" nowrap><a href="#Box\getHeight">Box\getHeight ()</a></td>
+	<td class="summary">getter for the box height.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Circle\getSize">Circle\getSize ()</a></td>
-	<td class="summary">getter for the circle radius.</td>
+	<td class="name" nowrap><a href="#Box\setPosition">Box\setPosition (x, y)</a></td>
+	<td class="summary">setter for the box position.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Circle\getWidth">Circle\getWidth ()</a></td>
-	<td class="summary">getter for the circle width.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#Circle\getHeight">Circle\getHeight ()</a></td>
-	<td class="summary">getter for the circle's height.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#Circle\setPosition">Circle\setPosition (x, y)</a></td>
-	<td class="summary">setter for the circle position.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#Circle\setRadius">Circle\setRadius (radius)</a></td>
-	<td class="summary">setter for the circle radius.</td>
+	<td class="name" nowrap><a href="#Box\setSize">Box\setSize (width, height)</a></td>
+	<td class="summary">setter for the box size.</td>
 	</tr>
 </table>
 
@@ -128,11 +116,11 @@
 
     <dl class="function">
     <dt>
-    <a name = "Circle\new"></a>
-    <strong>Circle\new (x, y, radius)</strong>
+    <a name = "Box\new"></a>
+    <strong>Box\new (x, y, width, height)</strong>
     </dt>
     <dd>
-    constructor passed a pos (<code>x</code>, <code>y</code>) and <code>radius</code> which must be <code>numbers</code>.
+    constructor passed a pos (<code>x</code>, <code>y</code>) and <code>width</code>/<code>height</code> which must be <code>numbers</code>.
 
 
     <h3>Parameters:</h3>
@@ -149,7 +137,13 @@
 
 
         </li>
-        <li><span class="parameter">radius</span>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">height</span>
             <span class="types"><span class="type">number</span></span>
 
 
@@ -163,11 +157,11 @@
 
 </dd>
     <dt>
-    <a name = "Circle\contains"></a>
-    <strong>Circle\contains (x, y)</strong>
+    <a name = "Box\contains"></a>
+    <strong>Box\contains (x, y)</strong>
     </dt>
     <dd>
-    tests if a given point is inside the circle.
+    tests if a given point is inside the box.
 
 
     <h3>Parameters:</h3>
@@ -200,11 +194,11 @@
 
 </dd>
     <dt>
-    <a name = "Circle\getPosition"></a>
-    <strong>Circle\getPosition ()</strong>
+    <a name = "Box\getPosition"></a>
+    <strong>Box\getPosition ()</strong>
     </dt>
     <dd>
-    getter for the circle position.
+    getter for the box position.
 
 
 
@@ -222,11 +216,33 @@
 
 </dd>
     <dt>
-    <a name = "Circle\getX"></a>
-    <strong>Circle\getX ()</strong>
+    <a name = "Box\getSize"></a>
+    <strong>Box\getSize ()</strong>
     </dt>
     <dd>
-    getter for the circle x position.
+    getter for the box size.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Box\getWidth"></a>
+    <strong>Box\getWidth ()</strong>
+    </dt>
+    <dd>
+    getter for the box width.
 
 
 
@@ -244,11 +260,11 @@
 
 </dd>
     <dt>
-    <a name = "Circle\getY"></a>
-    <strong>Circle\getY ()</strong>
+    <a name = "Box\getHeight"></a>
+    <strong>Box\getHeight ()</strong>
     </dt>
     <dd>
-    getter for the circle y position.
+    getter for the box height.
 
 
 
@@ -266,99 +282,11 @@
 
 </dd>
     <dt>
-    <a name = "Circle\getRadius"></a>
-    <strong>Circle\getRadius ()</strong>
+    <a name = "Box\setPosition"></a>
+    <strong>Box\setPosition (x, y)</strong>
     </dt>
     <dd>
-    getter for the circle radius.
-
-
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">number</span></span>
-
-
-
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "Circle\getSize"></a>
-    <strong>Circle\getSize ()</strong>
-    </dt>
-    <dd>
-    getter for the circle radius.
-
-
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">number</span></span>
-
-
-
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "Circle\getWidth"></a>
-    <strong>Circle\getWidth ()</strong>
-    </dt>
-    <dd>
-    getter for the circle width.
-
-
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">number</span></span>
-
-
-
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "Circle\getHeight"></a>
-    <strong>Circle\getHeight ()</strong>
-    </dt>
-    <dd>
-    getter for the circle's height.
-
-
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">number</span></span>
-
-
-
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "Circle\setPosition"></a>
-    <strong>Circle\setPosition (x, y)</strong>
-    </dt>
-    <dd>
-    setter for the circle position.
+    setter for the box position.
 
 
     <h3>Parameters:</h3>
@@ -383,16 +311,22 @@
 
 </dd>
     <dt>
-    <a name = "Circle\setRadius"></a>
-    <strong>Circle\setRadius (radius)</strong>
+    <a name = "Box\setSize"></a>
+    <strong>Box\setSize (width, height)</strong>
     </dt>
     <dd>
-    setter for the circle radius.
+    setter for the box size.
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">radius</span>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">height</span>
             <span class="types"><span class="type">number</span></span>
 
 
@@ -412,7 +346,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2022-01-29 09:20:24 </i>
+<i style="float:right;">Last updated 2022-01-29 09:26:42 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
