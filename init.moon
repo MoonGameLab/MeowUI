@@ -6,8 +6,13 @@
 --@module MeowUI
 
 path = ...
+cwd = path .. ".src."
 
-export MeowUI = {
-  cwd: path .. ".src."
+export MeowUI = {}
+MeowUI.cwd = cwd
+
+MeowUI = {
+  manager: assert(require(MeowUI.cwd .. "Core.Manager")).getInstance!
+  Control: assert require MeowUI.cwd .. "Core.Control"
 }
 

@@ -389,7 +389,7 @@ class Control
 
   --- draws the control.
   draw: =>
-    if not @visible then return
+    if @visible == false then return
     @events\dispatch @events\getEvent("UI_DRAW")
     @drawChildren!
 
