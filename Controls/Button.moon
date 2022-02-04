@@ -36,7 +36,7 @@ class Button extends MeowUI.Control
     textH = text and text\getHeight! or 0
     space = text and @iconAndTextSpace or 0
     dynamicContentWidth = space + textW
-    textX = (box\getWidth! - dynamicContentWidth) / 2 + box.x + (text\getWidth! / 2)
+    textX = (box\getWidth! - dynamicContentWidth + 10) / 2 + box.x
     textY = (box\getHeight! - textH)/2 + box.y
     Graphics.setColor @fontColor
     Graphics.draw text, textX, textY
