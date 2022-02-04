@@ -98,8 +98,8 @@ Minimalist and light-weight library based on catui https://github.com/wilhantian
       -- See InitContainers: https://github.com/Tourahi/MeowUI/blob/master/src/Core/Root.moon 
       root\addCoreChild exit
   
-      -- Now all you have to do is call the manager callbacks
-      -- inside the corresponding love2D callbacks.
+     -- Now all you have to do is call the manager callbacks
+     -- inside the corresponding love2D callbacks.
     .update = (dt) ->
       manager\update dt
   
