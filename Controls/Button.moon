@@ -1,4 +1,3 @@
-assert require "MeowUI"
 Graphics = love.graphics
 
 class Button extends MeowUI.Control
@@ -6,21 +5,24 @@ class Button extends MeowUI.Control
   new: =>
     -- Bounding box type
     super "Box"
+    style = assert(require(MeowUI.root .. "Controls.Style"))[MeowUI.theme].button
 
-    @width = 100
-    @height = 50
-    @stroke = 1
-    @font = Graphics.newFont 16
-    @iconAndTextSpace = 8
+    @width = style.width
+    @height = style.height
+    @stroke = style.stroke
+    @font = Graphics.newFont style.fontSize
+    @iconAndTextSpace = style.iconAndTextSpace
     @textDrawable = Graphics.newText @font, ""
+    @rx = style.rx
+    @ry = style.ry
 
     -- colors
-    @downColor = { 0.0274509803922 ,0.0274509803922 ,0.0274509803922 }
-    @hoverColor = { 0.2, 0.2, 0.2 }
-    @upColor = { 0.0980392156863, 0.101960784314, 0.0980392156863 }
-    @disabledColor = { 0.66274509803922, 0.66274509803922, 0.66274509803922 }
-    @strokeColor = { 0.149019607843, 0.929411764706, 0.286274509804}
-    @fontColor = { 1, 1, 1 }
+    @downColor = style.downColor
+    @hoverColor = style.hoverColor
+    @upColor = style.upColor
+    @disabledColor = style.disabledColor
+    @strokeColor = style.strokeColor
+    @fontColor = style.fontColor
 
 
     @on "UI_DRAW", @onDraw, @
@@ -58,7 +60,7 @@ class Button extends MeowUI.Control
 
     -- base
     Graphics.setColor color
-    Graphics.rectangle "fill", box.x, box.y, box\getWidth!, box\getHeight!
+    Graphics.rectangle "fill", box.x, box.y, box\getWidth!, box\getHeight!, @rx, @ry
 
     -- border
     if @enabled and @stroke > 0
@@ -66,7 +68,7 @@ class Button extends MeowUI.Control
       Graphics.setLineWidth @stroke
       Graphics.setLineStyle "rough" -- could be dynamic
       Graphics.setColor @strokeColor
-      Graphics.rectangle "line", box.x, box.y, box\getWidth!, box\getHeight!
+      Graphics.rectangle "line", box.x, box.y, box\getWidth!, box\getHeight!, @rx, @ry
       Graphics.setLineWidth oldLineWidth
 
     -- Text
@@ -115,3 +117,21 @@ class Button extends MeowUI.Control
   setText: (text) =>
     -- @text = text
     @textDrawable\set text
+
+  setUpColor: (color) =>
+    @upColor = color
+
+  setDownColor: (color) =>
+    @downColor = color
+
+  setHoverColor: (color) =>
+    @hoverColor = color
+
+  setDisableColor: (color) =>
+    @theme.disableColor = color
+
+  setStroke: (s) =>
+    @stroke = s
+
+  setFontColor: (color) =>
+    @fontColor = color
