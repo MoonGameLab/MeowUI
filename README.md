@@ -100,34 +100,35 @@ Minimalist and light-weight library based on catui https://github.com/wilhantian
   
       -- Now all you have to do is call the manager callbacks
       -- inside the corresponding love2D callbacks.
-      .update = (dt) ->
+    .update = (dt) ->
       manager\update dt
   
-      .draw = ->
+    .draw = ->
       manager\draw!
   
-      .mousepressed = (x, y, button) ->
+    .mousepressed = (x, y, button) ->
       manager\mousepressed x, y, button
   
   
-      .keypressed = (key, is_r) ->
+    .keypressed = (key, is_r) ->
       manager\keypressed key, is_r
   
   
-      .mousemoved = (x, y, button) ->
+    .mousemoved = (x, y, button) ->
       manager\mousemoved x, y, button
   
-      .mousereleased = (x, y, button) ->
+    .mousereleased = (x, y, button) ->
       manager\mousereleased x, y, button
   
-      .wheelmoved = (x, y) ->
+    .wheelmoved = (x, y) ->
       manager\wheelmoved x, y
   
-      .keyreleased = (key) ->
+    .keyreleased = (key) ->
       manager\keyreleased key
   
-      .textinput = (text) ->
+    .textinput = (text) ->
       manager\textinput text
+  
   ```
 
   
