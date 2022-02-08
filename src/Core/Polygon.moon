@@ -18,17 +18,19 @@ class Polygon
 
     @vertices = {}
     @sides = n
+    @x, @y = x, y
     @radius = radius
     @angle = angle
-    @centroid = {x:x, y:y}
-    @calcVertices x, y
+    @centroid = {x:@x, y:@y}
+    @calcVertices!
 
 
-  calcVertices: (x, y) =>
+  calcVertices: () =>
     @vertices = {}
     for i = @sides, 1, -1
-      x = ( sin( i / @sides * 2 * pi - @angle) * @radius) + x
-      y = ( cos( i / @sides * 2 * pi - @angle) * @radius) + y
+      x, y = 0, 0
+      x = ( sin( i / @sides * 2 * pi - @angle) * @radius) + @x
+      y = ( cos( i / @sides * 2 * pi - @angle) * @radius) + @y
       @vertices[#@vertices + 1] = {x:x, y:y}
 
   getVertices: =>
