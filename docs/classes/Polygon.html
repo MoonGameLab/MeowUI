@@ -39,12 +39,12 @@
 <h2>Classes</h2>
 <ul class="nowrap">
   <li><a href="../classes/Box.html">Box</a></li>
-  <li><strong>Chrono</strong></li>
+  <li><a href="../classes/Chrono.html">Chrono</a></li>
   <li><a href="../classes/Circle.html">Circle</a></li>
   <li><a href="../classes/Control.html">Control</a></li>
   <li><a href="../classes/Event.html">Event</a></li>
   <li><a href="../classes/Manager.html">Manager</a></li>
-  <li><a href="../classes/Polygon.html">Polygon</a></li>
+  <li><strong>Polygon</strong></li>
   <li><a href="../classes/Root.html">Root</a></li>
   <li><a href="../classes/Singleton.html">Singleton</a></li>
 </ul>
@@ -61,14 +61,14 @@
 
 <div id="content">
 
-<h1>Class <code>Chrono</code></h1>
-<p>A Chrono class (extends <a href="../classes/Singleton.html#">Singleton</a>)</p>
+<h1>Class <code>Polygon</code></h1>
+<p>A polygon class</p>
 <p>
 
 </p>
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">c = Chrono.getInstance!
+        <pre class="example">b = Polygon!
 </pre>
     </ul>
 
@@ -76,20 +76,12 @@
 <h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Chrono\new">Chrono\new ()</a></td>
-	<td class="summary">constructor.</td>
+	<td class="name" nowrap><a href="#Polygon\new">Polygon\new (x, y, n, radius, angle)</a></td>
+	<td class="summary">constructor</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Chrono\getTimersCount">Chrono\getTimersCount ()</a></td>
-	<td class="summary">will return the number of active timers.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#Chrono\create">Chrono\create (duration, onDone)</a></td>
-	<td class="summary">creates a timer.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#Chrono\update">Chrono\update (owner, dt)</a></td>
-	<td class="summary">updates the active timers.</td>
+	<td class="name" nowrap><a href="#Polygon\contains">Polygon\contains (x, y)</a></td>
+	<td class="summary">tests if a given point is inside the poly.</td>
 	</tr>
 </table>
 
@@ -101,96 +93,40 @@
 
     <dl class="function">
     <dt>
-    <a name = "Chrono\new"></a>
-    <strong>Chrono\new ()</strong>
+    <a name = "Polygon\new"></a>
+    <strong>Polygon\new (x, y, n, radius, angle)</strong>
     </dt>
     <dd>
-    constructor.
-
-
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "Chrono\getTimersCount"></a>
-    <strong>Chrono\getTimersCount ()</strong>
-    </dt>
-    <dd>
-    will return the number of active timers.
-
-
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">number</span></span>
-
-
-
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "Chrono\create"></a>
-    <strong>Chrono\create (duration, onDone)</strong>
-    </dt>
-    <dd>
-    creates a timer.  This timer will be removed automatically from owner if
- "chrono" is the key for the timer instance.
+    constructor
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">duration</span>
+        <li><span class="parameter">x</span>
             <span class="types"><span class="type">number</span></span>
 
 
 
         </li>
-        <li><span class="parameter">onDone</span>
-            <span class="types"><span class="type">function</span></span>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
 
 
 
         </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
-
-
-
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "Chrono\update"></a>
-    <strong>Chrono\update (owner, dt)</strong>
-    </dt>
-    <dd>
-    updates the active timers.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">owner</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        <li><span class="parameter">n</span>
+            <span class="types"><span class="type">number</span></span>
 
 
 
         </li>
-        <li><span class="parameter">dt</span>
+        <li><span class="parameter">radius</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">angle</span>
             <span class="types"><span class="type">number</span></span>
 
 
@@ -198,6 +134,43 @@
         </li>
     </ul>
 
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Polygon\contains"></a>
+    <strong>Polygon\contains (x, y)</strong>
+    </dt>
+    <dd>
+    tests if a given point is inside the poly.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+
+
+
+    </ol>
 
 
 

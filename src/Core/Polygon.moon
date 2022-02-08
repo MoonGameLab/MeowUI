@@ -48,7 +48,7 @@ class Polygon
     @centroid = {x:@x, y:@y}
     @calcVertices!
 
-
+  -- @local
   calcVertices: () =>
     @vertices = {}
     for i = @sides, 1, -1
@@ -57,7 +57,10 @@ class Polygon
       y = ( cos( i / @sides * 2 * pi - @angle) * @radius) + @y
       @vertices[#@vertices + 1] = {x:x, y:y}
 
-
+  --- tests if a given point is inside the poly.
+  -- @tparam number x
+  -- @tparam number y
+  -- @treturn boolean
   contains: (x, y) =>
     point = {x:x, y:y}
     p1, p2 = {x:0, y:0}, {x:0, y:0}
@@ -78,7 +81,8 @@ class Polygon
       return true
 
 
-
+  -- getter for vertices.
+  -- @treturn table
   getVertices: =>
     vertices = {}
 
@@ -88,24 +92,35 @@ class Polygon
 
     vertices
 
+  -- setter for radius.
+  -- @tparam number radius
   setRadius: (radius) =>
     assert (type(radius) == 'number'),
       "radius must be of type number."
     @radius = radius
     @calcVertices!
 
+  -- getter for radius.
+  -- @treturn number
   getRadius: =>
     @radius
 
+  -- setter for position.
+  -- @tparam number x
+  -- @tparam number y
   setPosition: (x = @x, y = @y) =>
     assert (type(x) == 'number') and (type(y) == 'number'),
       "x and y must be of type number."
     @x, @y = x, y
     @calcVertices!
 
+  -- getter for position.
+  -- @treturn number
   getPosition: =>
     @x, @y
 
+  -- setter for sides.
+  -- @tparam number sides
   setSides: (sides) =>
     assert (type(sides) == 'number'),
       "sides must be of type number."
@@ -119,15 +134,21 @@ class Polygon
     @calcVertices!
 
 
+  -- getter for sides.
+  -- @treturn number
   getSides: =>
     @sides
 
+  -- setter for angle.
+  -- @tparam number angle
   setAngle: (angle) =>
     assert (type(angle) == 'number'),
       "angle must be of type number."
     @angle = angle
     @calcVertices!
 
+  -- getter for angle.
+  -- @treturn number
   getAngle: =>
     @angle
 

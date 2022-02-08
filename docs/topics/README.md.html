@@ -30,6 +30,10 @@
   <li><a href="../index.html">Index</a></li>
 </ul>
 
+<h2>Contents</h2>
+<ul>
+<li><a href="#How_to_make_a_control__">How to make a control ? </a></li>
+</ul>
 
 
 <h2>Topics</h2>
@@ -48,6 +52,7 @@
   <li><a href="../classes/Control.html">Control</a></li>
   <li><a href="../classes/Event.html">Event</a></li>
   <li><a href="../classes/Manager.html">Manager</a></li>
+  <li><a href="../classes/Polygon.html">Polygon</a></li>
   <li><a href="../classes/Root.html">Root</a></li>
   <li><a href="../classes/Singleton.html">Singleton</a></li>
 </ul>
@@ -61,19 +66,144 @@
 
 <p>Minimalist and light-weight library based on catui https://github.com/wilhantian/catui.</p>
 
+<p>You can find the demo here : https://github.com/Tourahi/MeowUI-Demo</p>
+
 <h3>Improvements</h3>
 
 <ul>
-    <li>Unlike catui this library has NO external dependencies.</li>
+    <li>This library has NO external dependencies.</li>
     <li>Has a built-in Chrono class (Timers manager). see Docs.</li>
     <li>Has the same level of extensibility as catui and more since it is based on moonscript class system.</li>
     <li>Lighter than catui.</li>
     <li>A LOT of assertion which improves the readability of the code and helps detect bugs.</li>
-    <li>Unlike catui the controls have a unique id which prevent from attaching the same child multiple times.</li>
+    <li>The controls have a unique id which prevent from attaching the same child multiple times.</li>
     <li>Fully documented.</li>
 </ul>
 
 
+
+<p><a name="How_to_make_a_control__"></a></p>
+<h2>How to make a control ?</h2>
+
+<ul>
+    <li><p>Firstly you need to require MeowUI in the main or in the file where you want to define the new control class.</p></li>
+    <li><p><code> assert require &quot;MeowUI&quot;</code></p></li>
+    <li><p>Now all you have to do is create a control class that extends MeowUI.Control.</p></li>
+</ul>
+
+<p>  ```lua
+  class Button extends MeowUI.Control</p>
+
+<pre>
+new: =&gt;
+  <span class="comment">-- Send Bounding box type to the parent constructor.
+</span>  super <span class="string">"Box"</span> <span class="comment">-- Currently Bounding box can be a Circle also.
+</span>
+  <span class="comment">-- Control properties example
+</span>  @width = <span class="number">100</span>
+  @height = <span class="number">50</span>
+  @stroke = <span class="number">1</span>
+  @font = Graphics.newFont <span class="number">16</span>
+  @iconAndTextSpace = <span class="number">8</span>
+  @textDrawable = Graphics.newText @font, <span class="string">""</span>
+  ...
+
+  <span class="comment">-- Attach class methods to events
+</span>  <span class="comment">-- The method will be executed every time the event attached to it is fired.
+</span>  <span class="comment">-- See: https://tourahi.github.io/MeowUI/classes/Event.html#Event\on
+</span>  @on <span class="string">"UI_DRAW"</span>, @onDraw, @
+
+
+
+onDraw: =&gt;
+  <span class="comment">-- Bounding box you can use in drawing the control
+</span>  box = @getBoundingBox!
+
+  <span class="comment">-- Draw whatever you want just keep in mind the type of the boundingBox you are using.
+</span>  <span class="comment">-- Dynamic Bbox type will be added in future releases.
+</span>
+  <span class="comment">--                  For the full example see:
+</span>  <span class="comment">--https://github.com/Tourahi/MeowUI/blob/master/Controls/Button.moon</span>
+</pre>
+
+<p>  ```</p>
+
+<ul>
+    <li><p>And you are DONE. You can be as creative as you want.</p></li>
+    <li><p>If you created some cool stuff and you want to contribute Pull requests are welcome.</p></li>
+    <li><p>Finally in the main</p></li>
+</ul>
+
+<p>  ```lua
+  -- Always require MeowUI before any control classes.
+  assert require "MeowUI"</p>
+
+<p>  Button = assert require "MeowUI.Controls.Button"
+  Graphics = love.graphics</p>
+
+<p>  with love</p>
+
+<pre>
+.<span class="global">load</span> = -&gt;
+  <span class="comment">-- The manager instance.
+</span>  <span class="comment">-- This instance is the engine of MeowUI.
+</span>  <span class="comment">-- See: https://tourahi.github.io/MeowUI/classes/Manager.html
+</span>  export manager = MeowUI.manager
+
+  <span class="comment">-- Root control.
+</span>  <span class="comment">-- See: https://tourahi.github.io/MeowUI/classes/Root.html
+</span>  root = manager\getRoot!
+
+  <span class="comment">-- Create the button.
+</span>  <span class="comment">-- Button extends Control so naturally it has all of Controls methods + It's own.
+</span>  exit = Button!
+  with exit
+    \setPos <span class="number">100</span>, <span class="number">100</span>
+    \setEnabled <span class="keyword">true</span>
+    \setText <span class="string">"PRESS"</span>
+    \onClick -&gt;
+      <span class="global">print</span> <span class="string">"Clicked"</span>
+
+
+  <span class="comment">-- Add exit btn as a child of the root core container. (It's just a Control).
+</span>  <span class="comment">-- You can add it to the popUp or Option or Tip Containers.
+</span>  <span class="comment">-- Just keep in minds all of these have different depths.
+</span>  <span class="comment">-- See InitContainers: https://github.com/Tourahi/MeowUI/blob/master/src/Core/Root.moon
+</span>  root\addCoreChild exit
+
+  <span class="comment">-- Now all you have to do is call the manager callbacks
+</span>  <span class="comment">-- inside the corresponding love2D callbacks.
+</span>.update = (dt) -&gt;
+  manager\update dt
+
+.draw = -&gt;
+  manager\draw!
+
+.mousepressed = (x, y, button) -&gt;
+  manager\mousepressed x, y, button
+
+
+.keypressed = (key, is_r) -&gt;
+  manager\keypressed key, is_r
+
+
+.mousemoved = (x, y, button) -&gt;
+  manager\mousemoved x, y, button
+
+.mousereleased = (x, y, button) -&gt;
+  manager\mousereleased x, y, button
+
+.wheelmoved = (x, y) -&gt;
+  manager\wheelmoved x, y
+
+.keyreleased = (key) -&gt;
+  manager\keyreleased key
+
+.textinput = (text) -&gt;
+  manager\textinput text
+</pre>
+
+<p>  ```</p>
 
 
 
@@ -81,7 +211,7 @@
 
 <ul>
     <li>Core : Done</li>
-    <li>Example Controls : To-Do </li>
+    <li>Example Controls : To-Do</li>
 </ul>
 
 
@@ -90,7 +220,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2022-01-29 10:54:57 </i>
+<i style="float:right;">Last updated 2022-02-08 22:00:27 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
