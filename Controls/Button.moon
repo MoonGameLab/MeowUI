@@ -10,11 +10,14 @@ class Button extends MeowUI.Control
     @width = style.width
     @height = style.height
     @stroke = style.stroke
-    @font = Graphics.newFont style.fontSize
     @iconAndTextSpace = style.iconAndTextSpace
-    @textDrawable = Graphics.newText @font, ""
+    @textDrawable = Graphics.newText Graphics.newFont(style.fontSize), ""
     @rx = style.rx
     @ry = style.ry
+    @dynamicSize = true
+    @oWidth = @width
+    @oHeight = @height
+    @dPadding = 15
 
     -- colors
     @downColor = style.downColor
@@ -25,26 +28,11 @@ class Button extends MeowUI.Control
     @fontColor = style.fontColor
 
     @on "UI_DRAW", @onDraw, @
-    @on "UI_UPDATE", @onUpdate, @
     @on "UI_MOUSE_ENTER", @onMouseEnter, @
     @on "UI_MOUSE_LEAVE", @onMouseLeave, @
     @on "UI_MOUSE_DOWN", @onMouseDown, @
     @on "UI_MOUSE_UP", @onMouseUp, @
 
-
-  drawText: (box) =>
-    text = @textDrawable
-    textW = text and text\getWidth! or 0
-    textH = text and text\getHeight! or 0
-    space = text and @iconAndTextSpace or 0
-    dynamicContentWidth = space + textW
-    textX = (box\getWidth! - dynamicContentWidth + 10) / 2 + box.x
-    textY = (box\getHeight! - textH)/2 + box.y
-    Graphics.setColor @fontColor
-    Graphics.draw text, textX, textY
-
-  onUpdate: (dt) =>
-    print 'updating'
 
   onDraw: =>
     box = @getBoundingBox!
@@ -61,7 +49,7 @@ class Button extends MeowUI.Control
     else
       color = @disabledColor
 
-    -- base
+    -- Button body
     Graphics.setColor color
     Graphics.rectangle "fill", box.x, box.y, box\getWidth!, box\getHeight!, @rx, @ry
 
@@ -75,8 +63,9 @@ class Button extends MeowUI.Control
       Graphics.setLineWidth oldLineWidth
 
     -- Text
-    if @textDrawable then @drawText box
-
+    if @textDrawable
+      Graphics.draw @textDrawable, @x + ((@width/2) - (@textDrawable\getWidth!/2)),
+        @y + ((@height/2) - (@textDrawable\getHeight!/2))
 
     Graphics.setColor r, g, b, a
 
@@ -120,6 +109,17 @@ class Button extends MeowUI.Control
   setText: (text) =>
     -- @text = text
     @textDrawable\set text
+    if @dynamicSize
+      @width = @width > @textDrawable\getWidth! and @oWidth or @textDrawable\getWidth! + @dPadding
+      @height = @height > @textDrawable\getHeight! and @oHeight or @textDrawable\getHeight!
+
+  setDynamicPadding: (p) =>
+    @dPadding = p
+
+  setSize: (width, height) =>
+    super width, height
+    @oWidth = @width
+    @oHeight = @height
 
   setUpColor: (color) =>
     @upColor = color
@@ -138,3 +138,10 @@ class Button extends MeowUI.Control
 
   setFontColor: (color) =>
     @fontColor = color
+
+  setFontSize: (size) =>
+    Graphics = love.graphics
+    @textDrawable\setFont Graphics.newFont size
+
+  getFontSize: =>
+    @textDrawable\getFont!\getWidth!, @textDrawable\getFont!\getHeight!
