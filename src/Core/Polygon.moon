@@ -5,6 +5,25 @@
 -- @usage b = Polygon!
 
 pi, cos, sin, tan = math.pi, math.cos, math.sin, math.tan
+twoPi = 6.283185307179586476925287
+
+
+-- @local
+getAngle =  (x1, y1, x2, y2) ->
+  local dtheta, theta1, theta2
+
+  theta1 = math.atan2 y1, x1
+  theta2 = math.atan2 y2, x2
+  dtheta = theta2 - theta1
+
+  while dtheta > math.pi
+    dtheta -= twoPi
+  while dtheta < -math.pi
+    dtheta += twoPi
+
+  dtheta
+
+
 
 class Polygon
 
@@ -33,6 +52,28 @@ class Polygon
       y = ( cos( i / @sides * 2 * pi - @angle) * @radius) + @y
       @vertices[#@vertices + 1] = {x:x, y:y}
 
+
+  contains: (x, y) =>
+    point = {x:x, y:y}
+    p1, p2 = {x:0, y:0}, {x:0, y:0}
+    vertsNum = #@vertices
+    angle = 0
+
+    for i = 1, vertsNum, 1
+      p1.x = @vertices[i].x - point.x
+      p1.y = @vertices[i].y - point.y
+      if (i+1) % vertsNum ~= 0
+        p2.x = @vertices[(i+1) % vertsNum].x - point.x
+        p2.y = @vertices[(i+1) % vertsNum].y - point.y
+        angle += getAngle p1.x, p1.y, p2.x, p2.y
+
+    if math.abs(angle) < math.pi
+      return false
+    else
+      return true
+
+
+
   getVertices: =>
     vertices = {}
 
@@ -41,3 +82,45 @@ class Polygon
       vertices[2*i]   = @vertices[i].y
 
     vertices
+
+  setRadius: (radius) =>
+    assert (type(radius) == 'number'),
+      "radius must be of type number."
+    @radius = radius
+    @calcVertices!
+
+  getRadius: =>
+    @radius
+
+  setPosition: (x = @x, y = @y) =>
+    assert (type(x) == 'number') and (type(y) == 'number'),
+      "x and y must be of type number."
+    @x, @y = x, y
+    @calcVertices!
+
+  getPosition: =>
+    @x, @y
+
+  setSides: (sides) =>
+    assert (type(sides) == 'number'),
+      "sides must be of type number."
+    @sides = sides
+    @calcVertices!
+
+  getSides: =>
+    @sides
+
+  setAngle: (angle) =>
+    assert (type(angle) == 'number'),
+      "angle must be of type number."
+    @angle = angle
+    @calcVertices!
+
+  getAngle: =>
+    @angle
+
+
+
+
+
+
