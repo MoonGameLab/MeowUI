@@ -116,6 +116,9 @@ class Button extends MeowUI.Control
   setDynamicPadding: (p) =>
     @dPadding = p
 
+  setDynamicSize: (bool) =>
+    @dynamicSize = bool
+
   setSize: (width, height) =>
     super width, height
     @oWidth = @width
