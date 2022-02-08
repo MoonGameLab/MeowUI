@@ -8,7 +8,14 @@ Utils      = assert require MeowUI.cwd .. "Core.Utils"
 Event      = assert require MeowUI.cwd .. "Core.Event"
 Box        = assert require MeowUI.cwd .. "Core.Box"
 Circle     = assert require MeowUI.cwd .. "Core.Circle"
+Polygon     = assert require MeowUI.cwd .. "Core.Circle"
 Chrono     = assert require MeowUI.cwd .. "Core.Chrono"
+
+BBoxs = {
+  Box: assert require MeowUI.cwd .. "Core.Box"
+  Circle: assert require MeowUI.cwd .. "Core.Circle"
+  Polygon: assert require MeowUI.cwd .. "Core.Polygon"
+}
 
 Tremove = table.remove
 
@@ -37,11 +44,7 @@ class Control
     @onTimerDone = nil
     @radius = nil
     @alwaysUpdate = true
-
-    if boxT == 'Box'
-      @boundingBox = Box!
-    elseif boxT == 'Circle'
-      @boundingBox = Circle!
+    @boundingBox = BBoxs[boxT]!
 
 
   --- getter for the root control.

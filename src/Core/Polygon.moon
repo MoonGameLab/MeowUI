@@ -33,13 +33,18 @@ class Polygon
   -- @tparam number n
   -- @tparam number radius
   -- @tparam number angle
-  new: (x = 0, y = 0, n = 3, radius = 0, angle = 0) =>
+  new: (x = 0, y = 0, n = 3, radius = 0, angle) =>
 
     @vertices = {}
     @sides = n
     @x, @y = x, y
     @radius = radius
-    @angle = angle
+    if n == 3
+      @angle = angle or math.pi
+    elseif n == 4
+      @angle = angle or math.pi/4
+    else
+      @angle = angle or 0
     @centroid = {x:@x, y:@y}
     @calcVertices!
 
@@ -105,7 +110,14 @@ class Polygon
     assert (type(sides) == 'number'),
       "sides must be of type number."
     @sides = sides
+
+    if sides == 3
+      @angle = @angle or math.pi
+    elseif sides == 4
+      @angle = @angle or math.pi/4
+
     @calcVertices!
+
 
   getSides: =>
     @sides
