@@ -81,7 +81,7 @@ class Polygon
       return true
 
 
-  -- getter for vertices.
+  --- getter for vertices.
   -- @treturn table
   getVertices: =>
     vertices = {}
@@ -100,12 +100,12 @@ class Polygon
     @radius = radius
     @calcVertices!
 
-  -- getter for radius.
+  --- getter for radius.
   -- @treturn number
   getRadius: =>
     @radius
 
-  -- setter for position.
+  --- setter for position.
   -- @tparam number x
   -- @tparam number y
   setPosition: (x = @x, y = @y) =>
@@ -114,12 +114,12 @@ class Polygon
     @x, @y = x, y
     @calcVertices!
 
-  -- getter for position.
+  --- getter for position.
   -- @treturn number
   getPosition: =>
     @x, @y
 
-  -- setter for sides.
+  --- setter for sides.
   -- @tparam number sides
   setSides: (sides) =>
     assert (type(sides) == 'number'),
@@ -134,12 +134,12 @@ class Polygon
     @calcVertices!
 
 
-  -- getter for sides.
+  --- getter for sides.
   -- @treturn number
   getSides: =>
     @sides
 
-  -- setter for angle.
+  --- setter for angle.
   -- @tparam number angle
   setAngle: (angle) =>
     assert (type(angle) == 'number'),
@@ -147,7 +147,7 @@ class Polygon
     @angle = angle
     @calcVertices!
 
-  -- getter for angle.
+  --- getter for angle.
   -- @treturn number
   getAngle: =>
     @angle
