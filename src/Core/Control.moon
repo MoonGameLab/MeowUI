@@ -36,6 +36,7 @@ class Control
     @chrono = nil
     @onTimerDone = nil
     @radius = nil
+    @alwaysUpdate = true
 
     if boxT == 'Box'
       @boundingBox = Box!
@@ -382,10 +383,22 @@ class Control
   --- updates the control.
   -- @tparam number dt
   update: (dt) =>
+    if @visible == false
+      if @alwaysUpdate == false then return
     Chrono.getInstance!\update self, dt
     @conform!
     @events\dispatch @events\getEvent("UI_UPDATE"), dt
     @updateChildren dt
+
+  --- sets alwaysUpdate (If false it will prevent the control from updating if visible is false).
+  -- @tparam boolean bool
+  setAlwaysUpdate: (bool) =>
+    @alwaysUpdate = bool
+
+  --- sets visible.
+  -- @tparam boolean bool
+  setVisible: (bool) =>
+    @visible = bool
 
   --- draws the control.
   draw: =>

@@ -24,8 +24,8 @@ class Button extends MeowUI.Control
     @strokeColor = style.strokeColor
     @fontColor = style.fontColor
 
-
     @on "UI_DRAW", @onDraw, @
+    @on "UI_UPDATE", @onUpdate, @
     @on "UI_MOUSE_ENTER", @onMouseEnter, @
     @on "UI_MOUSE_LEAVE", @onMouseLeave, @
     @on "UI_MOUSE_DOWN", @onMouseDown, @
@@ -42,6 +42,9 @@ class Button extends MeowUI.Control
     textY = (box\getHeight! - textH)/2 + box.y
     Graphics.setColor @fontColor
     Graphics.draw text, textX, textY
+
+  onUpdate: (dt) =>
+    print 'updating'
 
   onDraw: =>
     box = @getBoundingBox!
