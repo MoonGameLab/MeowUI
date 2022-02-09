@@ -8,16 +8,13 @@ Utils      = assert require MeowUI.cwd .. "Core.Utils"
 Event      = assert require MeowUI.cwd .. "Core.Event"
 Box        = assert require MeowUI.cwd .. "Core.Box"
 Circle     = assert require MeowUI.cwd .. "Core.Circle"
-Polygon     = assert require MeowUI.cwd .. "Core.Circle"
 Chrono     = assert require MeowUI.cwd .. "Core.Chrono"
 
 BBoxs = {
-  Box: assert require MeowUI.cwd .. "Core.Box"
-  Circle: assert require MeowUI.cwd .. "Core.Circle"
-  Polygon: assert require MeowUI.cwd .. "Core.Polygon"
+  Box: Box
+  Circle: Circle
+  Polygon: Chrono
 }
-
-Tremove = table.remove
 
 class Control
   --- constructor
@@ -107,9 +104,9 @@ class Control
         \setPosition @worldX, @worldY
         \setRadius @radius
 
-    for _, v in ipairs(@children)
-      v\needConforming true
-      v\conform!
+    for k = 1, #@children
+      @children[k]\needConforming true
+      @children[k]\conform!
 
     @needConforming false
 
@@ -118,8 +115,8 @@ class Control
     if not @getBoundingBox!\contains x, y then return nil
 
     if @childrenEnabled
-      for id, _ in ipairs @children
-        control = @children[id]
+      for k = 1, #@children
+        control = @children[k]
         hitControl = control\hitTest x, y
         if hitControl then return hitControl
 
@@ -150,8 +147,8 @@ class Control
 
   -- @local
   childExists: (id) =>
-    for _, child in ipairs @children
-      if child.id == id then return true
+    for k = 1, #@children
+      if @children[k].id == id then return true
     false
 
   --- attach a a child to the content entity.
@@ -331,9 +328,9 @@ class Control
   --- remove an attached child.
   -- @tparam number id
   removeChild: (id) =>
-    for i, child in ipairs @children
-      if child.id == id
-        Tremove @children, i
+    for i = 1, #@children
+      if @children[i].id == id
+        @children[i] = nil
         child.events\dispatch child.events\getEvent "UI_ON_REMOVE"
         break
 
@@ -343,11 +340,11 @@ class Control
 
   --- disables the control children.
   disableChildren: =>
-    for _, child in ipairs @children do child\setEnabled false
+    for i = 1, #@children do @children[i]\setEnabled false
 
   --- enables the control children.
   enableChildren: =>
-    for _, child in ipairs @children do child\setEnabled true
+    for i = 1, #@children do @children[i]\setEnabled true
 
   -- getter for the control children.
   getChildren: =>
@@ -375,13 +372,13 @@ class Control
 
   -- @local
   updateChildren: (dt) =>
-    for _, child in ipairs @children
-      child\update dt
+    for i = 1, #@children
+      @children[i]\update dt
 
   -- @local
   drawChildren: =>
-    for _, child in ipairs @children
-      child\draw!
+    for i = 1, #@children
+      @children[i]\draw!
 
   --- updates the control.
   -- @tparam number dt

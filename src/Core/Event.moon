@@ -102,9 +102,9 @@ class Event
 
     hdlr = @handlers[name]
     if not hdlr then return false
-
-    for _, h in ipairs hdlr
-      handler = h
+    -- for i = 1, #@children
+    for i = 1, #hdlr
+      handler = hdlr[i]
       if handler.callback
         if handler.target
           if handler.callback(handler.target, ...)
@@ -119,8 +119,10 @@ class Event
   -- @tparam string event
   -- @tparam string id
   remove: (event, id) =>
-    if @handlers[@getEvent(event)] == nil then return
-    for i, h in ipairs @handlers[@getEvent(event)]
+    _event = @getEvent(event)
+    if @handlers[_event] == nil then return
+    for i = 1, #@handlers[_event]
+      h = @handlers[_event][i]
       if h.id == id
         Tremove @handlers[@getEvent(event)], i
         return
