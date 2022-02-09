@@ -4,7 +4,6 @@
 -- @usage e: Event!
 
 Tinsert = table.insert
-Tremove = table.remove
 
 Utils = assert require MeowUI.cwd .. "Core.Utils"
 
@@ -102,7 +101,6 @@ class Event
 
     hdlr = @handlers[name]
     if not hdlr then return false
-    -- for i = 1, #@children
     for i = 1, #hdlr
       handler = hdlr[i]
       if handler.callback
@@ -124,7 +122,7 @@ class Event
     for i = 1, #@handlers[_event]
       h = @handlers[_event][i]
       if h.id == id
-        Tremove @handlers[@getEvent(event)], i
+        @handlers[@getEvent(event)][i] = nil
         return
 
 
