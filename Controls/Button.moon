@@ -8,18 +8,21 @@ drawRect = (self) ->
     local color
     if @isPressed
       color = @downColor
+      color[4] = (color[4] ~= nil) and color[4] or @alphaDown
     elseif @isHovred
       color = @hoverColor
+      color[4] = (color[4] ~= nil) and color[4] or @alphaHover
     elseif @enabled
       color = @upColor
+      color[4] = (color[4] ~= nil) and color[4] or @alphaEnable
     else
       color = @disabledColor
-
+      color[4] = (color[4] ~= nil) and color[4] or @alphaDisable
 
     -- Button body
     if @bgImage
       if not @isPressed
-        Graphics.setColor r, g, b
+        Graphics.setColor r, g, b, a
       if @isHovred
         Graphics.setColor color
 
@@ -28,7 +31,7 @@ drawRect = (self) ->
       y = @imageY + ((@bgImage\getHeight! - box\getHeight!) / 2)
       box.x, box.y = x + (@bgImageBx/2), y + (@bgImageBy/2)
 
-      Graphics.setColor r, g, b
+      Graphics.setColor r, g, b, a
     else
       Graphics.setColor color
       Graphics.rectangle "fill", box.x, box.y, box\getWidth!, box\getHeight!, @rx, @ry
@@ -45,8 +48,8 @@ drawRect = (self) ->
 
     -- Text
     if @textDrawable
-      x = @x + ((box\getWidth! - @textDrawable\getWidth!) / 2) + @bgImageBx
-      y = @y + ((box\getHeight! - @textDrawable\getHeight!) / 2) + @bgImageBy
+      x = @x + ((box\getWidth! - @textDrawable\getWidth!) / 2) + (@bgImageBx or 0)
+      y = @y + ((box\getHeight! - @textDrawable\getHeight!) / 2) + (@bgImageBx or 0)
       Graphics.draw @textDrawable, x, y
 
     Graphics.setColor r, g, b, a
@@ -70,6 +73,7 @@ class Button extends MeowUI.Control
     @oHeight = @height
     @dPadding = 15
     @bgImage = nil
+    @alpha = 1
 
     -- colors
     @downColor = style.downColor
@@ -181,4 +185,17 @@ class Button extends MeowUI.Control
   setImageBorder: (bx = 0, by = 0) =>
     @bgImageBx, @bgImageBy = bx, by
     @setSize @bgImage\getWidth! - bx, @bgImage\getHeight! - by
+
+  setAlphaDown: (a) =>
+    @alphaDown = a
+
+  setAlphaHover: (a) =>
+    @alphaHover = a
+
+  setAlphaEnable: (a) =>
+    @alphaEnable = a
+
+  setAlphaDisable: (a) =>
+    @alphaDisable = a
+
 
