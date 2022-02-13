@@ -40,7 +40,7 @@ class Control
     @worldY = 0
     @chrono = nil
     @onTimerDone = nil
-    @radius = nil
+    @radius = 0
     @alwaysUpdate = true
     @boundingBox = BBoxs[boxT]!
 
@@ -96,14 +96,15 @@ class Control
     @worldY = y - h
 
     box = @boundingBox
-    if box.__class == Box
-      with box
-        \setPosition @worldX, @worldY
-        \setSize @worldX + @width, @worldY + @height
-    elseif box.__class == Circle
-      with box
-        \setPosition @worldX, @worldY
-        \setRadius @radius
+    switch box.__class
+      when Box
+        with box
+          \setPosition @worldX, @worldY
+          \setSize @worldX + @width, @worldY + @height
+      when Circle
+        with box
+          \setPosition @worldX, @worldY
+          \setRadius @radius
 
     for k = 1, #@children
       @children[k]\needConforming true
@@ -400,6 +401,15 @@ class Control
   -- @tparam boolean bool
   setVisible: (bool) =>
     @visible = bool
+
+  -- sets the radius.
+  -- @tparam number r
+  setRadius: (r) =>
+    assert (type(r) == 'number'),
+      "radius must be of type number."
+    @radius = r
+    @needConforming true
+
 
   --- draws the control.
   draw: =>

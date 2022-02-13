@@ -86,7 +86,7 @@ class Circle
   --- setter for the circle radius.
   -- @tparam number radius
   setRadius: (radius) =>
-    assert type(radius) == 'number',
+    assert (type(radius) == 'number'),
       "radius must be of type number."
     @radius = radius
 
