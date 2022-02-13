@@ -1,40 +1,6 @@
 Graphics = love.graphics
 
-class Button extends MeowUI.Control
-
-  new: =>
-    -- Bounding box type
-    super "Box"
-    style = assert(require(MeowUI.root .. "Controls.Style"))[MeowUI.theme].button
-
-    @width = style.width
-    @height = style.height
-    @stroke = style.stroke
-    @iconAndTextSpace = style.iconAndTextSpace
-    @textDrawable = Graphics.newText Graphics.newFont(style.fontSize), ""
-    @rx = style.rx
-    @ry = style.ry
-    @dynamicSize = true
-    @oWidth = @width
-    @oHeight = @height
-    @dPadding = 15
-
-    -- colors
-    @downColor = style.downColor
-    @hoverColor = style.hoverColor
-    @upColor = style.upColor
-    @disabledColor = style.disabledColor
-    @strokeColor = style.strokeColor
-    @fontColor = style.fontColor
-
-    @on "UI_DRAW", @onDraw, @
-    @on "UI_MOUSE_ENTER", @onMouseEnter, @
-    @on "UI_MOUSE_LEAVE", @onMouseLeave, @
-    @on "UI_MOUSE_DOWN", @onMouseDown, @
-    @on "UI_MOUSE_UP", @onMouseUp, @
-
-
-  onDraw: =>
+drawRect = (self) ->
     box = @getBoundingBox!
 
     r, g, b, a = Graphics.getColor!
@@ -49,9 +15,24 @@ class Button extends MeowUI.Control
     else
       color = @disabledColor
 
+
     -- Button body
-    Graphics.setColor color
-    Graphics.rectangle "fill", box.x, box.y, box\getWidth!, box\getHeight!, @rx, @ry
+    if @bgImage
+      if not @isPressed
+        Graphics.setColor r, g, b
+      if @isHovred
+        Graphics.setColor color
+
+      Graphics.draw @bgImage, @imageX, @imageY
+      x = @imageX + ((@bgImage\getWidth! - box\getWidth!) / 2)
+      y = @imageY + ((@bgImage\getHeight! - box\getHeight!) / 2)
+      box.x, box.y = x + (@bgImageBx/2), y + (@bgImageBy/2)
+
+      Graphics.setColor r, g, b
+    else
+      Graphics.setColor color
+      Graphics.rectangle "fill", box.x, box.y, box\getWidth!, box\getHeight!, @rx, @ry
+      Graphics.setColor r, g, b
 
     -- border
     if @enabled and @stroke > 0
@@ -64,10 +45,49 @@ class Button extends MeowUI.Control
 
     -- Text
     if @textDrawable
-      Graphics.draw @textDrawable, @x + ((@width/2) - (@textDrawable\getWidth!/2)),
-        @y + ((@height/2) - (@textDrawable\getHeight!/2))
+      x = @x + ((box\getWidth! - @textDrawable\getWidth!) / 2) + @bgImageBx
+      y = @y + ((box\getHeight! - @textDrawable\getHeight!) / 2) + @bgImageBy
+      Graphics.draw @textDrawable, x, y
 
     Graphics.setColor r, g, b, a
+
+class Button extends MeowUI.Control
+
+  new: =>
+    -- Bounding box type
+    super "Box"
+    style = assert(require(MeowUI.root .. "Controls.Style"))[MeowUI.theme].button
+
+    @width  = style.width
+    @height = style.height
+    @stroke = style.stroke
+    @iconAndTextSpace = style.iconAndTextSpace
+    @textDrawable = Graphics.newText Graphics.newFont(style.fontSize), ""
+    @rx = style.rx
+    @ry = style.ry
+    @dynamicSize = true
+    @oWidth = @width
+    @oHeight = @height
+    @dPadding = 15
+    @bgImage = nil
+
+    -- colors
+    @downColor = style.downColor
+    @hoverColor = style.hoverColor
+    @upColor = style.upColor
+    @disabledColor = style.disabledColor
+    @strokeColor = style.strokeColor
+    @fontColor = style.fontColor
+
+    @onDraw = drawRect
+
+    @on "UI_DRAW", @onDraw, @
+    @on "UI_MOUSE_ENTER", @onMouseEnter, @
+    @on "UI_MOUSE_LEAVE", @onMouseLeave, @
+    @on "UI_MOUSE_DOWN", @onMouseDown, @
+    @on "UI_MOUSE_UP", @onMouseUp, @
+
+  onDraw: =>
 
   onClick: (cb) =>
     @Click = cb
@@ -148,3 +168,17 @@ class Button extends MeowUI.Control
 
   getFontSize: =>
     @textDrawable\getFont!\getWidth!, @textDrawable\getFont!\getHeight!
+
+  setImage: (image, conform, bx = 0, by = 0) =>
+    @bgImage = Graphics.newImage image
+    @dynamicSize = false
+    @stroke = 0
+    @imageX, @imageY = @x, @y
+    if conform
+      @bgImageBx, @bgImageBy = bx, by
+      @setSize @bgImage\getWidth! - bx, @bgImage\getHeight! - by
+
+  setImageBorder: (bx = 0, by = 0) =>
+    @bgImageBx, @bgImageBy = bx, by
+    @setSize @bgImage\getWidth! - bx, @bgImage\getHeight! - by
+

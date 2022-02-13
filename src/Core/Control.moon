@@ -8,12 +8,13 @@ Utils      = assert require MeowUI.cwd .. "Core.Utils"
 Event      = assert require MeowUI.cwd .. "Core.Event"
 Box        = assert require MeowUI.cwd .. "Core.Box"
 Circle     = assert require MeowUI.cwd .. "Core.Circle"
+Polygon    = assert require MeowUI.cwd .. "Core.Polygon"
 Chrono     = assert require MeowUI.cwd .. "Core.Chrono"
 
 BBoxs = {
   Box: Box
   Circle: Circle
-  Polygon: Chrono
+  Polygon: Polygon
 }
 
 class Control
