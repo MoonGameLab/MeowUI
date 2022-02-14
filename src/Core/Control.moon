@@ -101,7 +101,7 @@ class Control
         with box
           \setPosition @worldX, @worldY
           \setSize @worldX + @width, @worldY + @height
-      when Circle
+      when Circle or Polygon
         with box
           \setPosition @worldX, @worldY
           \setRadius @radius
@@ -214,7 +214,7 @@ class Control
   --- setter for the content position.
   -- @tparam number x
   -- @tparam number y
-  setPos: (x, y) =>
+  setPosition: (x, y) =>
     assert (type(x) == 'number') and (type(y) == 'number'),
       "x and y must be of type number."
 
@@ -224,7 +224,7 @@ class Control
 
   --- getter for the content position.
   -- @treturn table position
-  getPos: =>
+  getPosition: =>
     @x, @y
 
   --- setter for the content x position.
@@ -258,6 +258,7 @@ class Control
   --- getter for the control size.
   -- @treturn table
   getSize: =>
+    if @boundingBox.__class.__name ~= "Box" then return nil
     @w, @h
 
   --- getter for the control width.
@@ -268,11 +269,13 @@ class Control
   --- getter for the control height.
   -- @treturn number
   getHeight: =>
+    if @boundingBox.__class.__name ~= "Box" then return nil
     @height
 
   --- setter for the content width.
   -- @tparam number w
   setWidth: (w) =>
+    if @boundingBox.__class.__name ~= "Box" then return
     assert type(w) == 'number',
       "w must be of type number."
     @width = w
@@ -281,6 +284,7 @@ class Control
   --- setter for the content height.
   -- @tparam number h
   setHeight: (h) =>
+    if @boundingBox.__class.__name ~= "Box" then return
     assert type(h) == 'number',
       "h must be of type number."
     @height = h
@@ -290,6 +294,7 @@ class Control
   -- @tparam number width
   -- @tparam number height
   setSize: (width, height) =>
+    if @boundingBox.__class.__name ~= "Box" then return
     assert (type(width) == 'number') and (type(height) == 'number'),
       "width and height must be of type number."
 
@@ -405,11 +410,41 @@ class Control
   -- sets the radius.
   -- @tparam number r
   setRadius: (r) =>
+    if @boundingBox.__class.__name ~= "Circle" or @boundingBox.__class.__name ~= "Polygon" then return
     assert (type(r) == 'number'),
       "radius must be of type number."
     @radius = r
     @needConforming true
 
+  -- getter for the radius.
+  -- @treturn number r
+  getRadius: =>
+    if @boundingBox.__class.__name ~= "Circle" or @boundingBox.__class.__name ~= "Polygon" then return
+    @radius
+
+  -- sets the number of sides.
+  -- @tparam number sides
+  setSides: (sides) =>
+    if @boundingBox.__class.__name ~= "Polygon" then return
+    @boundingBox\setSides sides
+
+  -- gets the number of sides.
+  -- @treturn number sides
+  getSides: =>
+    if @boundingBox.__class.__name ~= "Polygon" then return nil
+    @boundingBox\getSides!
+
+  -- sets the angle.
+  -- @tparam number angle
+  setAngle: (angle) =>
+    if @boundingBox.__class.__name ~= "Polygon" then return
+    @boundingBox\setAngle angle
+
+  -- gets the angle.
+  -- @treturn number angle
+  getAngle: =>
+    if @boundingBox.__class.__name ~= "Polygon" then return nil
+    @boundingBox\getAngle!
 
   --- draws the control.
   draw: =>

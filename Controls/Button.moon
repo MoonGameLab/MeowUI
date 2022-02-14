@@ -24,9 +24,7 @@ currentColor = =>
 drawCircle = =>
   box = @getBoundingBox!
   r, g, b, a = Graphics.getColor!
-
-  -- print box\getRadius!
-
+  boxR = box\getRadius!
   color = currentColor self
 
   -- Button body
@@ -47,7 +45,7 @@ drawCircle = =>
     Graphics.setColor r, g, b, a
   else
     Graphics.setColor color
-    Graphics.circle 'fill', box.x, box.y, box\getRadius!
+    Graphics.circle 'fill', box.x, box.y, boxR
     Graphics.setColor r, g, b, a
 
   -- border
@@ -56,14 +54,15 @@ drawCircle = =>
     Graphics.setLineWidth @stroke
     Graphics.setLineStyle "rough" -- could be dynamic
     Graphics.setColor @strokeColor
-    Graphics.circle "line", box.x, box.y, box\getRadius!
+    Graphics.circle "line", box.x, box.y, boxR
     Graphics.setLineWidth oldLineWidth
     Graphics.setColor r, g, b, a
 
   -- Text
   if @textDrawable
-    x = @x - @textDrawable\getWidth! / 2
-    y = @y - @textDrawable\getHeight! / 2
+    textW, textH = @textDrawable\getWidth!, @textDrawable\getHeight!
+    x = @x - textW / 2
+    y = @y - textH / 2
     Graphics.draw @textDrawable, x, y
 
   Graphics.setColor r, g, b, a
@@ -71,25 +70,26 @@ drawCircle = =>
 drawRect = =>
     box = @getBoundingBox!
     r, g, b, a = Graphics.getColor!
-
+    boxW, boxH = box\getWidth!, box\getHeight!
     color = currentColor self
 
     -- Button body
     if @bgImage
+      imageW, imageH = @bgImage\getWidth!, @bgImage\getHeight!
       if not @isPressed
         Graphics.setColor r, g, b, a
       if @isHovred
         Graphics.setColor color
 
       Graphics.draw @bgImage, @imageX, @imageY
-      x = @imageX + ((@bgImage\getWidth! - box\getWidth!) / 2)
-      y = @imageY + ((@bgImage\getHeight! - box\getHeight!) / 2)
+      x = @imageX + ((imageW - boxW) / 2)
+      y = @imageY + ((imageH - boxH) / 2)
       box.x, box.y = x + (@bgImageBx/2), y + (@bgImageBy/2)
 
       Graphics.setColor r, g, b, a
     else
       Graphics.setColor color
-      Graphics.rectangle "fill", box.x, box.y, box\getWidth!, box\getHeight!, @rx, @ry
+      Graphics.rectangle "fill", box.x, box.y, boxW, boxH, @rx, @ry
       Graphics.setColor r, g, b, a
 
     -- border
@@ -98,13 +98,14 @@ drawRect = =>
       Graphics.setLineWidth @stroke
       Graphics.setLineStyle "rough" -- could be dynamic
       Graphics.setColor @strokeColor
-      Graphics.rectangle "line", box.x, box.y, box\getWidth!, box\getHeight!, @rx, @ry
+      Graphics.rectangle "line", box.x, box.y, boxW, boxH, @rx, @ry
       Graphics.setLineWidth oldLineWidth
 
     -- Text
     if @textDrawable
-      x = @x + ((box\getWidth! - @textDrawable\getWidth!) / 2) + (@bgImageBx or 0)
-      y = @y + ((box\getHeight! - @textDrawable\getHeight!) / 2) + (@bgImageBx or 0)
+      textW, textH = @textDrawable\getWidth!, @textDrawable\getHeight!
+      x = @x + ((boxW - textW) / 2) + (@bgImageBx or 0)
+      y = @y + ((boxH - textH) / 2) + (@bgImageBx or 0)
       Graphics.draw @textDrawable, x, y
 
     Graphics.setColor r, g, b, a
@@ -132,7 +133,7 @@ class Button extends MeowUI.Control
     switch type
       when "Box"
         @onDraw = drawRect
-        style = assert(require(MeowUI.root .. "Controls.Style"))[MeowUI.theme].button
+        style = t.button
         @width  = style.width
         @height = style.height
         @textDrawable = Graphics.newText Graphics.newFont(@fontSize), ""
@@ -146,7 +147,7 @@ class Button extends MeowUI.Control
         @alpha = 1
       when "Circle"
         @onDraw = drawCircle
-        style = assert(require(MeowUI.root .. "Controls.Style"))[MeowUI.theme].circleButton
+        style = t.circleButton
         @radius  = style.radius
         @textDrawable = Graphics.newText Graphics.newFont(@fontSize), ""
         @dynamicSize = true
@@ -217,10 +218,6 @@ class Button extends MeowUI.Control
     super width, height
     @oWidth = @width
     @oHeight = @height
-
-  setRadius: (r) =>
-    print "set RAD"
-    super r
 
   setUpColor: (color) =>
     @upColor = color
