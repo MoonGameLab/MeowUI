@@ -101,7 +101,11 @@ class Control
         with box
           \setPosition @worldX, @worldY
           \setSize @worldX + @width, @worldY + @height
-      when Circle or Polygon
+      when Circle
+        with box
+          \setPosition @worldX, @worldY
+          \setRadius @radius
+      when Polygon
         with box
           \setPosition @worldX, @worldY
           \setRadius @radius
@@ -410,7 +414,7 @@ class Control
   -- sets the radius.
   -- @tparam number r
   setRadius: (r) =>
-    if @boundingBox.__class.__name ~= "Circle" or @boundingBox.__class.__name ~= "Polygon" then return
+    if @boundingBox.__class.__name ~= "Circle" and @boundingBox.__class.__name ~= "Polygon" then return
     assert (type(r) == 'number'),
       "radius must be of type number."
     @radius = r
@@ -451,7 +455,3 @@ class Control
     if @visible == false then return
     @events\dispatch @events\getEvent("UI_DRAW")
     @drawChildren!
-
-
-
-

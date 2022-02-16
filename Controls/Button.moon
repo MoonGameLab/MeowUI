@@ -1,8 +1,12 @@
 Graphics = love.graphics
 
-stencileFunc = =>
+stencileFuncCircle = =>
   box = @getBoundingBox!
-  () -> Graphics.circle "fill", box.x, box.y, @bgImage\getWidth!
+  -> Graphics.circle "fill", box.x, box.y, @bgImage\getWidth!
+
+stencileFuncPoly = =>
+  box = @getBoundingBox!
+  -> Graphics.polygon "fill", box\getVertices!
 
 currentColor = =>
   local color
@@ -21,6 +25,53 @@ currentColor = =>
 
   color
 
+
+drawPoly = =>
+  box = @getBoundingBox!
+  r, g, b, a = Graphics.getColor!
+  color = currentColor self
+
+  -- Dump box\getVertices!
+
+  -- Button body
+  if @bgImage
+    if not @isPressed
+      Graphics.setColor r, g, b, a
+    if @isHovred
+      Graphics.setColor color
+
+    sf = stencileFuncPoly self
+    Graphics.stencil sf, "replace", 1
+    Graphics.setStencilTest "greater", 0
+    x, y = box\getPosition!
+    Graphics.draw @bgImage, x - @bgImage\getWidth!/2 , y - @bgImage\getHeight!/2
+    love.graphics.polygon "line", box\getVertices!
+    Graphics.setStencilTest!
+    Graphics.setColor r, g, b, a
+  else
+    Graphics.setColor color
+    Graphics.polygon 'fill', box\getVertices!
+    Graphics.setColor r, g, b, a
+
+  -- border
+  if @enabled and @stroke > 0
+    oldLineWidth = Graphics.getLineWidth!
+    Graphics.setLineWidth @stroke
+    Graphics.setLineStyle "rough" -- could be dynamic
+    Graphics.setColor @strokeColor
+    Graphics.polygon "line", box\getVertices!
+    Graphics.setLineWidth oldLineWidth
+    Graphics.setColor r, g, b, a
+
+  -- Text
+  if @textDrawable
+    textW, textH = @textDrawable\getWidth!, @textDrawable\getHeight!
+    x = @x - textW / 2
+    y = @y - textH / 2
+    Graphics.draw @textDrawable, x, y
+
+  Graphics.setColor r, g, b, a
+
 drawCircle = =>
   box = @getBoundingBox!
   r, g, b, a = Graphics.getColor!
@@ -34,7 +85,7 @@ drawCircle = =>
     if @isHovred
       Graphics.setColor color
 
-    sf = stencileFunc self
+    sf = stencileFuncCircle self
     Graphics.stencil sf, "replace", 1
     Graphics.setStencilTest "greater", 0
     Graphics.draw @bgImage, (@imageX - @radius * @scaleX),
@@ -157,6 +208,18 @@ class Button extends MeowUI.Control
         @alpha = 1
         @scaleX = 1
         @scaleY = 1
+      when "Polygon"
+        @onDraw = drawPoly
+        style = t.polyButton
+        @radius  = style.radius
+        @textDrawable = Graphics.newText Graphics.newFont(@fontSize), ""
+        @dynamicSize = true
+        @oRadius = @radius
+        @dPadding = 15
+        @bgImage = nil
+        @alpha = 1
+        @scaleX = 1
+        @scaleY = 1
 
     @on "UI_DRAW", @onDraw, @
     @on "UI_MOUSE_ENTER", @onMouseEnter, @
@@ -259,6 +322,13 @@ class Button extends MeowUI.Control
         @x += bx
         @y += bx
         @setRadius r
+      elseif box.__class.__name == "Polygon"
+        w, h = @bgImage\getWidth! / 1.5, @bgImage\getHeight! / 1.5
+        r = (w > h) and w or h
+        @x += bx
+        @y += bx
+        @setRadius r
+
 
   setImageBorder: (bx = 0, by = 0) =>
     @bgImageBx, @bgImageBy = bx, by
@@ -278,6 +348,3 @@ class Button extends MeowUI.Control
 
   setScale: (x = nil, y = nil) =>
     @sx, @sy = x or @sx, y or @sy
-
-
-

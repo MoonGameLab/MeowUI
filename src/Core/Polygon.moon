@@ -94,6 +94,7 @@ class Polygon
   -- setter for radius.
   -- @tparam number radius
   setRadius: (radius) =>
+    if radius == @radius then return
     assert (type(radius) == 'number'),
       "radius must be of type number."
     @radius = radius
@@ -108,6 +109,7 @@ class Polygon
   -- @tparam number x
   -- @tparam number y
   setPosition: (x = @x, y = @y) =>
+    if x == @x and y == @y then return
     assert (type(x) == 'number') and (type(y) == 'number'),
       "x and y must be of type number."
     @x, @y = x, y
@@ -121,6 +123,7 @@ class Polygon
   --- setter for sides.
   -- @tparam number sides
   setSides: (sides) =>
+    if sides == @sides then return
     assert (type(sides) == 'number'),
       "sides must be of type number."
     @sides = sides
@@ -141,6 +144,7 @@ class Polygon
   --- setter for angle.
   -- @tparam number angle
   setAngle: (angle) =>
+    if angle == @angle then return
     assert (type(angle) == 'number'),
       "angle must be of type number."
     @angle = angle
@@ -150,9 +154,3 @@ class Polygon
   -- @treturn number
   getAngle: =>
     @angle
-
-
-
-
-
-

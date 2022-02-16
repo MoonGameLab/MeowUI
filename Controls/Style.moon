@@ -24,14 +24,14 @@ Style = {
     }
 
     circleButton: {
-      radius: 20
-      height: 50
+      radius: 30
+    }
+
+    polyButton: {
+      radius: 10
     }
   }
 }
 
 
 Style
-
-
-
