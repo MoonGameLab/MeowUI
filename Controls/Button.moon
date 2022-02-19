@@ -65,6 +65,7 @@ drawPoly = =>
 
   -- Text
   if @textDrawable
+    Graphics.setColor @fontColor
     textW, textH = @textDrawable\getWidth!, @textDrawable\getHeight!
     x = @x - textW / 2
     y = @y - textH / 2
@@ -111,6 +112,7 @@ drawCircle = =>
 
   -- Text
   if @textDrawable
+    Graphics.setColor @fontColor
     textW, textH = @textDrawable\getWidth!, @textDrawable\getHeight!
     x = @x - textW / 2
     y = @y - textH / 2
@@ -154,6 +156,7 @@ drawRect = =>
 
     -- Text
     if @textDrawable
+      Graphics.setColor @fontColor
       textW, textH = @textDrawable\getWidth!, @textDrawable\getHeight!
       x = @x + ((boxW - textW) / 2) + (@bgImageBx or 0)
       y = @y + ((boxH - textH) / 2) + (@bgImageBx or 0)
