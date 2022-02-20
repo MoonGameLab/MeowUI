@@ -36,6 +36,7 @@ class Polygon
   new: (x = 0, y = 0, n = 3, radius = 0, angle) =>
 
     @vertices = {}
+    @verticesArray = {}
     @sides = n
     @x, @y = x, y
     @radius = radius
@@ -56,6 +57,8 @@ class Polygon
       x = ( sin( i / @sides * 2 * pi - @angle) * @radius) + @x
       y = ( cos( i / @sides * 2 * pi - @angle) * @radius) + @y
       @vertices[#@vertices + 1] = {x, y}
+    
+    @makeVerticesArray!
 
   --- tests if a given point is inside the poly.
   -- @tparam number x
@@ -79,17 +82,16 @@ class Polygon
     else
       return true
 
+  -- @local
+  makeVerticesArray: =>
+    for i = 1,#@vertices do
+      @verticesArray[2*i-1] = @vertices[i][1]
+      @verticesArray[2*i]   = @vertices[i][2]
 
   --- getter for vertices.
   -- @treturn table
   getVertices: =>
-    vertices = {}
-
-    for i = 1,#@vertices do
-      vertices[2*i-1] = @vertices[i][1]
-      vertices[2*i]   = @vertices[i][2]
-
-    vertices
+    @verticesArray
 
   -- setter for radius.
   -- @tparam number radius
