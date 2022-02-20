@@ -43,6 +43,7 @@ class Control
     @radius = 0
     @alwaysUpdate = true
     @boundingBox = BBoxs[boxT]!
+    @clip = false
 
 
   --- getter for the root control.
@@ -450,8 +451,40 @@ class Control
     if @boundingBox.__class.__name ~= "Polygon" then return nil
     @boundingBox\getAngle!
 
+  -- sets the clip.
+  -- @tparam boolean bool
+  setClip: (bool) =>
+    @clip = bool
+
+  -- gets the clip
+  -- @treturn boolean clip
+  getClip: =>
+    @clip
+
+  -- @local
+  clipBegin: =>
+    if @clip
+      Graphics = love.graphics
+      switch @boundingBox.__class.__name
+        when "Box"
+          Graphics.stencil -> Graphics.rectangle "fill", @x, @y, @boundingBox\getWidth!, @boundingBox\getHeight!
+        when "Polygon"
+          Graphics.stencil -> Graphics.polygon "fill", @boundingBox\getVertices!
+        when "Circle"
+          Graphics.stencil -> Graphics.circle "fill", @x, @y, @boundingBox\getRadius!
+
+      Graphics.setStencilTest "greater", 0
+
+  -- @local
+  clipEnd: =>
+    if @clip
+      Graphics = love.graphics
+      Graphics.setStencilTest!
+
   --- draws the control.
   draw: =>
+    @clipBegin!
     if @visible == false then return
     @events\dispatch @events\getEvent("UI_DRAW")
     @drawChildren!
+    @clipEnd!
