@@ -9,7 +9,9 @@ path = ...
 cwd = path .. ".src."
 root = path .. "."
 
-export MeowUI = {}
+export MeowUI = {
+    debug: true
+}
 
 MeowUI["cwd"]     = cwd
 MeowUI["root"]    = root

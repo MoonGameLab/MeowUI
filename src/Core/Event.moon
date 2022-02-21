@@ -6,6 +6,7 @@
 Tinsert = table.insert
 
 Utils = assert require MeowUI.cwd .. "Core.Utils"
+DEBUG = assert require MeowUI.cwd .. "Core.Debug"
 
 class Event
   --- a table of event constants.
@@ -105,6 +106,7 @@ class Event
       handler = hdlr[i]
       if handler.callback
         if handler.target
+          if MeowUI.debug and name == "mouseEnter" then DEBUG\watch handler.target
           if handler.callback(handler.target, ...)
             return true
         else
