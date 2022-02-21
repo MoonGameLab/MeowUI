@@ -10,6 +10,7 @@ Box        = assert require MeowUI.cwd .. "Core.Box"
 Circle     = assert require MeowUI.cwd .. "Core.Circle"
 Polygon    = assert require MeowUI.cwd .. "Core.Polygon"
 Chrono     = assert require MeowUI.cwd .. "Core.Chrono"
+DEBUG      = assert require MeowUI.cwd .. "Core.Debug"
 
 BBoxs = {
   Box: Box
@@ -127,7 +128,14 @@ class Control
         hitControl = control\hitTest x, y
         if hitControl then return hitControl
 
-    if @enabled then return @
+    if @enabled 
+      if MeowUI.debug then @_d = false
+      return @
+    
+    if MeowUI.debug 
+      @_d = true
+      return @
+ 
     return nil
 
   --- setter for the content parent.

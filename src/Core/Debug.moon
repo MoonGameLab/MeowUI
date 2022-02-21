@@ -13,7 +13,8 @@ class Debug extends Singleton
     @focusedControl = {}
 
   watch: (control) =>
-    print control.id
+    if control
+      print control.id
 
   draw: =>
     -- slove.graphics.rectangle 'fill', 10, 10, 100, 100
