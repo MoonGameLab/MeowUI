@@ -117,6 +117,16 @@ class Polygon
     @x, @y = x, y
     @calcVertices!
 
+  --- getter for the circle x position.
+  -- @treturn number
+  getX: =>
+    @x
+
+  --- getter for the circle y position.
+  -- @treturn number
+  getY: =>
+    @y
+
   --- getter for position.
   -- @treturn number
   getPosition: =>

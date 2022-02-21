@@ -31,8 +31,6 @@ drawPoly = =>
   r, g, b, a = Graphics.getColor!
   color = currentColor self
 
-  -- Dump box\getVertices!
-
   -- Button body
   if @bgImage
     if not @isPressed
@@ -168,7 +166,7 @@ class Button extends MeowUI.Control
 
   new: (type) =>
     -- Bounding box type
-    super type
+    super type, "Button"
 
     -- colors
     t = assert(require(MeowUI.root .. "Controls.Style"))[MeowUI.theme]

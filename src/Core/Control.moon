@@ -10,6 +10,7 @@ Box        = assert require MeowUI.cwd .. "Core.Box"
 Circle     = assert require MeowUI.cwd .. "Core.Circle"
 Polygon    = assert require MeowUI.cwd .. "Core.Polygon"
 Chrono     = assert require MeowUI.cwd .. "Core.Chrono"
+DEBUG      = assert require MeowUI.cwd .. "Core.Debug"
 
 BBoxs = {
   Box: Box
@@ -20,7 +21,11 @@ BBoxs = {
 class Control
   --- constructor
   -- @tparam string boxT Bounding box type[Box, Circle]
-  new: (boxT = "Box") =>
+  -- @tparam string __name name of the control
+  new: (boxT = "Box", __name) =>
+
+    @__name = __name
+    @boxType = boxT
     @id = Utils.Uid!
     @x = 0
     @y = 0
@@ -28,7 +33,7 @@ class Control
     @anchorY = 0
     @width = 0
     @height = 0
-    @depth = 0
+    @depth = 1
     @children = {}
     @parent = nil
     @visible = true
@@ -42,7 +47,7 @@ class Control
     @onTimerDone = nil
     @radius = 0
     @alwaysUpdate = true
-    @boundingBox = BBoxs[boxT]!
+    @boundingBox = BBoxs[@boxType]!
     @clip = false
 
 
@@ -122,12 +127,19 @@ class Control
     if not @getBoundingBox!\contains x, y then return nil
 
     if @childrenEnabled
-      for k = 1, #@children
-        control = @children[k]
+      for i = #@children, 1, -1
+        control = @children[i]
         hitControl = control\hitTest x, y
         if hitControl then return hitControl
 
-    if @enabled then return @
+    if @enabled 
+      if MeowUI.debug then @_d = false
+      return @
+    
+    if MeowUI.debug 
+      @_d = true
+      return @
+ 
     return nil
 
   --- setter for the content parent.
@@ -144,7 +156,7 @@ class Control
   -- @local
   sortChildren: =>
     table.sort @children, (a, b) ->
-      a.depth < b.depth
+      a.depth > b.depth
 
   --- setter for the content depth.
   -- @tparam number depth
@@ -173,6 +185,7 @@ class Control
     if depth then child\setDepth depth
     events = child.events
     events\dispatch events\getEvent "UI_ON_ADD"
+    @sortChildren!
 
   --- setter for the content anchor.
   -- @tparam number x
@@ -415,17 +428,18 @@ class Control
   -- sets the radius.
   -- @tparam number r
   setRadius: (r) =>
-    if @boundingBox.__class.__name ~= "Circle" and @boundingBox.__class.__name ~= "Polygon" then return
-    assert (type(r) == 'number'),
-      "radius must be of type number."
-    @radius = r
-    @needConforming true
+    if @boundingBox.__class.__name == "Circle" or @boundingBox.__class.__name == "Polygon"
+      assert (type(r) == 'number'),
+        "radius must be of type number."
+      @radius = r
+      @needConforming true
 
   -- getter for the radius.
   -- @treturn number r
   getRadius: =>
-    if @boundingBox.__class.__name ~= "Circle" or @boundingBox.__class.__name ~= "Polygon" then return
-    @radius
+    if @boundingBox.__class.__name == "Circle" or @boundingBox.__class.__name == "Polygon"
+      return @radius
+    return nil
 
   -- sets the number of sides.
   -- @tparam number sides

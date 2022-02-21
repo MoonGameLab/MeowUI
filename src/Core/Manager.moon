@@ -5,6 +5,7 @@
 
 Root = assert require MeowUI.cwd .. "Core.Root"
 Singleton = assert require MeowUI.cwd .. "Core.Singleton"
+DEBUG = assert require MeowUI.cwd .. "Core.Debug"
 Timer = love.timer
 Mouse = love.mouse
 
@@ -12,6 +13,16 @@ Mouse = love.mouse
 dispatch = (control, name, ...) ->
     control.events\dispatch control.events\getEvent(name),
       ...
+
+
+-- @local
+debug = (hitControl) ->
+  if hitControl and hitControl._d
+    DEBUG\watch hitControl
+    return nil
+  else
+    DEBUG\watch hitControl
+    return hitControl
 
 class Manager extends Singleton
 
@@ -37,6 +48,7 @@ class Manager extends Singleton
   --- draws the manager.
   draw: =>
     if @rootControl then @rootControl\draw!
+    if MeowUI.debug then DEBUG\draw!
 
   --- callback function triggered when the mouse is moved.
   -- @tparam number x
@@ -47,6 +59,9 @@ class Manager extends Singleton
     if not @rootControl then return
 
     hitControl = @rootControl\hitTest x, y
+
+    if MeowUI.debug then hitControl = debug hitControl
+
     if hitControl ~= @hoverControl
       if @hoverControl then dispatch @hoverControl, "UI_MOUSE_LEAVE"
 
@@ -79,6 +94,8 @@ class Manager extends Singleton
 
     hitControl = @rootControl\hitTest x, y
 
+    if MeowUI.debug then hitControl = debug hitControl
+
     if hitControl
       dispatch hitControl, "UI_MOUSE_DOWN", x, y, button, isTouch
       @holdControl = hitControl
@@ -94,7 +111,11 @@ class Manager extends Singleton
     if @holdControl
       dispatch @holdControl, "UI_MOUSE_UP", x, y, button, isTouch
       if @rootControl
+
         hitControl = @rootControl\hitTest x, y
+
+        if MeowUI.debug then hitControl = debug hitControl
+
         if hitControl == @holdControl
           if @lastClickControl and
             @lastClickControl == @holdControl and
@@ -116,6 +137,9 @@ class Manager extends Singleton
   -- @tparam number y
   wheelmoved: (x, y) =>
     hitControl = @rootControl\hitTest Mouse\getX!, Mouse\getY!
+
+    if MeowUI.debug then hitControl = debug hitControl
+
     while hitControl
       @mousemoved Mouse\getX!, Mouse\getY!, 0, 0
       if dispatch hitControl, "UI_WHELL_MOVE", x, y then return
@@ -126,6 +150,7 @@ class Manager extends Singleton
   -- @tparam scancode scancode
   -- @tparam boolean isrepeat
   keypressed: (key, scancode, isrepeat) =>
+    if key == "f1" then MeowUI.debug = not MeowUI.debug
     if @focusControl then dispatch @focusControl, "UI_KEY_DOWN", key, scancode, isrepeat
 
   --- callback function triggered when a keyboard key is released.

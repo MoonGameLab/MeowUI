@@ -60,6 +60,16 @@ class Box
       "x and y must be of type number."
     @x, @y = x, y
 
+  --- getter for the circle x position.
+  -- @treturn number
+  getX: =>
+    @x
+
+  --- getter for the circle y position.
+  -- @treturn number
+  getY: =>
+    @y
+
   --- setter for the box size.
   -- @tparam number width
   -- @tparam number height

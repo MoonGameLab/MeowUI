@@ -20,16 +20,16 @@ class Root extends Control
   -- @tparam number w
   -- @tparam number h
   initContainers: (w, h) =>
-    with @coreContainer = Control!
+    with @coreContainer = Control "Box", "coreContainer"
       \setSize w, h
 
-    with @popupContainer = Control!
+    with @popupContainer = Control "Box", "popupContainer"
       \setSize w, h
 
-    with @optionContainer = Control!
+    with @optionContainer = Control "Box", "optionContainer"
       \setSize w, h
 
-    with @tipContainer = Control!
+    with @tipContainer = Control "Box", "tipContainer"
       \setSize w, h
 
     @addChild @coreContainer, 1
