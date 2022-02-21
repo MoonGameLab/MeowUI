@@ -31,8 +31,6 @@ drawPoly = =>
   r, g, b, a = Graphics.getColor!
   color = currentColor self
 
-  -- Dump box\getVertices!
-
   -- Button body
   if @bgImage
     if not @isPressed
