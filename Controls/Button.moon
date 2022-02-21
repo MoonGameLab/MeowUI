@@ -158,8 +158,8 @@ drawRect = =>
     if @textDrawable
       Graphics.setColor @fontColor
       textW, textH = @textDrawable\getWidth!, @textDrawable\getHeight!
-      x = @x + ((boxW - textW) / 2) + (@bgImageBx or 0)
-      y = @y + ((boxH - textH) / 2) + (@bgImageBx or 0)
+      x = box.x + ((boxW - textW) / 2) + (@bgImageBx or 0)
+      y = box.y + ((boxH - textH) / 2) + (@bgImageBx or 0)
       Graphics.draw @textDrawable, x, y
 
     Graphics.setColor r, g, b, a
