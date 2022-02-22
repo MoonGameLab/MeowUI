@@ -23,6 +23,7 @@ class Debug extends Singleton
     @boxColor = {0, 0, 0, 0.78431372549}
     @palette = {
       red: {1, 0, 0, 1}
+      blue: {0, 0.8, 1, 1}
       green: {0, 1, 0, 1}
       white: {1, 1, 1, 1}
     }
@@ -36,8 +37,8 @@ class Debug extends Singleton
 
   draw: =>
     Timer = love.timer
-    fps = Timer.getFPS!
     delta = Timer.getDelta!
+    fps = Timer.getFPS!
     loveV = love._version
     libV = MeowUI.version
     stage = MeowUI.stage
@@ -72,13 +73,13 @@ class Debug extends Singleton
     Graphics.setFont @font
     Graphics.setColor @boxColor
 
-    Graphics.rectangle 'fill', @x, @y, 165, 200
-    Graphics.setColor @palette.red
+    Graphics.rectangle 'fill', @x, @y, 165, 234
+    Graphics.setColor @palette.blue
     Graphics.print "MeowUI - Debug [" .. libV .. " - " .. stage .. "]", @x + 5, @y + 5
     Graphics.setColor @palette.white
     Graphics.print "LOVE Version [" .. loveV.. "]", @x + 35, @y + 20
     Graphics.line @x, @y + 40, @x + 165, @y + 40
-    Graphics.print "FPS: " .. fps, @x + 5, @y + 45
+    Graphics.print "FPS: " ..fps, @x + 5, @y + 45
     Graphics.print "Delta: " .. delta, @x + 5, @y + 60
     Graphics.print "MEM (KB): " .. collectgarbage('count'), @x + 5, @y + 75
 
@@ -93,6 +94,9 @@ class Debug extends Singleton
       else pname = parent.__name
       Graphics.print "Parent: " .. pname, @x + 10, @y + cy
       Graphics.print "Depth: " .. focusControl.depth, @x + 10, @y + cy + 12
+      Graphics.print "#Children: " .. #focusControl.children, @x + 10, @y + cy + 24
+      Graphics.print "isClipped: " .. tostring(focusControl\getClip!), @x + 10, @y + cy + 36
+      Graphics.print "isVisible: " .. tostring(focusControl\getVisible!), @x + 10, @y + cy + 48
 
 
     Graphics.setColor @palette.green
@@ -103,7 +107,7 @@ class Debug extends Singleton
       Graphics.setColor @palette.white
       Graphics.print "id: " .. @focusControl.id, 5, wh - 15
       Graphics.setColor @palette.green
-      Graphics.rectangle 'line', @x + 5, @y + 95, 155, 100
+      Graphics.rectangle 'line', @x + 5, @y + 95, 155, 134
       className = @focusControl.__name or @focusControl.__class.__name
       box = @focusControl\getBoundingBox!
       Graphics.setColor @palette.white 
@@ -116,7 +120,7 @@ class Debug extends Singleton
           controlInfo @focusControl
         when "Polygon"
           Graphics.print "Radius: " .. @focusControl\getRadius!, @x + 10, @y + 136
-          Graphics.print "# vertices: " .. #@focusControl\getBoundingBox!\getVertices!/2, @x + 10, @y + 148
+          Graphics.print "#Vertices: " .. #@focusControl\getBoundingBox!\getVertices!/2, @x + 10, @y + 148
           controlInfo @focusControl
         when "Circle"
           Graphics.print "Radius: " .. @focusControl\getRadius!, @x + 10, @y + 136

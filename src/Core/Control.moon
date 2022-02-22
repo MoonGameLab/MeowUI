@@ -420,6 +420,11 @@ class Control
   setVisible: (bool) =>
     @visible = bool
 
+  --- getter for visible property.
+  -- @treturn boolean visible
+  getVisible: =>
+    @visible
+
   -- sets the radius.
   -- @tparam number r
   setRadius: (r) =>
