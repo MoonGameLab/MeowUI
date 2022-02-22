@@ -32,7 +32,7 @@ class Root extends Control
     with @tipContainer = Control "Box", "tipContainer"
       \setSize w, h
 
-    @addChild @coreContainer, 1
+    @addChild @coreContainer, 100
     @addChild @popupContainer, 2
     @addChild @optionContainer, 3
     @addChild @tipContainer, 4
