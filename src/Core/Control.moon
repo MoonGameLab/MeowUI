@@ -156,13 +156,7 @@ class Control
   -- @local
   sortChildren: =>
     table.sort @children, (a, b) ->
-      a.depth > b.depth
-
-  --- setter for the content depth.
-  -- @tparam number depth
-  setDepth: (depth) =>
-    @depth = depth
-    if @parent then @parent\sortChildren!
+      a.depth < b.depth
 
   -- @local
   childExists: (id) =>
@@ -185,7 +179,6 @@ class Control
     if depth then child\setDepth depth
     events = child.events
     events\dispatch events\getEvent "UI_ON_ADD"
-    @sortChildren!
 
   --- setter for the content anchor.
   -- @tparam number x
@@ -339,8 +332,7 @@ class Control
   isChildrenEnabled: =>
     @childrenEnabled
 
-  --- setter for the control depth.
-  -- @tparam number depth
+  -- @local
   setDepth: (depth) =>
     @depth = depth
     if @parent then @parent\sortChildren!
