@@ -1,4 +1,5 @@
 Graphics = love.graphics
+Control = MeowUI.Control
 
 stencileFuncCircle = =>
   box = @getBoundingBox!
@@ -162,7 +163,7 @@ drawRect = =>
 
     Graphics.setColor r, g, b, a
 
-class Button extends MeowUI.Control
+class Button extends Control
 
   new: (type) =>
     -- Bounding box type
@@ -346,6 +347,9 @@ class Button extends MeowUI.Control
 
   setAlphaDisable: (a) =>
     @alphaDisable = a
+
+  setCorners: (rx, ry) =>
+    @rx, @ry = rx, ry
 
   setScale: (x = nil, y = nil) =>
     @sx, @sy = x or @sx, y or @sy
