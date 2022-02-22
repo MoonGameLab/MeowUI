@@ -177,6 +177,7 @@ class Control
     child\setParent self
 
     if depth then child\setDepth depth
+    else child\setDepth child.depth
     events = child.events
     events\dispatch events\getEvent "UI_ON_ADD"
 
@@ -332,8 +333,10 @@ class Control
   isChildrenEnabled: =>
     @childrenEnabled
 
-  -- @local
+  --- setter for the control depth property.
+  -- @tparam number depth
   setDepth: (depth) =>
+    assert (type(depth) == 'number') and (depth > 0), "Depth must be a number and > 0."
     @depth = depth
     if @parent then @parent\sortChildren!
 
