@@ -336,6 +336,7 @@ class Control
   --- setter for the control depth property.
   -- @tparam number depth
   setDepth: (depth) =>
+    assert (type(depth) == 'number') and (depth > 0), "Depth must be a number and > 0."
     @depth = depth
     if @parent then @parent\sortChildren!
 
