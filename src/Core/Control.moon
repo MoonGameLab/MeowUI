@@ -74,7 +74,12 @@ class Control
     y += @y
 
     if @parent then
-      x , y = @parent\localToGlobal(x , y)
+      if @parent\getBoundingBox!.__class.__name == "Box"
+        x , y = @parent\localToGlobal(x , y)
+      else
+        r = @parent\getRadius!
+        x , y = @parent\localToGlobal(x - r, y - r)
+
 
     return x, y
 
