@@ -13,14 +13,15 @@ class ScrollBar extends Control
 
     t = assert(require(MeowUI.root .. "Controls.Style"))[MeowUI.theme]
     style = t.scrollBar
-    @setSize style.width, style.height
     @bar\setSize style.width, style.width
     @backgroundColor = t.colors.scrollBar
     @alpha = 1
     @dir = "vertical"
-    @ratio = 3
+    @ratio = 6
     @barPosRation = 0
     @barDown = false
+    @setSize style.width, style.height
+
 
     @on "UI_MOUSE_DOWN", @onBarDown, @
     @on "UI_MOUSE_MOVE", @onBarMove, @
@@ -34,6 +35,8 @@ class ScrollBar extends Control
     @bar\on "UI_MOUSE_UP",  @onBarUp, @bar\getParent!
     @bar\on "UI_MOUSE_MOVE", @onBarMove, @bar\getParent!
     @bar\on "UI_MOUSE_DOWN", @onBgDown, @bar\getParent!
+
+    @reset!
     
   onDraw: =>
     box = @getBoundingBox!
@@ -73,6 +76,7 @@ class ScrollBar extends Control
   onBarMove: (x, y, dx, dy) =>
     if @barDown == false then return
 
+    
     bar = @bar
 
     if @dir == "vertical"
@@ -94,7 +98,44 @@ class ScrollBar extends Control
     if @dir == "vertical" then @setBarPos y / @getHeight!
     else @setBarPos x / @getWidth!
 
+  reset: =>
+    ratio = @ratio
+    if @dir == "vertical"
+      @bar\setWidth @getWidth!
+      @bar\setHeight @getHeight! / ratio
+    else
+      @bar\setWidth @getWidth! / ratio
+      @bar\setHeight @getHeight!
+    @setBarPos @barPosRation
 
+
+  setDir: (dir) =>
+    @dir = dir
+    @reset!
+
+  getDir: =>
+    @dir
+
+  -- Override
+  setSize: (width, height) =>
+    super width, height
+    @reset!
+
+  -- Override
+  setWidth: (width) =>
+    super width
+    @reset!
+
+  --Override
+  setHeight: (height) =>
+    super height
+    @reset!
+
+  getBar: =>
+    @bar
+
+  getBarPos: =>
+    @barPosRation
 
 
 
