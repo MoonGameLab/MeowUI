@@ -183,6 +183,8 @@ class Button extends Control
     @strokeColor = colors.strokeColor
     @fontColor = colors.fontColor
 
+    @setEnabled true
+
     switch type
       when "Box"
         @onDraw = drawRect

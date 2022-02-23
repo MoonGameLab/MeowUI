@@ -1,5 +1,5 @@
 Graphics = love.graphics
-Control = MeowUI.Control
+Control  = MeowUI.Control
 
 
 drawRect = =>

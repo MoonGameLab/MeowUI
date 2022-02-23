@@ -7,6 +7,7 @@
 
 path = ...
 cwd = path .. ".src."
+c_cwd = path .. ".Controls."
 root = path .. "."
 
 export MeowUI = {
@@ -18,6 +19,7 @@ export MeowUI = {
 
 
 MeowUI["cwd"]          = cwd
+MeowUI["c_cwd"]        = c_cwd
 MeowUI["root"]         = root
 MeowUI["manager"]      = assert(require(MeowUI.cwd .. "Core.Manager")).getInstance!
 MeowUI["Control"]      = assert require MeowUI.cwd .. "Core.Control"

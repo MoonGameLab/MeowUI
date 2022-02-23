@@ -16,7 +16,7 @@ class Box
       "Width and Height must be of type number."
     @x = x
     @y = y
-    @width = height
+    @width = width
     @height = height
 
   --- tests if a given point is inside the box.
@@ -40,7 +40,7 @@ class Box
   --- getter for the box size.
   -- @treturn table
   getSize: =>
-    @w - @x, @h - @y
+    @width - @x, @height - @y
 
   --- getter for the box width.
   -- @treturn number

@@ -12,6 +12,7 @@ Style = {
       strokeColor: { 0.149019607843, 0.929411764706, 0.286274509804}
       fontColor: { 1, 1, 1 }
       backgroundColor: { 0.0392156862745, 0.0392156862745, 0.0392156862745 }
+      scrollBar: { 0.14, 0.14, 0.14 }
     }
 
     common: {
@@ -25,6 +26,11 @@ Style = {
       height: 50
       rx: 10
       ry: 10
+    }
+
+    scrollBar: {
+      width: 13
+      height: 100
     }
 
     content: {
