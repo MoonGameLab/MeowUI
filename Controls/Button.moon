@@ -1,4 +1,5 @@
 Graphics = love.graphics
+MeowUI = MeowUI
 Control = MeowUI.Control
 
 stencileFuncCircle = =>
