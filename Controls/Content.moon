@@ -8,7 +8,7 @@ ScrollBar = assert require MeowUI.c_cwd .. "ScrollBar"
 addChild = (child, depth) =>
   @content\addChild child, depth
 
-removeChild: (id) =>
+removeChild =  (id) =>
   @content\removeChild id
 
 drawRect = =>
@@ -92,8 +92,10 @@ class Content extends Control
     @hBar = nil
 
     @setClip true
-    @content = Control type, "Content-Control"
-    
+    @slides = {}
+    @slidesNum = 1
+    @slides[@slidesNum] = Control type, "Content_slide_" .. @slidesNum
+    @content = @slides[@slidesNum]
 
     switch type
       when "Box"
@@ -120,7 +122,7 @@ class Content extends Control
         @content\setRadius @radius
 
     @addChild @content
-
+    
     @addChild = addChild
     @removeChild = removeChild
 
