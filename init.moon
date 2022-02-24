@@ -23,5 +23,6 @@ MeowUI["c_cwd"]        = c_cwd
 MeowUI["root"]         = root
 MeowUI["manager"]      = assert(require(MeowUI.cwd .. "Core.Manager")).getInstance!
 MeowUI["Control"]      = assert require MeowUI.cwd .. "Core.Control"
+MeowUI["Utils"]      = assert require MeowUI.cwd .. "Core.Utils"
 MeowUI["theme"]        = "dark-green-neon"
 

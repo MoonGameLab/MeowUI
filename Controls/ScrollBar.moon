@@ -17,7 +17,7 @@ class ScrollBar extends Control
     @backgroundColor = t.colors.scrollBar
     @alpha = 1
     @dir = "vertical"
-    @ratio = 6
+    @ratio = 5
     @barPosRation = 0
     @barDown = false
     @setSize style.width, style.height

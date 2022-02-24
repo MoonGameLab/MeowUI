@@ -13,5 +13,11 @@ with Utils
       return ("0123456789abcdef")\sub r, r
     return (("xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx")\gsub("[xy]", f))
 
+  .Overrides = (parent, child, overrides) ->
+    for i = 1, #overrides
+      func = parent[overrides[i]]
+      parent[overrides[i]] = (parent, ...) ->
+        func parent, ...
+        child[overrides[i]] child, ...
 
 Utils
