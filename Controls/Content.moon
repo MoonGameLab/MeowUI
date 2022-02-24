@@ -1,7 +1,15 @@
 Graphics = love.graphics
 MeowUI = MeowUI
 Control  = MeowUI.Control
+Utils  = MeowUI.Utils
+ScrollBar = assert require MeowUI.c_cwd .. "ScrollBar"
 
+
+addChild = (child, depth) =>
+  @content\addChild child, depth
+
+removeChild: (id) =>
+  @content\removeChild id
 
 drawRect = =>
   box = @getBoundingBox!
@@ -80,6 +88,12 @@ class Content extends Control
     @stroke = common.stroke
     @backgroundColor = colors.backgroundColor
     @strokeColor = colors.strokeColor
+    @vBar = nil
+    @hBar = nil
+
+    @setClip true
+    @content = Control type, "Content-Control"
+    
 
     switch type
       when "Box"
@@ -90,19 +104,25 @@ class Content extends Control
         @rx = style.rx
         @ry = style.ry
         @alpha = 1
+        @content\setSize @width, @height
+        Utils.Overrides @, @content, Control.boxOverrides
       when "Circle"
         @onDraw = drawCircle
         style = t.content
         @radius  = style.radius
         @alpha = 1
+        @content\setRadius @radius
       when "Polygon"
         @onDraw = drawPoly
         style = t.content
         @radius  = style.radius
         @alpha = 1
-        
+        @content\setRadius @radius
 
-    @setClip true
+    @addChild @content
+
+    @addChild = addChild
+    @removeChild = removeChild
 
     @on "UI_DRAW", @onDraw, @
 
@@ -111,3 +131,17 @@ class Content extends Control
 
   setStroke: (s) =>
     @stroke = s
+
+  onVBarScroll: (ratio) =>
+    @setY -ratio * @getHeight!
+
+  attachScrollBarV: (barType) =>
+    if @vBar ~= nil then return
+    @vBar = ScrollBar barType
+    @vBar\setDir "vertical"
+    @addChild @vBar
+    @bvBarar\on "UI_ON_SCROLL", @onVBarScroll, @bar\getParent!
+
+
+
+    

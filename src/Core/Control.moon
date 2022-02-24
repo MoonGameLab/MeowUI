@@ -507,3 +507,25 @@ class Control
     @events\dispatch @events\getEvent("UI_DRAW")
     @drawChildren!
     @clipEnd!
+
+  --- list of functions to override when boundingbox is of type Box.
+  -- @table boxOverrides
+  @boxOverrides: {
+    "setSize"
+    "setWidth"
+    "setHeight"
+  }
+
+  --- list of functions to override when boundingbox is of type Circle.
+  -- @table circleOverrides
+  @circleOverrides: {
+    "setRadius"
+  }
+
+  --- list of functions to override when boundingbox is of type Polygon.
+  -- @table polyOverrides
+  @polyOverrides: {
+    "setRadius"
+    "setSides"
+    "setAngle"
+  }
