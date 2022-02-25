@@ -177,7 +177,9 @@ class Control
   addChild: (child, depth) =>
     assert (child.__class.__parent == Control) or (child.__class == Control),
       "child must be Control or a subclass of Control."
-
+    assert child\getParent! == nil, "child must be an Orphan Control."
+    
+    
     if @childExists child.id then return
 
     @children[#@children + 1] = child
