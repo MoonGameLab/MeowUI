@@ -30,11 +30,11 @@ drawRect = =>
 class Content extends Control
 
   -- @local
-  attachSlide = (self, slide) ->
+  _attachSlide = (self, slide) ->
     @addChild slide, 1
 
   -- @local
-  detachSlide = (self, slide) ->
+  _detachSlide = (self, slide) ->
     @removeChild slide.id
 
 
@@ -57,6 +57,7 @@ class Content extends Control
     @slides = {}
     @currentSlide = nil
     @slidesIdx = 1
+  
 
     @alpha = 1
 
@@ -69,7 +70,7 @@ class Content extends Control
 
     @on "UI_DRAW", @onDraw, @
 
-    --@attachScrollBarV!
+    @attachScrollBarV "Box"
     @addSlide true
 
 
@@ -80,8 +81,8 @@ class Content extends Control
     @slides[@slidesIdx]\setSize @getWidth!, @getHeight!
     @slidesIdx += 1
     if attach
-      if @currentSlideIdx then detachSlide @, @slides[@currentSlideIdx]
-      attachSlide @, @slides[slideIdx]
+      if @currentSlideIdx then _detachSlide @, @slides[@currentSlideIdx]
+      _attachSlide @, @slides[slideIdx]
     @currentSlideIdx = slideIdx
     slideIdx
 
@@ -98,8 +99,8 @@ class Content extends Control
     if @vBar ~= nil then return
     @vBar = ScrollBar barType
     @vBar\setDir "vertical"
-    @addChild @vBar
-    @bvBarar\on "UI_ON_SCROLL", @onVBarScroll, @bar\getParent!
+    --@addChild @vBar, 99999
+    --@bvBarar\on "UI_ON_SCROLL", @onVBarScroll, @bar\getParent!
 
   addSlideChild: (slideIdx, child, depth) =>
     if @slides[slideIdx] == nil then return
@@ -108,3 +109,31 @@ class Content extends Control
   removeSlideChild: (slideIdx, child) =>
     if @slides[slideIdx] == nil then return
     @slides[slideIdx]\removeChild child.id
+
+  attachSlide: (idx) =>
+    if @currentSlideIdx == idx then return
+    if @currentSlideIdx then _detachSlide @, @slides[@currentSlideIdx]
+    _attachSlide @, @slides[idx]
+    @currentSlideIdx = idx
+
+
+  getNumberOfSlides: =>
+    @slidesIdx - 1
+
+  getSlide: (idx) =>
+    @slides[idx]
+
+  next: =>
+    nSlides = @getNumberOfSlides!
+    nCurrent = @currentSlideIdx
+
+    if nCurrent == nSlides then @attachSlide 1
+    else @attachSlide nCurrent + 1
+
+
+  previous: =>
+    nSlides = @getNumberOfSlides!
+    nCurrent = @currentSlideIdx
+
+    if nCurrent == 1 then @attachSlide nSlides
+    else @attachSlide nCurrent - 1
