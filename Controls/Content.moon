@@ -5,12 +5,6 @@ Utils  = MeowUI.Utils
 ScrollBar = assert require MeowUI.c_cwd .. "ScrollBar"
 
 
-addChild = (child, depth) =>
-  @content\addChild child, depth
-
-removeChild =  (id) =>
-  @content\removeChild id
-
 drawRect = =>
   box = @getBoundingBox!
   r, g, b, a = Graphics.getColor!
@@ -33,53 +27,20 @@ drawRect = =>
 
   Graphics.setColor r, g, b, a
 
-drawCircle = =>
-  box = @getBoundingBox!
-  r, g, b, a = Graphics.getColor!
-  boxR = box\getRadius!
-  x, y = box\getX!, box\getY!
-  color = @backgroundColor
-  color[4] = color[4] or @alpha
-
-  Graphics.setColor color
-  Graphics.circle 'fill', x, y, boxR
-
-  -- border
-  if @enabled and @stroke > 0
-    oldLineWidth = Graphics.getLineWidth!
-    Graphics.setLineWidth @stroke
-    Graphics.setLineStyle "rough" -- could be dynamic
-    Graphics.setColor @strokeColor
-    Graphics.circle "line", x, y, boxR
-    Graphics.setLineWidth oldLineWidth
-  
-  Graphics.setColor r, g, b, a
-
-drawPoly = =>
-  box = @getBoundingBox!
-  r, g, b, a = Graphics.getColor!
-  color = @backgroundColor
-  color[4] = color[4] or @alpha
-
-  Graphics.setColor color
-  Graphics.polygon 'fill', box\getVertices!
-  
-  if @enabled and @stroke > 0
-    oldLineWidth = Graphics.getLineWidth!
-    Graphics.setLineWidth @stroke
-    Graphics.setLineStyle "rough" -- could be dynamic
-    Graphics.setColor @strokeColor
-    Graphics.polygon "line", box\getVertices!
-    Graphics.setLineWidth oldLineWidth
-    Graphics.setColor r, g, b, a
-  
-  
-  Graphics.setColor r, g, b, a
-
 class Content extends Control
-  new: (type) =>
+
+  -- @local
+  attachSlide = (self, slide) ->
+    @addChild slide, 1
+
+  -- @local
+  detachSlide = (self, slide) ->
+    @removeChild slide.id
+
+
+  new: =>
     -- Bounding box type
-    super type, "Content"
+    super "Box", "Content"
 
     -- colors
     t = assert(require(MeowUI.root .. "Controls.Style"))[MeowUI.theme]
@@ -92,41 +53,37 @@ class Content extends Control
     @hBar = nil
 
     @setClip true
+
     @slides = {}
-    @slidesNum = 1
-    @slides[@slidesNum] = Control type, "Content_slide_" .. @slidesNum
-    @content = @slides[@slidesNum]
+    @currentSlide = nil
+    @slidesIdx = 1
 
-    switch type
-      when "Box"
-        @onDraw = drawRect
-        style = t.content
-        @width  = style.width
-        @height = style.height
-        @rx = style.rx
-        @ry = style.ry
-        @alpha = 1
-        @content\setSize @width, @height
-        Utils.Overrides @, @content, Control.boxOverrides
-      when "Circle"
-        @onDraw = drawCircle
-        style = t.content
-        @radius  = style.radius
-        @alpha = 1
-        @content\setRadius @radius
-      when "Polygon"
-        @onDraw = drawPoly
-        style = t.content
-        @radius  = style.radius
-        @alpha = 1
-        @content\setRadius @radius
+    @alpha = 1
 
-    @addChild @content
-    
-    @addChild = addChild
-    @removeChild = removeChild
+    @onDraw = drawRect
+    style = t.content
+    @width  = style.width
+    @height = style.height
+    @rx = style.rx
+    @ry = style.ry
 
     @on "UI_DRAW", @onDraw, @
+
+    --@attachScrollBarV!
+    @addSlide true
+
+
+  addSlide: (attach) =>
+    slideIdx = @slidesIdx
+    @slides[@slidesIdx] = Control "Box", "content_slide_" .. @slidesIdx
+    Utils.Overrides @, @slides[@slidesIdx], Control.boxOverrides
+    @slides[@slidesIdx]\setSize @getWidth!, @getHeight!
+    @slidesIdx += 1
+    if attach
+      if @currentSlideIdx then detachSlide @, @slides[@currentSlideIdx]
+      attachSlide @, @slides[slideIdx]
+    @currentSlideIdx = slideIdx
+    slideIdx
 
   setBackgroundColor: (color) =>
     @backgroundColor = color
@@ -135,7 +92,7 @@ class Content extends Control
     @stroke = s
 
   onVBarScroll: (ratio) =>
-    @setY -ratio * @getHeight!
+    @setY - ratio * @getHeight!
 
   attachScrollBarV: (barType) =>
     if @vBar ~= nil then return
@@ -144,6 +101,10 @@ class Content extends Control
     @addChild @vBar
     @bvBarar\on "UI_ON_SCROLL", @onVBarScroll, @bar\getParent!
 
+  addSlideChild: (slideIdx, child, depth) =>
+    if @slides[slideIdx] == nil then return
+    @slides[slideIdx]\addChild child, depth
 
-
-    
+  removeSlideChild: (slideIdx, child) =>
+    if @slides[slideIdx] == nil then return
+    @slides[slideIdx]\removeChild child.id

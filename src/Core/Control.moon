@@ -10,7 +10,7 @@ Box        = assert require MeowUI.cwd .. "Core.Box"
 Circle     = assert require MeowUI.cwd .. "Core.Circle"
 Polygon    = assert require MeowUI.cwd .. "Core.Polygon"
 Chrono     = assert require MeowUI.cwd .. "Core.Chrono"
-DEBUG      = assert require MeowUI.cwd .. "Core.Debug"
+Tremove    = table.remove
 
 BBoxs = {
   Box: Box
@@ -150,6 +150,8 @@ class Control
   --- setter for the content parent.
   -- @tparam Content p
   setParent: (p) =>
+    assert (p == nil) or (p.__class.__parent == Control) or (p.__class == Control),
+      "child must be nil or Control or a subclass of Control."
     @parent = p
     @needConforming true
 
@@ -355,7 +357,9 @@ class Control
   removeChild: (id) =>
     for i = 1, #@children
       if @children[i].id == id
-        @children[i] = nil
+        child = @children[i]
+        @children[i]\setParent nil
+        Tremove @children, i
         child.events\dispatch child.events\getEvent "UI_ON_REMOVE"
         break
 
