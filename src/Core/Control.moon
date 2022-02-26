@@ -37,7 +37,7 @@ class Control
     @children = {}
     @parent = nil
     @visible = true
-    @enabled = false
+    @enabled = true
     @childrenEnabled = true
     @events = Event!
     @requireConform = false
@@ -388,8 +388,8 @@ class Control
       "event must be of type string."
     assert type(callback) == 'function',
       "callback must be of type function."
-    assert target.__class.__parent == Control,
-      "target must be a subclass of Control."
+    assert (target.__class.__parent == Control) or (target.__class == Control),
+      "target must be a Control or a subclass of Control."
 
     @events\on @events\getEvent(event), callback, target
 

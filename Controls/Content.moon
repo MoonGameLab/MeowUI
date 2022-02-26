@@ -1,7 +1,6 @@
 Graphics = love.graphics
 MeowUI = MeowUI
 Control  = MeowUI.Control
-Utils  = MeowUI.Utils
 ScrollBar = assert require MeowUI.c_cwd .. "ScrollBar"
 
 
@@ -37,8 +36,10 @@ class Content extends Control
   _detachSlide = (self, slide) ->
     @removeChild slide.id
 
+  -- @local
+  _barSide = "left"
 
-  new: =>
+  new: (vbar, hbar) =>
     -- Bounding box type
     super "Box", "Content"
 
@@ -49,9 +50,7 @@ class Content extends Control
     @stroke = common.stroke
     @backgroundColor = colors.backgroundColor
     @strokeColor = colors.strokeColor
-    @vBar = nil
-    @hBar = nil
-
+    
     @setClip true
 
     @slides = {}
@@ -68,22 +67,27 @@ class Content extends Control
     @rx = style.rx
     @ry = style.ry
 
+    @vBar = nil
+    @hBar = nil
+    @scrollBarDepth = 9999
+    -- @barLeft = {0, 0}
+    -- @barRight = {0}
+
     @on "UI_DRAW", @onDraw, @
 
-    @attachScrollBarV "Box"
     @addSlide true
+    @on "UI_WHELL_MOVE", @onWheelMove, @
+    if vbar then @attachScrollBarV "Box"
 
-
-  addSlide: (attach) =>
+  addSlide: (attach, width, height) =>
     slideIdx = @slidesIdx
     @slides[@slidesIdx] = Control "Box", "content_slide_" .. @slidesIdx
-    Utils.Overrides @, @slides[@slidesIdx], Control.boxOverrides
     @slides[@slidesIdx]\setSize @getWidth!, @getHeight!
     @slidesIdx += 1
     if attach
       if @currentSlideIdx then _detachSlide @, @slides[@currentSlideIdx]
       _attachSlide @, @slides[slideIdx]
-    @currentSlideIdx = slideIdx
+      @currentSlideIdx = slideIdx
     slideIdx
 
   setBackgroundColor: (color) =>
@@ -99,8 +103,21 @@ class Content extends Control
     if @vBar ~= nil then return
     @vBar = ScrollBar barType
     @vBar\setDir "vertical"
-    --@addChild @vBar, 99999
-    --@bvBarar\on "UI_ON_SCROLL", @onVBarScroll, @bar\getParent!
+    @vBarLeft!
+    @addChild @vBar, @scrollBarDepth
+    @vBar\on "UI_ON_SCROLL", @onVBarScroll, @vBar\getParent!
+
+  setSize: (width, height) =>
+    super width, height
+
+    for i = 1, #@slides
+      @slides[i]\setSize width, height
+
+    if @vBar
+      @vBar\setHeight height - (@ry + @rx)
+      switch _barSide
+        when "right" then @vBarRight!
+        when "left" then @vBarLeft!
 
   addSlideChild: (slideIdx, child, depth) =>
     if @slides[slideIdx] == nil then return
@@ -127,8 +144,20 @@ class Content extends Control
     nSlides = @getNumberOfSlides!
     nCurrent = @currentSlideIdx
 
-    if nCurrent == nSlides then @attachSlide 1
-    else @attachSlide nCurrent + 1
+    if nCurrent == nSlides
+      @attachSlide 1
+    else 
+      @attachSlide nCurrent + 1
+
+  vBarLeft: =>
+    if @vBar
+      _barSide = "left"
+      @vBar\setPosition @rx, @ry
+  
+  vBarRight: =>
+    if @vBar
+      _barSide = "right"
+      @vBar\setPosition (@getWidth! - @vBar\getWidth!) - @rx, @ry
 
 
   previous: =>
@@ -137,3 +166,25 @@ class Content extends Control
 
     if nCurrent == 1 then @attachSlide nSlides
     else @attachSlide nCurrent - 1
+
+  
+  getVBar: =>
+    if @vBar then return @vBar
+    nil
+
+  onWheelMove: (x, y) =>
+    slide = @getSlide @currentSlideIdx
+    if x ~= 0 and @getWidth! > slide\getWidth! then return false
+    if y ~= 0 and @getHeight! > slide\getHeight! then return false
+
+    if y ~= 0
+      if @vBar
+        offsetR = y / slide\getHeight! * 3
+        @vBar\setBarPos @vBar\getBarPos! - offsetR
+
+    true
+
+  onVBarScroll: (ratio) =>
+    slide = @getSlide @currentSlideIdx
+    offset = -ratio * slide\getHeight!
+    slide\setY offset
