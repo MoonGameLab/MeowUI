@@ -70,6 +70,7 @@ class Content extends Control
     @vBar = nil
     @hBar = nil
     @scrollBarDepth = 9999
+    @scrollSpeed = 9
     -- @barLeft = {0, 0}
     -- @barRight = {0}
 
@@ -79,10 +80,23 @@ class Content extends Control
     @on "UI_WHELL_MOVE", @onWheelMove, @
     if vbar then @attachScrollBarV "Box"
 
-  addSlide: (attach, width, height) =>
+  addSlide: (attach, width = nil, height = nil) =>
     slideIdx = @slidesIdx
     @slides[@slidesIdx] = Control "Box", "content_slide_" .. @slidesIdx
-    @slides[@slidesIdx]\setSize @getWidth!, @getHeight!
+    @slides[@slidesIdx].autoSize = false
+
+    if width
+      @slides[@slidesIdx].autoSize = false
+      @slides[@slidesIdx]\setWidth width
+    else
+      @slides[@slidesIdx]\setWidth @getWidth!
+
+    if height
+      @slides[@slidesIdx].autoSize = false
+      @slides[@slidesIdx]\setHeight height
+    else
+      @slides[@slidesIdx]\setHeight @getHeight!
+      
     @slidesIdx += 1
     if attach
       if @currentSlideIdx then _detachSlide @, @slides[@currentSlideIdx]
@@ -97,7 +111,7 @@ class Content extends Control
     @stroke = s
 
   onVBarScroll: (ratio) =>
-    @setY - ratio * @getHeight!
+    @setY -ratio * @getHeight!
 
   attachScrollBarV: (barType) =>
     if @vBar ~= nil then return
@@ -111,7 +125,26 @@ class Content extends Control
     super width, height
 
     for i = 1, #@slides
-      @slides[i]\setSize width, height
+      if @slides[i].autoSize then @slides[i]\setSize width, height
+
+    if @vBar
+      @vBar\setHeight height - (@ry + @rx)
+      switch _barSide
+        when "right" then @vBarRight!
+        when "left" then @vBarLeft!
+
+
+  setWidth: (width) =>
+      super width
+
+      for i = 1, #@slides
+        if @slides[i].autoSize then @slides[i]\setWidth width
+
+  setHeight: (height) =>
+    super height
+
+    for i = 1, #@slides
+      if @slides[i].autoSize then @slides[i]\setHeight height
 
     if @vBar
       @vBar\setHeight height - (@ry + @rx)
@@ -174,17 +207,19 @@ class Content extends Control
 
   onWheelMove: (x, y) =>
     slide = @getSlide @currentSlideIdx
+    abs = math.abs
+
     if x ~= 0 and @getWidth! > slide\getWidth! then return false
     if y ~= 0 and @getHeight! > slide\getHeight! then return false
 
     if y ~= 0
       if @vBar
-        offsetR = y / slide\getHeight! * 3
-        @vBar\setBarPos @vBar\getBarPos! - offsetR
+        offsetR = y / slide\getHeight! * @scrollSpeed
+        if (slide\getHeight! - @getHeight!) ~= 0 then @vBar\setBarPos @vBar\getBarPos! - offsetR
 
     true
 
   onVBarScroll: (ratio) =>
     slide = @getSlide @currentSlideIdx
-    offset = -ratio * slide\getHeight!
+    offset = -ratio * (slide\getHeight! - @getHeight!)
     slide\setY offset
