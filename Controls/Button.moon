@@ -45,7 +45,6 @@ drawPoly = =>
     Graphics.setStencilTest "greater", 1
     x, y = box\getPosition!
     Graphics.draw @bgImage, x - @bgImage\getWidth!/2 , y - @bgImage\getHeight!/2
-    love.graphics.polygon "line", box\getVertices!
     Graphics.setStencilTest!
     Graphics.setColor r, g, b, a
   else
@@ -67,8 +66,8 @@ drawPoly = =>
   if @textDrawable
     Graphics.setColor @fontColor
     textW, textH = @textDrawable\getWidth!, @textDrawable\getHeight!
-    x = @x - textW / 2
-    y = @y - textH / 2
+    x = box.x - textW / 2
+    y = box.y - textH / 2
     Graphics.draw @textDrawable, x, y
 
   Graphics.setColor r, g, b, a

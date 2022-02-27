@@ -14,7 +14,6 @@ drawRect = =>
   
   Graphics.setColor color
   Graphics.rectangle "fill", x, y, boxW, boxH, @rx, @ry
-
   -- border
   if @enabled and @stroke > 0
     oldLineWidth = Graphics.getLineWidth!
@@ -77,6 +76,7 @@ class Content extends Control
 
     @addSlide true
     @on "UI_WHELL_MOVE", @onWheelMove, @
+
     if vbar then @attachScrollBarV "Box"
 
   addSlide: (attach, width = nil, height = nil) =>
@@ -119,6 +119,12 @@ class Content extends Control
     @vBarLeft!
     @addChild @vBar, @scrollBarDepth
     @vBar\on "UI_ON_SCROLL", @onVBarScroll, @vBar\getParent!
+    @vBar\setHeight @getHeight! - (@ry + @rx)
+
+  detachScrollBarV: =>
+    if @vBar
+      @removeChild @vBar.id
+      @vBar = nil
 
   setSize: (width, height) =>
     super width, height
