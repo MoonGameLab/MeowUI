@@ -12,7 +12,7 @@ root = path .. "."
 
 export MeowUI = {
     debug: true
-    version: "v0.0.0.74"
+    version: "v0.0.0.77"
     stage: "alpha"
     author: "Tourahi Amine"
 }
