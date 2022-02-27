@@ -75,7 +75,7 @@ class Debug extends Singleton
 
     Graphics.rectangle 'fill', @x, @y, 165, 234
     Graphics.setColor @palette.blue
-    Graphics.print "MeowUI - Debug [" .. libV .. " - " .. stage .. "]", @x + 5, @y + 5
+    Graphics.print "MeowUI [" .. libV .. " - " .. stage .. "]", @x + 18, @y + 5
     Graphics.setColor @palette.white
     Graphics.print "LOVE Version [" .. loveV.. "]", @x + 35, @y + 20
     Graphics.line @x, @y + 40, @x + 165, @y + 40
@@ -106,7 +106,7 @@ class Debug extends Singleton
       Graphics.rectangle 'fill', 0, wh - 20, 230, 20
       Graphics.setColor @palette.white
       Graphics.print "id: " .. @focusControl.id, 5, wh - 15
-      Graphics.setColor @palette.green
+      Graphics.setColor @palette.blue
       Graphics.rectangle 'line', @x + 5, @y + 95, 155, 134
       className = @focusControl.__name or @focusControl.__class.__name
       box = @focusControl\getBoundingBox!

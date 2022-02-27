@@ -488,15 +488,16 @@ class Control
 
   -- @local
   clipBegin: =>
+    box = @getBoundingBox!
     if @clip
       Graphics = love.graphics
       switch @boundingBox.__class.__name
         when "Box"
-          Graphics.stencil -> Graphics.rectangle "fill", @x, @y, @boundingBox\getWidth!, @boundingBox\getHeight!
+          Graphics.stencil -> Graphics.rectangle "fill", box.x, box.y, box\getWidth!, box\getHeight!
         when "Polygon"
-          Graphics.stencil -> Graphics.polygon "fill", @boundingBox\getVertices!
+          Graphics.stencil -> Graphics.polygon "fill", box\getVertices!
         when "Circle"
-          Graphics.stencil -> Graphics.circle "fill", @x, @y, @boundingBox\getRadius!
+          Graphics.stencil -> Graphics.circle "fill", box.x, box.y, box\getRadius!
 
       Graphics.setStencilTest "greater", 0
 

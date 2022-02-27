@@ -48,7 +48,7 @@ class Content extends Control
     colors = t.colors
     common = t.common
     @stroke = common.stroke
-    @backgroundColor = colors.backgroundColor
+    @backgroundColor = colors.contentBackgroundColor
     @strokeColor = colors.strokeColor
     
     @setClip true
@@ -70,9 +70,8 @@ class Content extends Control
     @vBar = nil
     @hBar = nil
     @scrollBarDepth = 9999
+    @contentDepth = 9998
     @scrollSpeed = 9
-    -- @barLeft = {0, 0}
-    -- @barRight = {0}
 
     @on "UI_DRAW", @onDraw, @
 
@@ -83,7 +82,7 @@ class Content extends Control
   addSlide: (attach, width = nil, height = nil) =>
     slideIdx = @slidesIdx
     @slides[@slidesIdx] = Control "Box", "content_slide_" .. @slidesIdx
-    @slides[@slidesIdx].autoSize = false
+    @slides[@slidesIdx].autoSize = true
 
     if width
       @slides[@slidesIdx].autoSize = false
@@ -166,6 +165,11 @@ class Content extends Control
     _attachSlide @, @slides[idx]
     @currentSlideIdx = idx
 
+  addContentChild: (child) =>
+    @addChild child, @contentDepth
+
+  removeContentChild: (id) =>
+    @removeChild id
 
   getNumberOfSlides: =>
     @slidesIdx - 1
@@ -207,7 +211,6 @@ class Content extends Control
 
   onWheelMove: (x, y) =>
     slide = @getSlide @currentSlideIdx
-    abs = math.abs
 
     if x ~= 0 and @getWidth! > slide\getWidth! then return false
     if y ~= 0 and @getHeight! > slide\getHeight! then return false
@@ -223,3 +226,6 @@ class Content extends Control
     slide = @getSlide @currentSlideIdx
     offset = -ratio * (slide\getHeight! - @getHeight!)
     slide\setY offset
+
+  getCurrentSlideIdx: =>
+    @currentSlideIdx

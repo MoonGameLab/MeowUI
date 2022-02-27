@@ -4,7 +4,7 @@ Control = MeowUI.Control
 
 stencileFuncCircle = =>
   box = @getBoundingBox!
-  -> Graphics.circle "fill", box.x, box.y, @bgImage\getWidth!
+  -> Graphics.circle "fill", box.x, box.y, @bgImage\getWidth! / 2
 
 stencileFuncPoly = =>
   box = @getBoundingBox!
@@ -41,8 +41,8 @@ drawPoly = =>
       Graphics.setColor color
 
     sf = stencileFuncPoly self
-    Graphics.stencil sf, "replace", 1
-    Graphics.setStencilTest "greater", 0
+    Graphics.stencil sf, "increment", 1, true
+    Graphics.setStencilTest "greater", 1
     x, y = box\getPosition!
     Graphics.draw @bgImage, x - @bgImage\getWidth!/2 , y - @bgImage\getHeight!/2
     love.graphics.polygon "line", box\getVertices!
@@ -87,12 +87,11 @@ drawCircle = =>
       Graphics.setColor color
 
     sf = stencileFuncCircle self
-    Graphics.stencil sf, "replace", 1
-    Graphics.setStencilTest "greater", 0
-    Graphics.draw @bgImage, (@imageX - @radius * @scaleX),
-      (@imageY - @radius * @scaleY),
-      @rot, @scaleX, @scaleY
-    -- Graphics.circle "line", @x, @y, @radius
+
+    Graphics.stencil sf, "increment", 1, true
+    Graphics.setStencilTest "greater", 1
+    Graphics.draw @bgImage, ((box.x - @bgImageBx) - @radius * @scaleX),
+      ((box.y - @bgImageBx) - @radius * @scaleY)
     Graphics.setStencilTest!
     Graphics.setColor r, g, b, a
   else
@@ -114,8 +113,8 @@ drawCircle = =>
   if @textDrawable
     Graphics.setColor @fontColor
     textW, textH = @textDrawable\getWidth!, @textDrawable\getHeight!
-    x = @x - textW / 2
-    y = @y - textH / 2
+    x = box.x - textW / 2
+    y = box.y - textH / 2
     Graphics.draw @textDrawable, x, y
 
   Graphics.setColor r, g, b, a
@@ -134,9 +133,9 @@ drawRect = =>
       if @isHovred
         Graphics.setColor color
 
-      Graphics.draw @bgImage, @imageX, @imageY
-      x = @imageX + ((imageW - boxW) / 2)
-      y = @imageY + ((imageH - boxH) / 2)
+      Graphics.draw @bgImage, box.x, box.y
+      x = box.x + ((imageW - boxW) / 2)
+      y = box.y + ((imageH - boxH) / 2)
       box.x, box.y = x + (@bgImageBx/2), y + (@bgImageBy/2)
 
       Graphics.setColor r, g, b, a
@@ -183,6 +182,7 @@ class Button extends Control
     @disabledColor = colors.disabledColor
     @strokeColor = colors.strokeColor
     @fontColor = colors.fontColor
+    @bgImageBx, @bgImageBy = 0, 0
 
     @setEnabled true
 
@@ -270,7 +270,6 @@ class Button extends Control
     @isPressed = false
 
   setText: (text) =>
-    -- @text = text
     @textDrawable\set text
     if @dynamicSize
       @width = @width > @textDrawable\getWidth! and @oWidth or @textDrawable\getWidth! + @dPadding
@@ -314,9 +313,10 @@ class Button extends Control
 
   setImage: (image, conform, bx = 0, by = 0) =>
     @bgImage = Graphics.newImage image
+    box = @getBoundingBox!
     @dynamicSize = false
     @stroke = 0
-    @imageX, @imageY = @x, @y
+    @imageX, @imageY = box.x, box.y
     if conform
       box = @getBoundingBox!
       if box.__class.__name == "Box"
@@ -324,14 +324,12 @@ class Button extends Control
         @setSize @bgImage\getWidth! - bx, @bgImage\getHeight! - by
       elseif box.__class.__name == "Circle"
         r = @bgImage\getWidth! / 2 - bx
-        @x += bx
-        @y += bx
+        @bgImageBx = bx or 0
         @setRadius r
       elseif box.__class.__name == "Polygon"
         w, h = @bgImage\getWidth! / 1.5, @bgImage\getHeight! / 1.5
         r = (w > h) and w or h
-        @x += bx
-        @y += bx
+        @bgImageBx = bx or 0
         @setRadius r
 
 
