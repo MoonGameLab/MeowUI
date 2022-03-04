@@ -85,7 +85,7 @@ class ScrollBar extends Control
       elseif after + bar\getHeight! > @getHeight! then after = @getHeight! - bar\getHeight!
       @barPosRation = after / (@getHeight! - bar\getHeight!)
     else
-      after = bar\getY! + dx
+      after = bar\getX! + dx
       if after < 0 then after = 0
       elseif after + bar\getWidth! > @getWidth! then after = @getWidth! - bar\getWidth!
       @barPosRation = after / (@getWidth! - bar\getWidth!)

@@ -31,7 +31,7 @@ Style = {
 
     scrollBar: {
       width: 13
-      height: 100
+      height: 13
     }
 
     content: {

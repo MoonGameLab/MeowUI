@@ -36,7 +36,10 @@ class Content extends Control
     @removeChild slide.id
 
   -- @local
-  _barSide = "left"
+  v_barSide = "left"
+
+  -- @local
+  h_barSide = "bottom"
 
   new: (vbar, hbar) =>
     -- Bounding box type
@@ -78,6 +81,7 @@ class Content extends Control
     @on "UI_WHELL_MOVE", @onWheelMove, @
 
     if vbar then @attachScrollBarV "Box"
+    if hbar then @attachScrollBarH "Box"
 
   addSlide: (attach, width = nil, height = nil) =>
     slideIdx = @slidesIdx
@@ -121,10 +125,26 @@ class Content extends Control
     @vBar\on "UI_ON_SCROLL", @onVBarScroll, @vBar\getParent!
     @vBar\setHeight @getHeight! - (@ry + @rx)
 
+  attachScrollBarH: (barType) =>
+    if @hBar ~= nil then return
+    @hBar = ScrollBar barType
+    @hBar\setDir "horizontal"
+    @hBarBot!
+    @addChild @hBar, @scrollBarDepth
+
+    @hBar\on "UI_ON_SCROLL", @onHBarScroll, @hBar\getParent!
+    @hBar\setWidth @getWidth! - (@ry + @rx)
+    
+
   detachScrollBarV: =>
     if @vBar
       @removeChild @vBar.id
       @vBar = nil
+
+  detachScrollBarH: =>
+    if @hBar
+      @removeChild @hBar.id
+      @hBar = nil
 
   setSize: (width, height) =>
     super width, height
@@ -134,16 +154,26 @@ class Content extends Control
 
     if @vBar
       @vBar\setHeight height - (@ry + @rx)
-      switch _barSide
+      switch v_barSide
         when "right" then @vBarRight!
         when "left" then @vBarLeft!
+    
+    if @hBar
+      @hBar\setWidth width - (@ry + @rx)
+      switch h_barSide
+        when "bottom" then @hBarBot!
 
 
   setWidth: (width) =>
-      super width
+    super width
 
-      for i = 1, #@slides
-        if @slides[i].autoSize then @slides[i]\setWidth width
+    for i = 1, #@slides
+      if @slides[i].autoSize then @slides[i]\setWidth width
+
+    if @hBar
+      @hBar\setWidth width - (@ry + @rx)
+      switch h_barSide
+        when "bottom" then @hBarBot!
 
   setHeight: (height) =>
     super height
@@ -153,7 +183,7 @@ class Content extends Control
 
     if @vBar
       @vBar\setHeight height - (@ry + @rx)
-      switch _barSide
+      switch v_barSide
         when "right" then @vBarRight!
         when "left" then @vBarLeft!
 
@@ -194,14 +224,18 @@ class Content extends Control
 
   vBarLeft: =>
     if @vBar
-      _barSide = "left"
+      v_barSide = "left"
       @vBar\setPosition @rx, @ry
   
   vBarRight: =>
     if @vBar
-      _barSide = "right"
+      v_barSide = "right"
       @vBar\setPosition (@getWidth! - @vBar\getWidth!) - @rx, @ry
 
+  hBarBot: =>
+    if @hBar
+      h_barSide = "bottom"
+      @hBar\setPosition @rx, (@getHeight! - @hBar\getHeight!) - @ry
 
   previous: =>
     nSlides = @getNumberOfSlides!
@@ -226,6 +260,10 @@ class Content extends Control
         offsetR = y / slide\getHeight! * @scrollSpeed
         if (slide\getHeight! - @getHeight!) ~= 0 then @vBar\setBarPos @vBar\getBarPos! - offsetR
 
+      if @hBar
+        offsetR = y / slide\getWidth! * @scrollSpeed
+        if (slide\getWidth! - @getWidth!) ~= 0 then @hBar\setBarPos @hBar\getBarPos! - offsetR
+
     true
 
   onVBarScroll: (ratio) =>
@@ -233,5 +271,13 @@ class Content extends Control
     offset = -ratio * (slide\getHeight! - @getHeight!)
     slide\setY offset
 
+  onHBarScroll: (ratio) =>
+    slide = @getSlide @currentSlideIdx
+    offset = -ratio * (slide\getWidth! - @getWidth!)
+    slide\setX offset
+
   getCurrentSlideIdx: =>
     @currentSlideIdx
+
+  getCurrentSlide: =>
+    @slides[@currentSlideIdx]

@@ -91,6 +91,15 @@ drawCircle = =>
     Graphics.setStencilTest "greater", 1
     Graphics.draw @bgImage, ((box.x - @bgImageBx) - @radius * @scaleX),
       ((box.y - @bgImageBx) - @radius * @scaleY)
+      -- border
+    if @enabled and @stroke > 0
+      oldLineWidth = Graphics.getLineWidth!
+      Graphics.setLineWidth @stroke
+      Graphics.setLineStyle "rough" -- could be dynamic
+      Graphics.setColor @strokeColor
+      Graphics.circle "line", box.x, box.y, boxR
+      Graphics.setLineWidth oldLineWidth
+      Graphics.setColor r, g, b, a
     Graphics.setStencilTest!
     Graphics.setColor r, g, b, a
   else
@@ -98,7 +107,6 @@ drawCircle = =>
     Graphics.circle 'fill', box.x, box.y, boxR
     Graphics.setColor r, g, b, a
 
-  -- border
   if @enabled and @stroke > 0
     oldLineWidth = Graphics.getLineWidth!
     Graphics.setLineWidth @stroke
@@ -116,6 +124,7 @@ drawCircle = =>
     y = box.y - textH / 2
     Graphics.draw @textDrawable, x, y
 
+  
   Graphics.setColor r, g, b, a
 
 drawRect = =>
@@ -182,7 +191,7 @@ class Button extends Control
     @strokeColor = colors.strokeColor
     @fontColor = colors.fontColor
     @bgImageBx, @bgImageBy = 0, 0
-
+    @imageButtonDepth = nil
     @setEnabled true
 
     switch type
@@ -311,6 +320,8 @@ class Button extends Control
     @textDrawable\getFont!\getWidth!, @textDrawable\getFont!\getHeight!
 
   setImage: (image, conform, bx = 0, by = 0) =>
+    if @imageButtonDepth then @setDepth @imageButtonDepth
+    else @setDepth @getDepth! + 1
     @bgImage = Graphics.newImage image
     box = @getBoundingBox!
     @dynamicSize = false
@@ -353,3 +364,7 @@ class Button extends Control
 
   setScale: (x = nil, y = nil) =>
     @sx, @sy = x or @sx, y or @sy
+
+  setDepth: (depth) =>
+    super depth
+    @imageButtonDepth = depth + 1
