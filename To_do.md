@@ -20,3 +20,4 @@ Bug_Log:
 
 * [Button] : Buttons that use a stencil function should be drawn in a higher depth otherwise they effect the other Buttons and make them show above the Content stencil. --> Breaks the scrolling effect.
 * [Button] : The border should be drawn while the stencil function is active otherwise it will show above the Content stencil. --> Breaks the scrolling effect.
+* [Button] : Always set the depth before the image. 

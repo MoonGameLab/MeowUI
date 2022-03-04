@@ -4,11 +4,29 @@ Control = MeowUI.Control
 
 stencileFuncCircle = =>
   box = @getBoundingBox!
-  -> Graphics.circle "fill", box.x, box.y, @bgImage\getWidth! / 2
+  -> Graphics.circle "fill", box.x, box.y, @bgImage\getWidth! / 2 + @stroke
 
 stencileFuncPoly = =>
   box = @getBoundingBox!
   -> Graphics.polygon "fill", box\getVertices!
+
+circleBorder = (box) =>
+  if @enabled and @stroke > 0
+    oldLineWidth = Graphics.getLineWidth!
+    Graphics.setLineWidth @stroke
+    Graphics.setLineStyle "rough" -- could be dynamic
+    Graphics.setColor @strokeColor
+    Graphics.circle "line", box.x, box.y, box\getRadius!
+    Graphics.setLineWidth oldLineWidth
+
+polyBorder = (box) =>
+  if @enabled and @stroke > 0
+    oldLineWidth = Graphics.getLineWidth!
+    Graphics.setLineWidth @stroke
+    Graphics.setLineStyle "rough" -- could be dynamic
+    Graphics.setColor @strokeColor
+    Graphics.polygon "line", box\getVertices!
+    Graphics.setLineWidth oldLineWidth
 
 currentColor = =>
   local color
@@ -45,21 +63,15 @@ drawPoly = =>
     Graphics.setStencilTest "greater", 1
     x, y = box\getPosition!
     Graphics.draw @bgImage, x - @bgImage\getWidth!/2 , y - @bgImage\getHeight!/2
+    -- border
+    polyBorder @, box
     Graphics.setStencilTest!
     Graphics.setColor r, g, b, a
   else
     Graphics.setColor color
     Graphics.polygon 'fill', box\getVertices!
-    Graphics.setColor r, g, b, a
-
-  -- border
-  if @enabled and @stroke > 0
-    oldLineWidth = Graphics.getLineWidth!
-    Graphics.setLineWidth @stroke
-    Graphics.setLineStyle "rough" -- could be dynamic
-    Graphics.setColor @strokeColor
-    Graphics.polygon "line", box\getVertices!
-    Graphics.setLineWidth oldLineWidth
+    -- border
+    polyBorder @, box
     Graphics.setColor r, g, b, a
 
   -- Text
@@ -91,29 +103,14 @@ drawCircle = =>
     Graphics.setStencilTest "greater", 1
     Graphics.draw @bgImage, ((box.x - @bgImageBx) - @radius * @scaleX),
       ((box.y - @bgImageBx) - @radius * @scaleY)
-      -- border
-    if @enabled and @stroke > 0
-      oldLineWidth = Graphics.getLineWidth!
-      Graphics.setLineWidth @stroke
-      Graphics.setLineStyle "rough" -- could be dynamic
-      Graphics.setColor @strokeColor
-      Graphics.circle "line", box.x, box.y, boxR
-      Graphics.setLineWidth oldLineWidth
-      Graphics.setColor r, g, b, a
+    -- border
+    circleBorder @, box
     Graphics.setStencilTest!
     Graphics.setColor r, g, b, a
   else
     Graphics.setColor color
     Graphics.circle 'fill', box.x, box.y, boxR
-    Graphics.setColor r, g, b, a
-
-  if @enabled and @stroke > 0
-    oldLineWidth = Graphics.getLineWidth!
-    Graphics.setLineWidth @stroke
-    Graphics.setLineStyle "rough" -- could be dynamic
-    Graphics.setColor @strokeColor
-    Graphics.circle "line", box.x, box.y, boxR
-    Graphics.setLineWidth oldLineWidth
+    circleBorder @, box
     Graphics.setColor r, g, b, a
 
   -- Text
@@ -307,7 +304,17 @@ class Button extends Control
     @theme.disableColor = color
 
   setStroke: (s) =>
+    if @getBoundingBox!.__class.__name == "Polygon"
+      _s = @getStroke! * 2
+      r = @getRadius! - _s
+      @stroke = s * 2
+      @setRadius r + s
+      return
+
     @stroke = s
+
+  getStroke: =>
+    @stroke
 
   setFontColor: (color) =>
     @fontColor = color
@@ -340,7 +347,7 @@ class Button extends Control
         w, h = @bgImage\getWidth! / 1.5, @bgImage\getHeight! / 1.5
         r = (w > h) and w or h
         @bgImageBx = bx or 0
-        @setRadius r
+        @setRadius r + @stroke
 
 
   setImageBorder: (bx = 0, by = 0) =>
