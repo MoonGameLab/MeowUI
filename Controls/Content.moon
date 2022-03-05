@@ -129,7 +129,7 @@ class Content extends Control
     if @hBar ~= nil then return
     @hBar = ScrollBar barType
     @hBar\setDir "horizontal"
-    @hBarBot!
+    @hBarTop!
     @addChild @hBar, @scrollBarDepth
 
     @hBar\on "UI_ON_SCROLL", @onHBarScroll, @hBar\getParent!
@@ -162,6 +162,7 @@ class Content extends Control
       @hBar\setWidth width - (@ry + @rx)
       switch h_barSide
         when "bottom" then @hBarBot!
+        when "top" then @hBarTop!
 
 
   setWidth: (width) =>
@@ -174,6 +175,7 @@ class Content extends Control
       @hBar\setWidth width - (@ry + @rx)
       switch h_barSide
         when "bottom" then @hBarBot!
+        when "top" then @hBarTop!
 
   setHeight: (height) =>
     super height
@@ -235,7 +237,12 @@ class Content extends Control
   hBarBot: =>
     if @hBar
       h_barSide = "bottom"
-      @hBar\setPosition @rx, (@getHeight! - @hBar\getHeight!) - @ry
+      @hBar\setPosition @rx, (@getHeight! - @hBar\getHeight!) - @rx
+
+  hBarTop: =>
+      if @hBar
+        h_barSide = "top"
+        @hBar\setPosition @rx, @rx
 
   previous: =>
     nSlides = @getNumberOfSlides!

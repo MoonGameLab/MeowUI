@@ -3,6 +3,9 @@
 -- @classmod Root
 -- @usage r = Root!
 
+MeowUI = MeowUI
+love = love
+
 Control = assert require MeowUI.cwd .. "Core.Control"
 Graphics = love.graphics
 

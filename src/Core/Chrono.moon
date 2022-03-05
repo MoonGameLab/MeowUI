@@ -3,6 +3,8 @@
 -- @classmod Chrono
 -- @usage c = Chrono.getInstance!
 
+MeowUI = MeowUI
+
 Tinsert   = table.insert
 Utils     = assert require MeowUI.cwd .. "Core.Utils"
 Singleton = assert require MeowUI.cwd .. "Core.Singleton"

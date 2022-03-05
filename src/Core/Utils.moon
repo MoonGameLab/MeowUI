@@ -1,5 +1,7 @@
 -- @local
 
+love = love
+
 import random from love.math
 
 Utils = {}

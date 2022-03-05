@@ -4,7 +4,7 @@
 -- @classmod Polygon
 -- @usage b = Polygon!
 
-pi, cos, sin, tan, atan2, abs = math.pi, math.cos, math.sin, math.tan, math.atan2, math.abs
+pi, cos, sin, atan2, abs = math.pi, math.cos, math.sin, math.atan2, math.abs
 twoPi = 6.283185307179586476925287
 
 

@@ -3,6 +3,9 @@
 -- @classmod Event
 -- @usage e: Event!
 
+MeowUI = MeowUI
+love = love
+
 Tinsert = table.insert
 
 Utils = assert require MeowUI.cwd .. "Core.Utils"

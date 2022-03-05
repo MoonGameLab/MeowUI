@@ -3,6 +3,8 @@
 -- @classmod Control
 -- @usage c = Control!
 
+MeowUI = MeowUI
+love = love
 
 Utils      = assert require MeowUI.cwd .. "Core.Utils"
 Event      = assert require MeowUI.cwd .. "Core.Event"
@@ -19,8 +21,8 @@ BBoxs = {
 }
 
 class Control
-  --- constructor
-  -- @tparam string boxT Bounding box type[Box, Circle]
+  --- constructor.
+  -- @tparam string boxT Bounding box type[Box, Circle, Polygon]
   -- @tparam string __name name of the control
   new: (boxT = "Box", __name) =>
 

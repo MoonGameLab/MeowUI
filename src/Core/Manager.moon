@@ -3,6 +3,9 @@
 -- @classmod Manager
 -- @usage m = Root.getInstance!
 
+MeowUI = MeowUI
+love = love
+
 Root = assert require MeowUI.cwd .. "Core.Root"
 Singleton = assert require MeowUI.cwd .. "Core.Singleton"
 DEBUG = assert require MeowUI.cwd .. "Core.Debug"

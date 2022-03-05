@@ -3,6 +3,9 @@
 -- @classmod Debug
 -- @usage c = Debug!
 
+MeowUI = MeowUI
+love = love
+
 Singleton = assert require MeowUI.cwd .. "Core.Singleton"
 Graphics  = love.graphics
 

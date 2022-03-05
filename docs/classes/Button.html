@@ -1,0 +1,794 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>MeowUI documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>MeowUI</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Methods">Methods</a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><strong>Button</strong></li>
+  <li><a href="../classes/Box.html">Box</a></li>
+  <li><a href="../classes/Chrono.html">Chrono</a></li>
+  <li><a href="../classes/Circle.html">Circle</a></li>
+  <li><a href="../classes/Control.html">Control</a></li>
+  <li><a href="../classes/Debug.html">Debug</a></li>
+  <li><a href="../classes/Event.html">Event</a></li>
+  <li><a href="../classes/Manager.html">Manager</a></li>
+  <li><a href="../classes/Polygon.html">Polygon</a></li>
+  <li><a href="../classes/Root.html">Root</a></li>
+  <li><a href="../classes/Singleton.html">Singleton</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/MeowUI.html">MeowUI</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>Button</code></h1>
+<p>A button class</p>
+<p>
+
+</p>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">b = Button!
+</pre>
+    </ul>
+
+
+<h2><a href="#Methods">Methods</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Button\new">Button\new (type)</a></td>
+	<td class="summary">constructor.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\onClick">Button\onClick (cb)</a></td>
+	<td class="summary">sets the onClick callback.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\onHover">Button\onHover (cb)</a></td>
+	<td class="summary">sets the onHover callback.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\onLeave">Button\onLeave (cb)</a></td>
+	<td class="summary">sets the onLeave callback.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\onAfterClick">Button\onAfterClick (cb)</a></td>
+	<td class="summary">sets the onAfterClick callback.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\setText">Button\setText (text)</a></td>
+	<td class="summary">sets button text.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\setDynamicPadding">Button\setDynamicPadding (p)</a></td>
+	<td class="summary">sets dynamic padding.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\setDynamicSize">Button\setDynamicSize (bool)</a></td>
+	<td class="summary">sets dynamic size (Grows with the text).</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\setUpColor">Button\setUpColor (color)</a></td>
+	<td class="summary">sets upColor.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\setDownColor">Button\setDownColor (color)</a></td>
+	<td class="summary">sets downColor.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\setHoverColor">Button\setHoverColor (color)</a></td>
+	<td class="summary">sets hoverColor.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\setDisableColor">Button\setDisableColor (color)</a></td>
+	<td class="summary">sets DisableColor.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\setStroke">Button\setStroke (s)</a></td>
+	<td class="summary">sets the stroke (Border line width).</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\getStroke">Button\getStroke ()</a></td>
+	<td class="summary">gets stroke</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\setFontColor">Button\setFontColor (color)</a></td>
+	<td class="summary">sets the text font color.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\setFontSize">Button\setFontSize (size)</a></td>
+	<td class="summary">sets the text font size.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\getFontSize">Button\getFontSize ()</a></td>
+	<td class="summary">gets the font size.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\setImage">Button\setImage (image, conform, bx, by)</a></td>
+	<td class="summary">sets button image</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\setImageBorder">Button\setImageBorder (bx, by)</a></td>
+	<td class="summary">sets the image border</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\setAlphaDown">Button\setAlphaDown (a)</a></td>
+	<td class="summary">sets alpha for when the button is down.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\setAlphaHover">Button\setAlphaHover (a)</a></td>
+	<td class="summary">sets alpha for when the button is hovred.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\setAlphaEnable">Button\setAlphaEnable (a)</a></td>
+	<td class="summary">sets alpha for when the button is enabled.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\setCorners">Button\setCorners (rx, ry)</a></td>
+	<td class="summary">sets corners sharpness.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\setScale">Button\setScale (x, y)</a></td>
+	<td class="summary">sets the scale.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Button\setDepth">Button\setDepth (depth)</a></td>
+	<td class="summary">sets the depth.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Methods"></a>Methods</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Button\new"></a>
+    <strong>Button\new (type)</strong>
+    </dt>
+    <dd>
+    constructor.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">type</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         Bounding box type[Box, Circle, Polygon]
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\onClick"></a>
+    <strong>Button\onClick (cb)</strong>
+    </dt>
+    <dd>
+    sets the onClick callback.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cb</span>
+            <span class="types"><span class="type">function</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\onHover"></a>
+    <strong>Button\onHover (cb)</strong>
+    </dt>
+    <dd>
+    sets the onHover callback.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cb</span>
+            <span class="types"><span class="type">function</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\onLeave"></a>
+    <strong>Button\onLeave (cb)</strong>
+    </dt>
+    <dd>
+    sets the onLeave callback.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cb</span>
+            <span class="types"><span class="type">function</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\onAfterClick"></a>
+    <strong>Button\onAfterClick (cb)</strong>
+    </dt>
+    <dd>
+    sets the onAfterClick callback.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cb</span>
+            <span class="types"><span class="type">function</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\setText"></a>
+    <strong>Button\setText (text)</strong>
+    </dt>
+    <dd>
+    sets button text.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">text</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\setDynamicPadding"></a>
+    <strong>Button\setDynamicPadding (p)</strong>
+    </dt>
+    <dd>
+    sets dynamic padding.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">p</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\setDynamicSize"></a>
+    <strong>Button\setDynamicSize (bool)</strong>
+    </dt>
+    <dd>
+    sets dynamic size (Grows with the text).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bool</span>
+            <span class="types"><span class="type">boolean</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\setUpColor"></a>
+    <strong>Button\setUpColor (color)</strong>
+    </dt>
+    <dd>
+    sets upColor.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">color</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\setDownColor"></a>
+    <strong>Button\setDownColor (color)</strong>
+    </dt>
+    <dd>
+    sets downColor.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">color</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\setHoverColor"></a>
+    <strong>Button\setHoverColor (color)</strong>
+    </dt>
+    <dd>
+    sets hoverColor.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">color</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\setDisableColor"></a>
+    <strong>Button\setDisableColor (color)</strong>
+    </dt>
+    <dd>
+    sets DisableColor.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">color</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\setStroke"></a>
+    <strong>Button\setStroke (s)</strong>
+    </dt>
+    <dd>
+    sets the stroke (Border line width).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">s</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\getStroke"></a>
+    <strong>Button\getStroke ()</strong>
+    </dt>
+    <dd>
+    gets stroke
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        stroke
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\setFontColor"></a>
+    <strong>Button\setFontColor (color)</strong>
+    </dt>
+    <dd>
+    sets the text font color.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">color</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\setFontSize"></a>
+    <strong>Button\setFontSize (size)</strong>
+    </dt>
+    <dd>
+    sets the text font size.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">size</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\getFontSize"></a>
+    <strong>Button\getFontSize ()</strong>
+    </dt>
+    <dd>
+    gets the font size.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        fsize
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\setImage"></a>
+    <strong>Button\setImage (image, conform, bx, by)</strong>
+    </dt>
+    <dd>
+    sets button image
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">image</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         (path)
+        </li>
+        <li><span class="parameter">conform</span>
+            <span class="types"><span class="type">boolean</span></span>
+         (Give the Bbox the same size as the image).
+        </li>
+        <li><span class="parameter">bx</span>
+            <span class="types"><span class="type">number</span></span>
+         (Image border x)
+        </li>
+        <li><span class="parameter">by</span>
+            <span class="types"><span class="type">number</span></span>
+         (Image border x)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\setImageBorder"></a>
+    <strong>Button\setImageBorder (bx, by)</strong>
+    </dt>
+    <dd>
+    sets the image border
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bx</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">by</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\setAlphaDown"></a>
+    <strong>Button\setAlphaDown (a)</strong>
+    </dt>
+    <dd>
+    sets alpha for when the button is down.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\setAlphaHover"></a>
+    <strong>Button\setAlphaHover (a)</strong>
+    </dt>
+    <dd>
+    sets alpha for when the button is hovred.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\setAlphaEnable"></a>
+    <strong>Button\setAlphaEnable (a)</strong>
+    </dt>
+    <dd>
+    sets alpha for when the button is enabled.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\setCorners"></a>
+    <strong>Button\setCorners (rx, ry)</strong>
+    </dt>
+    <dd>
+    sets corners sharpness.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">rx</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">ry</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\setScale"></a>
+    <strong>Button\setScale (x, y)</strong>
+    </dt>
+    <dd>
+    sets the scale.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Button\setDepth"></a>
+    <strong>Button\setDepth (depth)</strong>
+    </dt>
+    <dd>
+    sets the depth.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">depth</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2022-03-05 18:59:32 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

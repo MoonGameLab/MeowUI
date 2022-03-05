@@ -1,3 +1,4 @@
+love = love
 Graphics = love.graphics
 ww = Graphics\getWidth!
 wh = Graphics\getHeight!
