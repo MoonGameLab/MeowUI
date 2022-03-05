@@ -6,6 +6,18 @@ Minimalist and light-weight library based on catui https://github.com/wilhantian
 
 You can find the demo here : https://github.com/Tourahi/MeowUI-Demo
 
+Current focus: 
+  - Controls
+      - Button : Done
+      - ScrollBar : Done
+      - Content : Done
+      - Content : Done
+      - TextField : Todo
+      - Label : Todo
+      - CheckBox : Todo
+      - ProgressBar : Todo
+      - Sliders : Todo
+      - MessageBox : Todo
 
 ## How to make a control ?
 
