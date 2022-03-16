@@ -11,7 +11,6 @@ Current focus:
       - Button : Done
       - ScrollBar : Done
       - Content : Done
-      - Content : Done
       - TextField : Todo
       - Label : Todo
       - CheckBox : Todo
