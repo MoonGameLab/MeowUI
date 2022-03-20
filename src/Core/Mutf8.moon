@@ -8,6 +8,13 @@
 
 string = string
 
+Mutf8Mapping = assert require MeowUI.cwd .. "Core.Mutf8Mapping"
+
+utf8_uc_lc = Mutf8Mapping.utf8_uc_lc
+utf8_lc_uc = Mutf8Mapping.utf8_lc_uc
+
+
+
 ONE_BYTE = 1
 TWO_BYTE = 2
 THREE_BYTE = 3
@@ -111,8 +118,8 @@ with string
   .utf8sub = (str, i, j = -1) ->
 
     assert type(str) == "string", "bad argument #1 to 'utf8len' (string expected, got ".. type(str) .. ")"
-    assert type(i) == "number", "bad argument #1 to 'utf8len' (number expected, got ".. type(i) .. ")"
-    assert type(j) == "number", "bad argument #1 to 'utf8len' (number expected, got ".. type(j) .. ")"
+    assert type(i) == "number", "bad argument #2 to 'utf8len' (number expected, got ".. type(i) .. ")"
+    assert type(j) == "number", "bad argument #3 to 'utf8len' (number expected, got ".. type(j) .. ")"
 
     idx, bytes, len = 1, str\len!, 0
 
@@ -140,6 +147,22 @@ with string
 
     str\sub startByte, endByte
 
+  .utf8replace = (str, mapping) ->
+    assert type(str) == "string", "bad argument #1 to 'utf8len' (string expected, got ".. type(str) .. ")"
+    assert type(mapping) == "table", "bad argument #2 to 'utf8len' (table expected, got ".. type(mapping) .. ")"
+
+    local charBytes
+    idx, bytes, newStr = 1, str\len!, ""
+
+    while idx <= bytes
+      charBytes = str\utf8charbytes idx
+      c = str\sub idx, idx + charBytes - 1
+
+      newStr = newStr .. (mapping[c] or c)
+
+      idx += charBytes
+
+    newStr
 
 
 
