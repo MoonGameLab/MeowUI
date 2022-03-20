@@ -15,6 +15,19 @@ FOUR_BYTE = 4
 
 
 with string
+  -- [(B1), (B2), (B3), (B4)]
+  -- 1 BYTE CHARS : [ (0 - 127) ]
+  -- 2 BYTE CHARS : [ (194 - 223),  (forEach (B1(*)) -> (128 - 191))]
+  -- 3 BYTE CHARS :[ (224 - 239),
+                  -- (forEach (B1(224)) -> (160 - 191)) <11100000	10100000	10000000>
+                  -- (forEach (B1(237)) -> (128 - 159)) <Skip private Use High Surrogate>
+                  -- (forEach (B1(ELSE)) -> (128 - 191)),
+                  -- (128 - 191)]
+  -- 4 BYTE CHARS : [ (240 - 244),
+                  -- (forEach (B1(240)) -> (144 - 191))
+                  -- (forEach (B1(244)) -> (128 - 143))
+                  -- (forEach (B1(ELSE)) -> (128 - 191)),
+                  -- (128 - 191), (128 - 191)]
   .utf8charbytes = (str, i = 1) ->
     assert type(str) == "string",
       "bad argument #1 to 'utf8charbytes' (string expected, got ".. type(str).. ")"
