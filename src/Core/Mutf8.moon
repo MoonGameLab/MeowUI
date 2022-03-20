@@ -120,8 +120,6 @@ with string
     startChar = (i >= 0) and i or l + i + 1
     endChar = (j >= 0) and j or l + j + 1
 
-    print l, startChar, endChar
-
     if startChar > endChar then return ""
 
     startByte, endByte = 1, bytes
