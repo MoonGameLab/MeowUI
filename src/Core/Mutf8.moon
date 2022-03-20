@@ -104,6 +104,46 @@ with string
 
     while idx <= bytes
       len += 1
-      idx += string.utf8charbytes str, idx
+      idx += str\utf8charbytes idx
 
     len
+
+  .utf8sub = (str, i, j = -1) ->
+
+    assert type(str) == "string", "bad argument #1 to 'utf8len' (string expected, got ".. type(str) .. ")"
+    assert type(i) == "number", "bad argument #1 to 'utf8len' (number expected, got ".. type(i) .. ")"
+    assert type(j) == "number", "bad argument #1 to 'utf8len' (number expected, got ".. type(j) .. ")"
+
+    idx, bytes, len = 1, str\len!, 0
+
+    l = (i >= 0 and j >= 0) or str\utf8len!
+    startChar = (i >= 0) and i or l + i + 1
+    endChar = (j >= 0) and j or l + j + 1
+
+    print l, startChar, endChar
+
+    if startChar > endChar then return ""
+
+    startByte, endByte = 1, bytes
+
+    while idx <= bytes
+      len += 1
+
+      if len == startChar then startByte = idx
+
+      idx += str\utf8charbytes idx
+
+      if len == endChar
+        endByte = idx - 1
+        break
+
+    if startChar > len then startByte = bytes + 1
+    if endChar < 1 then endByte = 0
+
+    str\sub startByte, endByte
+
+
+
+
+
+
