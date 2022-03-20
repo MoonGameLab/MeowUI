@@ -31,12 +31,12 @@ with string
   .utf8charbytes = (str, i = 1) ->
     assert type(str) == "string",
       "bad argument #1 to 'utf8charbytes' (string expected, got ".. type(str).. ")"
-    
+
     assert type(i) == "number",
       "bad argument #2 to 'utf8charbytes' (number expected, got ".. type(i).. ")"
 
     -- Numeric representation
-    numRepByteOne = str\byte(i)
+    numRepByteOne = str\byte i
 
     -- Determine bytes needed for char [ RFC 3629 ]
     -- first Byte
@@ -95,3 +95,15 @@ with string
 
     else
       error "Invalid UTF-8 character"
+
+  -- the lenght of an UTF-8 string
+  .utf8len = (str) ->
+    assert type(str) == "string", "bad argument #1 to 'utf8len' (string expected, got ".. type(str) .. ")"
+
+    idx, bytes, len = 1, str\len!, 0
+
+    while idx <= bytes
+      len += 1
+      idx += string.utf8charbytes str, idx
+
+    len
