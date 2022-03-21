@@ -164,6 +164,12 @@ with string
 
     newStr
 
+  .utf8upper = (str) ->
+    str\utf8replace utf8_lc_uc
+
+  .utf8lower = (str) ->
+    str\utf8replace utf8_uc_lc
+
 
 
 
