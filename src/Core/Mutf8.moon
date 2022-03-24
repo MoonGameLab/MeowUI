@@ -170,6 +170,58 @@ with string
   .utf8lower = (str) ->
     str\utf8replace utf8_uc_lc
 
+  .utf8reverse = (str) ->
+    assert type(str) == "string", "bad argument #1 to 'utf8len' (string expected, got ".. type(str) .. ")"
+
+    local charBytes
+    newStr = ""
+    idx, newStr = str\len!, ""
+
+    while idx > 0
+      char = str\byte idx
+      -- for chars represented in 2+ Bytes
+      while char > 128 and char < 191
+        idx -= 1
+        char = str\byte idx
+
+      charBytes = str\utf8charbytes idx
+
+      newStr ..= str\sub idx, idx + charBytes - 1
+
+      idx -= 1
+
+    newStr
+
+  .utf8char = (uc) ->
+    if uc <= 0x7F then return string.char uc
+
+    if (uc <= 0x7FF)
+      B0 = 0xC0 + math.floor(uc / 0x40)
+      B1 = 0x80 + math.floor(uc % 0x40)
+      return string.char B0, B1
+
+    if (uc <= 0xFFFF)
+      B0 = 0xC0 + math.floor(uc / 0x1000)
+      B1 = 0x80 + (math.floor(uc / 0x40) % 0x40)
+      B2 = 0x80 + (uc % 0x40)
+      return string.char B0, B1, B2
+
+    if (uc <= 0x10FFFF)
+      code = uc
+      B3 = 0x80 + (code % 0x40)
+      code = math.floor(code / 0x40)
+      B2 = 0x80 + (code % 0x40)
+      code = math.floor(code / 0x40)
+      B1= 0x80 + (code % 0x40)
+      code = math.floor(code / 0x40)
+      B0 = 0xF0 + code
+      return string.char B0, B1, B2, B3
+
+    error 'Unicode cannot be greater than U+10FFFF!'
+
+
+
+
 
 
 
