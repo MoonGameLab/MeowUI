@@ -143,9 +143,7 @@ drawCircle = =>
     y = box.y - textH / 2
     Graphics.draw @textDrawable, x, y
 
-
   Graphics.setColor r, g, b, a
-
 
 -- @local
 drawRect = =>
