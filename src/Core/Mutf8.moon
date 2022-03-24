@@ -10,8 +10,12 @@ string = string
 
 Mutf8Mapping = assert require MeowUI.cwd .. "Core.Mutf8Mapping"
 
-utf8_uc_lc = Mutf8Mapping.utf8_uc_lc
-utf8_lc_uc = Mutf8Mapping.utf8_lc_uc
+Utf8_uc_lc = Mutf8Mapping.utf8_uc_lc
+Utf8_lc_uc = Mutf8Mapping.utf8_lc_uc
+
+Shift_6  = 2^6
+Shift_12 = 2^12
+Shift_18 = 2^18
 
 
 
@@ -165,10 +169,10 @@ with string
     newStr
 
   .utf8upper = (str) ->
-    str\utf8replace utf8_lc_uc
+    str\utf8replace Utf8_lc_uc
 
   .utf8lower = (str) ->
-    str\utf8replace utf8_uc_lc
+    str\utf8replace Utf8_uc_lc
 
   .utf8reverse = (str) ->
     assert type(str) == "string", "bad argument #1 to 'utf8len' (string expected, got ".. type(str) .. ")"
@@ -195,18 +199,18 @@ with string
   .utf8char = (uc) ->
     if uc <= 0x7F then return string.char uc
 
-    if (uc <= 0x7FF)
+    if uc <= 0x7FF
       B0 = 0xC0 + math.floor(uc / 0x40)
       B1 = 0x80 + math.floor(uc % 0x40)
       return string.char B0, B1
 
-    if (uc <= 0xFFFF)
+    if uc <= 0xFFFF
       B0 = 0xC0 + math.floor(uc / 0x1000)
       B1 = 0x80 + (math.floor(uc / 0x40) % 0x40)
       B2 = 0x80 + (uc % 0x40)
       return string.char B0, B1, B2
 
-    if (uc <= 0x10FFFF)
+    if uc <= 0x10FFFF
       code = uc
       B3 = 0x80 + (code % 0x40)
       code = math.floor(code / 0x40)
@@ -220,9 +224,55 @@ with string
     error 'Unicode cannot be greater than U+10FFFF!'
 
 
+  .utf8unicode = (str, i = 1, j = 1, bytePos) ->
 
+    if i > j then return
 
+    local char, bytes
 
+    if bytePos
+      bytes = str\utf8charbytes bytePos
+      char = str\sub bytePos, bytePos - 1 + bytes
+    else
+      char, bytePos = str\utf8sub i, i
+      bytes = #char
+
+    local unicode
+
+    if bytes == 1 then unicode = string.byte char
+
+    if bytes == 2
+      Byte0, Byte1 = string.byte char, 1, 2
+      Code0, Code1 = Byte0 - 0xC0, Byte1 - 0x80
+      unicode = Code0 * Shift_6 + Code1
+
+    if bytes == 3
+      Byte0, Byte1, Byte2 = string.byte char, 1, 3
+      Code0, Code1, Code2 = Byte0 - 0xE0, Byte1 - 0x80, Byte2 - 0x80
+      unicode = Code0 * Shift_12 + Code1 * Shift_6 + Code2
+
+    if bytes == 4
+      Byte0, Byte1, Byte2, Byte3 = string.byte char,1,4
+      Code0, Code1, Code2, Code3 = Byte0 - 0xF0, Byte1 - 0x80, Byte2 - 0x80, Byte3 - 0x80
+      unicode = Code0 * Shift_18 + Code1 * Shift_12 + Code2 * Shift_6 + Code3
+
+    return unicode, str\utf8unicode( i + 1, j, bytePos + bytes )
+
+  .utf8gensub = (str, subLen = 1) ->
+    bytePos = 1
+    len = #str
+    return ->
+      charCount = 0
+      start = bytePos
+      while charCount ~= subLen
+        if bytePos > len then return
+        charCount += 1
+        bytes = str\utf8charbytes bytePos
+        bytePos += bytes
+
+      last = bytePos - 1
+      sub = str\sub start, last
+      return sub, start, last
 
 
 
