@@ -11,7 +11,7 @@ drawRect = =>
   x, y = box\getX!, box\getY!
   color = @backgroundColor
   color[4] = color[4] or @alpha
-  
+
   Graphics.setColor color
   Graphics.rectangle "fill", x, y, boxW, boxH, @rx, @ry
   -- border
@@ -52,13 +52,13 @@ class Content extends Control
     @stroke = common.stroke
     @backgroundColor = colors.contentBackgroundColor
     @strokeColor = colors.strokeColor
-    
+
     @setClip true
 
     @slides = {}
     @currentSlide = nil
     @slidesIdx = 1
-  
+
 
     @alpha = 1
 
@@ -99,7 +99,7 @@ class Content extends Control
       @slides[@slidesIdx]\setHeight height
     else
       @slides[@slidesIdx]\setHeight @getHeight!
-      
+
     @slidesIdx += 1
     if attach
       if @currentSlideIdx then _detachSlide @, @slides[@currentSlideIdx]
@@ -134,7 +134,7 @@ class Content extends Control
 
     @hBar\on "UI_ON_SCROLL", @onHBarScroll, @hBar\getParent!
     @hBar\setWidth @getWidth! - (@ry + @rx)
-    
+
 
   detachScrollBarV: =>
     if @vBar
@@ -157,7 +157,7 @@ class Content extends Control
       switch v_barSide
         when "right" then @vBarRight!
         when "left" then @vBarLeft!
-    
+
     if @hBar
       @hBar\setWidth width - (@ry + @rx)
       switch h_barSide
@@ -221,14 +221,14 @@ class Content extends Control
 
     if nCurrent == nSlides
       @attachSlide 1
-    else 
+    else
       @attachSlide nCurrent + 1
 
   vBarLeft: =>
     if @vBar
       v_barSide = "left"
       @vBar\setPosition @rx, @ry
-  
+
   vBarRight: =>
     if @vBar
       v_barSide = "right"
@@ -251,7 +251,7 @@ class Content extends Control
     if nCurrent == 1 then @attachSlide nSlides
     else @attachSlide nCurrent - 1
 
-  
+
   getVBar: =>
     if @vBar then return @vBar
     nil

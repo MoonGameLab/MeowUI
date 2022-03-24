@@ -70,6 +70,8 @@ drawPoly = =>
     if @isHovred
       Graphics.setColor color
 
+    Graphics.push 'all'
+
     sf = stencileFuncPoly self
     Graphics.stencil sf, "increment", 1, true
     Graphics.setStencilTest "greater", 1
@@ -79,6 +81,8 @@ drawPoly = =>
     polyBorder @, box
     Graphics.setStencilTest!
     Graphics.setColor r, g, b, a
+
+    Graphics.pop!
   else
     Graphics.setColor color
     Graphics.polygon 'fill', box\getVertices!
@@ -111,6 +115,8 @@ drawCircle = =>
     if @isHovred
       Graphics.setColor color
 
+    Graphics.push 'all'
+
     sf = stencileFuncCircle self
 
     Graphics.stencil sf, "increment", 1, true
@@ -121,6 +127,8 @@ drawCircle = =>
     circleBorder @, box
     Graphics.setStencilTest!
     Graphics.setColor r, g, b, a
+
+    Graphics.pop!
   else
     Graphics.setColor color
     Graphics.circle 'fill', box.x, box.y, boxR
@@ -135,7 +143,7 @@ drawCircle = =>
     y = box.y - textH / 2
     Graphics.draw @textDrawable, x, y
 
-  
+
   Graphics.setColor r, g, b, a
 
 
@@ -184,7 +192,7 @@ drawRect = =>
 
     Graphics.setColor r, g, b, a
 
-  
+
 class Button extends Control
 
   --- constructor.
@@ -207,7 +215,6 @@ class Button extends Control
     @strokeColor = colors.strokeColor
     @fontColor = colors.fontColor
     @bgImageBx, @bgImageBy = 0, 0
-    @imageButtonDepth = nil
     @alpha = 1
     @scaleX = 1
     @scaleY = 1
@@ -302,7 +309,7 @@ class Button extends Control
       @width = @width > @textDrawable\getWidth! and @oWidth or @textDrawable\getWidth! + @dPadding
       @height = @height > @textDrawable\getHeight! and @oHeight or @textDrawable\getHeight!
 
-      
+
   --- sets dynamic padding.
   -- @tparam number p
   setDynamicPadding: (p) =>
@@ -377,8 +384,6 @@ class Button extends Control
   -- @tparam number bx (Image border x)
   -- @tparam number by (Image border x)
   setImage: (image, conform, bx = 0, by = 0) =>
-    if @imageButtonDepth then @setDepth @imageButtonDepth
-    else @setDepth @getDepth! + 1
     @bgImage = Graphics.newImage image
     box = @getBoundingBox!
     @dynamicSize = false
@@ -443,4 +448,3 @@ class Button extends Control
   -- @tparam number depth
   setDepth: (depth) =>
     super depth
-    @imageButtonDepth = depth + 1
