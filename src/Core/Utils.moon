@@ -15,4 +15,16 @@ with Utils
       return ("0123456789abcdef")\sub r, r
     return (("xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx")\gsub("[xy]", f))
 
+  .Copy = (t) ->
+    out = {}
+    for k, v in pairs t
+      out[k] = v
+    out
+
+  .GetTableKeys = (tab) ->
+    keyset = {}
+    for k,_ in pairs(tab)
+      keyset[#keyset + 1] = k
+    keyset
+
 Utils
