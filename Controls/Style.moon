@@ -15,7 +15,6 @@ Style =
       disabledColor: { 0.0980392156863, 0.101960784314, 0.0980392156863 }
       strokeColor: { 0.149019607843, 0.929411764706, 0.286274509804}
       fontColor: { 1, 1, 1 }
-      backgroundColor: { 0.0392156862745, 0.0392156862745, 0.0392156862745 }
       contentBackgroundColor: { 0.0392156862745, 0.0392156862745, 0.0392156862745 }
       scrollBar: { 0.14, 0.14, 0.14 }
 
@@ -31,8 +30,10 @@ Style =
       ry: 10
 
     textField:
-      rx: 7
-      ry: 7
+      rx: 6
+      ry: 6
+      marginCorner: 12
+      textAreaColor: { 0.0392156862745, 0.0392156862745, 0.0392156862745 }
 
     scrollBar:
       width: 13

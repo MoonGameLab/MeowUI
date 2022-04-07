@@ -37,7 +37,7 @@ class ScrollBar extends Control
     @bar\on "UI_MOUSE_DOWN", @onBgDown, @bar\getParent!
 
     @reset!
-    
+
   onDraw: =>
     box = @getBoundingBox!
     x, y = box\getPosition!
@@ -71,12 +71,12 @@ class ScrollBar extends Control
       @bar\setY 0
 
     @events\dispatch @events\getEvent("UI_ON_SCROLL"), ratio
-    
+
 
   onBarMove: (x, y, dx, dy) =>
     if @barDown == false then return
 
-    
+
     bar = @bar
 
     if @dir == "vertical"
@@ -139,4 +139,4 @@ class ScrollBar extends Control
 
 
 
-  
+

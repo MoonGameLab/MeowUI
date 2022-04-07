@@ -37,11 +37,15 @@ class TextField extends Control
     @upColor = colors.upColor
     @disabledColor = colors.disabledColor
     @strokeColor = colors.strokeColor
-    @backgroundColor = colors.backgroundColor
     @fontColor = colors.fontColor
+    @strokeColor = colors.strokeColor
+
     @font = Graphics.newFont @fontSize
     @rx = style.rx
     @ry = style.ry
+    @trx, @try = @rx, @ry
+    @marginCorner = style.marginCorner
+    @textAreaColor = style.textAreaColor
 
     -- alpha
 
@@ -55,20 +59,32 @@ class TextField extends Control
     @on "UI_MOUSE_DOWN", @onMouseDown, @
     @on "UI_MOUSE_UP", @onMouseUp, @
 
+  _drawBackground: (x, y, w, h) =>
+    color = @strokeColor
+    color[4] = color[4] or @alpha
+    Graphics.setColor color
+    Graphics.rectangle "fill", x, y, w, h, @rx, @ry
+
+
+  _drawTextArea: (x, y, w, h) =>
+    floor = math.floor
+    mc = h / @marginCorner
+    color = @textAreaColor
+    color[4] = color[4] or @alpha
+    Graphics.setColor color
+    w, h = floor(w - mc * 2), floor(h - mc * 2)
+    Graphics.rectangle "fill", x + mc, y + mc, w, h, @trx, @try
 
   onDraw: =>
     box = @getBoundingBox!
     r, g, b, a = Graphics.getColor!
     boxW, boxH = box\getWidth!, box\getHeight!
     x, y = box\getX!, box\getY!
-    color = @backgroundColor
-    color[4] = color[4] or @alpha
 
-    Graphics.setColor color
-    Graphics.rectangle "fill", box.x, box.y, boxW, boxH, @rx, @ry
+    @_drawBackground x, y, boxW, boxH
+    @_drawTextArea x, y, boxW, boxH
 
     Graphics.setColor r, g, b, a
-
 
 
   onMouseEnter: =>
