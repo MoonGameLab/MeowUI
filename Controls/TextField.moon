@@ -8,12 +8,13 @@ Control  = MeowUI.Control
 
 class TextField extends Control
 
-  _lettersWidth: =>
-    if @letters == nil then return
-    w = 0
-    for i = 1, #@letters
-      w += @font\getWidth @letters[i].c
-    w
+  -- @local
+  -- _lettersWidth: =>
+  --   if @letters == nil then return
+  --   w = 0
+  --   for i = 1, #@letters
+  --     w += @font\getWidth @letters[i].c
+  --   w
 
   new: (defaultText) =>
     -- Bounding box type
@@ -59,13 +60,14 @@ class TextField extends Control
     @on "UI_MOUSE_DOWN", @onMouseDown, @
     @on "UI_MOUSE_UP", @onMouseUp, @
 
+  -- @local
   _drawBackground: (x, y, w, h) =>
     color = @strokeColor
     color[4] = color[4] or @alpha
     Graphics.setColor color
     Graphics.rectangle "fill", x, y, w, h, @rx, @ry
 
-
+  -- @local
   _drawTextArea: (x, y, w, h) =>
     floor = math.floor
     mc = h / @marginCorner
