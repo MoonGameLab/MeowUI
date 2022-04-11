@@ -53,6 +53,26 @@ class Control
     @clip = false
 
 
+  --- get the class where mixins can be inserted.
+  -- @treturn table {mixinTable, boolean(If mixin class was created)}
+  mixinsClass: (control) =>
+    parent = control.__parent -- The parent class
+
+    assert (parent != nil),
+      "The control does not have a parent class."
+
+    if rawget(parent, "mixinsClass") then return parent, false
+
+    mixinsClass = class extends parent
+      @__name: "#{control.__name}Mixins"
+      @mixinsClass: true
+
+    control.__parent = mixinsClass
+    setmetatable control.__base, mixinsClass.__base
+
+    mixinsClass, true
+
+
   --- getter for the root control.
   -- @treturn Control root
   getRoot: =>
@@ -139,14 +159,14 @@ class Control
         hitControl = control\hitTest x, y
         if hitControl then return hitControl
 
-    if @enabled 
+    if @enabled
       if MeowUI.debug then @_d = false
       return @
-    
-    if MeowUI.debug 
+
+    if MeowUI.debug
       @_d = true
       return @
- 
+
     return nil
 
   --- setter for the content parent.
@@ -180,8 +200,8 @@ class Control
     assert (child.__class.__parent == Control) or (child.__class == Control),
       "child must be Control or a subclass of Control."
     assert child\getParent! == nil, "child must be an Orphan Control."
-    
-    
+
+
     if @childExists child.id then return
 
     @children[#@children + 1] = child
