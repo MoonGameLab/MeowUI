@@ -434,7 +434,7 @@ class Control
       "event must be of type string."
     assert type(callback) == 'function',
       "callback must be of type function."
-    assert (target.__class.__parent == Control) or (target.__class == Control),
+    assert (target.__class.__parent == Control) or (target.__class == Control) or ((target\hasMinxins!) and target.__class.__parent.__parent == Control),
       "target must be a Control or a subclass of Control."
 
     @events\on @events\getEvent(event), callback, target
