@@ -52,6 +52,9 @@ class Control
     @boundingBox = BBoxs[@boxType]!
     @clip = false
 
+  -- @local
+  hasMinxins: =>
+    rawget(@__class.__parent, "mixinsClass")
 
   --- get the class where mixins can be inserted.
   -- @treturn table {mixinTable, boolean(If mixin class was created)}
@@ -67,12 +70,9 @@ class Control
       @__name: "#{control.__name}Mixins"
       @mixinsClass: true
 
-    control.__parent = mixinsClass
-
+    control.__class.__parent = mixinsClass
+    -- print  "b parent " .. tostring(control.__class.__parent.__parent.__name)
     setmetatable control.__class.__base, mixinsClass.__class.__base
-
-    --Dump control.__class.__base
-    --Dump mixinsClass.__class.__base
 
     mixinsClass, true
 
@@ -196,8 +196,8 @@ class Control
   --- setter for the content parent.
   -- @tparam Content p
   setParent: (p) =>
-    assert (p == nil) or (p.__class.__parent == Control) or (p.__class == Control),
-      "child must be nil or Control or a subclass of Control."
+    assert (p == nil) or (p.__class.__parent == Control) or (p.__class == Control) or ((p\hasMinxins!) and p.__class.__parent.__parent == Control),
+      "parent must be nil or Control or a subclass of Control."
     @parent = p
     @needConforming true
 
@@ -221,7 +221,7 @@ class Control
   -- @tparam Content child
   -- @tparam number depth
   addChild: (child, depth) =>
-    assert (child.__class.__parent == Control) or (child.__class == Control),
+    assert (child.__class.__parent == Control) or (child.__class == Control) or ((child\hasMinxins!) and child.__class.__parent.__parent == Control),
       "child must be Control or a subclass of Control."
     assert child\getParent! == nil, "child must be an Orphan Control."
 
