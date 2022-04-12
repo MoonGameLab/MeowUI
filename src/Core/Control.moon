@@ -55,8 +55,8 @@ class Control
 
   --- get the class where mixins can be inserted.
   -- @treturn table {mixinTable, boolean(If mixin class was created)}
-  mixinsClass: (control) =>
-    parent = control.__parent -- The parent class
+  getMixinsClass: (control) ->
+    parent = control.__class.__parent -- The parent class
 
     assert (parent != nil),
       "The control does not have a parent class."
@@ -68,9 +68,33 @@ class Control
       @mixinsClass: true
 
     control.__parent = mixinsClass
-    setmetatable control.__base, mixinsClass.__base
+
+    setmetatable control.__class.__base, mixinsClass.__class.__base
+
+    --Dump control.__class.__base
+    --Dump mixinsClass.__class.__base
 
     mixinsClass, true
+
+  include: (otherClass) =>
+    otherClass, otherClassName = if type(otherClass) == "string"
+      assert(require(otherClass)), otherClass
+
+    assert (otherClass.__class != Control) and (otherClass.__class.__parent != Control),
+      "Control is including a class that is or extends Control. An included class should be a plain class and not another control."
+
+    mixinsClass = @getMixinsClass!
+
+    if otherClass.__class.__parent then @include otherClass.__class.__parent
+
+    assert otherClass.__class.__base != nil, "Expecting a class when trying to include #{otherClassName or otherClass} into #{@__name}"
+
+    for k, v in pairs otherClass.__class.__base
+      continue if k\match("^__")
+      mixinsClass.__base[k] = v
+
+    true
+
 
 
   --- getter for the root control.
