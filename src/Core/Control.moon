@@ -52,6 +52,50 @@ class Control
     @boundingBox = BBoxs[@boxType]!
     @clip = false
 
+  -- @local
+  hasMinxins: =>
+    rawget(@__class.__parent, "mixinsClass")
+
+  --- get the class where mixins can be inserted.
+  -- @treturn table {mixinTable, boolean(If mixin class was created)}
+  getMixinsClass: (control) ->
+    parent = control.__class.__parent -- The parent class
+
+    assert (parent != nil),
+      "The control does not have a parent class."
+
+    if rawget(parent, "mixinsClass") then return parent, false
+
+    mixinsClass = class extends parent
+      @__name: "#{control.__name}Mixins"
+      @mixinsClass: true
+
+    control.__class.__parent = mixinsClass
+    -- print  "b parent " .. tostring(control.__class.__parent.__parent.__name)
+    setmetatable control.__class.__base, mixinsClass.__class.__base
+
+    mixinsClass, true
+
+  include: (otherClass) =>
+    otherClass, otherClassName = if type(otherClass) == "string"
+      assert(require(otherClass)), otherClass
+
+    assert (otherClass.__class != Control) and (otherClass.__class.__parent != Control),
+      "Control is including a class that is or extends Control. An included class should be a plain class and not another control."
+
+    mixinsClass = @getMixinsClass!
+
+    if otherClass.__class.__parent then @include otherClass.__class.__parent
+
+    assert otherClass.__class.__base != nil, "Expecting a class when trying to include #{otherClassName or otherClass} into #{@__name}"
+
+    for k, v in pairs otherClass.__class.__base
+      continue if k\match("^__")
+      mixinsClass.__base[k] = v
+
+    true
+
+
 
   --- getter for the root control.
   -- @treturn Control root
@@ -139,21 +183,21 @@ class Control
         hitControl = control\hitTest x, y
         if hitControl then return hitControl
 
-    if @enabled 
+    if @enabled
       if MeowUI.debug then @_d = false
       return @
-    
-    if MeowUI.debug 
+
+    if MeowUI.debug
       @_d = true
       return @
- 
+
     return nil
 
   --- setter for the content parent.
   -- @tparam Content p
   setParent: (p) =>
-    assert (p == nil) or (p.__class.__parent == Control) or (p.__class == Control),
-      "child must be nil or Control or a subclass of Control."
+    assert (p == nil) or (p.__class.__parent == Control) or (p.__class == Control) or ((p\hasMinxins!) and p.__class.__parent.__parent == Control),
+      "parent must be nil or Control or a subclass of Control."
     @parent = p
     @needConforming true
 
@@ -177,11 +221,11 @@ class Control
   -- @tparam Content child
   -- @tparam number depth
   addChild: (child, depth) =>
-    assert (child.__class.__parent == Control) or (child.__class == Control),
+    assert (child.__class.__parent == Control) or (child.__class == Control) or ((child\hasMinxins!) and child.__class.__parent.__parent == Control),
       "child must be Control or a subclass of Control."
     assert child\getParent! == nil, "child must be an Orphan Control."
-    
-    
+
+
     if @childExists child.id then return
 
     @children[#@children + 1] = child
@@ -390,7 +434,7 @@ class Control
       "event must be of type string."
     assert type(callback) == 'function',
       "callback must be of type function."
-    assert (target.__class.__parent == Control) or (target.__class == Control),
+    assert (target.__class.__parent == Control) or (target.__class == Control) or ((target\hasMinxins!) and target.__class.__parent.__parent == Control),
       "target must be a Control or a subclass of Control."
 
     @events\on @events\getEvent(event), callback, target

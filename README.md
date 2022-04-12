@@ -2,6 +2,8 @@
 
 STATUS : (Alpha) Under development.
 
+Please make sure to clone the master branch. Other branches are ideas that if successfully implemented will be eventually merged to master.
+
 Minimalist and light-weight library based on catui https://github.com/wilhantian/catui.
 
 You can find the demo here : https://github.com/Tourahi/MeowUI-Demo
