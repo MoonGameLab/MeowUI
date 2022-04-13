@@ -195,8 +195,8 @@ drawRect = =>
 class Button extends Control
 
 
-  @include Mixins.ColorsMixins
-  @include Mixins.EventsMixins
+  @include Mixins.ColorMixins
+  @include Mixins.EventMixins
 
   --- constructor.
   -- @tparam string type Bounding box type[Box, Circle, Polygon]
@@ -296,11 +296,6 @@ class Button extends Control
   -- @treturn number stroke
   getStroke: =>
     @stroke
-
-  --- sets the text font color.
-  -- @tparam table color
-  setFontColor: (color) =>
-    @fontColor = color
 
   --- sets the text font size.
   -- @tparam number size

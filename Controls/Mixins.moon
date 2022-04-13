@@ -1,6 +1,6 @@
 love = love
 
-ColorsMixins = class
+ColorMixins = class
 
   --- sets upColor.
   -- @tparam table color
@@ -58,15 +58,22 @@ ColorsMixins = class
     @alphaEnable = a
     true
 
-   -- sets alpha for when the control is disabled.
+  --- sets alpha for when the control is disabled.
   -- @tparam number a
   setAlphaDisable: (a) =>
     if @alphaDisable == nil then return false
     @alphaDisable = a
     true
 
+  --- sets the text font color.
+  -- @tparam table color
+  setFontColor: (color) =>
+    if @fontColor == nil then return false
+    @fontColor = color
+    true
 
-EventsMixins = class
+
+EventMixins = class
 
 --- sets the onClick callback.
   -- @tparam function cb
@@ -118,4 +125,6 @@ EventsMixins = class
     @isPressed = false
 
 
-{ :ColorsMixins, :EventsMixins }
+
+
+{ :ColorMixins, :EventMixins, :FontMixins }

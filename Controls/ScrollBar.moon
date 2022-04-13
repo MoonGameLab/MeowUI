@@ -1,6 +1,8 @@
+love     = love
+MeowUI   = MeowUI
 Graphics = love.graphics
-Control = MeowUI.Control
-Button = assert require MeowUI.c_cwd .. "Button"
+Control  = MeowUI.Control
+Button   = assert require MeowUI.c_cwd .. "Button"
 
 
 class ScrollBar extends Control
@@ -25,16 +27,16 @@ class ScrollBar extends Control
 
     @on "UI_MOUSE_DOWN", @onBarDown, @
     @on "UI_MOUSE_MOVE", @onBarMove, @
-    @on "UI_MOUSE_UP", @onBarUp, @
-    @on "UI_MOUSE_DOWN", @onBgDown, @
-    @on "UI_DRAW", @onDraw, @
+    @on "UI_MOUSE_UP",   @onBarUp,   @
+    @on "UI_MOUSE_DOWN", @onBgDown,  @
+    @on "UI_DRAW",       @onDraw,    @
 
     @addChild @bar
 
     @bar\on "UI_MOUSE_DOWN", @onBarDown, @bar\getParent!
-    @bar\on "UI_MOUSE_UP",  @onBarUp, @bar\getParent!
+    @bar\on "UI_MOUSE_UP",   @onBarUp,   @bar\getParent!
     @bar\on "UI_MOUSE_MOVE", @onBarMove, @bar\getParent!
-    @bar\on "UI_MOUSE_DOWN", @onBgDown, @bar\getParent!
+    @bar\on "UI_MOUSE_DOWN", @onBgDown,  @bar\getParent!
 
     @reset!
 
