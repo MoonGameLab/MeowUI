@@ -6,6 +6,7 @@ Graphics = love.graphics
 MeowUI   = MeowUI
 love     = love
 Control  = MeowUI.Control
+Mixins   = assert require MeowUI.root .. "Controls.Mixins"
 
 -- @local
 stencileFuncCircle = =>
@@ -193,6 +194,10 @@ drawRect = =>
 
 class Button extends Control
 
+
+  @include Mixins.ColorsMixins
+  @include Mixins.EventsMixins
+
   --- constructor.
   -- @tparam string type Bounding box type[Box, Circle, Polygon]
   new: (type) =>
@@ -250,55 +255,6 @@ class Button extends Control
     @on "UI_MOUSE_DOWN", @onMouseDown, @
     @on "UI_MOUSE_UP", @onMouseUp, @
 
-  --- sets the onClick callback.
-  -- @tparam function cb
-  onClick: (cb) =>
-    @Click = cb
-
-  --- sets the onHover callback.
-  -- @tparam function cb
-  onHover: (cb) =>
-    @Hover = cb
-
-  --- sets the onLeave callback.
-  -- @tparam function cb
-  onLeave: (cb) =>
-    @Leave = cb
-
-  --- sets the onAfterClick callback.
-  -- @tparam function cb
-  onAfterClick: (cb) =>
-    @aClick = cb
-
-  -- @local
-  onMouseEnter: =>
-    Mouse = love.mouse
-    if @Hover
-      @Hover!
-    @isHovred = true
-    if Mouse.getSystemCursor "hand"
-      Mouse.setCursor(Mouse.getSystemCursor("hand"))
-
-  -- @local
-  onMouseLeave: =>
-    Mouse = love.mouse
-    if @Leave
-      @Leave!
-    @isHovred = false
-    Mouse.setCursor!
-
-  -- @local
-  onMouseDown: (x, y) =>
-    if @Click
-      @Click!
-    @isPressed = true
-
-  -- @local
-  onMouseUp: (x, y) =>
-    if @aClick
-      @aClick!
-    @isPressed = false
-
   --- sets button text.
   -- @tparam string text
   setText: (text) =>
@@ -324,25 +280,6 @@ class Button extends Control
     @oWidth = @width
     @oHeight = @height
 
-  --- sets upColor.
-  -- @tparam table color
-  setUpColor: (color) =>
-    @upColor = color
-
-  --- sets downColor.
-  -- @tparam table color
-  setDownColor: (color) =>
-    @downColor = color
-
-  --- sets hoverColor.
-  -- @tparam table color
-  setHoverColor: (color) =>
-    @hoverColor = color
-
-  --- sets DisableColor.
-  -- @tparam table color
-  setDisableColor: (color) =>
-    @theme.disableColor = color
 
   --- sets the stroke (Border line width).
   setStroke: (s) =>
@@ -410,25 +347,6 @@ class Button extends Control
     @bgImageBx, @bgImageBy = bx, by
     @setSize @bgImage\getWidth! - bx, @bgImage\getHeight! - by
 
-  --- sets alpha for when the button is down.
-  -- @tparam number a
-  setAlphaDown: (a) =>
-    @alphaDown = a
-
-  --- sets alpha for when the button is hovred.
-  -- @tparam number a
-  setAlphaHover: (a) =>
-    @alphaHover = a
-
-  --- sets alpha for when the button is enabled.
-  -- @tparam number a
-  setAlphaEnable: (a) =>
-    @alphaEnable = a
-
-   -- sets alpha for when the button is disabled.
-  -- @tparam number a
-  setAlphaDisable: (a) =>
-    @alphaDisable = a
 
   --- sets corners sharpness.
   -- @tparam number rx

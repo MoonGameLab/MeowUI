@@ -71,7 +71,6 @@ class Control
       @mixinsClass: true
 
     control.__class.__parent = mixinsClass
-    -- print  "b parent " .. tostring(control.__class.__parent.__parent.__name)
     setmetatable control.__class.__base, mixinsClass.__class.__base
 
     mixinsClass, true
