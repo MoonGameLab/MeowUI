@@ -28,7 +28,7 @@ AddOns:
         - removeControlFrom(rootName<string> or ctrlId<string>, { contrlName: childCtrl } or id})
         - forget(rootName<string> or ctrlId<string>)
         - count(rootName<string> or ctrlId<string>)
-          - Count number of child controls. `#(rootName\getChildren!)`
+          - Count number of child controls. `#(rootName\getChildren!)` --> size param is better
 
 
 

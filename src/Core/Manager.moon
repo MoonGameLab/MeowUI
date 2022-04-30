@@ -176,3 +176,6 @@ class Manager extends Singleton
   -- @tparam number h
   resize: (w, h) =>
     @rootControl\resize w, h
+
+
+Manager.getInstance!

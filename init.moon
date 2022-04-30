@@ -22,7 +22,7 @@ export MeowUI = {
 MeowUI["cwd"]          = cwd
 MeowUI["c_cwd"]        = c_cwd
 MeowUI["root"]         = root
-MeowUI["manager"]      = assert(require(MeowUI.cwd .. "Core.Manager")).getInstance!
+MeowUI["manager"]      = assert require MeowUI.cwd .. "Core.Manager"
 MeowUI["Control"]      = assert require MeowUI.cwd .. "Core.Control"
 MeowUI["theme"]        = "dark-green-neon"
 
