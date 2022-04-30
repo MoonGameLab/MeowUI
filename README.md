@@ -8,9 +8,9 @@ Minimalist and light-weight library based on catui https://github.com/wilhantian
 
 You can find the demo here : https://github.com/Tourahi/MeowUI-Demo
 
-Current focus: 
-  - Core 
-    - UTF-8 Support.
+Current focus:
+  - Core
+    - UTF-8 Support. : Done
   - Controls
     - Button : Done
     - ScrollBar : Done
@@ -21,6 +21,8 @@ Current focus:
     - ProgressBar : Todo
     - Sliders : Todo
     - MessageBox : Todo
+  - Tests
+    - NEVER!! jk ASAP.
 
 ## How to make a control ?
 
@@ -35,7 +37,7 @@ Current focus:
     new: =>
       -- Send Bounding box type to the parent constructor.
       super "Box" -- Currently Bounding box can be a Circle also.
-  
+
       -- Control properties example
       @width = 100
       @height = 50
@@ -44,7 +46,7 @@ Current focus:
       @iconAndTextSpace = 8
       @textDrawable = Graphics.newText @font, ""
       ...
-  
+
       -- Attach class methods to events
       -- The method will be executed every time the event attached to it is fired.
       -- See: https://tourahi.github.io/MeowUI/classes/Event.html#Event\on
@@ -55,10 +57,10 @@ Current focus:
     onDraw: =>
       -- Bounding box you can use in drawing the control
       box = @getBoundingBox!
-    
+
       -- Draw whatever you want just keep in mind the type of the boundingBox you are using.
       -- Dynamic Bbox type will be added in future releases.
-    
+
       --              	For the full example see:
       --https://github.com/Tourahi/MeowUI/blob/master/Controls/Button.moon
 

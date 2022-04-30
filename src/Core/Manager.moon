@@ -1,7 +1,7 @@
 ----
 -- A Manager class (extends @{Singleton})
 -- @classmod Manager
--- @usage m = Root.getInstance!
+-- @usage m = Manager.getInstance!
 
 MeowUI = MeowUI
 love = love
