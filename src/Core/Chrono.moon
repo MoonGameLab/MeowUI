@@ -11,7 +11,6 @@ Singleton = assert require MeowUI.cwd .. "Core.Singleton"
 
 -- @local
 tick = (owner, dt) =>
-  print @time
   @time += (1 * dt)
   if @time >= @duration
     @onDone(owner)

@@ -30,9 +30,9 @@ Style =
       ry: 10
 
     textField:
-      rx: 6
-      ry: 6
-      marginCorner: 12
+      rx: 5
+      ry: 5
+      marginCorner: 18
       textAreaColor: { 0.0392156862745, 0.0392156862745, 0.0392156862745 }
 
     scrollBar:
