@@ -11,11 +11,15 @@ Singleton = assert require MeowUI.cwd .. "Core.Singleton"
 
 -- @local
 tick = (owner, dt) =>
+  print @time
   @time += (1 * dt)
   if @time >= @duration
     @onDone(owner)
-    if owner.chrono then owner.chrono = nil
-    return true
+    if @repeated
+      @time = 0
+    else
+      if owner.chrono then owner.chrono = nil
+      return true
   false
 
 
@@ -31,10 +35,12 @@ class Chrono extends Singleton
 
   --- creates a timer. This timer will be removed automatically from owner if
   -- "chrono" is the key for the timer instance.
+  -- You can set it to be repeated with the same duration and onDone callback.
   -- @tparam number duration
+  -- @tparam boolean repeated
   -- @tparam function onDone
   -- @treturn table
-  create: (duration, onDone) =>
+  create: (duration, repeated, onDone) =>
     assert type(duration) == 'number',
       "duration must be of type number."
     assert type(onDone) == 'function',
@@ -46,6 +52,7 @@ class Chrono extends Singleton
       duration: duration
       onDone:   onDone
       tick:     tick
+      repeated: repeated and true or false
     }
 
     Tinsert @timers, timer

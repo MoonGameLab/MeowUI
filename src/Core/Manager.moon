@@ -22,7 +22,7 @@ dispatch = (control, name, ...) ->
 -- @local
 debug = (hitControl) ->
   if hitControl and hitControl._d
-    DEBUG\watch hitControl
+    DEBUG\watch hitControl -- TODO: change it to use focusedControl
     return nil
   else
     DEBUG\watch hitControl
@@ -65,8 +65,10 @@ class Manager extends Singleton
     if not @rootControl then return
 
     hitControl = @rootControl\hitTest x, y
+    MeowUI.focusedControl = hitControl
 
-    if MeowUI.debug then hitControl = debug hitControl
+    if MeowUI.debug
+      hitControl = debug hitControl
 
     if hitControl ~= @hoverControl
       if @hoverControl then dispatch @hoverControl, "UI_MOUSE_LEAVE"
@@ -99,6 +101,7 @@ class Manager extends Singleton
     if not @rootControl then return
 
     hitControl = @rootControl\hitTest x, y
+    MeowUI.focusedControl = hitControl
 
     if MeowUI.debug then hitControl = debug hitControl
 
@@ -119,6 +122,7 @@ class Manager extends Singleton
       if @rootControl
 
         hitControl = @rootControl\hitTest x, y
+        MeowUI.focusedControl = hitControl
 
         if MeowUI.debug then hitControl = debug hitControl
 
@@ -143,6 +147,7 @@ class Manager extends Singleton
   -- @tparam number y
   wheelmoved: (x, y) =>
     hitControl = @rootControl\hitTest Mouse\getX!, Mouse\getY!
+    MeowUI.focusedControl = hitControl
 
     if MeowUI.debug then hitControl = debug hitControl
 

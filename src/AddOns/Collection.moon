@@ -30,8 +30,7 @@ class Collection extends Singleton
 
     for k, v in pairs children
       if k and v
-        @collection[collName][k] = {}
-        @collection[collName][k] = v
+        rawset @collection[collName], k, v
         @collection[collName].size += 1
 
 
@@ -46,7 +45,7 @@ class Collection extends Singleton
   attachControlTo: (child, collName) =>
     if child and collName
       k, v = pairs(child)(child)
-      @collection[collName][k] = v
+      rawset @collection[collName], k, v
       @collection[collName].size += 1
       return true
     false
@@ -57,7 +56,7 @@ class Collection extends Singleton
   removeControlFrom: (child, collName) =>
     if child and collName
       k, _ = pairs(child)(child)
-      @collection[collName][k] = nil
+      rawset @collection[collName], k, nil
       @collection[collName].size -= 1
       return true
     false

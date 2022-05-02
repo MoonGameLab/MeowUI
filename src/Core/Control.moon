@@ -441,10 +441,10 @@ class Control
   -- adds a chrono to the control.
   -- @tparam number duration
   -- @tparam function onDone
-  addChrono: (duration, onDone) =>
+  addChrono: (duration, repeated, onDone) =>
     chrono = Chrono.getInstance!
     if not @chrono
-      @chrono = chrono\create duration, onDone
+      @chrono = chrono\create duration, repeated, onDone
 
   -- @local
   updateChildren: (dt) =>

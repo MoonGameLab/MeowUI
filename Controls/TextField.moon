@@ -31,6 +31,7 @@ class TextField extends Control
     style = t.textField
 
     @stroke = common.stroke
+    @unit = 25
     @fontSize = common.fontSize
     @iconAndTextSpace = common.iconAndTextSpace
     @downColor = colors.downColor
@@ -76,6 +77,14 @@ class TextField extends Control
     Graphics.setColor color
     w, h = floor(w - mc * 2), floor(h - mc * 2)
     Graphics.rectangle "fill", x + mc, y + mc, w, h, @trx, @try
+
+  _drawCursor: (x, y, displacement) =>
+    fl = math.floor
+    if @showCursor
+      if @ == MeowUI.focusedControl
+        @xCursor = x + @marginCorner + displacement
+        Graphics.line fl(@xCursor), fl(y + @marginCorner + @unit / 15)
+
 
   onDraw: =>
     box = @getBoundingBox!
