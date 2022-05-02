@@ -20,7 +20,7 @@ Style =
 
     common:
       stroke: 2
-      fontSize: 16
+      fontSize: 13
       iconAndTextSpace: 8
 
     button:

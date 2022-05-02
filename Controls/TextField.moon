@@ -1,6 +1,7 @@
 
 
 Graphics = love.graphics
+Window = love.window
 MeowUI   = MeowUI
 love     = love
 Control  = MeowUI.Control
@@ -13,7 +14,7 @@ class TextField extends Control
     if @letters == nil then return
     w = 0
     for i = 1, #@letters
-      w += @font\getWidth @letters[i].c
+      w += @font\getWidth rawget(@letters, i).c
     w
 
   new: (defaultText) =>
@@ -32,6 +33,7 @@ class TextField extends Control
 
     @stroke = common.stroke
     @unit = 25
+    @marginText = @unit / 5
     @fontSize = common.fontSize
     @iconAndTextSpace = common.iconAndTextSpace
     @downColor = colors.downColor
@@ -42,18 +44,21 @@ class TextField extends Control
     @fontColor = colors.fontColor
     @strokeColor = colors.strokeColor
 
-    @font = Graphics.newFont @fontSize
+    @font = Graphics.newFont Window.toPixels(@fontSize)
     @rx = style.rx
     @ry = style.ry
     @trx, @try = @rx, @ry
     @marginCorner = style.marginCorner
     @textAreaColor = style.textAreaColor
     @showCursor = true
+    @indexCursor = 0
     @addChrono 0.4, true, -> @showCursor = not @showCursor
 
     -- alpha
 
-    @letters = nil
+    @letters = {
+      {c: "A"}
+    }
 
     @setEnabled true
 
@@ -89,6 +94,16 @@ class TextField extends Control
         @xCursor = x + @marginCorner + displacement
         Graphics.line fl(@xCursor), fl(y + @marginCorner + @unit / 15)
 
+  _pushText: (x, y, text, boxW) =>
+    r, g, b, a = Graphics.getColor!
+    if @_lettersWidth! <= boxW - @marginText * 4
+      rawset @letters, @indexCursor + 1, {
+        c: text
+        w: @font\getWidth(text)
+        h: @font\getHeight!
+      }
+      @indexCursor += 1
+    Graphics.setColor r, g, b, a
 
   onDraw: =>
     box = @getBoundingBox!
