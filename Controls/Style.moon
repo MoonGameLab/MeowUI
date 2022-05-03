@@ -34,6 +34,7 @@ Style =
       ry: 5
       marginCorner: 18
       textAreaColor: { 0.0392156862745, 0.0392156862745, 0.0392156862745 }
+      textColor: { 1, 1, 1 }
 
     scrollBar:
       width: 13

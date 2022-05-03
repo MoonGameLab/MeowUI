@@ -50,15 +50,14 @@ class TextField extends Control
     @trx, @try = @rx, @ry
     @marginCorner = style.marginCorner
     @textAreaColor = style.textAreaColor
+    @textColor = style.textColor
     @showCursor = true
     @indexCursor = 0
-    @addChrono 0.4, true, -> @showCursor = not @showCursor
+    @addChrono 1.4, true, -> @showCursor = not @showCursor
 
     -- alpha
 
-    @letters = {
-      {c: "A"}
-    }
+    @letters = {}
 
     @setEnabled true
 
@@ -87,12 +86,13 @@ class TextField extends Control
     w, h = floor(w - mc * 2), floor(h - mc * 2)
     Graphics.rectangle "fill", x + mc, y + mc, w, h, @trx, @try
 
-  _drawCursor: (x, y, displacement) =>
+  _drawCursor: (x, y, height, displacement, marginCorner) =>
     fl = math.floor
     if @showCursor
       if @ == MeowUI.focusedControl
-        @xCursor = x + @marginCorner + displacement
-        Graphics.line fl(@xCursor), fl(y + @marginCorner + @unit / 15)
+        @xCursor = x + marginCorner + displacement
+        Graphics.line fl(@xCursor), fl(y + marginCorner + @unit / 15), fl(@xCursor),
+          fl(y + height - marginCorner - @unit / 15)
 
   _pushText: (x, y, text, boxW) =>
     r, g, b, a = Graphics.getColor!
@@ -105,6 +105,30 @@ class TextField extends Control
       @indexCursor += 1
     Graphics.setColor r, g, b, a
 
+  _drawText: (x, y, height) =>
+    mf = math.floor
+    _marginCorner = height / 6
+
+    r, g, b, a = Graphics.getColor!
+    Graphics.setColor @textColor
+
+    charDisplacement = 0
+
+    for i = 1, #@letters
+      letter = @letters[i] -- object
+      xChar = x + _marginCorner + charDisplacement + @marginText
+      yChar = y + height/2 - @font\getHeight!/2
+
+      Graphics.print letter.c, mf(xChar), mf(yChar)
+
+      charDisplacement += letter.w
+      if i == @indexCursor then @_drawCursor x, y, height, charDisplacement + @marginText, _marginCorner
+
+    if @indexCursor == 0 then @_drawCursor x, y, height, @marginText, _marginCorner
+
+    Graphics.setColor r, g, b, a
+
+
   onDraw: =>
     box = @getBoundingBox!
     r, g, b, a = Graphics.getColor!
@@ -113,6 +137,7 @@ class TextField extends Control
 
     @_drawBackground x, y, boxW, boxH
     @_drawTextArea x, y, boxW, boxH
+    @_drawText x, y, boxH
 
     Graphics.setColor r, g, b, a
 
@@ -121,3 +146,7 @@ class TextField extends Control
   onMouseDown: =>
   onMouseUp: =>
   onTextInput: (text) =>
+    box = @getBoundingBox!
+    x, y = box\getX!, box\getY!
+    boxW = box\getWidth!
+    @_pushText x, y, text, boxW -- TODO: Needs a wrapper to support UTF-8.
