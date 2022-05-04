@@ -5,7 +5,7 @@ Window = love.window
 MeowUI   = MeowUI
 love     = love
 Control  = MeowUI.Control
-
+Input = MeowUI.manager.keyInput
 
 class TextField extends Control
 
@@ -16,6 +16,12 @@ class TextField extends Control
     for i = 1, #@letters
       w += @font\getWidth rawget(@letters, i).c
     w
+
+  _backspace: =>
+    if #@letters > 0
+      letter = table.remove @letters, @indexCursor
+      if letter
+        @indexCursor -= 1
 
   new: (defaultText) =>
     -- Bounding box type
@@ -51,9 +57,16 @@ class TextField extends Control
     @marginCorner = style.marginCorner
     @textAreaColor = style.textAreaColor
     @textColor = style.textColor
+    @allowBackspace = true
     @showCursor = true
     @indexCursor = 0
-    @addChrono 1.4, true, -> @showCursor = not @showCursor
+    @cursorChrono = @addChrono 1.4, true, -> @showCursor = not @showCursor
+
+    Input\bindArr {
+      backspace: "backspace"
+      w: "w"
+
+    }
 
     -- alpha
 
@@ -62,9 +75,10 @@ class TextField extends Control
     @setEnabled true
 
     @on "UI_DRAW", @onDraw, @
+    @on "UI_UPDATE", @onUpdate, @
+    @on "UI_KEY_DOWN", @onKeyDown, @
     @on "UI_MOUSE_ENTER", @onMouseEnter, @
     @on "UI_MOUSE_LEAVE", @onMouseLeave, @
-    @on "UI_MOUSE_DOWN", @onMouseDown, @
     @on "UI_MOUSE_UP", @onMouseUp, @
     @on "UI_TEXT_INPUT", @onTextInput, @
     @on "UI_TEXT_CHANGE", @onTextInput, @
@@ -89,7 +103,7 @@ class TextField extends Control
   _drawCursor: (x, y, height, displacement, marginCorner) =>
     fl = math.floor
     if @showCursor
-      if @ == MeowUI.focusedControl
+      if @ == MeowUI.clickedControl
         @xCursor = x + marginCorner + displacement
         Graphics.line fl(@xCursor), fl(y + marginCorner + @unit / 15), fl(@xCursor),
           fl(y + height - marginCorner - @unit / 15)
@@ -143,7 +157,14 @@ class TextField extends Control
 
   onMouseEnter: =>
   onMouseLeave: =>
-  onMouseDown: =>
+  onKeyDown: =>
+    if MeowUI.vsync == 0
+      if Input\pressed 'backspace' then  @_backspace!
+
+  onUpdate: (dt) =>
+    if MeowUI.vsync == 1 or MeowUI.vsync == -1
+      if Input\sequence 'backspace', math.ceil(dt), 'backspace' then @_backspace!
+
   onMouseUp: =>
   onTextInput: (text) =>
     box = @getBoundingBox!

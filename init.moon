@@ -9,12 +9,14 @@ path = ...
 cwd = path .. ".src."
 c_cwd = path .. ".Controls."
 root = path .. "."
+love = love
 
 export MeowUI = {
     debug: true
     keyInput: true -- If you are using keyInput functions else disable it. (Some example controls will used it, so if you want to use them keep it as is).
-    version: "v0.0.0.107"
+    version: "v0.0.0.116"
     stage: "alpha"
+    vsync: love.window.getVSync!
     author: "Tourahi Amine"
 }
 

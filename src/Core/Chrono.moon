@@ -17,8 +17,7 @@ tick = (owner, dt) =>
     if @repeated
       @time = 0
     else
-      if owner.chrono then owner.chrono = nil
-      return true
+      @isDone = true
   false
 
 
@@ -50,6 +49,7 @@ class Chrono extends Singleton
       time:     0
       duration: duration
       onDone:   onDone
+      isDone:   false
       tick:     tick
       repeated: repeated and true or false
     }
@@ -64,7 +64,7 @@ class Chrono extends Singleton
   update: (owner, dt) =>
     if @getTimersCount! == 0 then return
     for i = 1, @getTimersCount!, 1
-      if @timers[i]\tick owner, dt
+      if @timers[i] and @timers[i]\tick owner, dt
         @timers[i] = nil
 
 

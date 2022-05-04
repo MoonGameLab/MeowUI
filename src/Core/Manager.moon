@@ -49,6 +49,7 @@ class Manager extends Singleton
   -- @tparam number dt
   update: (dt) =>
     if @keyInput then @keyInput\update dt
+    if @focusControl then dispatch @focusControl, "UI_UPDATE", dt
     if @rootControl then @rootControl\update dt
 
   --- draws the manager.
@@ -65,7 +66,7 @@ class Manager extends Singleton
     if not @rootControl then return
 
     hitControl = @rootControl\hitTest x, y
-    MeowUI.focusedControl = hitControl
+    MeowUI.hoveredControl = hitControl
 
     if MeowUI.debug
       hitControl = debug hitControl
@@ -101,7 +102,7 @@ class Manager extends Singleton
     if not @rootControl then return
 
     hitControl = @rootControl\hitTest x, y
-    MeowUI.focusedControl = hitControl
+    MeowUI.clickedControl = hitControl
 
     if MeowUI.debug then hitControl = debug hitControl
 
@@ -122,7 +123,7 @@ class Manager extends Singleton
       if @rootControl
 
         hitControl = @rootControl\hitTest x, y
-        MeowUI.focusedControl = hitControl
+        MeowUI.releasedControl = hitControl
 
         if MeowUI.debug then hitControl = debug hitControl
 
@@ -147,7 +148,7 @@ class Manager extends Singleton
   -- @tparam number y
   wheelmoved: (x, y) =>
     hitControl = @rootControl\hitTest Mouse\getX!, Mouse\getY!
-    MeowUI.focusedControl = hitControl
+    MeowUI.wheeledControl = hitControl
 
     if MeowUI.debug then hitControl = debug hitControl
 

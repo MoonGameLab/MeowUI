@@ -45,7 +45,6 @@ class Control
     @requireConform = false
     @worldX = 0
     @worldY = 0
-    @chrono = nil
     @onTimerDone = nil
     @radius = 0
     @alwaysUpdate = true
@@ -443,8 +442,7 @@ class Control
   -- @tparam function onDone
   addChrono: (duration, repeated, onDone) =>
     chrono = Chrono.getInstance!
-    if not @chrono
-      @chrono = chrono\create duration, repeated, onDone
+    chrono\create duration, repeated, onDone
 
   -- @local
   updateChildren: (dt) =>
@@ -463,8 +461,7 @@ class Control
       if @alwaysUpdate == false then return
     Chrono.getInstance!\update self, dt
     @conform!
-    @events\dispatch @events\getEvent("UI_UPDATE"), dt
-    @updateChildren dt
+    -- @updateChildren dt -- Obsolete.
 
   --- sets alwaysUpdate (If false it will prevent the control from updating if visible is false).
   -- @tparam boolean bool

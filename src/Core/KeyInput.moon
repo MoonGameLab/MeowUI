@@ -1,5 +1,6 @@
 love = love
 MeowUI = MeowUI
+import keyboard from love
 import insert from table
 import remove from table
 import timer from love
@@ -96,7 +97,7 @@ class Input
   down: (action = nil, interval = nil, delay = nil) =>
     if action and interval and delay
       for _, key in ipairs @binds[action]
-        if @state[key] and not @prevState[key]
+        if @state[key] and @prevState[key] == nil
           @repeatState[key] = {
             pressedTime: timer.getTime!,
             delay: 0,
@@ -108,9 +109,9 @@ class Input
           return true
 
 
-    if action and interval and not delay
+    if action and interval and (delay == nil)
       for _, key in ipairs @binds[action]
-        if @state[key] and not @prevState[key]
+        if @state[key] and (@prevState[key] == nil)
           @repeatState[key] = {
             pressedTime: timer.getTime!,
             delay: 0,
@@ -120,6 +121,10 @@ class Input
           return true
         else if @state[key] and @prevState[key]
           return true
+
+    if action and (interval == nil) and (delay == nil)
+      for _, key in ipairs @binds[action]
+        if keyboard.isDown(key) then return true
 
   unbind: (key) =>
     for action, keys in pairs @binds
