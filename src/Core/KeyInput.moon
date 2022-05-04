@@ -20,6 +20,7 @@ class Input
     @repeatState = {}
     @sequences = {}
 
+
   bind: (key, action) =>
     if type(action) == 'function'
       @functions[key] = action

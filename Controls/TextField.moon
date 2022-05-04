@@ -60,7 +60,7 @@ class TextField extends Control
     @allowBackspace = true
     @showCursor = true
     @indexCursor = 0
-    @cursorChrono = @addChrono 1.4, true, -> @showCursor = not @showCursor
+    @cursorChrono = @addChrono 0.4, true, -> @showCursor = not @showCursor
 
     Input\bindArr {
       backspace: "backspace"
@@ -158,12 +158,10 @@ class TextField extends Control
   onMouseEnter: =>
   onMouseLeave: =>
   onKeyDown: =>
-    if MeowUI.vsync == 0
-      if Input\pressed 'backspace' then  @_backspace!
+    -- if Input\pressed 'backspace' then  @_backspace!
 
   onUpdate: (dt) =>
-    if MeowUI.vsync == 1 or MeowUI.vsync == -1
-      if Input\sequence 'backspace', math.ceil(dt), 'backspace' then @_backspace!
+    if Input\pressed 'backspace' then  @_backspace!
 
   onMouseUp: =>
   onTextInput: (text) =>

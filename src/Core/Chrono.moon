@@ -10,10 +10,10 @@ Utils     = assert require MeowUI.cwd .. "Core.Utils"
 Singleton = assert require MeowUI.cwd .. "Core.Singleton"
 
 -- @local
-tick = (owner, dt) =>
+tick = (dt) =>
   @time += (1 * dt)
   if @time >= @duration
-    @onDone(owner)
+    @onDone @
     if @repeated
       @time = 0
     else
@@ -61,10 +61,10 @@ class Chrono extends Singleton
   --- updates the active timers.
   -- @tparam table owner
   -- @tparam number dt
-  update: (owner, dt) =>
+  update: (dt) =>
     if @getTimersCount! == 0 then return
     for i = 1, @getTimersCount!, 1
-      if @timers[i] and @timers[i]\tick owner, dt
+      if @timers[i] and @timers[i]\tick dt
         @timers[i] = nil
 
 

@@ -12,6 +12,7 @@ DEBUG = assert require MeowUI.cwd .. "Core.Debug"
 KeyInput = assert require MeowUI.cwd .. "Core.KeyInput"
 Timer = love.timer
 Mouse = love.mouse
+Chrono     = assert require MeowUI.cwd .. "Core.Chrono"
 
 -- @local
 dispatch = (control, name, ...) ->
@@ -48,6 +49,7 @@ class Manager extends Singleton
   --- updates the manager.
   -- @tparam number dt
   update: (dt) =>
+    Chrono.getInstance!\update dt
     if @keyInput then @keyInput\update dt
     if @focusControl then dispatch @focusControl, "UI_UPDATE", dt
     if @rootControl then @rootControl\update dt

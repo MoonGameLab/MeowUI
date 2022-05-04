@@ -457,11 +457,7 @@ class Control
   --- updates the control.
   -- @tparam number dt
   update: (dt) =>
-    if @visible == false
-      if @alwaysUpdate == false then return
-    Chrono.getInstance!\update self, dt
     @conform!
-    -- @updateChildren dt -- Obsolete.
 
   --- sets alwaysUpdate (If false it will prevent the control from updating if visible is false).
   -- @tparam boolean bool
