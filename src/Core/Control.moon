@@ -47,7 +47,6 @@ class Control
     @worldY = 0
     @onTimerDone = nil
     @radius = 0
-    @alwaysUpdate = true
     @boundingBox = BBoxs[@boxType]!
     @clip = false
 
@@ -458,11 +457,6 @@ class Control
   -- @tparam number dt
   update: (dt) =>
     @conform!
-
-  --- sets alwaysUpdate (If false it will prevent the control from updating if visible is false).
-  -- @tparam boolean bool
-  setAlwaysUpdate: (bool) =>
-    @alwaysUpdate = bool
 
   --- sets visible.
   -- @tparam boolean bool

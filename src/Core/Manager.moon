@@ -52,7 +52,7 @@ class Manager extends Singleton
     Chrono.getInstance!\update dt
     if @keyInput then @keyInput\update dt
     if @focusControl then dispatch @focusControl, "UI_UPDATE", dt
-    if @rootControl then @rootControl\update dt
+    if @rootControl then dispatch @rootControl, "UI_UPDATE", dt
 
   --- draws the manager.
   draw: =>

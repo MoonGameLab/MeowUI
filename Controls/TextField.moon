@@ -62,6 +62,14 @@ class TextField extends Control
     @indexCursor = 0
     @cursorChrono = @addChrono 0.4, true, -> @showCursor = not @showCursor
 
+    -- DRAFT :: SHOULD BE SOMETHING LIKE THIS.
+    @keyChrono = @addChrono 0.3, true, ->
+      if @keyToRepeat and @keyToRepeat == 'backspace'
+        @_backspace!
+
+      if @keyToRepeat and love.keyboard.isDown(@keyToRepeat) == false
+        @keyToRepeat = nil
+
     Input\bindArr {
       backspace: "backspace"
       w: "w"
@@ -142,6 +150,8 @@ class TextField extends Control
 
     Graphics.setColor r, g, b, a
 
+  setKeyToRepeat: (k) =>
+    @keyToRepeat = k
 
   onDraw: =>
     box = @getBoundingBox!
@@ -157,11 +167,13 @@ class TextField extends Control
 
   onMouseEnter: =>
   onMouseLeave: =>
-  onKeyDown: =>
-    -- if Input\pressed 'backspace' then  @_backspace!
+
+  onKeyDown: (key) =>
+    @setKeyToRepeat key
+
 
   onUpdate: (dt) =>
-    if Input\pressed 'backspace' then  @_backspace!
+
 
   onMouseUp: =>
   onTextInput: (text) =>
