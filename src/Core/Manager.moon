@@ -9,7 +9,6 @@ love = love
 Root = assert require MeowUI.cwd .. "Core.Root"
 Singleton = assert require MeowUI.cwd .. "Core.Singleton"
 DEBUG = assert require MeowUI.cwd .. "Core.Debug"
-KeyInput = assert require MeowUI.cwd .. "Core.KeyInput"
 Timer = love.timer
 Mouse = love.mouse
 Chrono     = assert require MeowUI.cwd .. "Core.Chrono"
@@ -40,7 +39,6 @@ class Manager extends Singleton
     @holdControl = nil
     @lastClickControl = nil
     @lastClickTime = Timer.getTime!
-    @keyInput = (MeowUI.keyInput) and KeyInput! or nil
 
   --- getter for the root control.
   getRoot: =>
@@ -50,7 +48,6 @@ class Manager extends Singleton
   -- @tparam number dt
   update: (dt) =>
     Chrono.getInstance!\update dt
-    if @keyInput then @keyInput\update dt
     if @focusControl then dispatch @focusControl, "UI_UPDATE", dt
     if @rootControl then dispatch @rootControl, "UI_UPDATE", dt
 
@@ -164,14 +161,12 @@ class Manager extends Singleton
   -- @tparam scancode scancode
   -- @tparam boolean isrepeat
   keypressed: (key, scancode, isrepeat) =>
-    if @keyInput then @keyInput\keypressed key
     if key == "f1" then MeowUI.debug = not MeowUI.debug
     if @focusControl then dispatch @focusControl, "UI_KEY_DOWN", key, scancode, isrepeat
 
   --- callback function triggered when a keyboard key is released.
   -- @tparam KeyConstant key
   keyreleased: (key) =>
-    if @keyInput then @keyInput\keyreleased key
     if @focusControl then dispatch @focusControl, "UI_KEY_UP", key
 
   --- called when text has been entered by the user.

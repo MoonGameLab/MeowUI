@@ -1,11 +1,10 @@
-
-
 Graphics = love.graphics
 Window = love.window
 MeowUI   = MeowUI
 love     = love
 Control  = MeowUI.Control
-Input = MeowUI.manager.keyInput
+
+
 
 class TextField extends Control
 
@@ -62,19 +61,11 @@ class TextField extends Control
     @indexCursor = 0
     @cursorChrono = @addChrono 0.4, true, -> @showCursor = not @showCursor
 
-    -- DRAFT :: SHOULD BE SOMETHING LIKE THIS.
-    @keyChrono = @addChrono 0.3, true, ->
+    @keyChrono = @addChrono style.keyChronoRepeatTime, true, ->
       if @keyToRepeat and @keyToRepeat == 'backspace'
         @_backspace!
-
-      if @keyToRepeat and love.keyboard.isDown(@keyToRepeat) == false
         @keyToRepeat = nil
 
-    Input\bindArr {
-      backspace: "backspace"
-      w: "w"
-
-    }
 
     -- alpha
 
@@ -85,11 +76,11 @@ class TextField extends Control
     @on "UI_DRAW", @onDraw, @
     @on "UI_UPDATE", @onUpdate, @
     @on "UI_KEY_DOWN", @onKeyDown, @
+    @on "UI_KEY_UP", @onKeyUp, @
     @on "UI_MOUSE_ENTER", @onMouseEnter, @
     @on "UI_MOUSE_LEAVE", @onMouseLeave, @
     @on "UI_MOUSE_UP", @onMouseUp, @
     @on "UI_TEXT_INPUT", @onTextInput, @
-    @on "UI_TEXT_CHANGE", @onTextInput, @
 
   -- @local
   _drawBackground: (x, y, w, h) =>
@@ -151,6 +142,10 @@ class TextField extends Control
     Graphics.setColor r, g, b, a
 
   setKeyToRepeat: (k) =>
+    if k == @keyToRepeat
+      @keyToRepeat = nil
+      return
+
     @keyToRepeat = k
 
   onDraw: =>
@@ -166,16 +161,18 @@ class TextField extends Control
     Graphics.setColor r, g, b, a
 
   onMouseEnter: =>
+
   onMouseLeave: =>
 
   onKeyDown: (key) =>
     @setKeyToRepeat key
 
+  onKeyUp: (key) =>
 
   onUpdate: (dt) =>
 
-
   onMouseUp: =>
+
   onTextInput: (text) =>
     box = @getBoundingBox!
     x, y = box\getX!, box\getY!

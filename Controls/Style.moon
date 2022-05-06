@@ -35,6 +35,7 @@ Style =
       marginCorner: 18
       textAreaColor: { 0.0392156862745, 0.0392156862745, 0.0392156862745 }
       textColor: { 1, 1, 1 }
+      keyChronoRepeatTime: 0.01
 
     scrollBar:
       width: 13
