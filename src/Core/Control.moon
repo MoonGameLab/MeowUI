@@ -445,16 +445,13 @@ class Control
     chrono\create @, duration, repeated, alwaysUpdate, onDone
 
   -- @local
-  -- updateChildren: (dt) =>
-  --   for i = 1, #@children
-  --     if @children[i].alwaysUpdate then @children[i]\update dt
-
-  -- @local
   drawChildren: =>
     for i = 1, #@children
       @children[i]\draw!
 
-  --- updates the control.
+  --- updates the ROOT.
+  --- the root is the only ctrl that should be calling this method.
+  --- The Conform method will take care of the rest.
   -- @tparam number dt
   update: (dt) =>
     @conform!
@@ -542,8 +539,8 @@ class Control
 
   --- draws the control.
   draw: =>
-    @clipBegin!
     if @visible == false then return
+    @clipBegin!
     @events\dispatch @events\getEvent("UI_DRAW")
     @drawChildren!
     @clipEnd!

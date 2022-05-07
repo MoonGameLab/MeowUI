@@ -48,7 +48,7 @@ class Manager extends Singleton
   -- @tparam number dt
   update: (dt) =>
     Chrono.getInstance!\update dt
-    if @rootControl then dispatch @rootControl, "UI_UPDATE", dt
+    if @rootControl then @rootControl\update dt
     if @focusControl and @focusControl.updateWhenFocused
       dispatch @focusControl, "UI_UPDATE", dt
 

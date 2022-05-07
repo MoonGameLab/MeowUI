@@ -15,8 +15,6 @@ class Root extends Control
     super "Box", "rootControl"
     w, h = Graphics.getWidth!, Graphics.getHeight!
 
-    @on "UI_UPDATE", @update, @
-
 
     with @
       \setSize w, h

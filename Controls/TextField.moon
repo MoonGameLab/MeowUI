@@ -82,6 +82,7 @@ class TextField extends Control
     @on "UI_MOUSE_ENTER", @onMouseEnter, @
     @on "UI_MOUSE_LEAVE", @onMouseLeave, @
     @on "UI_MOUSE_UP", @onMouseUp, @
+    @on "UI_MOUSE_DOWN", @onMouseDown, @
     @on "UI_TEXT_INPUT", @onTextInput, @
 
   -- @local
@@ -166,6 +167,7 @@ class TextField extends Control
   onMouseLeave: =>
   onKeyUp: (key) =>
   onMouseUp: =>
+  onMouseDown: =>
 
   onKeyDown: (key) =>
     @setKeyToRepeat key
