@@ -38,7 +38,7 @@ class Chrono extends Singleton
   -- @tparam boolean repeated
   -- @tparam function onDone
   -- @treturn table
-  create: (duration, repeated, onDone) =>
+  create: (owner, duration, repeated, alwaysUpdate, onDone) =>
     assert type(duration) == 'number',
       "duration must be of type number."
     assert type(onDone) == 'function',
@@ -51,7 +51,9 @@ class Chrono extends Singleton
       onDone:   onDone
       isDone:   false
       tick:     tick
+      owner:    owner
       repeated: repeated and true or false
+      alwaysUpdate: alwaysUpdate
     }
 
     Tinsert @timers, timer
@@ -64,7 +66,8 @@ class Chrono extends Singleton
   update: (dt) =>
     if @getTimersCount! == 0 then return
     for i = 1, @getTimersCount!, 1
-      if @timers[i] and @timers[i]\tick dt
-        @timers[i] = nil
+      if @timers[i].alwaysUpdate or @timers[i].owner == MeowUI.clickedControl
+        if @timers[i] and @timers[i]\tick dt
+          @timers[i] = nil
 
 

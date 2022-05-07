@@ -46,6 +46,7 @@ class Control
     @worldX = 0
     @worldY = 0
     @onTimerDone = nil
+    @updateWhenFocused = true
     @radius = 0
     @boundingBox = BBoxs[@boxType]!
     @clip = false
@@ -439,14 +440,14 @@ class Control
   -- adds a chrono to the control.
   -- @tparam number duration
   -- @tparam function onDone
-  addChrono: (duration, repeated, onDone) =>
+  addChrono: (duration, repeated, alwaysUpdate, onDone) =>
     chrono = Chrono.getInstance!
-    chrono\create duration, repeated, onDone
+    chrono\create @, duration, repeated, alwaysUpdate, onDone
 
   -- @local
-  updateChildren: (dt) =>
-    for i = 1, #@children
-      @children[i]\update dt
+  -- updateChildren: (dt) =>
+  --   for i = 1, #@children
+  --     if @children[i].alwaysUpdate then @children[i]\update dt
 
   -- @local
   drawChildren: =>
@@ -546,6 +547,11 @@ class Control
     @events\dispatch @events\getEvent("UI_DRAW")
     @drawChildren!
     @clipEnd!
+
+  -- sets updateWhenFocused (if true the UI_UPDATE event will be triggred when the control is clicked.).
+  -- @tparam boolean bool
+  setUpdateWhenFocused: (updateWhenFocused) =>
+    @updateWhenFocused = updateWhenFocused
 
   --- list of functions to override when boundingbox is of type Box.
   -- @table boxOverrides

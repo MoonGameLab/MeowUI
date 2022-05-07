@@ -90,7 +90,11 @@ class Event
       "Target must be a table."
 
     if not @handlers[name] then @handlers[name] = {}
-    hdlr = {id: Utils.Uid!, callback: callback, target: target}
+    hdlr = {
+      id: Utils.Uid!
+      callback: callback
+      target: target
+    }
     Tinsert @handlers[name], hdlr
     hdlr
 

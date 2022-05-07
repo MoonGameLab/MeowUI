@@ -59,13 +59,16 @@ class TextField extends Control
     @allowBackspace = true
     @showCursor = true
     @indexCursor = 0
-    @cursorChrono = @addChrono 0.4, true, -> @showCursor = not @showCursor
 
-    @keyChrono = @addChrono style.keyChronoRepeatTime, true, ->
+    @cursorChrono = @addChrono 0.4, true, false, ->
+      @showCursor = not @showCursor
+
+    @keyChrono = @addChrono style.keyChronoRepeatTime, true, false, ->
       if @keyToRepeat and @keyToRepeat == 'backspace'
         @_backspace!
         @keyToRepeat = nil
 
+    @setUpdateWhenFocused false
 
     -- alpha
 
@@ -74,7 +77,6 @@ class TextField extends Control
     @setEnabled true
 
     @on "UI_DRAW", @onDraw, @
-    @on "UI_UPDATE", @onUpdate, @
     @on "UI_KEY_DOWN", @onKeyDown, @
     @on "UI_KEY_UP", @onKeyUp, @
     @on "UI_MOUSE_ENTER", @onMouseEnter, @
@@ -161,17 +163,12 @@ class TextField extends Control
     Graphics.setColor r, g, b, a
 
   onMouseEnter: =>
-
   onMouseLeave: =>
+  onKeyUp: (key) =>
+  onMouseUp: =>
 
   onKeyDown: (key) =>
     @setKeyToRepeat key
-
-  onKeyUp: (key) =>
-
-  onUpdate: (dt) =>
-
-  onMouseUp: =>
 
   onTextInput: (text) =>
     box = @getBoundingBox!
