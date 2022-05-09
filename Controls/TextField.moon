@@ -59,6 +59,7 @@ class TextField extends Control
     @allowBackspace = true
     @showCursor = true
     @indexCursor = 0
+    @overrideText = false
 
     @cursorChrono = @addChrono 0.4, true, false, ->
       @showCursor = not @showCursor
@@ -113,11 +114,18 @@ class TextField extends Control
   _pushText: (x, y, text, boxW) =>
     r, g, b, a = Graphics.getColor!
     if @_lettersWidth! <= boxW - @marginText * 4
-      rawset @letters, @indexCursor + 1, {
-        c: text
-        w: @font\getWidth(text)
-        h: @font\getHeight!
-      }
+      if @overrideText
+        rawset @letters, @indexCursor + 1, {
+          c: text
+          w: @font\getWidth(text)
+          h: @font\getHeight!
+        }
+      else
+        table.insert @letters, @indexCursor + 1, {
+          c: text
+          w: @font\getWidth(text)
+          h: @font\getHeight!
+        }
       @indexCursor += 1
     Graphics.setColor r, g, b, a
 
@@ -151,6 +159,10 @@ class TextField extends Control
 
     @keyToRepeat = k
 
+  cursorMove: (k) =>
+    if k == 'left' then if @indexCursor > 0 then @indexCursor -= 1
+    if k == 'right' then if @indexCursor < #@letters then @indexCursor += 1
+
   onDraw: =>
     box = @getBoundingBox!
     r, g, b, a = Graphics.getColor!
@@ -171,9 +183,10 @@ class TextField extends Control
 
   onKeyDown: (key) =>
     @setKeyToRepeat key
+    @cursorMove key
 
   onTextInput: (text) =>
     box = @getBoundingBox!
     x, y = box\getX!, box\getY!
     boxW = box\getWidth!
-    @_pushText x, y, text, boxW -- TODO: Needs a wrapper to support UTF-8.
+    @_pushText x, y, string.utf8sub(text, 1, 1), boxW
