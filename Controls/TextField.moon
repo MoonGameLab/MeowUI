@@ -152,6 +152,25 @@ class TextField extends Control
 
     Graphics.setColor r, g, b, a
 
+  _formStringFromLetters: =>
+    str = ""
+    for _, v in pairs @letters
+      str ..= v.c
+    str
+
+  _getCurrentTextSize: =>
+    if #@letters == 0 then return 0, 0
+    str = @_formStringFromLetters!
+    @font\getWidth(str), @font\getHeight(str)
+
+  _selectedRect: (x, y) =>
+    r, g, b, a = Graphics.getColor!
+    Graphics.setColor {0, 0.5, 1}
+    if #@letters > 0
+      width, height = @_getCurrentTextSize!
+      Graphics.rectangle "fill", x + @font\getWidth(@letters[1].c), y + @font\getHeight(@letters[1].c)/3, width, height
+    Graphics.setColor r, g, b, a
+
   setKeyToRepeat: (k) =>
     if k == @keyToRepeat
       @keyToRepeat = nil
@@ -171,6 +190,7 @@ class TextField extends Control
 
     @_drawBackground x, y, boxW, boxH
     @_drawTextArea x, y, boxW, boxH
+    @_selectedRect x, y
     @_drawText x, y, boxH
 
     Graphics.setColor r, g, b, a
