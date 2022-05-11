@@ -159,7 +159,9 @@ class TextField extends Control
     str
 
   _getCurrentTextSize: =>
+    print 'sizeCalc'
     if #@letters == 0 then return 0, 0
+    @oldSize = #@letters
     str = @_formStringFromLetters!
     @font\getWidth(str), @font\getHeight(str)
 
@@ -167,8 +169,9 @@ class TextField extends Control
     r, g, b, a = Graphics.getColor!
     Graphics.setColor {0, 0.5, 1}
     if #@letters > 0
-      width, height = @_getCurrentTextSize!
-      Graphics.rectangle "fill", x + @font\getWidth(@letters[1].c), y + @font\getHeight(@letters[1].c)/3, width, height
+      if @oldSize != #@letters
+        @selectedwidth, @selectedHeight = @_getCurrentTextSize!
+      Graphics.rectangle "fill", x + @font\getWidth(@letters[1].c), y + @font\getHeight(@letters[1].c)/3, @selectedwidth, @selectedHeight
     Graphics.setColor r, g, b, a
 
   setKeyToRepeat: (k) =>
