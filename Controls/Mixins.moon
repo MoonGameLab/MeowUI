@@ -1,4 +1,6 @@
 love = love
+Keyboard = love.keyboard
+
 
 ColorMixins = class
 
@@ -125,6 +127,9 @@ EventMixins = class
     @isPressed = false
 
 
+KeyboardMixins = class
+  isCtrlDown: =>
+    return Keyboard.isDown("lctrl") or Keyboard.isDown("rctrl")
 
 
-{ :ColorMixins, :EventMixins, :FontMixins }
+{ :ColorMixins, :EventMixins, :KeyboardMixins}

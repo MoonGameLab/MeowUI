@@ -3,18 +3,13 @@ Window = love.window
 MeowUI   = MeowUI
 love     = love
 Control  = MeowUI.Control
+Mixins   = assert require MeowUI.root .. "Controls.Mixins"
 
 
 
 class TextField extends Control
 
-  -- @local
-  _lettersWidth: =>
-    if @letters == nil then return
-    w = 0
-    for i = 1, #@letters
-      w += @font\getWidth rawget(@letters, i).c
-    w
+  @include Mixins.KeyboardMixins
 
   _backspace: =>
     @_popTextString!
@@ -58,6 +53,7 @@ class TextField extends Control
     @indexCursor = 0
     @overrideText = false
     @textString = ""
+    @selectAll = false
 
     @cursorChrono = @addChrono 0.4, true, false, ->
       @showCursor = not @showCursor
@@ -66,6 +62,7 @@ class TextField extends Control
       if @keyToRepeat and @keyToRepeat == 'backspace'
         @_backspace!
         @keyToRepeat = nil
+
 
     @setUpdateWhenFocused false
 
@@ -83,6 +80,10 @@ class TextField extends Control
     @on "UI_MOUSE_UP", @onMouseUp, @
     @on "UI_MOUSE_DOWN", @onMouseDown, @
     @on "UI_TEXT_INPUT", @onTextInput, @
+
+  -- @local
+  _clear: =>
+    @textString = ""
 
   -- @local
   _drawBackground: (x, y, w, h) =>
@@ -109,25 +110,6 @@ class TextField extends Control
         Graphics.line fl(@xCursor), fl(y + marginCorner + @unit / 15), fl(@xCursor),
           fl(y + height - marginCorner - @unit / 15)
 
-  _pushText: (x, y, text, boxW) =>
-    r, g, b, a = Graphics.getColor!
-    if @_lettersWidth! <= boxW - @marginText * 4
-      if @overrideText
-        rawset @letters, @indexCursor + 1, {
-          c: text
-          w: @font\getWidth(text)
-          h: @font\getHeight!
-        }
-      else
-        table.insert @letters, @indexCursor + 1, {
-          c: text
-          w: @font\getWidth(text)
-          h: @font\getHeight!
-        }
-      @indexCursor += 1
-    Graphics.setColor r, g, b, a
-
-
   _pushTextString: (text) =>
     if @font\getWidth(@textString) <= @getBoundingBox!\getWidth! - @marginText * 4
       firstHalf = string.utf8sub @textString, 1, @indexCursor
@@ -138,6 +120,11 @@ class TextField extends Control
       @textString = firstHalf .. text .. secondHalf
 
   _popTextString: () =>
+    if @selectAll
+      @_clear!
+      @indexCursor = 0
+      @selectAll = false
+      return
     if #@textString > 0 and @indexCursor > 0
       firstHalf = string.utf8sub @textString, 1, @indexCursor - 1
       secondHalf = string.utf8sub @textString, @indexCursor + 1
@@ -155,12 +142,12 @@ class TextField extends Control
 
     charDisplacement = 0
 
-    for i = 1, #@textString
-      letter = @textString\sub i, i
+    for i = 1, @textString\utf8len!
+      letter = @textString\utf8sub i, i
       xChar = x + _marginCorner + charDisplacement + @marginText
       yChar = y + height/2 - @font\getHeight!/2
 
-      Graphics.print letter, mf(xChar), mf(yChar)
+      Graphics.print letter, xChar, yChar
 
       charDisplacement += @font\getWidth(letter)
       if i == @indexCursor then @_drawCursor x, y, height, charDisplacement + @marginText, _marginCorner
@@ -169,26 +156,14 @@ class TextField extends Control
 
     Graphics.setColor r, g, b, a
 
-  _formStringFromLetters: =>
-    str = ""
-    for _, v in pairs @letters
-      str ..= v.c
-    str
-
-  _getCurrentTextSize: =>
-    -- print 'sizeCalc'
-    if #@letters == 0 then return 0, 0
-    @oldSize = #@letters
-    str = @_formStringFromLetters!
-    @font\getWidth(str), @font\getHeight(str)
-
   _selectedRect: (x, y) =>
     r, g, b, a = Graphics.getColor!
     Graphics.setColor {0, 0.5, 1}
-    if #@letters > 0
-      if @oldSize != #@letters
-        @selectedwidth, @selectedHeight = @_getCurrentTextSize!
-      Graphics.rectangle "fill", x + @font\getWidth(@letters[1].c), y + @font\getHeight(@letters[1].c)/3, @selectedwidth, @selectedHeight
+    if #@textString > 0
+      if @oldSize != #@textString
+        @selectedwidth, @selectedHeight = @font\getWidth(@textString), @font\getHeight!
+      Graphics.rectangle "fill", x + @selectedHeight / 1.7, y + (@selectedHeight / 3), @selectedwidth, @selectedHeight
+      @oldSize = #@textString
     Graphics.setColor r, g, b, a
 
   setKeyToRepeat: (k) =>
@@ -210,24 +185,24 @@ class TextField extends Control
 
     @_drawBackground x, y, boxW, boxH
     @_drawTextArea x, y, boxW, boxH
-    @_selectedRect x, y
+    if @selectAll then @_selectedRect x, y
     @_drawText x, y, boxH
 
     Graphics.setColor r, g, b, a
 
   onMouseEnter: =>
   onMouseLeave: =>
-  onKeyUp: (key) =>
   onMouseUp: =>
   onMouseDown: =>
+
+  onKeyUp: (key) =>
+    if @isCtrlDown!
+      if key == 'a' and #@textString > 0
+        @selectAll = not @selectAll
 
   onKeyDown: (key) =>
     @setKeyToRepeat key
     @cursorMove key
 
   onTextInput: (text) =>
-    -- box = @getBoundingBox!
-    -- x, y = box\getX!, box\getY!
-    -- boxW = box\getWidth!
     @_pushTextString text
-    --@_pushText x, y, string.utf8sub(text, 1, 1), boxW
