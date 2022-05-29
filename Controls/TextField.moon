@@ -6,6 +6,14 @@ Control  = MeowUI.Control
 Mixins   = assert require MeowUI.root .. "Controls.Mixins"
 
 
+-- @local
+stencileFuncRect = =>
+  box = @getBoundingBox!
+  x, y, w, h = box\getX!, box\getY!, box\getWidth!, box\getHeight!
+  floor = math.floor
+  mc = h / @marginCorner
+  w, h = floor(w - mc * 2), floor(h - mc * 2)
+  -> Graphics.rectangle "fill", x + mc, y + mc, w, h, @trx, @try
 
 class TextField extends Control
 
@@ -106,12 +114,12 @@ class TextField extends Control
     fl = math.floor
     if @showCursor
       if @ == MeowUI.clickedControl
-        @xCursor = x + marginCorner + displacement
+        @xCursor = x + displacement + (height / @marginCorner) + @marginCorner/3
         Graphics.line fl(@xCursor), fl(y + marginCorner + @unit / 15), fl(@xCursor),
           fl(y + height - marginCorner - @unit / 15)
 
   _pushTextString: (text) =>
-    if @font\getWidth(@textString) <= @getBoundingBox!\getWidth! - @marginText * 4
+    if @font\getWidth(@textString) <= @getBoundingBox!\getWidth! - @marginText * 4 - (@getBoundingBox!\getHeight! / @marginCorner) - (@getBoundingBox!\getHeight! / @marginCorner)
       firstHalf = string.utf8sub @textString, 1, @indexCursor
       secondHalf = string.utf8sub @textString, @indexCursor + 1
 
@@ -144,25 +152,28 @@ class TextField extends Control
 
     for i = 1, @textString\utf8len!
       letter = @textString\utf8sub i, i
-      xChar = x + _marginCorner + charDisplacement + @marginText
-      yChar = y + height/2 - @font\getHeight!/2
+      xChar = x + charDisplacement + (height / @marginCorner) + @marginCorner/3
+      yChar = y + (height/2 - @font\getHeight(@textString)/2)
 
-      Graphics.print letter, xChar, yChar
+      Graphics.print letter, @font, xChar, yChar
 
       charDisplacement += @font\getWidth(letter)
-      if i == @indexCursor then @_drawCursor x, y, height, charDisplacement + @marginText, _marginCorner
+      if i == @indexCursor then @_drawCursor x, y, height, charDisplacement, _marginCorner
 
     if @indexCursor == 0 then @_drawCursor x, y, height, @marginText, _marginCorner
 
     Graphics.setColor r, g, b, a
 
-  _selectedRect: (x, y) =>
+  _selectedRect: (x, y, height) =>
     r, g, b, a = Graphics.getColor!
     Graphics.setColor {0, 0.5, 1}
     if #@textString > 0
       if @oldSize != #@textString
         @selectedwidth, @selectedHeight = @font\getWidth(@textString), @font\getHeight!
-      Graphics.rectangle "fill", x + @selectedHeight / 1.7, y + (@selectedHeight / 3), @selectedwidth, @selectedHeight
+
+      xChar = x + (height / @marginCorner) + @marginCorner/3
+      yChar = y + (height/2 - @font\getHeight(@textString)/2)
+      Graphics.rectangle "fill", xChar, yChar, @selectedwidth, @selectedHeight
       @oldSize = #@textString
     Graphics.setColor r, g, b, a
 
@@ -184,9 +195,16 @@ class TextField extends Control
     x, y = box\getX!, box\getY!
 
     @_drawBackground x, y, boxW, boxH
+
+    sf = stencileFuncRect self
+    Graphics.stencil sf
+    Graphics.setStencilTest "greater", 0
+
     @_drawTextArea x, y, boxW, boxH
-    if @selectAll then @_selectedRect x, y
+    if @selectAll then @_selectedRect x, y, boxH
     @_drawText x, y, boxH
+
+    Graphics.setStencilTest!
 
     Graphics.setColor r, g, b, a
 
