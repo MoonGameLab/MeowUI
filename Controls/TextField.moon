@@ -17,10 +17,7 @@ class TextField extends Control
     w
 
   _backspace: =>
-    if #@letters > 0
-      letter = table.remove @letters, @indexCursor
-      if letter
-        @indexCursor -= 1
+    @_popTextString!
 
   new: (defaultText) =>
     -- Bounding box type
@@ -60,6 +57,7 @@ class TextField extends Control
     @showCursor = true
     @indexCursor = 0
     @overrideText = false
+    @textString = ""
 
     @cursorChrono = @addChrono 0.4, true, false, ->
       @showCursor = not @showCursor
@@ -129,6 +127,25 @@ class TextField extends Control
       @indexCursor += 1
     Graphics.setColor r, g, b, a
 
+
+  _pushTextString: (text) =>
+    if @font\getWidth(@textString) <= @getBoundingBox!\getWidth! - @marginText * 4
+      firstHalf = string.utf8sub @textString, 1, @indexCursor
+      secondHalf = string.utf8sub @textString, @indexCursor + 1
+
+      @indexCursor += 1
+
+      @textString = firstHalf .. text .. secondHalf
+
+  _popTextString: () =>
+    if #@textString > 0 and @indexCursor > 0
+      firstHalf = string.utf8sub @textString, 1, @indexCursor - 1
+      secondHalf = string.utf8sub @textString, @indexCursor + 1
+      @indexCursor -= 1
+      @textString = firstHalf .. secondHalf
+
+
+
   _drawText: (x, y, height) =>
     mf = math.floor
     _marginCorner = height / 6
@@ -138,14 +155,14 @@ class TextField extends Control
 
     charDisplacement = 0
 
-    for i = 1, #@letters
-      letter = @letters[i] -- object
+    for i = 1, #@textString
+      letter = @textString\sub i, i
       xChar = x + _marginCorner + charDisplacement + @marginText
       yChar = y + height/2 - @font\getHeight!/2
 
-      Graphics.print letter.c, mf(xChar), mf(yChar)
+      Graphics.print letter, mf(xChar), mf(yChar)
 
-      charDisplacement += letter.w
+      charDisplacement += @font\getWidth(letter)
       if i == @indexCursor then @_drawCursor x, y, height, charDisplacement + @marginText, _marginCorner
 
     if @indexCursor == 0 then @_drawCursor x, y, height, @marginText, _marginCorner
@@ -159,7 +176,7 @@ class TextField extends Control
     str
 
   _getCurrentTextSize: =>
-    print 'sizeCalc'
+    -- print 'sizeCalc'
     if #@letters == 0 then return 0, 0
     @oldSize = #@letters
     str = @_formStringFromLetters!
@@ -182,8 +199,8 @@ class TextField extends Control
     @keyToRepeat = k
 
   cursorMove: (k) =>
-    if k == 'left' then if @indexCursor > 0 then @indexCursor -= 1
-    if k == 'right' then if @indexCursor < #@letters then @indexCursor += 1
+    if k == 'left' then if @indexCursor >= 1 then @indexCursor -= 1
+    if k == 'right' then if @indexCursor < #@textString then @indexCursor += 1
 
   onDraw: =>
     box = @getBoundingBox!
@@ -209,7 +226,8 @@ class TextField extends Control
     @cursorMove key
 
   onTextInput: (text) =>
-    box = @getBoundingBox!
-    x, y = box\getX!, box\getY!
-    boxW = box\getWidth!
-    @_pushText x, y, string.utf8sub(text, 1, 1), boxW
+    -- box = @getBoundingBox!
+    -- x, y = box\getX!, box\getY!
+    -- boxW = box\getWidth!
+    @_pushTextString text
+    --@_pushText x, y, string.utf8sub(text, 1, 1), boxW
