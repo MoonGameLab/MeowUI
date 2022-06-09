@@ -62,6 +62,8 @@ class TextField extends Control
     @overrideText = false
     @textString = ""
     @selectAll = false
+    @overFlowEnabled = false
+    @overFlow = 0
 
     @cursorChrono = @addChrono 0.4, true, false, ->
       @showCursor = not @showCursor
@@ -119,13 +121,27 @@ class TextField extends Control
           fl(y + height - marginCorner - @unit / 15)
 
   _pushTextString: (text) =>
-    if @font\getWidth(@textString) <= @getBoundingBox!\getWidth! - @marginText * 4 - (@getBoundingBox!\getHeight! / @marginCorner) - (@getBoundingBox!\getHeight! / @marginCorner)
+    --if @font\getWidth(@textString) <= @getBoundingBox!\getWidth! - @marginText * 4 - (@getBoundingBox!\getHeight! / @marginCorner) - (@getBoundingBox!\getHeight! / @marginCorner)
+
+    if @overFlowEnabled
+      if @font\getWidth(@textString) >= @getBoundingBox!\getWidth! - @marginText * 4 - (@getBoundingBox!\getHeight! / @marginCorner) - (@getBoundingBox!\getHeight! / @marginCorner)
+        @overFlow -= @font\getWidth(@textString) / #@textString
+      else @overFlow = 0
+
       firstHalf = string.utf8sub @textString, 1, @indexCursor
       secondHalf = string.utf8sub @textString, @indexCursor + 1
 
       @indexCursor += 1
 
       @textString = firstHalf .. text .. secondHalf
+    else
+      if @font\getWidth(@textString) <= @getBoundingBox!\getWidth! - @marginText * 4 - (@getBoundingBox!\getHeight! / @marginCorner) - (@getBoundingBox!\getHeight! / @marginCorner)
+        firstHalf = string.utf8sub @textString, 1, @indexCursor
+        secondHalf = string.utf8sub @textString, @indexCursor + 1
+
+        @indexCursor += 1
+
+        @textString = firstHalf .. text .. secondHalf
 
   _popTextString: () =>
     if @selectAll
@@ -134,6 +150,9 @@ class TextField extends Control
       @selectAll = false
       return
     if #@textString > 0 and @indexCursor > 0
+      if @overFlowEnabled
+        if @font\getWidth(@textString) >= @getBoundingBox!\getWidth! - @marginText * 4 - (@getBoundingBox!\getHeight! / @marginCorner) - (@getBoundingBox!\getHeight! / @marginCorner)
+          @overFlow += @font\getWidth(@textString) / #@textString
       firstHalf = string.utf8sub @textString, 1, @indexCursor - 1
       secondHalf = string.utf8sub @textString, @indexCursor + 1
       @indexCursor -= 1
@@ -152,13 +171,13 @@ class TextField extends Control
 
     for i = 1, @textString\utf8len!
       letter = @textString\utf8sub i, i
-      xChar = x + charDisplacement + (height / @marginCorner) + @marginCorner/3
+      xChar = (x + @overFlow) + charDisplacement + (height / @marginCorner) + @marginCorner/3
       yChar = y + (height/2 - @font\getHeight(@textString)/2)
 
       Graphics.print letter, @font, xChar, yChar
 
       charDisplacement += @font\getWidth(letter)
-      if i == @indexCursor then @_drawCursor x, y, height, charDisplacement, _marginCorner
+      if i == @indexCursor then @_drawCursor (x + @overFlow), y, height, charDisplacement, _marginCorner
 
     if @indexCursor == 0 then @_drawCursor x, y, height, @marginText, _marginCorner
 
@@ -171,7 +190,7 @@ class TextField extends Control
       if @oldSize != #@textString
         @selectedwidth, @selectedHeight = @font\getWidth(@textString), @font\getHeight!
 
-      xChar = x + (height / @marginCorner) + @marginCorner/3
+      xChar = (x + @overFlow) + (height / @marginCorner) + @marginCorner/3
       yChar = y + (height/2 - @font\getHeight(@textString)/2)
       Graphics.rectangle "fill", xChar, yChar, @selectedwidth, @selectedHeight
       @oldSize = #@textString
@@ -224,3 +243,6 @@ class TextField extends Control
 
   onTextInput: (text) =>
     @_pushTextString text
+
+  enableOverFlow: (bool) =>
+    @overFlowEnabled = bool
