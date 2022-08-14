@@ -1,5 +1,6 @@
 love = love
 Keyboard = love.keyboard
+MeowUI   = MeowUI
 
 
 ColorMixins = class
@@ -132,4 +133,7 @@ KeyboardMixins = class
     return Keyboard.isDown("lctrl") or Keyboard.isDown("rctrl")
 
 
-{ :ColorMixins, :EventMixins, :KeyboardMixins}
+ThemeMixins = class
+  getTheme: => assert(require(MeowUI.root .. "Controls.Style"))[MeowUI.theme]
+
+{ :ColorMixins, :EventMixins, :KeyboardMixins, :ThemeMixins}

@@ -197,6 +197,7 @@ class Button extends Control
 
   @include Mixins.ColorMixins
   @include Mixins.EventMixins
+  @include Mixins.ThemeMixins
 
   --- constructor.
   -- @tparam string type Bounding box type[Box, Circle, Polygon]
@@ -205,7 +206,7 @@ class Button extends Control
     super type, "Button"
 
     -- colors
-    t = assert(require(MeowUI.root .. "Controls.Style"))[MeowUI.theme]
+    t = @getTheme!
     colors = t.colors
     common = t.common
     @stroke = common.stroke

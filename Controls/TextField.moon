@@ -161,7 +161,6 @@ class TextField extends Control
 
 
   _drawText: (x, y, height) =>
-    mf = math.floor
     _marginCorner = height / 6
 
     r, g, b, a = Graphics.getColor!
