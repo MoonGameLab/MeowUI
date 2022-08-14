@@ -179,7 +179,7 @@ class TextField extends Control
       charDisplacement += @font\getWidth(letter)
       if i == @indexCursor then @_drawCursor (x + @overFlow), y, height, charDisplacement, _marginCorner
 
-    if @indexCursor == 0 then @_drawCursor x, y, height, @marginText, _marginCorner
+    if @indexCursor == 0 then @_drawCursor x - 2.5, y, height, @marginText, _marginCorner
 
     Graphics.setColor r, g, b, a
 
