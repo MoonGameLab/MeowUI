@@ -16,11 +16,11 @@ Current focus:
     - ScrollBar : Done
     - Content : Done
     - TextField : Done
-    - Label : Todo
+    - Label : Done
     - CheckBox : Todo
     - ProgressBar : Todo
     - Sliders : Todo
-    - MessageBox : Todo
+    - MessageBox (Dialog): Todo
   - Tests
     - NEVER!! jk ASAP.
 
@@ -78,6 +78,7 @@ Current focus:
   assert require "MeowUI"
 
   Button = assert require "MeowUI.Controls.Button"
+  -- Button = assert require MeowUI.c_cwd .."Button" --new way
   Graphics = love.graphics
 
   with love
@@ -146,5 +147,5 @@ Current focus:
 ###### Status
 
 * Core : Done
-* Example Controls : To-Do
+* Example Controls : To-Do (Current)
 
