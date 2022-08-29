@@ -29,6 +29,14 @@ Style =
       rx: 10
       ry: 10
 
+    checkBox:
+      width: 25
+      height: 25
+      rx: 2
+      ry: 2
+      margin: 4
+
+
     textField:
       rx: 5
       ry: 5
