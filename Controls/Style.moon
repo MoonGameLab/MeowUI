@@ -28,6 +28,7 @@ Style =
       height: 50
       rx: 10
       ry: 10
+      borderLineStyle: "rough"
 
     checkBox:
       width: 25

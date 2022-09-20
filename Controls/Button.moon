@@ -23,7 +23,7 @@ circleBorder = (box) =>
   if @enabled and @stroke > 0
     oldLineWidth = Graphics.getLineWidth!
     Graphics.setLineWidth @stroke
-    Graphics.setLineStyle "rough" -- could be dynamic
+    Graphics.setLineStyle @borderLineStyle
     Graphics.setColor @strokeColor
     Graphics.circle "line", box.x, box.y, box\getRadius!
     Graphics.setLineWidth oldLineWidth
@@ -33,7 +33,7 @@ polyBorder = (box) =>
   if @enabled and @stroke > 0
     oldLineWidth = Graphics.getLineWidth!
     Graphics.setLineWidth @stroke
-    Graphics.setLineStyle "rough" -- could be dynamic
+    Graphics.setLineStyle @borderLineStyle
     Graphics.setColor @strokeColor
     Graphics.polygon "line", box\getVertices!
     Graphics.setLineWidth oldLineWidth
@@ -176,7 +176,7 @@ drawRect = =>
     if @enabled and @stroke > 0
       oldLineWidth = Graphics.getLineWidth!
       Graphics.setLineWidth @stroke
-      Graphics.setLineStyle "rough" -- could be dynamic
+      Graphics.setLineStyle @borderLineStyle
       Graphics.setColor @strokeColor
       Graphics.rectangle "line", box.x, box.y, boxW, boxH, @rx, @ry
       Graphics.setLineWidth oldLineWidth
@@ -209,6 +209,8 @@ class Button extends Control
     t = @getTheme!
     colors = t.colors
     common = t.common
+    
+    @borderLineStyle = t.button.borderLineStyle
     @stroke = common.stroke
     @fontSize = common.fontSize
     @iconAndTextSpace = common.iconAndTextSpace
@@ -309,6 +311,11 @@ class Button extends Control
   getFontSize: =>
     @textDrawable\getFont!\getWidth!, @textDrawable\getFont!\getHeight!
 
+  -- gets the borderLineStyle
+  -- @treturn string borderLineStyle
+  getBorderLineStyle: =>
+    @borderLineStyle
+
   --- sets button image
   -- @tparam string image (path)
   -- @tparam boolean conform (Give the Bbox the same size as the image).
@@ -360,3 +367,8 @@ class Button extends Control
   -- @tparam number depth
   setDepth: (depth) =>
     super depth
+
+  --- sets the borderLineStyle.
+  -- @tparam string(rough, smooth) borderLineStyle
+  setBorderLineStyle: (bl) =>
+    @borderLineStyle = bl
