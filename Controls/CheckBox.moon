@@ -8,6 +8,7 @@ love     = love
 Control  = MeowUI.Control
 Mixins   = assert require MeowUI.root .. "Controls.Mixins"
 
+import ceil from math
 
 
 drawRect = =>
@@ -28,8 +29,27 @@ drawRect = =>
   Graphics.setColor colorfr
   Graphics.rectangle "fill", box.x + @margin, box.y + @margin, boxW - @margin*2, boxH - @margin*2, @rx, @ry
 
-
   Graphics.setColor r, g, b, a
+
+drawCircle = =>
+  box = @getBoundingBox!
+  r, g, b, a = Graphics.getColor!
+  boxR = box\getRadius!
+
+  colorBk = @backColor
+  local colorfr
+
+  if @checked
+    colorfr = @pressedColor
+  else
+    colorfr = @frontColor
+  
+  Graphics.setColor colorBk
+  Graphics.circle 'fill', box.x, box.y, boxR, @segments
+  Graphics.setColor colorfr
+  Graphics.circle 'fill', box.x, box.y, ceil(boxR - @margin), @segments
+  Graphics.setColor r, g, b, a
+
 
 
 
@@ -52,6 +72,7 @@ class CheckBox extends Control
     @frontColor = colors.upColor
     @pressedColor = colors.strokeColor
     @disabledColor = colors.disabledColor
+    @strokeColor = colors.black
     @alpha = 1
     @checked = false
 
@@ -67,6 +88,13 @@ class CheckBox extends Control
         @height = style.height
         @rx = style.rx
         @ry = style.ry
+      when "Circle"
+        @onDraw = drawCircle
+        style = t.checkBox
+        @margin = style.margin
+        @radius  = style.radius
+        @segments  = style.segments
+        @dPadding = 15
 
 
     -- Events

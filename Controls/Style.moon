@@ -35,6 +35,8 @@ Style =
       rx: 2
       ry: 2
       margin: 4
+      radius: 20
+      segments: 300
 
 
     textField:
