@@ -38,6 +38,7 @@ Style =
       margin: 4
       radius: 20
       segments: 300
+      stroke: 3
 
 
     textField:

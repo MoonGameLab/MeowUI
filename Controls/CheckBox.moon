@@ -51,6 +51,35 @@ drawCircle = =>
   Graphics.setColor r, g, b, a
 
 
+-- @local
+polyBorder = (box) =>
+  oldLineWidth = Graphics.getLineWidth!
+  Graphics.setLineWidth @stroke
+  Graphics.setLineStyle "rough"
+  Graphics.setColor @strokeColor
+  Graphics.polygon "line", box\getVertices!
+  Graphics.setLineWidth oldLineWidth
+
+drawPoly = =>
+  box = @getBoundingBox!
+  r, g, b, a = Graphics.getColor!
+
+  colorBk = @backColor
+  local colorfr
+
+  if @checked
+    colorfr = @pressedColor
+  else
+    colorfr = @frontColor
+
+  Graphics.setColor colorfr
+  Graphics.polygon 'fill', box\getVertices!
+
+  -- border
+  polyBorder @, box
+  Graphics.setColor r, g, b, a
+
+
 
 
 class CheckBox extends Control
@@ -72,7 +101,7 @@ class CheckBox extends Control
     @frontColor = colors.upColor
     @pressedColor = colors.strokeColor
     @disabledColor = colors.disabledColor
-    @strokeColor = colors.black
+    @strokeColor = {0, 0, 0}
     @alpha = 1
     @checked = false
 
@@ -95,7 +124,12 @@ class CheckBox extends Control
         @radius  = style.radius
         @segments  = style.segments
         @dPadding = 15
-
+      when "Polygon"
+        @onDraw = drawPoly
+        style = t.checkBox
+        @radius  = style.radius
+        @stroke = t.checkBox.stroke
+        --@innerPoly = 
 
     -- Events
     @on "UI_DRAW", @onDraw, @
