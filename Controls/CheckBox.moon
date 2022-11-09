@@ -38,7 +38,11 @@ setChecked = (bool, rec = true) =>
     return
   if #@group > 0
     for _, elem in ipairs @group
-      elem.checked = not bool
+      if elem.checked
+        elem.checked = not bool
+      else
+        if @reverseGroup then elem.checked = not bool
+
   @checked = bool
 
 
@@ -74,7 +78,7 @@ drawPoly = =>
   box = @getBoundingBox!
   r, g, b, a = Graphics.getColor!
 
-  colorBk = @backColor
+  --colorBk = @backColor
   local colorfr
 
   if @checked
@@ -113,6 +117,7 @@ class CheckBox extends Control
     @disabledColor = colors.disabledColor
     @strokeColor = {0, 0, 0}
     @alpha = 1
+    @reverseGroup = false
     @checked = false
     @group = {}
 
@@ -162,8 +167,10 @@ class CheckBox extends Control
   linkTo: (cb) =>
     if #cb\getGroup! > 0
       for _, v in ipairs cb\getGroup!
-        insert @group, v
         v\addToGroup @
+      for _, v in ipairs cb\getGroup!
+        @addToGroup v
+      @addToGroup cb
       cb\addToGroup @
     else
       @addToGroup cb
@@ -189,6 +196,9 @@ class CheckBox extends Control
 
   setMargin: (m) =>
     @margin = m
+
+  setReverseGroup: (bool) =>
+    @reverseGroup = bool
 
 
 
