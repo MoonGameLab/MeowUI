@@ -234,12 +234,15 @@ class TextField extends Control
   onKeyUp: (key) =>
 
   onKeyDown: (key) =>
-    @setKeyToRepeat key
-    @cursorMove key
-
     if @isCtrlDown!
       if key == 'a' and #@textString > 0
         @selectAll = not @selectAll
+    elseif key != 'backspace'
+      @selectAll = false
+
+    @setKeyToRepeat key
+    @cursorMove key
+
 
   onTextInput: (text) =>
     @_pushTextString text
