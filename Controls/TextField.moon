@@ -232,13 +232,14 @@ class TextField extends Control
   onMouseDown: =>
 
   onKeyUp: (key) =>
-    if @isCtrlDown!
-      if key == 'a' and #@textString > 0
-        @selectAll = not @selectAll
 
   onKeyDown: (key) =>
     @setKeyToRepeat key
     @cursorMove key
+
+    if @isCtrlDown!
+      if key == 'a' and #@textString > 0
+        @selectAll = not @selectAll
 
   onTextInput: (text) =>
     @_pushTextString text

@@ -8,8 +8,9 @@ love     = love
 Control  = MeowUI.Control
 Mixins   = assert require MeowUI.root .. "Controls.Mixins"
 
-import ceil from math
 
+import ceil from math
+import insert from table
 
 drawRect = =>
   box = @getBoundingBox!
@@ -31,6 +32,16 @@ drawRect = =>
 
   Graphics.setColor r, g, b, a
 
+setChecked = (bool, rec = true) =>
+  if rec == false
+    @checked = bool
+    return
+  if #@group > 0
+    for _, elem in ipairs @group
+      elem.checked = not bool
+  @checked = bool
+
+
 drawCircle = =>
   box = @getBoundingBox!
   r, g, b, a = Graphics.getColor!
@@ -43,13 +54,12 @@ drawCircle = =>
     colorfr = @pressedColor
   else
     colorfr = @frontColor
-  
+
   Graphics.setColor colorBk
   Graphics.circle 'fill', box.x, box.y, boxR, @segments
   Graphics.setColor colorfr
   Graphics.circle 'fill', box.x, box.y, ceil(boxR - @margin), @segments
   Graphics.setColor r, g, b, a
-
 
 -- @local
 polyBorder = (box) =>
@@ -104,9 +114,13 @@ class CheckBox extends Control
     @strokeColor = {0, 0, 0}
     @alpha = 1
     @checked = false
+    @group = {}
+
+    @setChecked = setChecked
 
     @setEnabled true
 
+    @groupMember = false
 
     switch type
       when "Box"
@@ -129,7 +143,7 @@ class CheckBox extends Control
         style = t.checkBox
         @radius  = style.radius
         @stroke = t.checkBox.stroke
-        --@innerPoly = 
+        --@innerPoly =
 
     -- Events
     @on "UI_DRAW", @onDraw, @
@@ -143,7 +157,23 @@ class CheckBox extends Control
     if @Click
       @Click!
     @isPressed = true
-    @checked = not @checked
+    @setChecked not @checked
+
+  linkTo: (cb) =>
+    if #cb\getGroup! > 0
+      for _, v in ipairs cb\getGroup!
+        insert @group, v
+        v\addToGroup @
+      cb\addToGroup @
+    else
+      @addToGroup cb
+      cb\addToGroup @
+
+  addToGroup: (e) =>
+    insert @group, e
+
+  getGroup: =>
+    @group
 
   isChecked: =>
     @checked
@@ -160,6 +190,6 @@ class CheckBox extends Control
   setMargin: (m) =>
     @margin = m
 
-  setChecked: (bool) =>
-    @checked = bool
+
+
 
