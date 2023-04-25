@@ -30,4 +30,4 @@ MeowUI["manager"]      = assert require MeowUI.cwd .. "Core.Manager"
 MeowUI["Control"]      = assert require MeowUI.cwd .. "Core.Control"
 MeowUI["theme"]        = "dark-green-neon"
 
-assert require MeowUI.cwd .. "Core.Mutf8"
+assert require MeowUI.cwd .. "ThirdParty.utf8"
