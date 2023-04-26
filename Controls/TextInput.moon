@@ -1,6 +1,7 @@
 Graphics = love.graphics
 Window = love.window
 MeowUI   = MeowUI
+utf8 = utf8
 love     = love
 Control  = MeowUI.Control
 Mixins   = assert require MeowUI.root .. "Controls.Mixins"
@@ -35,6 +36,7 @@ class TextInput extends Control
 
 
   getText: =>
+    local text
     if @multiline
       for k, line in ipairs @lines
         text ..= line
@@ -46,7 +48,19 @@ class TextInput extends Control
     text
 
   setText: (text) =>
-    
+    text = tostring text
+    text = utf8.gsub text, string.char(9), @tabreplacement
+    text = utf8.gsub text, string.char(13), ""
+
+    if @multiline
+      return -- TODO
+    else
+      text = utf8.gsub text, string.char(92) .. string.char(110), ""
+      text = utf8.gsub text, string.char(10), ""
+      @lines = {text}
+      @line = 1
+      @indiNum = utf8.len text
+      
 
   onKeyDown: (key) =>
     timer = love.timer
@@ -69,9 +83,12 @@ class TextInput extends Control
         system.setClipboardText text
       elseif key == "x" and @allTextSelected and @editable
         text = @getText!
+        system = love.system
+        print text
         system.setClipboardText text
         -- TODO: OnCut callback
         -- TODO: clear Text
+        @setText ""
       elseif key == "v" and @editable
         @Paste!
       else
@@ -79,3 +96,7 @@ class TextInput extends Control
       
     else @processKey key, true
 
+  
+  -- DEBUG METHODS
+  getLines: =>
+    @lines

@@ -16,11 +16,11 @@ import keyboard from love
 keyboard.setKeyRepeat true
 
 export MeowUI = {
-    debug: true
-    keyInput: true -- If you are using keyInput functions else disable it. (Some example controls will used it, so if you want to use them keep it as is).
-    version: "v0.0.0.116"
-    stage: "alpha"
-    author: "Tourahi Amine"
+  debug: true
+  keyInput: true -- If you are using keyInput functions else disable it. (Some example controls will used it, so if you want to use them keep it as is).
+  version: "v0.0.0.116"
+  stage: "alpha"
+  author: "Tourahi Amine"
 }
 
 MeowUI["cwd"]          = cwd
@@ -29,5 +29,7 @@ MeowUI["root"]         = root
 MeowUI["manager"]      = assert require MeowUI.cwd .. "Core.Manager"
 MeowUI["Control"]      = assert require MeowUI.cwd .. "Core.Control"
 MeowUI["theme"]        = "dark-green-neon"
+MeowUI["useThirdParty-utf8"]        = true -- utf8.lua - https://github.com/Stepets/utf8.lua
 
-assert require MeowUI.cwd .. "ThirdParty.utf8"
+if MeowUI["useThirdParty-utf8"] 
+  export utf8 = assert require(MeowUI.cwd .. "ThirdParty.utf8")\init!
