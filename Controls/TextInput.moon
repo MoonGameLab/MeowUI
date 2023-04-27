@@ -25,14 +25,83 @@ class TextInput extends Control
     @allTextSelected = false
     @editable = true
     @tabreplacement = "        "
+    @indiNum = 0
+    @indincatortime = 0
+    @maskChar = '*'
+    @indicatorx = 0
+    @indicatory = 0
+
+    @textx = 0
+    @texty = 0
+
+    @font = love.graphics.newFont(12) -- TODO: use theme
 
     @setEnabled true
 
     -- Events
     @on "UI_KEY_DOWN", @onKeyDown, @
 
+  updateIndicator = =>
+    time = love.timer.getTime!
+
+    text = @lines[@line]
+
+    if @indincatortime < time
+      if @showIndicator then @showIndicator = false
+      else @showIndicator = true
+      @indincatortime += (time + 0.50)
+    
+    if @allTextSelected
+      @showIndicator = false -- we dont need to show the indicator if everything is selected
+    else
+      if @keyboardIsDown "up", "down", "left", "right" then @showIndicator = true
+    
+    width = 0
+
+    if @maske
+      width = @font\getWidth string.rep(@maskChar, @indiNum)
+    else
+      if @indiNum == 0
+        width = 0 -- Empty text box
+      elseif @indiNum >= utf8.len(text)
+        width = @font\getWidth text -- Indi is at the end of the text
+      else -- Indi is somewhere else in the text
+        width = @font\getWidth utf8.sub text, 1, @indiNum
+
+
+    if @multiline
+      return -- TODO: multiline
+    else
+      @indicatorx += @textx + width
+      @indicatory = texty
+
+
+    @
+
+
+  
+  moveIndicator: (num, exact = nil) =>
+    if exact == nil then @indiNum += num
+    else @indiNum = num
+    
+    if @indiNum > utf8.len(text)
+      @indiNum = utf8.len text
+    elseif @indicator < 0
+      @indiNum = 0
+
+    @showIndicator = true
+    -- Update indicator
+    @updateIndicator!
+    @
 
   processKey: (key, isText) =>
+
+    if @visible == false then return -- keep in mind the Contorl checks if visible only when drawing.
+    
+    if isText
+      if key == "left"
+        if @multiline == false
+          return
 
 
   getText: =>
@@ -92,7 +161,7 @@ class TextInput extends Control
       elseif key == "v" and @editable
         @Paste!
       else
-        @processKey key, false
+        @processKey key, true
       
     else @processKey key, true
 
