@@ -131,7 +131,7 @@ EventMixins = class
 KeyboardMixins = class
   isCtrlDown: =>
     if love._os == "OS X"
-      return Keyboard or Keyboard.isDown("rgui")
+      return Keyboard.isDown("lgui") or Keyboard.isDown("rgui")
     return Keyboard.isDown("lctrl") or Keyboard.isDown("rctrl")
 
   keyboardIsDown: (...) =>

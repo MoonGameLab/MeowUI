@@ -30,18 +30,29 @@ class TextInput extends Control
     @maskChar = '*'
     @indicatorx = 0
     @indicatory = 0
+    @visible = true
+
+    @offsetx = 0
+    @offsety = 0
+
+    @textoffsetx = 5
+    @textoffsety = 5
 
     @textx = 0
     @texty = 0
 
+    @width = 200
+
     @font = love.graphics.newFont(12) -- TODO: use theme
+
+    Dump "Lines : ", @lines 
 
     @setEnabled true
 
     -- Events
     @on "UI_KEY_DOWN", @onKeyDown, @
 
-  updateIndicator = =>
+  updateIndicator: =>
     time = love.timer.getTime!
 
     text = @lines[@line]
@@ -58,7 +69,7 @@ class TextInput extends Control
     
     width = 0
 
-    if @maske
+    if @masked
       width = @font\getWidth string.rep(@maskChar, @indiNum)
     else
       if @indiNum == 0
@@ -75,7 +86,8 @@ class TextInput extends Control
       @indicatorx += @textx + width
       @indicatory = texty
 
-
+    -- TODO: Might need to handle scrolling here ??
+    
     @
 
 
@@ -83,10 +95,12 @@ class TextInput extends Control
   moveIndicator: (num, exact = nil) =>
     if exact == nil then @indiNum += num
     else @indiNum = num
-    
+    text = @lines[@line]
+    --print "Text : ", utf8.len(text), @indiNum
+
     if @indiNum > utf8.len(text)
       @indiNum = utf8.len text
-    elseif @indicator < 0
+    elseif @indiNum < 0
       @indiNum = 0
 
     @showIndicator = true
@@ -98,11 +112,45 @@ class TextInput extends Control
 
     if @visible == false then return -- keep in mind the Contorl checks if visible only when drawing.
     
-    if isText
+    offsetx = @offsetx
+
+    if isText == false
       if key == "left"
         if @multiline == false
+          @moveIndicator -1
+          if @indicatorx <= @x and @indiNum ~= 0
+            currentLine = @lines[@line]
+            width = @font\getWidth utf8.sub(currentLine, @indiNum, @indiNum + 1)
+            @offsetx = offsetx - width
+          elseif @indiNum == 0 and offsetx ~= 0
+            @offsetx = 0
+        else
+          -- Todo Multiline
           return
 
+        if @allTextSelected
+          @line = 1
+          @indiNum = 0
+          @allTextSelected = false
+
+      elseif key == "right"
+        if @multiline == false
+          @moveIndicator 1
+          currentLine = @lines[@line]
+          if @indicatorx >= (@x + @width) and @indiNum ~= utf8.len(currentLine)
+            width = @font\getWidth utf8.sub(currentLine, @indiNum, @indiNum)
+            @offsetx = offsetx + width
+          elseif @indiNum == utf8.len(currentLine) and offsetx ~= ((@font\getWidth(currentLine)) - @width + 10) and @font\getWidth(currentLine) + @textoffsetx > @width
+            @offsetx = ((@font\getWidth(currentLine)) - @width + 10)
+        else
+          -- Todo Multiline
+          return
+          
+        if @allTextSelected
+          @line = #@lines
+          @indiNum = utf8.len @lines[@#lines]
+          @allTextSelected = false
+        
 
   getText: =>
     local text
@@ -145,7 +193,7 @@ class TextInput extends Control
         else
           @allTextSelected = true
       elseif key == "c" and @allTextSelected
-        print "COpy"
+        print "Copy"
         system = love.system
         text = @getText!
         -- TODO: OnCopy callback
@@ -161,9 +209,8 @@ class TextInput extends Control
       elseif key == "v" and @editable
         @Paste!
       else
-        @processKey key, true
-      
-    else @processKey key, true
+        @processKey key, false
+    else @processKey key, false
 
   
   -- DEBUG METHODS
