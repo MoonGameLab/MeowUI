@@ -41,6 +41,11 @@ class TextInput extends Control
     @textx = 0
     @texty = 0
 
+    @usable = {}
+    @unusable = {}
+
+    @textoffsetx = 5
+
     @width = 200
 
     @font = love.graphics.newFont(12) -- TODO: use theme
@@ -51,6 +56,7 @@ class TextInput extends Control
 
     -- Events
     @on "UI_KEY_DOWN", @onKeyDown, @
+    @on "UI_TEXT_INPUT", @onTextInput, @
 
   updateIndicator: =>
     time = love.timer.getTime!
@@ -108,6 +114,30 @@ class TextInput extends Control
     @updateIndicator!
     @
 
+
+  removeFromTxt: (pos) =>
+    curLine = @lines[@line]
+    text = curLine
+    p1 = utf8.sub text, 1, pos - 1
+    removedTxt =  utf8.sub text, pos, pos + 1
+    p2 = utf8.sub text, pos + 1
+    new = p1 .. p2
+    new, removedTxt
+
+  addIntoTxt: (txt, pos) =>
+    text = @lines[@line]
+    p1 = utf8.sub text, 1, pos
+    p2 = utf8.sub text, pos + 1
+    new = p1 .. txt .. p2
+    new
+
+  clear: =>
+    @lines = {""}
+    @line = 1
+    @offsetx = 0
+    @offsety = 0
+    @indiNum = 0
+    
   processKey: (key, isText) =>
 
     if @visible == false then return -- keep in mind the Contorl checks if visible only when drawing.
@@ -148,8 +178,105 @@ class TextInput extends Control
           
         if @allTextSelected
           @line = #@lines
-          @indiNum = utf8.len @lines[@#lines]
+          @indiNum = utf8.len @lines[#@lines]
           @allTextSelected = false
+
+      if @editable == false then return
+
+      if key == "backspace"
+        if @allTextSelected
+          @clear!
+          @allTextSelected = false
+        else
+          removedTxt = ''
+          text = @lines[@line]
+          if text ~= "" and @indiNum ~= 0
+            text, removedTxt = @removeFromTxt @indiNum
+            @moveIndicator -1
+            @lines[@line] = text
+
+          -- TODO Multiline
+
+          cwidth = 0
+          if @masked
+            cwidth = @font\getWidth utf8.gsub(removedTxt, ".", maskChar)
+          else
+            cwidth = @font\getWidth removedTxt
+
+          if @offsetx > 0
+            @offsetx -= cwidth
+          elseif @offsetx < 0
+            @offsetx = 0
+
+      if key == "delete"
+        if editable == false then return
+        if @allTextSelected
+          @clear!
+          @allTextSelected = false
+
+      if key == "tab"
+        if @allTextSelected then return
+        @lines[@line] = @addIntoTxt @tabreplacement, @indiNum
+        @moveIndicator utf8.len(@tabreplacement)
+
+    else
+      if @editable == false then return
+      text = @lines[@line]
+      
+      if utf8.len(text) >= @limit and @limit ~= 0 and @allTextSelected == false
+        return
+
+      if #@usable > 0
+        found = false
+        for k, v in ipairs @usable
+          if v == key then found = true
+
+        if found then return
+      
+      if #@unusable > 0
+        found = false
+        for k, v in ipairs @unusable
+          if v == key then found = true
+
+        if found then return
+
+      if @allTextSelected
+        @allTextSelected = false
+        @clear!
+        text = ""
+
+      if @indiNum ~= 0 and @indiNum ~= utf8.len text
+        text = @addIntoTxt key, @indiNum
+        @lines[@line] = text
+        @moveIndicator 1
+      elseif @indiNum == utf8.len text
+        text ..= key
+        @lines[@line] = text
+        @moveIndicator 1
+      elseif @indiNum == 0
+        text = @addIntoTxt key, @indiNum
+        @lines[@line] = text
+        @moveIndicator 1
+
+      text = @lines[@line]
+
+      if @multiline == false
+        twidth = 0
+        cwidth = 0
+        
+        if @masked
+          twidth = @font\getWidth utf8.gsub(text, ".", maskChar)
+          cwidth = @font\getWidth utf8.gsub(key, ".", maskChar)
+        else
+          twidth = @font\getWidth text
+          cwidth = @font\getWidth key
+
+        if (twidth + @textoffsetx) >= (@width - 1)
+          @offsetx += cwidth
+      
+      
+
+
         
 
   getText: =>
@@ -211,6 +338,10 @@ class TextInput extends Control
       else
         @processKey key, false
     else @processKey key, false
+
+  
+  onTextInput: (text) =>
+    @processKey text, true
 
   
   -- DEBUG METHODS
