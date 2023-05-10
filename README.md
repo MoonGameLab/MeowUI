@@ -6,7 +6,6 @@ Please make sure to clone the master branch. Other branches are ideas that if su
 
 Minimalist and light-weight library based on catui https://github.com/wilhantian/catui.
 
-You can find the demo here : https://github.com/Tourahi/MeowUI-Demo
 
 Current focus:
   - Core
@@ -17,12 +16,12 @@ Current focus:
     - Content : Done
     - TextField : Done
     - Label : Done
-    - CheckBox : Todo
+    - CheckBox : Done
     - ProgressBar : Todo
     - Sliders : Todo
     - MessageBox (Dialog): Todo
   - Tests
-    - NEVER!! jk ASAP.
+    - https://github.com/Tourahi/MeowUI-Demo
 
 ## How to make a control ?
 
