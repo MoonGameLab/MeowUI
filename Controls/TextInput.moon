@@ -5,7 +5,11 @@ utf8 = utf8
 love     = love
 Control  = MeowUI.Control
 Mixins   = assert require MeowUI.root .. "Controls.Mixins"
+colors   = assert require MeowUI.root .. "src.AddOns.Colors"
 
+
+stencilFunc = =>
+  -> Graphics.rectangle "fill", @x, @y, @width, @height
 
 class TextInput extends Control
 
@@ -46,7 +50,8 @@ class TextInput extends Control
 
     @textoffsetx = 5
 
-    @width = 200
+    @width = 150
+    @height = 25
 
     @font = love.graphics.newFont(12) -- TODO: use theme
 
@@ -57,8 +62,9 @@ class TextInput extends Control
     -- Events
     @on "UI_KEY_DOWN", @onKeyDown, @
     @on "UI_TEXT_INPUT", @onTextInput, @
+    @on "UI_DRAW", @draw, @
 
-  updateIndicator: =>
+  indicatorBlink: =>
     time = love.timer.getTime!
 
     text = @lines[@line]
@@ -66,8 +72,11 @@ class TextInput extends Control
     if @indincatortime < time
       if @showIndicator then @showIndicator = false
       else @showIndicator = true
-      @indincatortime += (time + 0.50)
-    
+      @indincatortime = (time + 0.50)
+
+  updateIndicator: =>
+    text = @lines[@line]
+
     if @allTextSelected
       @showIndicator = false -- we dont need to show the indicator if everything is selected
     else
@@ -89,12 +98,12 @@ class TextInput extends Control
     if @multiline
       return -- TODO: multiline
     else
-      @indicatorx += @textx + width
-      @indicatory = texty
+      box = @getBoundingBox!
+      @indicatorx = box.x + @textx + width
+      @indicatory = box.y + @texty
 
     -- TODO: Might need to handle scrolling here ??
     
-    @
 
 
   
@@ -112,7 +121,6 @@ class TextInput extends Control
     @showIndicator = true
     -- Update indicator
     @updateIndicator!
-    @
 
 
   removeFromTxt: (pos) =>
@@ -306,6 +314,13 @@ class TextInput extends Control
       @indiNum = utf8.len text
       
 
+  positionText: =>
+    if @multiline
+      return
+    else
+      @textx = (@x - @offsetx) + @textoffsetx    
+      @texty = (@y - @offsety) + @textoffsety    
+
   onKeyDown: (key) =>
     timer = love.timer
     if @visible == false then return
@@ -342,6 +357,27 @@ class TextInput extends Control
   
   onTextInput: (text) =>
     @processKey text, true
+
+
+  draw: =>
+    Graphics.stencil stencilFunc @
+    Graphics.setStencilTest "greater", 0
+
+    @updateIndicator!
+    @indicatorBlink!
+    r, g, b, a = Graphics.getColor!
+    Graphics.setColor colors.white
+    Graphics.rectangle "fill", @x, @y, @width, @height
+
+    if @showIndicator
+      r, g, b, a = Graphics.getColor!
+      Graphics.setColor colors.red
+      print @indicatorx, @indicatory
+      Graphics.rectangle "fill", @indicatorx + 2.5, @indicatory + 2.5, 1, @height - 5
+      Graphics.setColor r, g, b, a
+
+    Graphics.setColor r, g, b, a
+    Graphics.setStencilTest!
 
   
   -- DEBUG METHODS
