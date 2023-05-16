@@ -51,7 +51,7 @@ class TextInput extends Control
     @textoffsetx = 5
 
     @width = 150
-    @height = 25
+    @height = 50
 
     @font = love.graphics.newFont(12) -- TODO: use theme
 
@@ -92,7 +92,7 @@ class TextInput extends Control
       elseif @indiNum >= utf8.len(text)
         width = @font\getWidth text -- Indi is at the end of the text
       else -- Indi is somewhere else in the text
-        width = @font\getWidth utf8.sub text, 1, @indiNum
+        width = @font\getWidth utf8.sub(text, 1, @indiNum)
 
 
     if @multiline
@@ -100,13 +100,11 @@ class TextInput extends Control
     else
       box = @getBoundingBox!
       @indicatorx = @textx + width
-      @indicatory = @texty - @textoffsety
+      @indicatory = @texty
 
     -- TODO: Might need to handle scrolling here ??
     
 
-
-  
   moveIndicator: (num, exact = nil) =>
     if exact == nil then @indiNum += num
     else @indiNum = num
@@ -195,6 +193,7 @@ class TextInput extends Control
         if @allTextSelected
           @clear!
           @allTextSelected = false
+          @updateIndicator!
         else
           removedTxt = ''
           text = @lines[@line]
@@ -221,6 +220,7 @@ class TextInput extends Control
         if @allTextSelected
           @clear!
           @allTextSelected = false
+          @updateIndicator!
 
       if key == "tab"
         if @allTextSelected then return
@@ -282,11 +282,6 @@ class TextInput extends Control
         if (twidth + @textoffsetx) >= (@width - 1)
           @offsetx += cwidth
       
-      
-
-
-        
-
   getText: =>
     local text
     if @multiline
@@ -319,8 +314,8 @@ class TextInput extends Control
       return
     else
       box = @getBoundingBox!
-      @textx = box.x + @textoffsetx
-      @texty = box.y + @textoffsetx    
+      @textx = (box.x - @offsetx) + @textoffsetx
+      @texty = (box.y - @offsety) + @textoffsety   
 
   onKeyDown: (key) =>
     timer = love.timer
@@ -349,22 +344,22 @@ class TextInput extends Control
         -- TODO: OnCut callback
         -- TODO: clear Text
         @setText ""
+        @updateIndicator!
       elseif key == "v" and @editable
         @Paste!
       else
         @processKey key, false
     else @processKey key, false
-
   
   onTextInput: (text) =>
     @processKey text, true
 
 
   draw: =>
-    @positionText!
     Graphics.stencil stencilFunc @
     Graphics.setStencilTest "greater", 0
 
+    @positionText!
     @updateIndicator!
     @indicatorBlink!
     r, g, b, a = Graphics.getColor!
@@ -374,8 +369,7 @@ class TextInput extends Control
     if @showIndicator
       r, g, b, a = Graphics.getColor!
       Graphics.setColor colors.red
-      print @indicatorx, @indicatory
-      Graphics.rectangle "fill", @indicatorx, @indicatory + 2.5, 1, @height - 5
+      Graphics.rectangle "fill", @indicatorx, @indicatory - 2.5, 1, @height - 5
       Graphics.setColor r, g, b, a
 
     r, g, b, a = Graphics.getColor!
