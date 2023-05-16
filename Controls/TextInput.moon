@@ -99,8 +99,8 @@ class TextInput extends Control
       return -- TODO: multiline
     else
       box = @getBoundingBox!
-      @indicatorx = box.x + @textx + width
-      @indicatory = box.y + @texty
+      @indicatorx = @textx + width
+      @indicatory = @texty - @textoffsety
 
     -- TODO: Might need to handle scrolling here ??
     
@@ -318,8 +318,9 @@ class TextInput extends Control
     if @multiline
       return
     else
-      @textx = (@x - @offsetx) + @textoffsetx    
-      @texty = (@y - @offsety) + @textoffsety    
+      box = @getBoundingBox!
+      @textx = box.x + @textoffsetx
+      @texty = box.y + @textoffsetx    
 
   onKeyDown: (key) =>
     timer = love.timer
@@ -360,6 +361,7 @@ class TextInput extends Control
 
 
   draw: =>
+    @positionText!
     Graphics.stencil stencilFunc @
     Graphics.setStencilTest "greater", 0
 
@@ -373,8 +375,19 @@ class TextInput extends Control
       r, g, b, a = Graphics.getColor!
       Graphics.setColor colors.red
       print @indicatorx, @indicatory
-      Graphics.rectangle "fill", @indicatorx + 2.5, @indicatory + 2.5, 1, @height - 5
+      Graphics.rectangle "fill", @indicatorx, @indicatory + 2.5, 1, @height - 5
       Graphics.setColor r, g, b, a
+
+    r, g, b, a = Graphics.getColor!
+    font = Graphics.getFont!
+    Graphics.setFont @font
+    Graphics.setColor colors.black
+    str = @lines[1]
+    box = @getBoundingBox!
+    Graphics.print str, math.floor(@textx), math.floor(@texty)
+    Graphics.setColor r, g, b, a
+    Graphics.setFont font
+
 
     Graphics.setColor r, g, b, a
     Graphics.setStencilTest!
