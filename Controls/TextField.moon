@@ -74,6 +74,9 @@ class TextField extends Control
 
     @setUpdateWhenFocused false
 
+    -- Default size
+    @setSize 250, 25
+
     -- alpha
 
     @letters = {}

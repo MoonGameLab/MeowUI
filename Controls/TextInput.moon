@@ -18,6 +18,17 @@ class TextInput extends Control
   new: (placeHolder) =>
     super "Box", "TextInput"
 
+    -- TODO: should be a mixin
+    t = assert(require(MeowUI.root .. "Controls.Style"))[MeowUI.theme]
+    common = t.common
+    style = t.textField
+
+    @marginCorner = style.marginCorner
+    @textAreaColor = style.textAreaColor
+    @textColor = style.textColor
+    @rx = style.rx
+    @ry = style.ry
+
     @keyDown = "none"
     @limit = 0
     @line = 1
@@ -51,7 +62,7 @@ class TextInput extends Control
     @textoffsetx = 5
 
     @width = 150
-    @height = 50
+    @height = 25
 
     @font = love.graphics.newFont(12) -- TODO: use theme
 
@@ -366,9 +377,21 @@ class TextInput extends Control
     Graphics.setColor colors.white
     Graphics.rectangle "fill", @x, @y, @width, @height
 
+
+    if @allTextSelected
+      local w, h
+      h = @font\getHeight "a"
+      if @masked
+        w = @font\getWidth utf8.gsub(@lines[@line], ".", @maskChar)
+      else
+        w = @font\getWidth @lines[@line]
+      Graphics.setColor colors.lightskyblue
+      Graphics.rectangle "fill", @textx, @texty, w, h
+      Graphics.setColor colors.white
+
     if @showIndicator
       r, g, b, a = Graphics.getColor!
-      Graphics.setColor colors.red
+      Graphics.setColor colors.black
       Graphics.rectangle "fill", @indicatorx, @indicatory - 2.5, 1, @height - 5
       Graphics.setColor r, g, b, a
 
