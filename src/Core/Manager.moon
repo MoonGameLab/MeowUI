@@ -87,11 +87,15 @@ class Manager extends Singleton
   setFocuse: (control) =>
     if @focusControl == control then return
 
-    if @focusControl then dispatch @focusControl, "UI_UN_FOCUS"
+    if @focusControl
+      @focusControl\setFocuse false
+      dispatch @focusControl, "UI_UN_FOCUS"
 
     @focusControl = control
 
-    if @focusControl then dispatch @focusControl, "UI_FOCUS"
+    if @focusControl
+      @focusControl\setFocuse true
+      dispatch @focusControl, "UI_FOCUS"
 
   --- callback function triggered when a mouse button is pressed.
   -- @tparam number x

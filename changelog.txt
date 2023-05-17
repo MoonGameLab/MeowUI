@@ -1,4 +1,10 @@
 ================================================
+Version 11.4 - Alpha (May 17 - 2023)
+================================================
+[ADDED] focused property :bool true is control is focused
+[ADDED] isFocused return focused property :bool
+
+================================================
 Version 11.4 - Alpha (Apr 25 - 2023)
 ================================================
 [CHANGED] Utf8 going third-party (utf8.lua)

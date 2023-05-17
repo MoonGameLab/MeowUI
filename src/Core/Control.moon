@@ -47,6 +47,7 @@ class Control
     @worldY = 0
     @onTimerDone = nil
     @updateWhenFocused = true
+    @focused = false
     @radius = 0
     @boundingBox = BBoxs[@boxType]!
     @clip = false
@@ -545,10 +546,20 @@ class Control
     @drawChildren!
     @clipEnd!
 
-  -- sets updateWhenFocused (if true the UI_UPDATE event will be triggred when the control is clicked.).
+  --- sets updateWhenFocused (if true the UI_UPDATE event will be triggred when the control is clicked.).
   -- @tparam boolean bool
   setUpdateWhenFocused: (updateWhenFocused) =>
     @updateWhenFocused = updateWhenFocused
+
+  --- sets focused property
+  -- @tparam bool
+  setFocuse: (bool) =>
+    @focused = bool
+
+  --- return focused property 
+  -- @treturn boolean focused
+  isFocused: =>
+    @focused
 
   --- list of functions to override when boundingbox is of type Box.
   -- @table boxOverrides
