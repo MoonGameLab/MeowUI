@@ -69,11 +69,13 @@ class TextInput extends Control
     Dump "Lines : ", @lines 
 
     @setEnabled true
+    @setUpdateWhenFocused true
 
     -- Events
     @on "UI_KEY_DOWN", @onKeyDown, @
     @on "UI_TEXT_INPUT", @onTextInput, @
     @on "UI_DRAW", @draw, @
+    @on "UI_UPDATE", @update, @
 
   indicatorBlink: =>
     time = love.timer.getTime!
@@ -372,7 +374,6 @@ class TextInput extends Control
 
     @positionText!
     @updateIndicator!
-    @indicatorBlink!
     r, g, b, a = Graphics.getColor!
     Graphics.setColor colors.white
     Graphics.rectangle "fill", @x, @y, @width, @height
@@ -389,7 +390,7 @@ class TextInput extends Control
       Graphics.rectangle "fill", @textx, @texty, w, h
       Graphics.setColor colors.white
 
-    if @showIndicator
+    if @showIndicator and @isFocused!
       r, g, b, a = Graphics.getColor!
       Graphics.setColor colors.black
       Graphics.rectangle "fill", @indicatorx, @indicatory - 2.5, 1, @height - 5
@@ -410,6 +411,10 @@ class TextInput extends Control
     Graphics.setStencilTest!
 
   
+  update: (dt) =>
+    @indicatorBlink!
+
+
   -- DEBUG METHODS
   getLines: =>
     @lines

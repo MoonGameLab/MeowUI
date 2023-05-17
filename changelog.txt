@@ -1,7 +1,7 @@
 ================================================
 Version 11.4 - Alpha (May 17 - 2023)
 ================================================
-[ADDED] focused property :bool true is control is focused
+[ADDED] focused property :bool true if control is focused
 [ADDED] isFocused return focused property :bool
 
 ================================================
