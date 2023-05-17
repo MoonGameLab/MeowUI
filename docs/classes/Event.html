@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <title>MeowUI documentation</title>
-    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link rel="stylesheet" href="../ldoc_new.css" type="text/css" />
 </head>
 <body>
 
@@ -26,6 +26,7 @@
 <br/>
 <h1>MeowUI</h1>
 
+
 <ul>
   <li><a href="../index.html">Index</a></li>
 </ul>
@@ -39,6 +40,7 @@
 
 <h2>Classes</h2>
 <ul class="nowrap">
+  <li><a href="../classes/Collection.html">Collection</a></li>
   <li><a href="../classes/Box.html">Box</a></li>
   <li><a href="../classes/Chrono.html">Chrono</a></li>
   <li><a href="../classes/Circle.html">Circle</a></li>
@@ -53,8 +55,13 @@
 <h2>Modules</h2>
 <ul class="nowrap">
   <li><a href="../modules/Controls.Button.html">Controls.Button</a></li>
+  <li><a href="../modules/Controls.CheckBox.html">Controls.CheckBox</a></li>
+  <li><a href="../modules/Controls.Label.html">Controls.Label</a></li>
   <li><a href="../modules/MeowUI.html">MeowUI</a></li>
   <li><a href="../modules/Mutf8.html">Mutf8</a></li>
+  <li><a href="../modules/src.ThirdParty.utf8.primitives.dummy.html">src.ThirdParty.utf8.primitives.dummy</a></li>
+  <li><a href="../modules/src.ThirdParty.utf8.test.strict.html">src.ThirdParty.utf8.test.strict</a></li>
+  <li><a href="../modules/src.ThirdParty.utf8.test.test_pm.html">src.ThirdParty.utf8.test.test_pm</a></li>
 </ul>
 <h2>Topics</h2>
 <ul class="">
@@ -80,34 +87,34 @@
 <h2><a href="#Tables">Tables</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Event.eventsDef">Event.eventsDef</a></td>
+	<td class="name" nowrap><a href="#event.eventsDef">event.eventsDef</a></td>
 	<td class="summary">a table of event constants.</td>
 	</tr>
 </table>
 <h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Event\new">Event\new ()</a></td>
+	<td class="name" nowrap><a href="#event\new">event\new ()</a></td>
 	<td class="summary">constructor</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Event\getEvent">Event\getEvent (ename)</a></td>
+	<td class="name" nowrap><a href="#event\getEvent">event\getEvent (ename)</a></td>
 	<td class="summary">getter for an event from event constants table.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Event\drop">Event\drop ()</a></td>
+	<td class="name" nowrap><a href="#event\drop">event\drop ()</a></td>
 	<td class="summary">drops all the handlers of an event instance.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Event\on">Event\on (name, callback, target)</a></td>
+	<td class="name" nowrap><a href="#event\on">event\on (name, callback, target)</a></td>
 	<td class="summary">attaches a handler to an event.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Event\dispatch">Event\dispatch (name, ...)</a></td>
+	<td class="name" nowrap><a href="#event\dispatch">event\dispatch (name, ...)</a></td>
 	<td class="summary">runs the callback associated to an event name.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Event\remove">Event\remove (event, id)</a></td>
+	<td class="name" nowrap><a href="#event\remove">event\remove (event, id)</a></td>
 	<td class="summary">removes an event handler.</td>
 	</tr>
 </table>
@@ -120,8 +127,8 @@
 
     <dl class="function">
     <dt>
-    <a name = "Event.eventsDef"></a>
-    <strong>Event.eventsDef</strong>
+    <a name = "event.eventsDef"></a>
+    <strong>event.eventsDef</strong>
     </dt>
     <dd>
     a table of event constants.
@@ -251,8 +258,8 @@
 
     <dl class="function">
     <dt>
-    <a name = "Event\new"></a>
-    <strong>Event\new ()</strong>
+    <a name = "event\new"></a>
+    <strong>event\new ()</strong>
     </dt>
     <dd>
     constructor
@@ -265,8 +272,8 @@
 
 </dd>
     <dt>
-    <a name = "Event\getEvent"></a>
-    <strong>Event\getEvent (ename)</strong>
+    <a name = "event\getEvent"></a>
+    <strong>event\getEvent (ename)</strong>
     </dt>
     <dd>
     getter for an event from event constants table.
@@ -296,8 +303,8 @@
 
 </dd>
     <dt>
-    <a name = "Event\drop"></a>
-    <strong>Event\drop ()</strong>
+    <a name = "event\drop"></a>
+    <strong>event\drop ()</strong>
     </dt>
     <dd>
     drops all the handlers of an event instance.
@@ -310,8 +317,8 @@
 
 </dd>
     <dt>
-    <a name = "Event\on"></a>
-    <strong>Event\on (name, callback, target)</strong>
+    <a name = "event\on"></a>
+    <strong>event\on (name, callback, target)</strong>
     </dt>
     <dd>
     attaches a handler to an event.
@@ -351,8 +358,8 @@
 
 </dd>
     <dt>
-    <a name = "Event\dispatch"></a>
-    <strong>Event\dispatch (name, ...)</strong>
+    <a name = "event\dispatch"></a>
+    <strong>event\dispatch (name, ...)</strong>
     </dt>
     <dd>
     runs the callback associated to an event name.
@@ -386,8 +393,8 @@
 
 </dd>
     <dt>
-    <a name = "Event\remove"></a>
-    <strong>Event\remove (event, id)</strong>
+    <a name = "event\remove"></a>
+    <strong>event\remove (event, id)</strong>
     </dt>
     <dd>
     removes an event handler.
@@ -420,8 +427,8 @@
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2022-03-19 21:09:30 </i>
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-05-17 08:19:20 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

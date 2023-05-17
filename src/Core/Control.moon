@@ -547,12 +547,12 @@ class Control
     @clipEnd!
 
   --- sets updateWhenFocused (if true the UI_UPDATE event will be triggred when the control is clicked.).
-  -- @tparam boolean bool
+  -- @tparam boolean updateWhenFocused
   setUpdateWhenFocused: (updateWhenFocused) =>
     @updateWhenFocused = updateWhenFocused
 
   --- sets focused property
-  -- @tparam bool
+  -- @tparam bool bool
   setFocuse: (bool) =>
     @focused = bool
 

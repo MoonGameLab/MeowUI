@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>MeowUI documentation</title>
+    <link rel="stylesheet" href="../ldoc_new.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>MeowUI</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Methods">Methods</a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><strong>Collection</strong></li>
+  <li><a href="../classes/Box.html">Box</a></li>
+  <li><a href="../classes/Chrono.html">Chrono</a></li>
+  <li><a href="../classes/Circle.html">Circle</a></li>
+  <li><a href="../classes/Control.html">Control</a></li>
+  <li><a href="../classes/Debug.html">Debug</a></li>
+  <li><a href="../classes/Event.html">Event</a></li>
+  <li><a href="../classes/Manager.html">Manager</a></li>
+  <li><a href="../classes/Polygon.html">Polygon</a></li>
+  <li><a href="../classes/Root.html">Root</a></li>
+  <li><a href="../classes/Singleton.html">Singleton</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/Controls.Button.html">Controls.Button</a></li>
+  <li><a href="../modules/Controls.CheckBox.html">Controls.CheckBox</a></li>
+  <li><a href="../modules/Controls.Label.html">Controls.Label</a></li>
+  <li><a href="../modules/MeowUI.html">MeowUI</a></li>
+  <li><a href="../modules/Mutf8.html">Mutf8</a></li>
+  <li><a href="../modules/src.ThirdParty.utf8.primitives.dummy.html">src.ThirdParty.utf8.primitives.dummy</a></li>
+  <li><a href="../modules/src.ThirdParty.utf8.test.strict.html">src.ThirdParty.utf8.test.strict</a></li>
+  <li><a href="../modules/src.ThirdParty.utf8.test.test_pm.html">src.ThirdParty.utf8.test.test_pm</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>Collection</code></h1>
+<p>A Collection class (extends <a href="../classes/Singleton.html#">Singleton</a>)</p>
+<p>
+
+</p>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">c = Collection.getInstance!
+</pre>
+    </ul>
+
+
+<h2><a href="#Methods">Methods</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#collection\newCollection">collection\newCollection (collName, root, children)</a></td>
+	<td class="summary">Creates a new collection with an optional root and children{childName: child}</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#collection\getCollection">collection\getCollection (collName)</a></td>
+	<td class="summary">gets a collection.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#collection\attachControlTo">collection\attachControlTo (child, collName)</a></td>
+	<td class="summary">adds child to a collection.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#collection\removeControlFrom">collection\removeControlFrom (child, collName)</a></td>
+	<td class="summary">removes child to a collection.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#collection\forget">collection\forget (collName)</a></td>
+	<td class="summary">remove a collection.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Methods"></a>Methods</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "collection\newCollection"></a>
+    <strong>collection\newCollection (collName, root, children)</strong>
+    </dt>
+    <dd>
+    Creates a new collection with an optional root and children{childName: child}
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collName</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">root</span>
+            <span class="types"><a class="type" href="../classes/Control.html#">Control</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">children</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "collection\getCollection"></a>
+    <strong>collection\getCollection (collName)</strong>
+    </dt>
+    <dd>
+    gets a collection.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collName</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "collection\attachControlTo"></a>
+    <strong>collection\attachControlTo (child, collName)</strong>
+    </dt>
+    <dd>
+    adds child to a collection.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">child</span>
+            <span class="types"><a class="type" href="../classes/Control.html#">Control(table)</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">collName</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "collection\removeControlFrom"></a>
+    <strong>collection\removeControlFrom (child, collName)</strong>
+    </dt>
+    <dd>
+    removes child to a collection.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">child</span>
+            <span class="types"><a class="type" href="../classes/Control.html#">Control(table)</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">collName</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "collection\forget"></a>
+    <strong>collection\forget (collName)</strong>
+    </dt>
+    <dd>
+    remove a collection.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collName</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-05-17 08:19:20 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

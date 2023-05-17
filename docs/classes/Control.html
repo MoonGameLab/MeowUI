@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <title>MeowUI documentation</title>
-    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link rel="stylesheet" href="../ldoc_new.css" type="text/css" />
 </head>
 <body>
 
@@ -26,12 +26,14 @@
 <br/>
 <h1>MeowUI</h1>
 
+
 <ul>
   <li><a href="../index.html">Index</a></li>
 </ul>
 
 <h2>Contents</h2>
 <ul>
+<li><a href="#Functions">Functions</a></li>
 <li><a href="#Tables">Tables</a></li>
 <li><a href="#Methods">Methods</a></li>
 </ul>
@@ -39,6 +41,7 @@
 
 <h2>Classes</h2>
 <ul class="nowrap">
+  <li><a href="../classes/Collection.html">Collection</a></li>
   <li><a href="../classes/Box.html">Box</a></li>
   <li><a href="../classes/Chrono.html">Chrono</a></li>
   <li><a href="../classes/Circle.html">Circle</a></li>
@@ -53,8 +56,13 @@
 <h2>Modules</h2>
 <ul class="nowrap">
   <li><a href="../modules/Controls.Button.html">Controls.Button</a></li>
+  <li><a href="../modules/Controls.CheckBox.html">Controls.CheckBox</a></li>
+  <li><a href="../modules/Controls.Label.html">Controls.Label</a></li>
   <li><a href="../modules/MeowUI.html">MeowUI</a></li>
   <li><a href="../modules/Mutf8.html">Mutf8</a></li>
+  <li><a href="../modules/src.ThirdParty.utf8.primitives.dummy.html">src.ThirdParty.utf8.primitives.dummy</a></li>
+  <li><a href="../modules/src.ThirdParty.utf8.test.strict.html">src.ThirdParty.utf8.test.strict</a></li>
+  <li><a href="../modules/src.ThirdParty.utf8.test.test_pm.html">src.ThirdParty.utf8.test.test_pm</a></li>
 </ul>
 <h2>Topics</h2>
 <ul class="">
@@ -77,190 +85,205 @@
     </ul>
 
 
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#control.getMixinsClass">control.getMixinsClass (control)</a></td>
+	<td class="summary">get the class where mixins can be inserted.</td>
+	</tr>
+</table>
 <h2><a href="#Tables">Tables</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Control.boxOverrides">Control.boxOverrides</a></td>
+	<td class="name" nowrap><a href="#control.boxOverrides">control.boxOverrides</a></td>
 	<td class="summary">list of functions to override when boundingbox is of type Box.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control.circleOverrides">Control.circleOverrides</a></td>
+	<td class="name" nowrap><a href="#control.circleOverrides">control.circleOverrides</a></td>
 	<td class="summary">list of functions to override when boundingbox is of type Circle.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control.polyOverrides">Control.polyOverrides</a></td>
+	<td class="name" nowrap><a href="#control.polyOverrides">control.polyOverrides</a></td>
 	<td class="summary">list of functions to override when boundingbox is of type Polygon.</td>
 	</tr>
 </table>
 <h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Control\new">Control\new (boxT, __name)</a></td>
+	<td class="name" nowrap><a href="#control\new">control\new (boxT, __name)</a></td>
 	<td class="summary">constructor.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\getRoot">Control\getRoot ()</a></td>
+	<td class="name" nowrap><a href="#control\getRoot">control\getRoot ()</a></td>
 	<td class="summary">getter for the root control.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\getBoundingBox">Control\getBoundingBox ()</a></td>
+	<td class="name" nowrap><a href="#control\getBoundingBox">control\getBoundingBox ()</a></td>
 	<td class="summary">getter for the boundingbox.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\localToGlobal">Control\localToGlobal (x, y)</a></td>
+	<td class="name" nowrap><a href="#control\localToGlobal">control\localToGlobal (x, y)</a></td>
 	<td class="summary">converts a local position to window position.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\globalToLocal">Control\globalToLocal (x, y)</a></td>
+	<td class="name" nowrap><a href="#control\globalToLocal">control\globalToLocal (x, y)</a></td>
 	<td class="summary">converts a window position to local position.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\setParent">Control\setParent (p)</a></td>
+	<td class="name" nowrap><a href="#control\setParent">control\setParent (p)</a></td>
 	<td class="summary">setter for the content parent.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\getParent">Control\getParent ()</a></td>
+	<td class="name" nowrap><a href="#control\getParent">control\getParent ()</a></td>
 	<td class="summary">getter for the content parent.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\addChild">Control\addChild (child, depth)</a></td>
+	<td class="name" nowrap><a href="#control\addChild">control\addChild (child, depth)</a></td>
 	<td class="summary">attach a a child to the content entity.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\setAnchor">Control\setAnchor (x, y)</a></td>
+	<td class="name" nowrap><a href="#control\setAnchor">control\setAnchor (x, y)</a></td>
 	<td class="summary">setter for the content anchor.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\getAnchor">Control\getAnchor ()</a></td>
+	<td class="name" nowrap><a href="#control\getAnchor">control\getAnchor ()</a></td>
 	<td class="summary">getter for the content anchor.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\setAnchorX">Control\setAnchorX (x)</a></td>
+	<td class="name" nowrap><a href="#control\setAnchorX">control\setAnchorX (x)</a></td>
 	<td class="summary">setter for the content anchorX.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\getAnchorX">Control\getAnchorX ()</a></td>
+	<td class="name" nowrap><a href="#control\getAnchorX">control\getAnchorX ()</a></td>
 	<td class="summary">getter for the content anchorX.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\setAnchorY">Control\setAnchorY (y)</a></td>
+	<td class="name" nowrap><a href="#control\setAnchorY">control\setAnchorY (y)</a></td>
 	<td class="summary">setter for the content anchorY.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\getAnchorY">Control\getAnchorY ()</a></td>
+	<td class="name" nowrap><a href="#control\getAnchorY">control\getAnchorY ()</a></td>
 	<td class="summary">getter for the content anchorY.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\setPosition">Control\setPosition (x, y)</a></td>
+	<td class="name" nowrap><a href="#control\setPosition">control\setPosition (x, y)</a></td>
 	<td class="summary">setter for the content position.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\getPosition">Control\getPosition ()</a></td>
+	<td class="name" nowrap><a href="#control\getPosition">control\getPosition ()</a></td>
 	<td class="summary">getter for the content position.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\setX">Control\setX (x)</a></td>
+	<td class="name" nowrap><a href="#control\setX">control\setX (x)</a></td>
 	<td class="summary">setter for the content x position.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\getX">Control\getX ()</a></td>
+	<td class="name" nowrap><a href="#control\getX">control\getX ()</a></td>
 	<td class="summary">getter for the content x position.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\setY">Control\setY (y)</a></td>
+	<td class="name" nowrap><a href="#control\setY">control\setY (y)</a></td>
 	<td class="summary">setter for the content y position.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\getY">Control\getY ()</a></td>
+	<td class="name" nowrap><a href="#control\getY">control\getY ()</a></td>
 	<td class="summary">getter for the content y position.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\getSize">Control\getSize ()</a></td>
+	<td class="name" nowrap><a href="#control\getSize">control\getSize ()</a></td>
 	<td class="summary">getter for the control size.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\getWidth">Control\getWidth ()</a></td>
+	<td class="name" nowrap><a href="#control\getWidth">control\getWidth ()</a></td>
 	<td class="summary">getter for the control width.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\getHeight">Control\getHeight ()</a></td>
+	<td class="name" nowrap><a href="#control\getHeight">control\getHeight ()</a></td>
 	<td class="summary">getter for the control height.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\setWidth">Control\setWidth (w)</a></td>
+	<td class="name" nowrap><a href="#control\setWidth">control\setWidth (w)</a></td>
 	<td class="summary">setter for the content width.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\setHeight">Control\setHeight (h)</a></td>
+	<td class="name" nowrap><a href="#control\setHeight">control\setHeight (h)</a></td>
 	<td class="summary">setter for the content height.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\setSize">Control\setSize (width, height)</a></td>
+	<td class="name" nowrap><a href="#control\setSize">control\setSize (width, height)</a></td>
 	<td class="summary">setter for the control size.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\setEnabled">Control\setEnabled (enabled)</a></td>
+	<td class="name" nowrap><a href="#control\setEnabled">control\setEnabled (enabled)</a></td>
 	<td class="summary">setter for the control enabled property.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\isEnabled">Control\isEnabled ()</a></td>
+	<td class="name" nowrap><a href="#control\isEnabled">control\isEnabled ()</a></td>
 	<td class="summary">getter for the control enabled property.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\setChildrenEnabled">Control\setChildrenEnabled (enabled)</a></td>
+	<td class="name" nowrap><a href="#control\setChildrenEnabled">control\setChildrenEnabled (enabled)</a></td>
 	<td class="summary">setter for the control childrenEnabled property.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\isChildrenEnabled">Control\isChildrenEnabled ()</a></td>
+	<td class="name" nowrap><a href="#control\isChildrenEnabled">control\isChildrenEnabled ()</a></td>
 	<td class="summary">getter for the control childrenEnabled property.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\setDepth">Control\setDepth (depth)</a></td>
+	<td class="name" nowrap><a href="#control\setDepth">control\setDepth (depth)</a></td>
 	<td class="summary">setter for the control depth property.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\getDepth">Control\getDepth ()</a></td>
+	<td class="name" nowrap><a href="#control\getDepth">control\getDepth ()</a></td>
 	<td class="summary">getter for the control depth.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\removeChild">Control\removeChild (id)</a></td>
+	<td class="name" nowrap><a href="#control\removeChild">control\removeChild (id)</a></td>
 	<td class="summary">remove an attached child.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\dropChildren">Control\dropChildren ()</a></td>
+	<td class="name" nowrap><a href="#control\dropChildren">control\dropChildren ()</a></td>
 	<td class="summary">drops the control children.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\disableChildren">Control\disableChildren ()</a></td>
+	<td class="name" nowrap><a href="#control\disableChildren">control\disableChildren ()</a></td>
 	<td class="summary">disables the control children.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\enableChildren">Control\enableChildren ()</a></td>
+	<td class="name" nowrap><a href="#control\enableChildren">control\enableChildren ()</a></td>
 	<td class="summary">enables the control children.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\on">Control\on (event, callback, target)</a></td>
+	<td class="name" nowrap><a href="#control\on">control\on (event, callback, target)</a></td>
 	<td class="summary">attaches a handler to an event.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\update">Control\update (dt)</a></td>
-	<td class="summary">updates the control.</td>
+	<td class="name" nowrap><a href="#control\update">control\update (dt)</a></td>
+	<td class="summary">updates the ROOT.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\setAlwaysUpdate">Control\setAlwaysUpdate (bool)</a></td>
-	<td class="summary">sets alwaysUpdate (If false it will prevent the control from updating if visible is false).</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#Control\setVisible">Control\setVisible (bool)</a></td>
+	<td class="name" nowrap><a href="#control\setVisible">control\setVisible (bool)</a></td>
 	<td class="summary">sets visible.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\getVisible">Control\getVisible ()</a></td>
+	<td class="name" nowrap><a href="#control\getVisible">control\getVisible ()</a></td>
 	<td class="summary">getter for visible property.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Control\draw">Control\draw ()</a></td>
+	<td class="name" nowrap><a href="#control\draw">control\draw ()</a></td>
 	<td class="summary">draws the control.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#control\setUpdateWhenFocused">control\setUpdateWhenFocused (updateWhenFocused)</a></td>
+	<td class="summary">sets updateWhenFocused (if true the UI_UPDATE event will be triggred when the control is clicked.).</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#control\setFocuse">control\setFocuse (bool)</a></td>
+	<td class="summary">sets focused property</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#control\isFocused">control\isFocused ()</a></td>
+	<td class="summary">return focused property</td>
 	</tr>
 </table>
 
@@ -268,12 +291,44 @@
 <br/>
 
 
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "control.getMixinsClass"></a>
+    <strong>control.getMixinsClass (control)</strong>
+    </dt>
+    <dd>
+    get the class where mixins can be inserted.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">control</span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        {mixinTable, boolean(If mixin class was created)}
+    </ol>
+
+
+
+
+</dd>
+</dl>
     <h2 class="section-header "><a name="Tables"></a>Tables</h2>
 
     <dl class="function">
     <dt>
-    <a name = "Control.boxOverrides"></a>
-    <strong>Control.boxOverrides</strong>
+    <a name = "control.boxOverrides"></a>
+    <strong>control.boxOverrides</strong>
     </dt>
     <dd>
     list of functions to override when boundingbox is of type Box.
@@ -286,8 +341,8 @@
 
 </dd>
     <dt>
-    <a name = "Control.circleOverrides"></a>
-    <strong>Control.circleOverrides</strong>
+    <a name = "control.circleOverrides"></a>
+    <strong>control.circleOverrides</strong>
     </dt>
     <dd>
     list of functions to override when boundingbox is of type Circle.
@@ -300,8 +355,8 @@
 
 </dd>
     <dt>
-    <a name = "Control.polyOverrides"></a>
-    <strong>Control.polyOverrides</strong>
+    <a name = "control.polyOverrides"></a>
+    <strong>control.polyOverrides</strong>
     </dt>
     <dd>
     list of functions to override when boundingbox is of type Polygon.
@@ -318,8 +373,8 @@
 
     <dl class="function">
     <dt>
-    <a name = "Control\new"></a>
-    <strong>Control\new (boxT, __name)</strong>
+    <a name = "control\new"></a>
+    <strong>control\new (boxT, __name)</strong>
     </dt>
     <dd>
     constructor.
@@ -343,8 +398,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\getRoot"></a>
-    <strong>Control\getRoot ()</strong>
+    <a name = "control\getRoot"></a>
+    <strong>control\getRoot ()</strong>
     </dt>
     <dd>
     getter for the root control.
@@ -363,8 +418,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\getBoundingBox"></a>
-    <strong>Control\getBoundingBox ()</strong>
+    <a name = "control\getBoundingBox"></a>
+    <strong>control\getBoundingBox ()</strong>
     </dt>
     <dd>
     getter for the boundingbox.
@@ -383,8 +438,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\localToGlobal"></a>
-    <strong>Control\localToGlobal (x, y)</strong>
+    <a name = "control\localToGlobal"></a>
+    <strong>control\localToGlobal (x, y)</strong>
     </dt>
     <dd>
     converts a local position to window position.
@@ -418,8 +473,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\globalToLocal"></a>
-    <strong>Control\globalToLocal (x, y)</strong>
+    <a name = "control\globalToLocal"></a>
+    <strong>control\globalToLocal (x, y)</strong>
     </dt>
     <dd>
     converts a window position to local position.
@@ -453,8 +508,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\setParent"></a>
-    <strong>Control\setParent (p)</strong>
+    <a name = "control\setParent"></a>
+    <strong>control\setParent (p)</strong>
     </dt>
     <dd>
     setter for the content parent.
@@ -476,8 +531,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\getParent"></a>
-    <strong>Control\getParent ()</strong>
+    <a name = "control\getParent"></a>
+    <strong>control\getParent ()</strong>
     </dt>
     <dd>
     getter for the content parent.
@@ -496,8 +551,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\addChild"></a>
-    <strong>Control\addChild (child, depth)</strong>
+    <a name = "control\addChild"></a>
+    <strong>control\addChild (child, depth)</strong>
     </dt>
     <dd>
     attach a a child to the content entity.
@@ -525,8 +580,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\setAnchor"></a>
-    <strong>Control\setAnchor (x, y)</strong>
+    <a name = "control\setAnchor"></a>
+    <strong>control\setAnchor (x, y)</strong>
     </dt>
     <dd>
     setter for the content anchor.
@@ -554,8 +609,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\getAnchor"></a>
-    <strong>Control\getAnchor ()</strong>
+    <a name = "control\getAnchor"></a>
+    <strong>control\getAnchor ()</strong>
     </dt>
     <dd>
     getter for the content anchor.
@@ -574,8 +629,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\setAnchorX"></a>
-    <strong>Control\setAnchorX (x)</strong>
+    <a name = "control\setAnchorX"></a>
+    <strong>control\setAnchorX (x)</strong>
     </dt>
     <dd>
     setter for the content anchorX.
@@ -597,8 +652,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\getAnchorX"></a>
-    <strong>Control\getAnchorX ()</strong>
+    <a name = "control\getAnchorX"></a>
+    <strong>control\getAnchorX ()</strong>
     </dt>
     <dd>
     getter for the content anchorX.
@@ -617,8 +672,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\setAnchorY"></a>
-    <strong>Control\setAnchorY (y)</strong>
+    <a name = "control\setAnchorY"></a>
+    <strong>control\setAnchorY (y)</strong>
     </dt>
     <dd>
     setter for the content anchorY.
@@ -640,8 +695,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\getAnchorY"></a>
-    <strong>Control\getAnchorY ()</strong>
+    <a name = "control\getAnchorY"></a>
+    <strong>control\getAnchorY ()</strong>
     </dt>
     <dd>
     getter for the content anchorY.
@@ -660,8 +715,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\setPosition"></a>
-    <strong>Control\setPosition (x, y)</strong>
+    <a name = "control\setPosition"></a>
+    <strong>control\setPosition (x, y)</strong>
     </dt>
     <dd>
     setter for the content position.
@@ -689,8 +744,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\getPosition"></a>
-    <strong>Control\getPosition ()</strong>
+    <a name = "control\getPosition"></a>
+    <strong>control\getPosition ()</strong>
     </dt>
     <dd>
     getter for the content position.
@@ -709,8 +764,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\setX"></a>
-    <strong>Control\setX (x)</strong>
+    <a name = "control\setX"></a>
+    <strong>control\setX (x)</strong>
     </dt>
     <dd>
     setter for the content x position.
@@ -732,8 +787,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\getX"></a>
-    <strong>Control\getX ()</strong>
+    <a name = "control\getX"></a>
+    <strong>control\getX ()</strong>
     </dt>
     <dd>
     getter for the content x position.
@@ -752,8 +807,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\setY"></a>
-    <strong>Control\setY (y)</strong>
+    <a name = "control\setY"></a>
+    <strong>control\setY (y)</strong>
     </dt>
     <dd>
     setter for the content y position.
@@ -775,8 +830,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\getY"></a>
-    <strong>Control\getY ()</strong>
+    <a name = "control\getY"></a>
+    <strong>control\getY ()</strong>
     </dt>
     <dd>
     getter for the content y position.
@@ -795,8 +850,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\getSize"></a>
-    <strong>Control\getSize ()</strong>
+    <a name = "control\getSize"></a>
+    <strong>control\getSize ()</strong>
     </dt>
     <dd>
     getter for the control size.
@@ -817,8 +872,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\getWidth"></a>
-    <strong>Control\getWidth ()</strong>
+    <a name = "control\getWidth"></a>
+    <strong>control\getWidth ()</strong>
     </dt>
     <dd>
     getter for the control width.
@@ -839,8 +894,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\getHeight"></a>
-    <strong>Control\getHeight ()</strong>
+    <a name = "control\getHeight"></a>
+    <strong>control\getHeight ()</strong>
     </dt>
     <dd>
     getter for the control height.
@@ -861,8 +916,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\setWidth"></a>
-    <strong>Control\setWidth (w)</strong>
+    <a name = "control\setWidth"></a>
+    <strong>control\setWidth (w)</strong>
     </dt>
     <dd>
     setter for the content width.
@@ -884,8 +939,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\setHeight"></a>
-    <strong>Control\setHeight (h)</strong>
+    <a name = "control\setHeight"></a>
+    <strong>control\setHeight (h)</strong>
     </dt>
     <dd>
     setter for the content height.
@@ -907,8 +962,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\setSize"></a>
-    <strong>Control\setSize (width, height)</strong>
+    <a name = "control\setSize"></a>
+    <strong>control\setSize (width, height)</strong>
     </dt>
     <dd>
     setter for the control size.
@@ -936,8 +991,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\setEnabled"></a>
-    <strong>Control\setEnabled (enabled)</strong>
+    <a name = "control\setEnabled"></a>
+    <strong>control\setEnabled (enabled)</strong>
     </dt>
     <dd>
     setter for the control enabled property.
@@ -959,8 +1014,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\isEnabled"></a>
-    <strong>Control\isEnabled ()</strong>
+    <a name = "control\isEnabled"></a>
+    <strong>control\isEnabled ()</strong>
     </dt>
     <dd>
     getter for the control enabled property.
@@ -979,8 +1034,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\setChildrenEnabled"></a>
-    <strong>Control\setChildrenEnabled (enabled)</strong>
+    <a name = "control\setChildrenEnabled"></a>
+    <strong>control\setChildrenEnabled (enabled)</strong>
     </dt>
     <dd>
     setter for the control childrenEnabled property.
@@ -1002,8 +1057,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\isChildrenEnabled"></a>
-    <strong>Control\isChildrenEnabled ()</strong>
+    <a name = "control\isChildrenEnabled"></a>
+    <strong>control\isChildrenEnabled ()</strong>
     </dt>
     <dd>
     getter for the control childrenEnabled property.
@@ -1022,8 +1077,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\setDepth"></a>
-    <strong>Control\setDepth (depth)</strong>
+    <a name = "control\setDepth"></a>
+    <strong>control\setDepth (depth)</strong>
     </dt>
     <dd>
     setter for the control depth property.
@@ -1045,8 +1100,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\getDepth"></a>
-    <strong>Control\getDepth ()</strong>
+    <a name = "control\getDepth"></a>
+    <strong>control\getDepth ()</strong>
     </dt>
     <dd>
     getter for the control depth.
@@ -1065,8 +1120,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\removeChild"></a>
-    <strong>Control\removeChild (id)</strong>
+    <a name = "control\removeChild"></a>
+    <strong>control\removeChild (id)</strong>
     </dt>
     <dd>
     remove an attached child.
@@ -1088,8 +1143,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\dropChildren"></a>
-    <strong>Control\dropChildren ()</strong>
+    <a name = "control\dropChildren"></a>
+    <strong>control\dropChildren ()</strong>
     </dt>
     <dd>
     drops the control children.
@@ -1102,8 +1157,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\disableChildren"></a>
-    <strong>Control\disableChildren ()</strong>
+    <a name = "control\disableChildren"></a>
+    <strong>control\disableChildren ()</strong>
     </dt>
     <dd>
     disables the control children.
@@ -1116,8 +1171,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\enableChildren"></a>
-    <strong>Control\enableChildren ()</strong>
+    <a name = "control\enableChildren"></a>
+    <strong>control\enableChildren ()</strong>
     </dt>
     <dd>
     enables the control children.
@@ -1130,8 +1185,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\on"></a>
-    <strong>Control\on (event, callback, target)</strong>
+    <a name = "control\on"></a>
+    <strong>control\on (event, callback, target)</strong>
     </dt>
     <dd>
     attaches a handler to an event.
@@ -1166,11 +1221,13 @@
 
 </dd>
     <dt>
-    <a name = "Control\update"></a>
-    <strong>Control\update (dt)</strong>
+    <a name = "control\update"></a>
+    <strong>control\update (dt)</strong>
     </dt>
     <dd>
-    updates the control.
+    updates the ROOT.
+ the root is the only ctrl that should be calling this method.
+ The Conform method will take care of the rest.
 
 
     <h3>Parameters:</h3>
@@ -1189,31 +1246,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\setAlwaysUpdate"></a>
-    <strong>Control\setAlwaysUpdate (bool)</strong>
-    </dt>
-    <dd>
-    sets alwaysUpdate (If false it will prevent the control from updating if visible is false).
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">bool</span>
-            <span class="types"><span class="type">boolean</span></span>
-
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "Control\setVisible"></a>
-    <strong>Control\setVisible (bool)</strong>
+    <a name = "control\setVisible"></a>
+    <strong>control\setVisible (bool)</strong>
     </dt>
     <dd>
     sets visible.
@@ -1235,8 +1269,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\getVisible"></a>
-    <strong>Control\getVisible ()</strong>
+    <a name = "control\getVisible"></a>
+    <strong>control\getVisible ()</strong>
     </dt>
     <dd>
     getter for visible property.
@@ -1255,8 +1289,8 @@
 
 </dd>
     <dt>
-    <a name = "Control\draw"></a>
-    <strong>Control\draw ()</strong>
+    <a name = "control\draw"></a>
+    <strong>control\draw ()</strong>
     </dt>
     <dd>
     draws the control.
@@ -1268,14 +1302,80 @@
 
 
 </dd>
+    <dt>
+    <a name = "control\setUpdateWhenFocused"></a>
+    <strong>control\setUpdateWhenFocused (updateWhenFocused)</strong>
+    </dt>
+    <dd>
+    sets updateWhenFocused (if true the UI_UPDATE event will be triggred when the control is clicked.).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">updateWhenFocused</span>
+            <span class="types"><span class="type">boolean</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "control\setFocuse"></a>
+    <strong>control\setFocuse (bool)</strong>
+    </dt>
+    <dd>
+    sets focused property
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">bool</span>
+            <span class="types"><span class="type">bool</span></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "control\isFocused"></a>
+    <strong>control\isFocused ()</strong>
+    </dt>
+    <dd>
+    return focused property
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+        focused
+    </ol>
+
+
+
+
+</dd>
 </dl>
 
 
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2022-03-19 21:09:30 </i>
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-05-17 08:19:20 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

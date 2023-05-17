@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <title>MeowUI documentation</title>
-    <link rel="stylesheet" href="ldoc.css" type="text/css" />
+    <link rel="stylesheet" href="ldoc_new.css" type="text/css" />
 </head>
 <body>
 
@@ -29,14 +29,21 @@
 
 
 
+
 <h2>Modules</h2>
 <ul class="nowrap">
   <li><a href="modules/Controls.Button.html">Controls.Button</a></li>
+  <li><a href="modules/Controls.CheckBox.html">Controls.CheckBox</a></li>
+  <li><a href="modules/Controls.Label.html">Controls.Label</a></li>
   <li><a href="modules/MeowUI.html">MeowUI</a></li>
   <li><a href="modules/Mutf8.html">Mutf8</a></li>
+  <li><a href="modules/src.ThirdParty.utf8.primitives.dummy.html">src.ThirdParty.utf8.primitives.dummy</a></li>
+  <li><a href="modules/src.ThirdParty.utf8.test.strict.html">src.ThirdParty.utf8.test.strict</a></li>
+  <li><a href="modules/src.ThirdParty.utf8.test.test_pm.html">src.ThirdParty.utf8.test.test_pm</a></li>
 </ul>
 <h2>Classes</h2>
 <ul class="nowrap">
+  <li><a href="classes/Collection.html">Collection</a></li>
   <li><a href="classes/Box.html">Box</a></li>
   <li><a href="classes/Chrono.html">Chrono</a></li>
   <li><a href="classes/Circle.html">Circle</a></li>
@@ -63,65 +70,101 @@
 <h2>Modules</h2>
 <table class="module_list">
 	<tr>
-		<td class="name"  nowrap><a href="modules/Controls.Button.html">Controls.Button</a></td>
+		<td class="name" nowrap><a href="modules/Controls.Button.html">Controls.Button</a></td>
 		<td class="summary">A button class (An example that you can use or build on.)</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="modules/MeowUI.html">MeowUI</a></td>
+		<td class="name" nowrap><a href="modules/Controls.CheckBox.html">Controls.CheckBox</a></td>
+		<td class="summary">CheckBox class (An example that you can use or build on.)</td>
+	</tr>
+	<tr>
+		<td class="name" nowrap><a href="modules/Controls.Label.html">Controls.Label</a></td>
+		<td class="summary">Label class</td>
+	</tr>
+	<tr>
+		<td class="name" nowrap><a href="modules/MeowUI.html">MeowUI</a></td>
 		<td class="summary">A useful set of core classes that help you make an extensible set of UI controls.</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="modules/Mutf8.html">Mutf8</a></td>
-		<td class="summary">Adds UTF-8 functions to string</td>
+		<td class="name" nowrap><a href="modules/Mutf8.html">Mutf8</a></td>
+		<td class="summary">Adds UTF-8 functions to string lua table.</td>
+	</tr>
+	<tr>
+		<td class="name" nowrap><a href="modules/src.ThirdParty.utf8.primitives.dummy.html">src.ThirdParty.utf8.primitives.dummy</a></td>
+		<td class="summary">differs from Lua 5.3 utf8.offset in accepting any byte positions (not only head byte) for all n values</td>
+	</tr>
+	<tr>
+		<td class="name" nowrap><a href="modules/src.ThirdParty.utf8.test.strict.html">src.ThirdParty.utf8.test.strict</a></td>
+		<td class="summary">strict.lua from http://metalua.luaforge.net/src/lib/strict.lua.html</td>
+	</tr>
+	<tr>
+		<td class="name" nowrap><a href="modules/src.ThirdParty.utf8.test.test_pm.html">src.ThirdParty.utf8.test.test_pm</a></td>
+		<td class="summary">MIT License</p>
+
+<p>Copyright (c) 2018 Xavier Wang</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.</td>
 	</tr>
 </table>
 <h2>Classes</h2>
 <table class="module_list">
 	<tr>
-		<td class="name"  nowrap><a href="classes/Box.html">Box</a></td>
+		<td class="name" nowrap><a href="classes/Collection.html">Collection</a></td>
+		<td class="summary">A Collection class (extends <a href="classes/Singleton.html#">Singleton</a>)</td>
+	</tr>
+	<tr>
+		<td class="name" nowrap><a href="classes/Box.html">Box</a></td>
 		<td class="summary">A box class (rectangle)</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="classes/Chrono.html">Chrono</a></td>
+		<td class="name" nowrap><a href="classes/Chrono.html">Chrono</a></td>
 		<td class="summary">A Chrono class (extends <a href="classes/Singleton.html#">Singleton</a>)</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="classes/Circle.html">Circle</a></td>
+		<td class="name" nowrap><a href="classes/Circle.html">Circle</a></td>
 		<td class="summary">A circle class</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="classes/Control.html">Control</a></td>
+		<td class="name" nowrap><a href="classes/Control.html">Control</a></td>
 		<td class="summary">A control class</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="classes/Debug.html">Debug</a></td>
+		<td class="name" nowrap><a href="classes/Debug.html">Debug</a></td>
 		<td class="summary">A debug class</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="classes/Event.html">Event</a></td>
+		<td class="name" nowrap><a href="classes/Event.html">Event</a></td>
 		<td class="summary">Event class</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="classes/Manager.html">Manager</a></td>
+		<td class="name" nowrap><a href="classes/Manager.html">Manager</a></td>
 		<td class="summary">A Manager class (extends <a href="classes/Singleton.html#">Singleton</a>)</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="classes/Polygon.html">Polygon</a></td>
+		<td class="name" nowrap><a href="classes/Polygon.html">Polygon</a></td>
 		<td class="summary">A polygon class</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="classes/Root.html">Root</a></td>
+		<td class="name" nowrap><a href="classes/Root.html">Root</a></td>
 		<td class="summary">A Root class (extends <a href="classes/Control.html#">Control</a>)</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="classes/Singleton.html">Singleton</a></td>
+		<td class="name" nowrap><a href="classes/Singleton.html">Singleton</a></td>
 		<td class="summary">A Singleton class</td>
 	</tr>
 </table>
 <h2>Topics</h2>
 <table class="module_list">
 	<tr>
-		<td class="name"  nowrap><a href="topics/README.md.html">README.md</a></td>
+		<td class="name" nowrap><a href="topics/README.md.html">README.md</a></td>
 		<td class="summary"></td>
 	</tr>
 </table>
@@ -129,8 +172,8 @@
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2022-03-19 21:09:30 </i>
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-05-17 08:19:20 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

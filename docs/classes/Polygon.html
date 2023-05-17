@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <title>MeowUI documentation</title>
-    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link rel="stylesheet" href="../ldoc_new.css" type="text/css" />
 </head>
 <body>
 
@@ -26,6 +26,7 @@
 <br/>
 <h1>MeowUI</h1>
 
+
 <ul>
   <li><a href="../index.html">Index</a></li>
 </ul>
@@ -38,6 +39,7 @@
 
 <h2>Classes</h2>
 <ul class="nowrap">
+  <li><a href="../classes/Collection.html">Collection</a></li>
   <li><a href="../classes/Box.html">Box</a></li>
   <li><a href="../classes/Chrono.html">Chrono</a></li>
   <li><a href="../classes/Circle.html">Circle</a></li>
@@ -52,8 +54,13 @@
 <h2>Modules</h2>
 <ul class="nowrap">
   <li><a href="../modules/Controls.Button.html">Controls.Button</a></li>
+  <li><a href="../modules/Controls.CheckBox.html">Controls.CheckBox</a></li>
+  <li><a href="../modules/Controls.Label.html">Controls.Label</a></li>
   <li><a href="../modules/MeowUI.html">MeowUI</a></li>
   <li><a href="../modules/Mutf8.html">Mutf8</a></li>
+  <li><a href="../modules/src.ThirdParty.utf8.primitives.dummy.html">src.ThirdParty.utf8.primitives.dummy</a></li>
+  <li><a href="../modules/src.ThirdParty.utf8.test.strict.html">src.ThirdParty.utf8.test.strict</a></li>
+  <li><a href="../modules/src.ThirdParty.utf8.test.test_pm.html">src.ThirdParty.utf8.test.test_pm</a></li>
 </ul>
 <h2>Topics</h2>
 <ul class="">
@@ -79,51 +86,51 @@
 <h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Polygon\new">Polygon\new (x, y, n, radius, angle)</a></td>
+	<td class="name" nowrap><a href="#polygon\new">polygon\new (x, y, n, radius, angle)</a></td>
 	<td class="summary">constructor</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Polygon\contains">Polygon\contains (x, y)</a></td>
+	<td class="name" nowrap><a href="#polygon\contains">polygon\contains (x, y)</a></td>
 	<td class="summary">tests if a given point is inside the poly.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Polygon\getVertices">Polygon\getVertices ()</a></td>
+	<td class="name" nowrap><a href="#polygon\getVertices">polygon\getVertices ()</a></td>
 	<td class="summary">getter for vertices.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Polygon\getRadius">Polygon\getRadius ()</a></td>
+	<td class="name" nowrap><a href="#polygon\getRadius">polygon\getRadius ()</a></td>
 	<td class="summary">getter for radius.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Polygon\setPosition">Polygon\setPosition (x, y)</a></td>
+	<td class="name" nowrap><a href="#polygon\setPosition">polygon\setPosition (x, y)</a></td>
 	<td class="summary">setter for position.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Polygon\getX">Polygon\getX ()</a></td>
+	<td class="name" nowrap><a href="#polygon\getX">polygon\getX ()</a></td>
 	<td class="summary">getter for the circle x position.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Polygon\getY">Polygon\getY ()</a></td>
+	<td class="name" nowrap><a href="#polygon\getY">polygon\getY ()</a></td>
 	<td class="summary">getter for the circle y position.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Polygon\getPosition">Polygon\getPosition ()</a></td>
+	<td class="name" nowrap><a href="#polygon\getPosition">polygon\getPosition ()</a></td>
 	<td class="summary">getter for position.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Polygon\setSides">Polygon\setSides (sides)</a></td>
+	<td class="name" nowrap><a href="#polygon\setSides">polygon\setSides (sides)</a></td>
 	<td class="summary">setter for sides.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Polygon\getSides">Polygon\getSides ()</a></td>
+	<td class="name" nowrap><a href="#polygon\getSides">polygon\getSides ()</a></td>
 	<td class="summary">getter for sides.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Polygon\setAngle">Polygon\setAngle (angle)</a></td>
+	<td class="name" nowrap><a href="#polygon\setAngle">polygon\setAngle (angle)</a></td>
 	<td class="summary">setter for angle.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Polygon\getAngle">Polygon\getAngle ()</a></td>
+	<td class="name" nowrap><a href="#polygon\getAngle">polygon\getAngle ()</a></td>
 	<td class="summary">getter for angle.</td>
 	</tr>
 </table>
@@ -136,8 +143,8 @@
 
     <dl class="function">
     <dt>
-    <a name = "Polygon\new"></a>
-    <strong>Polygon\new (x, y, n, radius, angle)</strong>
+    <a name = "polygon\new"></a>
+    <strong>polygon\new (x, y, n, radius, angle)</strong>
     </dt>
     <dd>
     constructor
@@ -183,8 +190,8 @@
 
 </dd>
     <dt>
-    <a name = "Polygon\contains"></a>
-    <strong>Polygon\contains (x, y)</strong>
+    <a name = "polygon\contains"></a>
+    <strong>polygon\contains (x, y)</strong>
     </dt>
     <dd>
     tests if a given point is inside the poly.
@@ -220,8 +227,8 @@
 
 </dd>
     <dt>
-    <a name = "Polygon\getVertices"></a>
-    <strong>Polygon\getVertices ()</strong>
+    <a name = "polygon\getVertices"></a>
+    <strong>polygon\getVertices ()</strong>
     </dt>
     <dd>
     getter for vertices.
@@ -242,8 +249,8 @@
 
 </dd>
     <dt>
-    <a name = "Polygon\getRadius"></a>
-    <strong>Polygon\getRadius ()</strong>
+    <a name = "polygon\getRadius"></a>
+    <strong>polygon\getRadius ()</strong>
     </dt>
     <dd>
     getter for radius.
@@ -264,8 +271,8 @@
 
 </dd>
     <dt>
-    <a name = "Polygon\setPosition"></a>
-    <strong>Polygon\setPosition (x, y)</strong>
+    <a name = "polygon\setPosition"></a>
+    <strong>polygon\setPosition (x, y)</strong>
     </dt>
     <dd>
     setter for position.
@@ -293,8 +300,8 @@
 
 </dd>
     <dt>
-    <a name = "Polygon\getX"></a>
-    <strong>Polygon\getX ()</strong>
+    <a name = "polygon\getX"></a>
+    <strong>polygon\getX ()</strong>
     </dt>
     <dd>
     getter for the circle x position.
@@ -315,8 +322,8 @@
 
 </dd>
     <dt>
-    <a name = "Polygon\getY"></a>
-    <strong>Polygon\getY ()</strong>
+    <a name = "polygon\getY"></a>
+    <strong>polygon\getY ()</strong>
     </dt>
     <dd>
     getter for the circle y position.
@@ -337,8 +344,8 @@
 
 </dd>
     <dt>
-    <a name = "Polygon\getPosition"></a>
-    <strong>Polygon\getPosition ()</strong>
+    <a name = "polygon\getPosition"></a>
+    <strong>polygon\getPosition ()</strong>
     </dt>
     <dd>
     getter for position.
@@ -359,8 +366,8 @@
 
 </dd>
     <dt>
-    <a name = "Polygon\setSides"></a>
-    <strong>Polygon\setSides (sides)</strong>
+    <a name = "polygon\setSides"></a>
+    <strong>polygon\setSides (sides)</strong>
     </dt>
     <dd>
     setter for sides.
@@ -382,8 +389,8 @@
 
 </dd>
     <dt>
-    <a name = "Polygon\getSides"></a>
-    <strong>Polygon\getSides ()</strong>
+    <a name = "polygon\getSides"></a>
+    <strong>polygon\getSides ()</strong>
     </dt>
     <dd>
     getter for sides.
@@ -404,8 +411,8 @@
 
 </dd>
     <dt>
-    <a name = "Polygon\setAngle"></a>
-    <strong>Polygon\setAngle (angle)</strong>
+    <a name = "polygon\setAngle"></a>
+    <strong>polygon\setAngle (angle)</strong>
     </dt>
     <dd>
     setter for angle.
@@ -427,8 +434,8 @@
 
 </dd>
     <dt>
-    <a name = "Polygon\getAngle"></a>
-    <strong>Polygon\getAngle ()</strong>
+    <a name = "polygon\getAngle"></a>
+    <strong>polygon\getAngle ()</strong>
     </dt>
     <dd>
     getter for angle.
@@ -454,8 +461,8 @@
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2022-03-19 21:09:30 </i>
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-05-17 08:19:20 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

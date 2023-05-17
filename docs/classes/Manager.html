@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <title>MeowUI documentation</title>
-    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link rel="stylesheet" href="../ldoc_new.css" type="text/css" />
 </head>
 <body>
 
@@ -26,6 +26,7 @@
 <br/>
 <h1>MeowUI</h1>
 
+
 <ul>
   <li><a href="../index.html">Index</a></li>
 </ul>
@@ -38,6 +39,7 @@
 
 <h2>Classes</h2>
 <ul class="nowrap">
+  <li><a href="../classes/Collection.html">Collection</a></li>
   <li><a href="../classes/Box.html">Box</a></li>
   <li><a href="../classes/Chrono.html">Chrono</a></li>
   <li><a href="../classes/Circle.html">Circle</a></li>
@@ -52,8 +54,13 @@
 <h2>Modules</h2>
 <ul class="nowrap">
   <li><a href="../modules/Controls.Button.html">Controls.Button</a></li>
+  <li><a href="../modules/Controls.CheckBox.html">Controls.CheckBox</a></li>
+  <li><a href="../modules/Controls.Label.html">Controls.Label</a></li>
   <li><a href="../modules/MeowUI.html">MeowUI</a></li>
   <li><a href="../modules/Mutf8.html">Mutf8</a></li>
+  <li><a href="../modules/src.ThirdParty.utf8.primitives.dummy.html">src.ThirdParty.utf8.primitives.dummy</a></li>
+  <li><a href="../modules/src.ThirdParty.utf8.test.strict.html">src.ThirdParty.utf8.test.strict</a></li>
+  <li><a href="../modules/src.ThirdParty.utf8.test.test_pm.html">src.ThirdParty.utf8.test.test_pm</a></li>
 </ul>
 <h2>Topics</h2>
 <ul class="">
@@ -71,7 +78,7 @@
 </p>
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">m = Root.getInstance!
+        <pre class="example">m = Manager.getInstance!
 </pre>
     </ul>
 
@@ -79,55 +86,55 @@
 <h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Manager\new">Manager\new ()</a></td>
+	<td class="name" nowrap><a href="#manager\new">manager\new ()</a></td>
 	<td class="summary">constructor.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Manager\getRoot">Manager\getRoot ()</a></td>
+	<td class="name" nowrap><a href="#manager\getRoot">manager\getRoot ()</a></td>
 	<td class="summary">getter for the root control.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Manager\update">Manager\update (dt)</a></td>
+	<td class="name" nowrap><a href="#manager\update">manager\update (dt)</a></td>
 	<td class="summary">updates the manager.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Manager\draw">Manager\draw ()</a></td>
+	<td class="name" nowrap><a href="#manager\draw">manager\draw ()</a></td>
 	<td class="summary">draws the manager.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Manager\mousemoved">Manager\mousemoved (x, y, dx, dy)</a></td>
+	<td class="name" nowrap><a href="#manager\mousemoved">manager\mousemoved (x, y, dx, dy)</a></td>
 	<td class="summary">callback function triggered when the mouse is moved.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Manager\setFocuse">Manager\setFocuse (control)</a></td>
+	<td class="name" nowrap><a href="#manager\setFocuse">manager\setFocuse (control)</a></td>
 	<td class="summary">focuse on given control.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Manager\mousepressed">Manager\mousepressed (x, y, button, isTouch)</a></td>
+	<td class="name" nowrap><a href="#manager\mousepressed">manager\mousepressed (x, y, button, isTouch)</a></td>
 	<td class="summary">callback function triggered when a mouse button is pressed.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Manager\mousereleased">Manager\mousereleased (x, y, button, isTouch)</a></td>
+	<td class="name" nowrap><a href="#manager\mousereleased">manager\mousereleased (x, y, button, isTouch)</a></td>
 	<td class="summary">callback function triggered when a mouse button is released.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Manager\wheelmoved">Manager\wheelmoved (x, y)</a></td>
+	<td class="name" nowrap><a href="#manager\wheelmoved">manager\wheelmoved (x, y)</a></td>
 	<td class="summary">callback function triggered when the mouse wheel is moved.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Manager\keypressed">Manager\keypressed (key, scancode, isrepeat)</a></td>
+	<td class="name" nowrap><a href="#manager\keypressed">manager\keypressed (key, scancode, isrepeat)</a></td>
 	<td class="summary">callback function triggered when a key is pressed.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Manager\keyreleased">Manager\keyreleased (key)</a></td>
+	<td class="name" nowrap><a href="#manager\keyreleased">manager\keyreleased (key)</a></td>
 	<td class="summary">callback function triggered when a keyboard key is released.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Manager\textinput">Manager\textinput (text)</a></td>
+	<td class="name" nowrap><a href="#manager\textinput">manager\textinput (text)</a></td>
 	<td class="summary">called when text has been entered by the user.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Manager\resize">Manager\resize (w, h)</a></td>
+	<td class="name" nowrap><a href="#manager\resize">manager\resize (w, h)</a></td>
 	<td class="summary">resize the root control</td>
 	</tr>
 </table>
@@ -140,8 +147,8 @@
 
     <dl class="function">
     <dt>
-    <a name = "Manager\new"></a>
-    <strong>Manager\new ()</strong>
+    <a name = "manager\new"></a>
+    <strong>manager\new ()</strong>
     </dt>
     <dd>
     constructor.
@@ -154,8 +161,8 @@
 
 </dd>
     <dt>
-    <a name = "Manager\getRoot"></a>
-    <strong>Manager\getRoot ()</strong>
+    <a name = "manager\getRoot"></a>
+    <strong>manager\getRoot ()</strong>
     </dt>
     <dd>
     getter for the root control.
@@ -168,8 +175,8 @@
 
 </dd>
     <dt>
-    <a name = "Manager\update"></a>
-    <strong>Manager\update (dt)</strong>
+    <a name = "manager\update"></a>
+    <strong>manager\update (dt)</strong>
     </dt>
     <dd>
     updates the manager.
@@ -191,8 +198,8 @@
 
 </dd>
     <dt>
-    <a name = "Manager\draw"></a>
-    <strong>Manager\draw ()</strong>
+    <a name = "manager\draw"></a>
+    <strong>manager\draw ()</strong>
     </dt>
     <dd>
     draws the manager.
@@ -205,8 +212,8 @@
 
 </dd>
     <dt>
-    <a name = "Manager\mousemoved"></a>
-    <strong>Manager\mousemoved (x, y, dx, dy)</strong>
+    <a name = "manager\mousemoved"></a>
+    <strong>manager\mousemoved (x, y, dx, dy)</strong>
     </dt>
     <dd>
     callback function triggered when the mouse is moved.
@@ -246,8 +253,8 @@
 
 </dd>
     <dt>
-    <a name = "Manager\setFocuse"></a>
-    <strong>Manager\setFocuse (control)</strong>
+    <a name = "manager\setFocuse"></a>
+    <strong>manager\setFocuse (control)</strong>
     </dt>
     <dd>
     focuse on given control.
@@ -269,8 +276,8 @@
 
 </dd>
     <dt>
-    <a name = "Manager\mousepressed"></a>
-    <strong>Manager\mousepressed (x, y, button, isTouch)</strong>
+    <a name = "manager\mousepressed"></a>
+    <strong>manager\mousepressed (x, y, button, isTouch)</strong>
     </dt>
     <dd>
     callback function triggered when a mouse button is pressed.
@@ -310,8 +317,8 @@
 
 </dd>
     <dt>
-    <a name = "Manager\mousereleased"></a>
-    <strong>Manager\mousereleased (x, y, button, isTouch)</strong>
+    <a name = "manager\mousereleased"></a>
+    <strong>manager\mousereleased (x, y, button, isTouch)</strong>
     </dt>
     <dd>
     callback function triggered when a mouse button is released.
@@ -351,8 +358,8 @@
 
 </dd>
     <dt>
-    <a name = "Manager\wheelmoved"></a>
-    <strong>Manager\wheelmoved (x, y)</strong>
+    <a name = "manager\wheelmoved"></a>
+    <strong>manager\wheelmoved (x, y)</strong>
     </dt>
     <dd>
     callback function triggered when the mouse wheel is moved.
@@ -380,8 +387,8 @@
 
 </dd>
     <dt>
-    <a name = "Manager\keypressed"></a>
-    <strong>Manager\keypressed (key, scancode, isrepeat)</strong>
+    <a name = "manager\keypressed"></a>
+    <strong>manager\keypressed (key, scancode, isrepeat)</strong>
     </dt>
     <dd>
     callback function triggered when a key is pressed.
@@ -415,8 +422,8 @@
 
 </dd>
     <dt>
-    <a name = "Manager\keyreleased"></a>
-    <strong>Manager\keyreleased (key)</strong>
+    <a name = "manager\keyreleased"></a>
+    <strong>manager\keyreleased (key)</strong>
     </dt>
     <dd>
     callback function triggered when a keyboard key is released.
@@ -438,8 +445,8 @@
 
 </dd>
     <dt>
-    <a name = "Manager\textinput"></a>
-    <strong>Manager\textinput (text)</strong>
+    <a name = "manager\textinput"></a>
+    <strong>manager\textinput (text)</strong>
     </dt>
     <dd>
     called when text has been entered by the user.
@@ -461,8 +468,8 @@
 
 </dd>
     <dt>
-    <a name = "Manager\resize"></a>
-    <strong>Manager\resize (w, h)</strong>
+    <a name = "manager\resize"></a>
+    <strong>manager\resize (w, h)</strong>
     </dt>
     <dd>
     resize the root control
@@ -495,8 +502,8 @@
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2022-03-19 21:09:30 </i>
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-05-17 08:19:20 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

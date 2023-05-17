@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <title>MeowUI documentation</title>
-    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link rel="stylesheet" href="../ldoc_new.css" type="text/css" />
 </head>
 <body>
 
@@ -26,6 +26,7 @@
 <br/>
 <h1>MeowUI</h1>
 
+
 <ul>
   <li><a href="../index.html">Index</a></li>
 </ul>
@@ -38,6 +39,7 @@
 
 <h2>Classes</h2>
 <ul class="nowrap">
+  <li><a href="../classes/Collection.html">Collection</a></li>
   <li><a href="../classes/Box.html">Box</a></li>
   <li><a href="../classes/Chrono.html">Chrono</a></li>
   <li><strong>Circle</strong></li>
@@ -52,8 +54,13 @@
 <h2>Modules</h2>
 <ul class="nowrap">
   <li><a href="../modules/Controls.Button.html">Controls.Button</a></li>
+  <li><a href="../modules/Controls.CheckBox.html">Controls.CheckBox</a></li>
+  <li><a href="../modules/Controls.Label.html">Controls.Label</a></li>
   <li><a href="../modules/MeowUI.html">MeowUI</a></li>
   <li><a href="../modules/Mutf8.html">Mutf8</a></li>
+  <li><a href="../modules/src.ThirdParty.utf8.primitives.dummy.html">src.ThirdParty.utf8.primitives.dummy</a></li>
+  <li><a href="../modules/src.ThirdParty.utf8.test.strict.html">src.ThirdParty.utf8.test.strict</a></li>
+  <li><a href="../modules/src.ThirdParty.utf8.test.test_pm.html">src.ThirdParty.utf8.test.test_pm</a></li>
 </ul>
 <h2>Topics</h2>
 <ul class="">
@@ -79,47 +86,47 @@
 <h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Circle\new">Circle\new (x, y, radius)</a></td>
+	<td class="name" nowrap><a href="#circle\new">circle\new (x, y, radius)</a></td>
 	<td class="summary">constructor passed a pos (<code>x</code>, <code>y</code>) and <code>radius</code> which must be <code>numbers</code>.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Circle\contains">Circle\contains (x, y)</a></td>
+	<td class="name" nowrap><a href="#circle\contains">circle\contains (x, y)</a></td>
 	<td class="summary">tests if a given point is inside the circle.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Circle\getPosition">Circle\getPosition ()</a></td>
+	<td class="name" nowrap><a href="#circle\getPosition">circle\getPosition ()</a></td>
 	<td class="summary">getter for the circle position.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Circle\getX">Circle\getX ()</a></td>
+	<td class="name" nowrap><a href="#circle\getX">circle\getX ()</a></td>
 	<td class="summary">getter for the circle x position.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Circle\getY">Circle\getY ()</a></td>
+	<td class="name" nowrap><a href="#circle\getY">circle\getY ()</a></td>
 	<td class="summary">getter for the circle y position.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Circle\getRadius">Circle\getRadius ()</a></td>
+	<td class="name" nowrap><a href="#circle\getRadius">circle\getRadius ()</a></td>
 	<td class="summary">getter for the circle radius.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Circle\getSize">Circle\getSize ()</a></td>
+	<td class="name" nowrap><a href="#circle\getSize">circle\getSize ()</a></td>
 	<td class="summary">getter for the circle radius.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Circle\getWidth">Circle\getWidth ()</a></td>
+	<td class="name" nowrap><a href="#circle\getWidth">circle\getWidth ()</a></td>
 	<td class="summary">getter for the circle width.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Circle\getHeight">Circle\getHeight ()</a></td>
+	<td class="name" nowrap><a href="#circle\getHeight">circle\getHeight ()</a></td>
 	<td class="summary">getter for the circle's height.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Circle\setPosition">Circle\setPosition (x, y)</a></td>
+	<td class="name" nowrap><a href="#circle\setPosition">circle\setPosition (x, y)</a></td>
 	<td class="summary">setter for the circle position.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Circle\setRadius">Circle\setRadius (radius)</a></td>
+	<td class="name" nowrap><a href="#circle\setRadius">circle\setRadius (radius)</a></td>
 	<td class="summary">setter for the circle radius.</td>
 	</tr>
 </table>
@@ -132,8 +139,8 @@
 
     <dl class="function">
     <dt>
-    <a name = "Circle\new"></a>
-    <strong>Circle\new (x, y, radius)</strong>
+    <a name = "circle\new"></a>
+    <strong>circle\new (x, y, radius)</strong>
     </dt>
     <dd>
     constructor passed a pos (<code>x</code>, <code>y</code>) and <code>radius</code> which must be <code>numbers</code>.
@@ -167,8 +174,8 @@
 
 </dd>
     <dt>
-    <a name = "Circle\contains"></a>
-    <strong>Circle\contains (x, y)</strong>
+    <a name = "circle\contains"></a>
+    <strong>circle\contains (x, y)</strong>
     </dt>
     <dd>
     tests if a given point is inside the circle.
@@ -204,8 +211,8 @@
 
 </dd>
     <dt>
-    <a name = "Circle\getPosition"></a>
-    <strong>Circle\getPosition ()</strong>
+    <a name = "circle\getPosition"></a>
+    <strong>circle\getPosition ()</strong>
     </dt>
     <dd>
     getter for the circle position.
@@ -226,8 +233,8 @@
 
 </dd>
     <dt>
-    <a name = "Circle\getX"></a>
-    <strong>Circle\getX ()</strong>
+    <a name = "circle\getX"></a>
+    <strong>circle\getX ()</strong>
     </dt>
     <dd>
     getter for the circle x position.
@@ -248,8 +255,8 @@
 
 </dd>
     <dt>
-    <a name = "Circle\getY"></a>
-    <strong>Circle\getY ()</strong>
+    <a name = "circle\getY"></a>
+    <strong>circle\getY ()</strong>
     </dt>
     <dd>
     getter for the circle y position.
@@ -270,8 +277,8 @@
 
 </dd>
     <dt>
-    <a name = "Circle\getRadius"></a>
-    <strong>Circle\getRadius ()</strong>
+    <a name = "circle\getRadius"></a>
+    <strong>circle\getRadius ()</strong>
     </dt>
     <dd>
     getter for the circle radius.
@@ -292,8 +299,8 @@
 
 </dd>
     <dt>
-    <a name = "Circle\getSize"></a>
-    <strong>Circle\getSize ()</strong>
+    <a name = "circle\getSize"></a>
+    <strong>circle\getSize ()</strong>
     </dt>
     <dd>
     getter for the circle radius.
@@ -314,8 +321,8 @@
 
 </dd>
     <dt>
-    <a name = "Circle\getWidth"></a>
-    <strong>Circle\getWidth ()</strong>
+    <a name = "circle\getWidth"></a>
+    <strong>circle\getWidth ()</strong>
     </dt>
     <dd>
     getter for the circle width.
@@ -336,8 +343,8 @@
 
 </dd>
     <dt>
-    <a name = "Circle\getHeight"></a>
-    <strong>Circle\getHeight ()</strong>
+    <a name = "circle\getHeight"></a>
+    <strong>circle\getHeight ()</strong>
     </dt>
     <dd>
     getter for the circle's height.
@@ -358,8 +365,8 @@
 
 </dd>
     <dt>
-    <a name = "Circle\setPosition"></a>
-    <strong>Circle\setPosition (x, y)</strong>
+    <a name = "circle\setPosition"></a>
+    <strong>circle\setPosition (x, y)</strong>
     </dt>
     <dd>
     setter for the circle position.
@@ -387,8 +394,8 @@
 
 </dd>
     <dt>
-    <a name = "Circle\setRadius"></a>
-    <strong>Circle\setRadius (radius)</strong>
+    <a name = "circle\setRadius"></a>
+    <strong>circle\setRadius (radius)</strong>
     </dt>
     <dd>
     setter for the circle radius.
@@ -415,8 +422,8 @@
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2022-03-19 21:09:30 </i>
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-05-17 08:19:20 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

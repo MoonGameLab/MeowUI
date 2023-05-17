@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <title>MeowUI documentation</title>
-    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link rel="stylesheet" href="../ldoc_new.css" type="text/css" />
 </head>
 <body>
 
@@ -26,6 +26,7 @@
 <br/>
 <h1>MeowUI</h1>
 
+
 <ul>
   <li><a href="../index.html">Index</a></li>
 </ul>
@@ -39,11 +40,17 @@
 <h2>Modules</h2>
 <ul class="nowrap">
   <li><strong>Controls.Button</strong></li>
+  <li><a href="../modules/Controls.CheckBox.html">Controls.CheckBox</a></li>
+  <li><a href="../modules/Controls.Label.html">Controls.Label</a></li>
   <li><a href="../modules/MeowUI.html">MeowUI</a></li>
   <li><a href="../modules/Mutf8.html">Mutf8</a></li>
+  <li><a href="../modules/src.ThirdParty.utf8.primitives.dummy.html">src.ThirdParty.utf8.primitives.dummy</a></li>
+  <li><a href="../modules/src.ThirdParty.utf8.test.strict.html">src.ThirdParty.utf8.test.strict</a></li>
+  <li><a href="../modules/src.ThirdParty.utf8.test.test_pm.html">src.ThirdParty.utf8.test.test_pm</a></li>
 </ul>
 <h2>Classes</h2>
 <ul class="nowrap">
+  <li><a href="../classes/Collection.html">Collection</a></li>
   <li><a href="../classes/Box.html">Box</a></li>
   <li><a href="../classes/Chrono.html">Chrono</a></li>
   <li><a href="../classes/Circle.html">Circle</a></li>
@@ -79,26 +86,6 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#new">new (type)</a></td>
-	<td class="summary">constructor.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#onClick">onClick (cb)</a></td>
-	<td class="summary">sets the onClick callback.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#onHover">onHover (cb)</a></td>
-	<td class="summary">sets the onHover callback.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#onLeave">onLeave (cb)</a></td>
-	<td class="summary">sets the onLeave callback.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#onAfterClick">onAfterClick (cb)</a></td>
-	<td class="summary">sets the onAfterClick callback.</td>
-	</tr>
-	<tr>
 	<td class="name" nowrap><a href="#setText">setText (text)</a></td>
 	<td class="summary">sets button text.</td>
 	</tr>
@@ -111,32 +98,12 @@
 	<td class="summary">sets dynamic size (Grows with the text).</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#setUpColor">setUpColor (color)</a></td>
-	<td class="summary">sets upColor.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#setDownColor">setDownColor (color)</a></td>
-	<td class="summary">sets downColor.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#setHoverColor">setHoverColor (color)</a></td>
-	<td class="summary">sets hoverColor.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#setDisableColor">setDisableColor (color)</a></td>
-	<td class="summary">sets DisableColor.</td>
-	</tr>
-	<tr>
 	<td class="name" nowrap><a href="#setStroke">setStroke (s)</a></td>
 	<td class="summary">sets the stroke (Border line width).</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#getStroke">getStroke ()</a></td>
 	<td class="summary">gets stroke</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#setFontColor">setFontColor (color)</a></td>
-	<td class="summary">sets the text font color.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#setFontSize">setFontSize (size)</a></td>
@@ -155,18 +122,6 @@
 	<td class="summary">sets the image border</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#setAlphaDown">setAlphaDown (a)</a></td>
-	<td class="summary">sets alpha for when the button is down.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#setAlphaHover">setAlphaHover (a)</a></td>
-	<td class="summary">sets alpha for when the button is hovred.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#setAlphaEnable">setAlphaEnable (a)</a></td>
-	<td class="summary">sets alpha for when the button is enabled.</td>
-	</tr>
-	<tr>
 	<td class="name" nowrap><a href="#setCorners">setCorners (rx, ry)</a></td>
 	<td class="summary">sets corners sharpness.</td>
 	</tr>
@@ -178,6 +133,10 @@
 	<td class="name" nowrap><a href="#setDepth">setDepth (depth)</a></td>
 	<td class="summary">sets the depth.</td>
 	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setBorderLineStyle">setBorderLineStyle (smooth)</a></td>
+	<td class="summary">sets the borderLineStyle.</td>
+	</tr>
 </table>
 
 <br/>
@@ -187,119 +146,6 @@
     <h2 class="section-header "><a name="Functions"></a>Functions</h2>
 
     <dl class="function">
-    <dt>
-    <a name = "new"></a>
-    <strong>new (type)</strong>
-    </dt>
-    <dd>
-    constructor.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">type</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
-         Bounding box type[Box, Circle, Polygon]
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "onClick"></a>
-    <strong>onClick (cb)</strong>
-    </dt>
-    <dd>
-    sets the onClick callback.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">cb</span>
-            <span class="types"><span class="type">function</span></span>
-
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "onHover"></a>
-    <strong>onHover (cb)</strong>
-    </dt>
-    <dd>
-    sets the onHover callback.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">cb</span>
-            <span class="types"><span class="type">function</span></span>
-
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "onLeave"></a>
-    <strong>onLeave (cb)</strong>
-    </dt>
-    <dd>
-    sets the onLeave callback.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">cb</span>
-            <span class="types"><span class="type">function</span></span>
-
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "onAfterClick"></a>
-    <strong>onAfterClick (cb)</strong>
-    </dt>
-    <dd>
-    sets the onAfterClick callback.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">cb</span>
-            <span class="types"><span class="type">function</span></span>
-
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
     <dt>
     <a name = "setText"></a>
     <strong>setText (text)</strong>
@@ -370,98 +216,6 @@
 
 </dd>
     <dt>
-    <a name = "setUpColor"></a>
-    <strong>setUpColor (color)</strong>
-    </dt>
-    <dd>
-    sets upColor.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">color</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
-
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "setDownColor"></a>
-    <strong>setDownColor (color)</strong>
-    </dt>
-    <dd>
-    sets downColor.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">color</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
-
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "setHoverColor"></a>
-    <strong>setHoverColor (color)</strong>
-    </dt>
-    <dd>
-    sets hoverColor.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">color</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
-
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "setDisableColor"></a>
-    <strong>setDisableColor (color)</strong>
-    </dt>
-    <dd>
-    sets DisableColor.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">color</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
-
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
     <a name = "setStroke"></a>
     <strong>setStroke (s)</strong>
     </dt>
@@ -498,29 +252,6 @@
            <span class="types"><span class="type">number</span></span>
         stroke
     </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "setFontColor"></a>
-    <strong>setFontColor (color)</strong>
-    </dt>
-    <dd>
-    sets the text font color.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">color</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
-
-
-
-        </li>
-    </ul>
-
 
 
 
@@ -632,75 +363,6 @@
 
 </dd>
     <dt>
-    <a name = "setAlphaDown"></a>
-    <strong>setAlphaDown (a)</strong>
-    </dt>
-    <dd>
-    sets alpha for when the button is down.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">a</span>
-            <span class="types"><span class="type">number</span></span>
-
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "setAlphaHover"></a>
-    <strong>setAlphaHover (a)</strong>
-    </dt>
-    <dd>
-    sets alpha for when the button is hovred.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">a</span>
-            <span class="types"><span class="type">number</span></span>
-
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "setAlphaEnable"></a>
-    <strong>setAlphaEnable (a)</strong>
-    </dt>
-    <dd>
-    sets alpha for when the button is enabled.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">a</span>
-            <span class="types"><span class="type">number</span></span>
-
-
-
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
     <a name = "setCorners"></a>
     <strong>setCorners (rx, ry)</strong>
     </dt>
@@ -781,14 +443,35 @@
 
 
 </dd>
+    <dt>
+    <a name = "setBorderLineStyle"></a>
+    <strong>setBorderLineStyle (smooth)</strong>
+    </dt>
+    <dd>
+    sets the borderLineStyle.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">smooth</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string(rough,</a></span>
+        ) borderLineStyle
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
 </dl>
 
 
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2022-03-19 21:09:30 </i>
+<i>generated by <a href="http://github.com/lunarmodules/ldoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-05-17 08:19:20 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

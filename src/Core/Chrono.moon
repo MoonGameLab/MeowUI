@@ -32,10 +32,12 @@ class Chrono extends Singleton
     #@timers
 
   --- creates a timer. This timer will be removed automatically from owner if
-  -- "chrono" is the key for the timer instance.
-  -- You can set it to be repeated with the same duration and onDone callback.
+  --- "chrono" is the key for the timer instance.
+  --- You can set it to be repeated with the same duration and onDone callback.
+  -- @tparam Control owner
   -- @tparam number duration
   -- @tparam boolean repeated
+  -- @tparam bool alwaysUpdate
   -- @tparam function onDone
   -- @treturn table
   create: (owner, duration, repeated, alwaysUpdate, onDone) =>
@@ -61,7 +63,6 @@ class Chrono extends Singleton
     timer
 
   --- updates the active timers.
-  -- @tparam table owner
   -- @tparam number dt
   update: (dt) =>
     if @getTimersCount! == 0 then return
