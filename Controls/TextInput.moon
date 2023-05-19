@@ -26,6 +26,8 @@ class TextInput extends Control
     @marginCorner = style.marginCorner
     @textAreaColor = style.textAreaColor
     @textColor = style.textColor
+    @strokeColor = t.colors.strokeColor
+    @stroke = common.stroke
     @rx = style.rx
     @ry = style.ry
 
@@ -368,17 +370,40 @@ class TextInput extends Control
     @processKey text, true
 
 
-  draw: =>
-    Graphics.stencil stencilFunc @
-    Graphics.setStencilTest "greater", 0
 
-    @positionText!
-    @updateIndicator!
+  drawIndicator: =>
+    if @showIndicator and @isFocused!
+      r, g, b, a = Graphics.getColor!
+      Graphics.setColor colors.black
+      Graphics.rectangle "fill", @indicatorx, @indicatory - 2.5, 1, @height - 5
+      Graphics.setColor r, g, b, a
+
+  drawText: =>
+    r, g, b, a = Graphics.getColor!
+    font = Graphics.getFont!
+    Graphics.setFont @font
+    Graphics.setColor colors.black
+    str = @lines[1]
+    box = @getBoundingBox!
+    Graphics.print str, math.floor(@textx), math.floor(@texty)
+    Graphics.setColor r, g, b, a
+    Graphics.setFont font
+    Graphics.setColor r, g, b, a
+
+  drawBgBox: =>
+    r, g, b, a = Graphics.getColor!
+    color = colors.gray
+    color[4] = color[4] or @alpha
+    Graphics.setColor color
+    Graphics.rectangle "fill", @x - @stroke, @y - @stroke, @width + @stroke*2, @height + @stroke*2
+    Graphics.setColor r, g, b, a 
+
+  drawTextBox: =>
     r, g, b, a = Graphics.getColor!
     Graphics.setColor colors.white
     Graphics.rectangle "fill", @x, @y, @width, @height
 
-
+  drawTextEffects: =>
     if @allTextSelected
       local w, h
       h = @font\getHeight "a"
@@ -390,24 +415,19 @@ class TextInput extends Control
       Graphics.rectangle "fill", @textx, @texty, w, h
       Graphics.setColor colors.white
 
-    if @showIndicator and @isFocused!
-      r, g, b, a = Graphics.getColor!
-      Graphics.setColor colors.black
-      Graphics.rectangle "fill", @indicatorx, @indicatory - 2.5, 1, @height - 5
-      Graphics.setColor r, g, b, a
+  draw: =>
 
-    r, g, b, a = Graphics.getColor!
-    font = Graphics.getFont!
-    Graphics.setFont @font
-    Graphics.setColor colors.black
-    str = @lines[1]
-    box = @getBoundingBox!
-    Graphics.print str, math.floor(@textx), math.floor(@texty)
-    Graphics.setColor r, g, b, a
-    Graphics.setFont font
+    @drawBgBox!
+    Graphics.stencil stencilFunc @
+    Graphics.setStencilTest "greater", 0
 
+    @positionText!
+    @updateIndicator!
+    @drawTextBox!
+    @drawTextEffects!
+    @drawIndicator!
+    @drawText!
 
-    Graphics.setColor r, g, b, a
     Graphics.setStencilTest!
 
   
