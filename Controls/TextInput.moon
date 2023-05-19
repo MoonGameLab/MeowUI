@@ -135,6 +135,23 @@ class TextInput extends Control
     -- Update indicator
     @updateIndicator!
 
+  offsetTextTab: =>
+    twidth = 0
+    cwidth = 0
+    text = @lines[@line]
+    
+    if @masked
+      twidth = @font\getWidth utf8.gsub(text, ".", maskChar)
+      cwidth = @font\getWidth utf8.gsub(@tabreplacement, ".", maskChar)
+    else
+      twidth = @font\getWidth text
+      cwidth = @font\getWidth @tabreplacement
+
+    if (twidth + @textoffsetx) >= (@width - 1)
+      @offsetx += cwidth
+
+    @moveIndicator 1
+
 
   removeFromTxt: (pos) =>
     curLine = @lines[@line]
@@ -230,17 +247,26 @@ class TextInput extends Control
           elseif @offsetx < 0
             @offsetx = 0
 
-      if key == "delete"
+      elseif key == "delete"
         if editable == false then return
         if @allTextSelected
           @clear!
           @allTextSelected = false
           @updateIndicator!
-
-      if key == "tab"
+      elseif key == "tab"
         if @allTextSelected then return
         @lines[@line] = @addIntoTxt @tabreplacement, @indiNum
         @moveIndicator utf8.len(@tabreplacement)
+        @updateIndicator!
+        text = @lines[@line]
+        if @multiline == false
+          @offsetTextTab!
+          currentLine = @lines[@line]
+          if @indicatorx >= (@x + @width) and @indiNum ~= utf8.len(currentLine)
+            width = @font\getWidth utf8.sub(currentLine, @indiNum, @indiNum)
+            @offsetx = offsetx + width
+          elseif @indiNum == utf8.len(currentLine) and offsetx ~= ((@font\getWidth(currentLine)) - @width + 10) and @font\getWidth(currentLine) + @textoffsetx > @width
+            @offsetx = ((@font\getWidth(currentLine)) - @width + 10)
 
     else
       if @editable == false then return
@@ -361,7 +387,7 @@ class TextInput extends Control
         @setText ""
         @updateIndicator!
       elseif key == "v" and @editable
-        @Paste!
+        return -- TODO @Paste!
       else
         @processKey key, false
     else @processKey key, false
