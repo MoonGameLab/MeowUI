@@ -476,4 +476,18 @@ class TextInput extends Control
     if @multiline == false
       @lines[1]
 
-  
+  getFont: =>
+    @font
+
+  setFontSize: (size) =>
+    Graphics = love.graphics
+    @font = Graphics.newFont size
+
+  getFontSize: =>
+    @font\getWidth!, @font\getHeight!
+
+  setCorners: (rx, ry, brx, bry) =>
+    @rx = rx or @rx
+    @ry = ry or @ry
+    @brx = brx or @brx
+    @bry = bry or @bry
