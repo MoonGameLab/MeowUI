@@ -14,6 +14,7 @@ stencilFunc = =>
 class TextInput extends Control
 
   @include Mixins.KeyboardMixins
+  @include Mixins.EventMixins
 
   new: (placeHolder) =>
     super "Box", "TextInput"
@@ -30,6 +31,8 @@ class TextInput extends Control
     @stroke = common.stroke
     @rx = style.rx
     @ry = style.ry
+    @brx = 0
+    @bry = 0
 
     @keyDown = "none"
     @limit = 0
@@ -78,6 +81,10 @@ class TextInput extends Control
     @on "UI_TEXT_INPUT", @onTextInput, @
     @on "UI_DRAW", @draw, @
     @on "UI_UPDATE", @update, @
+    @on "UI_MOUSE_ENTER", @onMouseEnter, @
+    @on "UI_MOUSE_LEAVE", @onMouseLeave, @
+    @on "UI_MOUSE_DOWN", @onMouseDown, @
+    @on "UI_MOUSE_UP", @onMouseUp, @
 
   indicatorBlink: =>
     time = love.timer.getTime!
@@ -421,13 +428,13 @@ class TextInput extends Control
     color = colors.gray
     color[4] = color[4] or @alpha
     Graphics.setColor color
-    Graphics.rectangle "fill", @x - @stroke, @y - @stroke, @width + @stroke*2, @height + @stroke*2
+    Graphics.rectangle "fill", @x - @stroke, @y - @stroke, @width + @stroke*2, @height + @stroke*2, @brx, @bry
     Graphics.setColor r, g, b, a 
 
   drawTextBox: =>
     r, g, b, a = Graphics.getColor!
     Graphics.setColor colors.white
-    Graphics.rectangle "fill", @x, @y, @width, @height
+    Graphics.rectangle "fill", @x, @y, @width, @height, @rx, @ry
 
   drawTextEffects: =>
     if @allTextSelected
@@ -461,6 +468,12 @@ class TextInput extends Control
     @indicatorBlink!
 
 
-  -- DEBUG METHODS
+  -- Getters/Setters
   getLines: =>
     @lines
+
+  getText: =>
+    if @multiline == false
+      @lines[1]
+
+  
