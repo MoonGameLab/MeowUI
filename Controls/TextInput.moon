@@ -6,7 +6,7 @@ love     = love
 Control  = MeowUI.Control
 Mixins   = assert require MeowUI.root .. "Controls.Mixins"
 colors   = assert require MeowUI.root .. "src.AddOns.Colors"
-
+tableHasValue = Mixins.tableHasValue
 
 stencilFunc = =>
   -> Graphics.rectangle "fill", @x, @y, @width, @height
@@ -131,7 +131,6 @@ class TextInput extends Control
     if exact == nil then @indiNum += num
     else @indiNum = num
     text = @lines[@line]
-    --print "Text : ", utf8.len(text), @indiNum
 
     if @indiNum > utf8.len(text)
       @indiNum = utf8.len text
@@ -379,30 +378,25 @@ class TextInput extends Control
         else
           @allTextSelected = true
       elseif key == "c" and @allTextSelected
-        print "Copy"
-        system = love.system
-        text = @getText!
+        @copy!
+        @allTextSelected = false
         -- TODO: OnCopy callback
-        system.setClipboardText text
       elseif key == "x" and @allTextSelected and @editable
         text = @getText!
         system = love.system
-        print text
         system.setClipboardText text
         -- TODO: OnCut callback
         -- TODO: clear Text
         @setText ""
         @updateIndicator!
       elseif key == "v" and @editable
-        return -- TODO @Paste!
+        @past!
       else
         @processKey key, false
     else @processKey key, false
   
   onTextInput: (text) =>
     @processKey text, true
-
-
 
   drawIndicator: =>
     if @showIndicator and @isFocused!
@@ -491,3 +485,53 @@ class TextInput extends Control
     @ry = ry or @ry
     @brx = brx or @brx
     @bry = bry or @bry
+
+
+  copy: =>
+    sys = love.system
+    text = @getText!
+    sys.setClipboardText text
+
+  past: =>
+    sys = love.system
+    text = sys.getClipboardText!
+
+    if @limit > 0
+      curText = @getText!
+      curLenght = utf8.len  curText
+      if curText == @limit
+        return
+      else
+        inptLimit = @limit - curLenght
+        if utf8.len(text) > inptLimit
+          text = utf8.sub text, 1, inptLimit
+    
+    charCheck = (a) ->
+      if #@usable > 0
+        if tableHasValue(@usable, a) == false
+          return ""
+      elseif #@unusable > 0
+        if tableHasValue(@usable, a) 
+          return ""
+
+    if @allTextSelected
+      @setText text
+      @allTextSelected = false
+    else
+      if @multiline
+        return
+      else
+        text = utf8.gsub text, string.char(10), " "
+        text = utf8.gsub text, string.char(13), " "
+        text = utf8.gsub text, string.char(9), @tabreplacement
+        lenght = utf8.len text
+        linetxt = @lines[1]
+        p1 = utf8.sub linetxt, 1, @indiNum
+        p2 = utf8.sub linetxt, @indiNum + 1
+        new = p1 .. text .. p2
+        @lines[1] = new
+        @indiNum = @indiNum + lenght
+
+
+
+    

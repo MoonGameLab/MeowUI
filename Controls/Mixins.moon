@@ -138,6 +138,16 @@ KeyboardMixins = class
     Keyboard.isDown(...)
 
 
+local utils
+utils = {}
+
+utils.tableHasValue = (table, value) ->
+  for k, v in pairs table
+    if v == value then return true
+  
+  return false
+
+
 ThemeMixins = class
   getTheme: => assert(require(MeowUI.root .. "Controls.Style"))[MeowUI.theme]
 
