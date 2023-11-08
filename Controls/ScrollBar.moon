@@ -3,9 +3,12 @@ MeowUI   = MeowUI
 Graphics = love.graphics
 Control  = MeowUI.Control
 Button   = assert require MeowUI.c_cwd .. "Button"
-
+Mixins   = assert require MeowUI.root .. "Controls.mx"
 
 class ScrollBar extends Control
+  
+  @include Mixins.ThemeMixins
+
   new: (type) =>
     super "Box", "ScrollBar"
 
@@ -13,7 +16,7 @@ class ScrollBar extends Control
 
     @setEnabled true
 
-    t = assert(require(MeowUI.root .. "Controls.Style"))[MeowUI.theme]
+    t = @getTheme!
     style = t.scrollBar
     @bar\setSize style.width, style.width
     @backgroundColor = t.colors.scrollBar

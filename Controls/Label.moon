@@ -6,7 +6,7 @@ Graphics = love.graphics
 MeowUI   = MeowUI
 love     = love
 Control  = MeowUI.Control
-Mixins   = assert require MeowUI.root .. "Controls.Mixins"
+Mixins   = assert require MeowUI.root .. "Controls.mx"
 Colors = assert require MeowUI.cwd .. "AddOns.Colors"
 
 

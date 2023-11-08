@@ -149,6 +149,6 @@ utils.tableHasValue = (table, value) ->
 
 
 ThemeMixins = class
-  getTheme: => assert(require(MeowUI.root .. "Controls.Style"))[MeowUI.theme]
+  getTheme: => return MeowUI.theme
 
 { :ColorMixins, :EventMixins, :KeyboardMixins, :ThemeMixins}
