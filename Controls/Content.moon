@@ -2,7 +2,7 @@ Graphics = love.graphics
 MeowUI = MeowUI
 Control  = MeowUI.Control
 ScrollBar = assert require MeowUI.c_cwd .. "ScrollBar"
-
+Mixins   = assert require MeowUI.root .. "Controls.mx"
 
 drawRect = =>
   box = @getBoundingBox!
@@ -27,6 +27,8 @@ drawRect = =>
 
 class Content extends Control
 
+  @include Mixins.ThemeMixins
+
   -- @local
   _attachSlide = (self, slide) ->
     @addChild slide, 1
@@ -46,7 +48,7 @@ class Content extends Control
     super "Box", "Content"
 
     -- colors
-    t = assert(require(MeowUI.root .. "Controls.Style"))[MeowUI.theme]
+    t = @getTheme!
     colors = t.colors
     common = t.common
     @stroke = common.stroke

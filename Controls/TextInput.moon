@@ -4,7 +4,7 @@ MeowUI   = MeowUI
 utf8 = utf8
 love     = love
 Control  = MeowUI.Control
-Mixins   = assert require MeowUI.root .. "Controls.Mixins"
+Mixins   = assert require MeowUI.root .. "Controls.mx"
 colors   = assert require MeowUI.root .. "src.AddOns.Colors"
 tableHasValue = Mixins.tableHasValue
 
