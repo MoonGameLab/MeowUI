@@ -28,6 +28,7 @@ drawRect = =>
 class Content extends Control
 
   @include Mixins.ThemeMixins
+  @include Mixins.ColorMixins
 
   -- @local
   _attachSlide = (self, slide) ->

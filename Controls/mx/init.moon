@@ -75,6 +75,14 @@ ColorMixins = class
     @fontColor = color
     true
 
+  --- sets the backdround color.
+  -- @tparam table color
+  setBackgroundColor: (color) =>
+    if @backgroundColor == nil then return false
+    @backgroundColor = color
+    true
+  
+
 
 EventMixins = class
 
@@ -150,5 +158,11 @@ utils.tableHasValue = (table, value) ->
 
 ThemeMixins = class
   getTheme: => return MeowUI.theme
+
+  --- sets axis radius of each round corner.
+  setCorners: (rx, ry) =>
+    if @rx == nil and @ry == nil then return false
+    @rx, @ry = rx, ry
+    true
 
 { :ColorMixins, :EventMixins, :KeyboardMixins, :ThemeMixins}
