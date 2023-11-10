@@ -20,7 +20,7 @@ export MeowUI = {
   keyInput: true -- If you are using keyInput functions else disable it. (Some example controls will used it, so if you want to use them keep it as is).
   version: "v0.0.0.116"
   stage: "alpha"
-  defTheme: "default"
+  defTheme: "blues"
   author: "Tourahi Amine"
 }
 

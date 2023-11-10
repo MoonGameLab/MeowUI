@@ -25,10 +25,33 @@ drawRect = =>
 
   Graphics.setColor r, g, b, a
 
+
+class Slide extends Control
+  
+  @include Mixins.EventMixins
+
+  new: (type, idx, parent, extend) =>
+    super type, "Slide"..idx
+
+    @setEnabled true
+
+    -- Events
+    if extend
+      @on "UI_MOUSE_ENTER", parent.onMouseEnter, parent
+      @on "UI_MOUSE_LEAVE", parent.onMouseLeave, parent
+      @on "UI_MOUSE_DOWN", parent.onMouseDown, parent
+      @on "UI_MOUSE_UP", parent.onMouseUp, parent
+    else
+      @on "UI_MOUSE_ENTER", @.onMouseEnter, @
+      @on "UI_MOUSE_LEAVE", @.onMouseLeave, @
+      @on "UI_MOUSE_DOWN", @.onMouseDown, @
+      @on "UI_MOUSE_UP", @.onMouseUp, @
+
 class Content extends Control
 
   @include Mixins.ThemeMixins
   @include Mixins.ColorMixins
+  @include Mixins.EventMixins
 
   -- @local
   _attachSlide = (self, slide) ->
@@ -44,9 +67,11 @@ class Content extends Control
   -- @local
   h_barSide = "bottom"
 
-  new: (vbar, hbar) =>
+  new: (label, vbar, hbar) =>
     -- Bounding box type
     super "Box", "Content"
+
+    @setLabel label
 
     -- colors
     t = @getTheme!
@@ -79,17 +104,20 @@ class Content extends Control
     @scrollSpeed = 9
 
     @on "UI_DRAW", @onDraw, @
+    @on "UI_MOUSE_DOWN", @onMouseDown, @
 
-    @addSlide true
+    @addSlide true, true
     @on "UI_WHELL_MOVE", @onWheelMove, @
 
     if vbar then @attachScrollBarV "Box"
     if hbar then @attachScrollBarH "Box"
 
-  addSlide: (attach, width = nil, height = nil) =>
+  addSlide: (attach, extend, width = nil, height = nil) =>
     slideIdx = @slidesIdx
-    @slides[@slidesIdx] = Control "Box", "content_slide_" .. @slidesIdx
+    @slides[@slidesIdx] = Slide "Box", @slidesIdx, @, extend
     @slides[@slidesIdx].autoSize = true
+    if @getLabel!
+      @slides[@slidesIdx]\setLabel @getLabel!
 
     if width
       @slides[@slidesIdx].autoSize = false
