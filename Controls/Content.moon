@@ -3,6 +3,7 @@ MeowUI = MeowUI
 Control  = MeowUI.Control
 ScrollBar = assert require MeowUI.c_cwd .. "ScrollBar"
 Mixins   = assert require MeowUI.root .. "Controls.mx"
+mouse = love.mouse
 
 drawRect = =>
   box = @getBoundingBox!
@@ -34,20 +35,20 @@ class Slide extends Control
     super type, "Slide"..idx
 
     @setEnabled true
+    @extend = extend
 
     -- Events
-    if extend
-      @on "UI_MOUSE_ENTER", parent.onMouseEnter, parent
-      @on "UI_MOUSE_LEAVE", parent.onMouseLeave, parent
+    if @extend
       @on "UI_MOUSE_DOWN", parent.onMouseDown, parent
       @on "UI_MOUSE_UP", parent.onMouseUp, parent
       @on "UI_UPDATE", parent.onUpdate, parent
     else
-      @on "UI_MOUSE_ENTER", @.onMouseEnter, @
-      @on "UI_MOUSE_LEAVE", @.onMouseLeave, @
       @on "UI_MOUSE_DOWN", @.onMouseDown, @
       @on "UI_MOUSE_UP", @.onMouseUp, @
       @on "UI_UPDATE", @.onUpdate, @
+
+  getExtend: =>
+    @extend
 
 class Content extends Control
 
@@ -104,9 +105,12 @@ class Content extends Control
     @scrollBarDepth = 9999
     @contentDepth = 9998
     @scrollSpeed = 9
+    @drag = false
+    @dragParent = false
 
     @on "UI_DRAW", @onDraw, @
     @on "UI_MOUSE_DOWN", @onMouseDown, @
+    @on "UI_UPDATE", @onUpdate, @
 
     @addSlide true, true
     @on "UI_WHELL_MOVE", @onWheelMove, @
@@ -307,7 +311,28 @@ class Content extends Control
     true
 
   onUpdate: (dt) =>
-    -- TODO
+    if @isPressed and @drag
+      mx, my = mouse.getPosition!
+      local parent
+      parent = @getParent!
+
+      if @dragParent == false
+        @setPosition mx - @offsetX, my - @offsetY
+      else
+        while parent.getExtend and parent\getExtend!
+          parent = parent\getParent!
+        parent\setPosition mx - @offsetX, my - @offsetY
+
+  setDrag: (bool, dragParent) =>
+    @drag = bool
+    @dragParent = dragParent or @dragParent
+
+  setDragParent: (bool) =>
+    @dragParent = bool
+
+  getDragParent: =>
+    @dragParent -- TODO : should be mixin since other controls can be dragged.
+
   onVBarScroll: (ratio) =>
     slide = @getSlide @currentSlideIdx
     offset = -ratio * (slide\getHeight! - @getHeight!)

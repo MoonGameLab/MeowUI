@@ -120,6 +120,23 @@ EventMixins = class
     if @Click
       @Click!
     @isPressed = true
+    if @dragParent == false
+      @offsetX = x - @getBoundingBox!\getX!
+      @offsetY = y - @getBoundingBox!\getY!
+    else
+      local parent
+      parent = @
+
+      while parent.getDragParent and parent\getDragParent!
+        parent = parent\getParent!
+      
+      if parent.getExtend
+        if parent\getExtend!
+          @offsetX = x - parent\getParent!\getBoundingBox!\getX!
+          @offsetY = y - parent\getParent!\getBoundingBox!\getY!
+        else
+          @offsetX = x - parent\getBoundingBox!\getX!
+          @offsetY = y - parent\getBoundingBox!\getY!
 
   -- @local
   onMouseUp: (x, y) =>
