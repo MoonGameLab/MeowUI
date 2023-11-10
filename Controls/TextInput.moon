@@ -15,12 +15,13 @@ class TextInput extends Control
 
   @include Mixins.KeyboardMixins
   @include Mixins.EventMixins
+  @include Mixins.ThemeMixins
 
   new: (placeHolder) =>
     super "Box", "TextInput"
 
     -- TODO: should be a mixin
-    t = assert(require(MeowUI.root .. "Controls.Style"))[MeowUI.theme]
+    t = @getTheme!
     common = t.common
     style = t.textField
 
@@ -70,8 +71,6 @@ class TextInput extends Control
     @height = 25
 
     @font = love.graphics.newFont(12) -- TODO: use theme
-
-    Dump "Lines : ", @lines 
 
     @setEnabled true
     @setUpdateWhenFocused true

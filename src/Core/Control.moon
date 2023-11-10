@@ -53,6 +53,11 @@ class Control
     @boundingBox = BBoxs[@boxType]!
     @clip = false
 
+  --- gets control id
+  -- @treturn string id
+  getId: =>
+    @id
+
   -- @local
   hasMinxins: =>
     rawget(@__class.__parent, "mixinsClass")

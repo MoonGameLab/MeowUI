@@ -41,11 +41,13 @@ class Slide extends Control
       @on "UI_MOUSE_LEAVE", parent.onMouseLeave, parent
       @on "UI_MOUSE_DOWN", parent.onMouseDown, parent
       @on "UI_MOUSE_UP", parent.onMouseUp, parent
+      @on "UI_UPDATE", parent.onUpdate, parent
     else
       @on "UI_MOUSE_ENTER", @.onMouseEnter, @
       @on "UI_MOUSE_LEAVE", @.onMouseLeave, @
       @on "UI_MOUSE_DOWN", @.onMouseDown, @
       @on "UI_MOUSE_UP", @.onMouseUp, @
+      @on "UI_UPDATE", @.onUpdate, @
 
 class Content extends Control
 
@@ -304,6 +306,8 @@ class Content extends Control
 
     true
 
+  onUpdate: (dt) =>
+    -- TODO
   onVBarScroll: (ratio) =>
     slide = @getSlide @currentSlideIdx
     offset = -ratio * (slide\getHeight! - @getHeight!)
@@ -319,3 +323,14 @@ class Content extends Control
 
   getCurrentSlide: =>
     @slides[@currentSlideIdx]
+
+  destruct: (root) =>
+    @detachScrollBarV!
+    @detachScrollBarH!
+    
+    for i, slide in ipairs @slides
+      _detachSlide @, slide
+    
+    @slides = nil
+
+    root\removeChild @getId!

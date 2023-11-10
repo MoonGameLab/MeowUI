@@ -45,7 +45,7 @@ class Label extends Control
     @scaleX = 1
     @scaleY = 1
     @autoSize = true
-    @drawBg = true
+    @drawBg = false
     @bgOffsetX = 3
     @bgOffsetY = 3
     @alpha = 1

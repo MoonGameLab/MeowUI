@@ -127,6 +127,7 @@ EventMixins = class
       @aClick!
     @isPressed = false
 
+  onUpdate: (dt) =>
 
 KeyboardMixins = class
   isCtrlDown: =>
