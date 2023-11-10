@@ -113,8 +113,11 @@ class Debug extends Singleton
       Graphics.rectangle 'line', @x + 5, @y + 95, 155, 134
       className = @focusControl.__name or @focusControl.__class.__name
       box = @focusControl\getBoundingBox!
-      Graphics.setColor @palette.white 
-      Graphics.print "Class: " .. className, @x + 10, @y + 100
+      Graphics.setColor @palette.white
+      if @focusControl.label
+        Graphics.print @focusControl.label .. ": " .. className, @x + 10, @y + 100
+      else  
+        Graphics.print "Class: " .. className, @x + 10, @y + 100
       Graphics.print "Box_type: " .. @focusControl.boxType, @x + 10, @y + 112
       Graphics.print "Pos: " .. box\getX! .. ", " .. box\getY!, @x + 10, @y + 124
       switch @focusControl.boxType

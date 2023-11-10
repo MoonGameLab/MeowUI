@@ -27,6 +27,7 @@ class Control
   new: (boxT = "Box", __name) =>
 
     @__name = __name
+    @label = nil
     @boxType = boxT
     @id = Utils.Uid!
     @x = 0
@@ -560,6 +561,17 @@ class Control
   -- @treturn boolean focused
   isFocused: =>
     @focused
+
+  --- sets control label (Mainly for debug)
+  -- @tparam string l
+  setLabel: (l) =>
+    @label = l
+
+  --- gets control label (Mainly for debug)
+  -- @treturn string l
+  getLabel: =>
+    @label
+
 
   --- list of functions to override when boundingbox is of type Box.
   -- @table boxOverrides
