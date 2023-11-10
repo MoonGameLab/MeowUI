@@ -25,7 +25,7 @@ circleBorder = (box) =>
     Graphics.setLineWidth @stroke
     Graphics.setLineStyle @borderLineStyle
     Graphics.setColor @strokeColor
-    Graphics.circle "line", box.x, box.y, box\getRadius!, @outlineSegNbr
+    Graphics.circle "line", box.x, box.y, box\getRadius!
     Graphics.setLineWidth oldLineWidth
 
 -- @local
@@ -246,7 +246,6 @@ class Button extends Control
         style = t.circleButton
         @radius  = style.radius
         @dPadding = 15
-        @outlineSegNbr = style.outlineSegNbr
       when "Polygon"
         @onDraw = drawPoly
         style = t.polyButton

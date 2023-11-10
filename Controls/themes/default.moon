@@ -12,7 +12,7 @@ Default =
       hoverColor: { 0.2, 0.2, 0.2 }
       upColor: { 0.0980392156863, 0.101960784314, 0.0980392156863 }
       disabledColor: { 0.0980392156863, 0.101960784314, 0.0980392156863 }
-      strokeColor: { 0.471, 0.471, 0.439}
+      strokeColor: { 0.149019607843, 0.929411764706, 0.286274509804}
       fontColor: { 1, 1, 1 }
       contentBackgroundColor: { 0.0392156862745, 0.0392156862745, 0.0392156862745 }
       scrollBar: { 0.14, 0.14, 0.14 }
@@ -27,7 +27,7 @@ Default =
       height: 50
       rx: 10
       ry: 10
-      borderLineStyle: "smooth"
+      borderLineStyle: "rough"
 
     checkBox:
       width: 25
@@ -63,7 +63,6 @@ Default =
 
     circleButton:
       radius: 30
-      outlineSegNbr: 1000 -- TO-DO: seperate from normal drawing
 
     polyButton:
       radius: 10

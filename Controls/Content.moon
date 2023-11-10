@@ -50,8 +50,8 @@ class Slide extends Control
 class Content extends Control
 
   @include Mixins.ThemeMixins
-  @include Mixins.ColorMixins
   @include Mixins.EventMixins
+  @include Mixins.ColorMixins
 
   -- @local
   _attachSlide = (self, slide) ->
