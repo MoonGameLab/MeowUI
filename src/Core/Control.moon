@@ -201,8 +201,19 @@ class Control
   --- setter for the content parent.
   -- @tparam Content p
   setParent: (p) =>
-    assert (p == nil) or (p.__class.__parent == Control) or (p.__class == Control) or ((p\hasMinxins!) and p.__class.__parent.__parent == Control),
+    local _rootParent
+
+    if p 
+      if p["__class"]
+        _rootParent = p.__class.__parent
+        while _rootParent != Control
+          _rootParent = _rootParent.__parent
+      else
+        error "parent must a class."
+
+    assert (p == nil) or (p.__class == Control) or (_rootParent.__class == Control),
       "parent must be nil or Control or a subclass of Control."
+
     @parent = p
     @needConforming true
 
@@ -226,8 +237,18 @@ class Control
   -- @tparam Content child
   -- @tparam number depth
   addChild: (child, depth) =>
-    assert (child.__class.__parent == Control) or (child.__class == Control) or ((child\hasMinxins!) and child.__class.__parent.__parent == Control),
+    local _rootParent
+
+    if child["__class"]
+      _rootParent = child.__class.__parent
+      while _rootParent != Control
+        _rootParent = _rootParent.__parent
+    else
+      error "parent must a class."
+
+    assert (child.__class == Control) or (_rootParent.__class == Control),
       "child must be Control or a subclass of Control."
+
     assert child\getParent! == nil, "child must be an Orphan Control."
 
 
@@ -237,7 +258,7 @@ class Control
     child\setParent self
 
     if depth then child\setDepth depth
-    else child\setDepth child.depth
+    else child\setDepth @getDepth! + 1
     events = child.events
     events\dispatch events\getEvent "UI_ON_ADD"
 
@@ -439,7 +460,17 @@ class Control
       "event must be of type string."
     assert type(callback) == 'function',
       "callback must be of type function."
-    assert (target.__class.__parent == Control) or (target.__class == Control) or ((target\hasMinxins!) and target.__class.__parent.__parent == Control),
+
+    local _rootParent
+
+    if target["__class"]
+      _rootParent = target.__class.__parent
+      while _rootParent != Control
+        _rootParent = _rootParent.__parent
+    else
+      error "target must a class."
+
+    assert (target.__class == Control) or (_rootParent.__class == Control),
       "target must be a Control or a subclass of Control."
 
     @events\on @events\getEvent(event), callback, target
