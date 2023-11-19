@@ -10,7 +10,13 @@ drawRect = =>
   r, g, b, a = Graphics.getColor!
   boxW, boxH = box\getWidth!, box\getHeight!
   x, y = box\getX!, box\getY!
-  color = @backgroundColor
+  local color
+
+  if @focuseResponsive and @isFocused! == false
+    color = @backgroundColorUnFocus
+  else
+    color = @backgroundColor
+
   color[4] = color[4] or @alpha
 
   Graphics.setColor color
@@ -42,14 +48,18 @@ class Slide extends Control
       @on "UI_MOUSE_DOWN", parent.onMouseDown, parent
       @on "UI_MOUSE_UP", parent.onMouseUp, parent
       @on "UI_UPDATE", parent.onUpdate, parent
+      @on "UI_UN_FOCUS", @onUnFocus, @
+
     else
       @on "UI_MOUSE_DOWN", @.onMouseDown, @
       @on "UI_MOUSE_UP", @.onMouseUp, @
       @on "UI_UPDATE", @.onUpdate, @
+      @on "UI_UN_FOCUS", @onUnFocus, @
+      @on "UI_FOCUS", @onFocus, @
 
   getExtend: =>
     @extend
-
+    
 class Content extends Control
 
   @include Mixins.ThemeMixins
@@ -70,7 +80,7 @@ class Content extends Control
   -- @local
   h_barSide = "bottom"
 
-  new: (label, vbar, hbar) =>
+  new: (label, vbar, hbar, attachSlides) =>
     -- Bounding box type
     super "Box", "Content"
 
@@ -81,7 +91,10 @@ class Content extends Control
     colors = t.colors
     common = t.common
     @stroke = common.stroke
-    @backgroundColor = colors.contentBackgroundColor
+    @backgroundColor = t.content.backgroundColorFocuse
+    @backgroundColorUnFocus = t.content.backgroundColorUnFocuse
+    @focuseResponsive = false
+
     @strokeColor = colors.strokeColor
 
     @setClip true
@@ -93,7 +106,6 @@ class Content extends Control
 
     @alpha = 1
 
-    @onDraw = drawRect
     style = t.content
     @width  = style.width
     @height = style.height
@@ -110,9 +122,12 @@ class Content extends Control
 
     @on "UI_DRAW", @onDraw, @
     @on "UI_MOUSE_DOWN", @onMouseDown, @
+    @on "UI_UN_FOCUS", @onUnFocus, @
+    @on "UI_FOCUS", @onFocus, @
     @on "UI_UPDATE", @onUpdate, @
-
-    @addSlide true, true
+    if attachSlides
+      @addSlide true, true
+      @onDraw = drawRect -- FIX
     @on "UI_WHELL_MOVE", @onWheelMove, @
 
     if vbar then @attachScrollBarV "Box"
@@ -122,6 +137,7 @@ class Content extends Control
     slideIdx = @slidesIdx
     @slides[@slidesIdx] = Slide "Box", @slidesIdx, @, extend
     @slides[@slidesIdx].autoSize = true
+
     if @getLabel!
       @slides[@slidesIdx]\setLabel @getLabel!
 

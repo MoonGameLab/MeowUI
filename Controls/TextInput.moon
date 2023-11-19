@@ -20,7 +20,6 @@ class TextInput extends Control
   new: (placeHolder) =>
     super "Box", "TextInput"
 
-    -- TODO: should be a mixin
     t = @getTheme!
     common = t.common
     style = t.textField

@@ -14,7 +14,6 @@ Default =
       disabledColor: { 0.0980392156863, 0.101960784314, 0.0980392156863 }
       strokeColor: { 0.471, 0.471, 0.439}
       fontColor: { 1, 1, 1 }
-      contentBackgroundColor: {0.082, 0.086, 0.09}
       scrollBar: { 0.14, 0.14, 0.14 }
 
     common:
@@ -60,6 +59,8 @@ Default =
       radius: ww/4
       rx: 1
       ry: 1
+      backgroundColorFocuse: {0.082, 0.086, 0.09}
+      backgroundColorUnFocuse: {0.808, 0.804, 0.859}
 
     circleButton:
       radius: 30

@@ -129,7 +129,7 @@ EventMixins = class
 
       while parent.getDragParent and parent\getDragParent!
         parent = parent\getParent!
-      
+    
       if parent.getExtend
         if parent\getExtend!
           @offsetX = x - parent\getParent!\getBoundingBox!\getX!
@@ -145,6 +145,20 @@ EventMixins = class
     @isPressed = false
 
   onUpdate: (dt) =>
+
+  whenFocused: (cb) =>
+    @Focused = cb
+
+  whenUnFocused: (cb) =>
+    @UnFocused = cb
+
+  onFocus: =>
+    if @Focused
+      @Focused!
+  
+  onUnFocus: =>
+     if @UnFocused
+      @UnFocused!
 
 KeyboardMixins = class
   isCtrlDown: =>
