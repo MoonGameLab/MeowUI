@@ -205,11 +205,14 @@ class Control
 
     if p 
       if p["__class"]
-        _rootParent = p.__class.__parent
-        while _rootParent != Control
-          _rootParent = _rootParent.__parent
+        if p.__class != Control
+          _rootParent = p.__class.__parent
+          while _rootParent != Control
+            _rootParent = _rootParent.__parent
       else
         error "parent must a class."
+
+    _rootParent = _rootParent or p
 
     assert (p == nil) or (p.__class == Control) or (_rootParent.__class == Control),
       "parent must be nil or Control or a subclass of Control."
@@ -240,11 +243,14 @@ class Control
     local _rootParent
 
     if child["__class"]
-      _rootParent = child.__class.__parent
-      while _rootParent != Control
-        _rootParent = _rootParent.__parent
+      if child.__class != Control
+        _rootParent = child.__class.__parent
+        while _rootParent != Control
+          _rootParent = _rootParent.__parent
     else
       error "parent must a class."
+
+    _rootParent = _rootParent or child
 
     assert (child.__class == Control) or (_rootParent.__class == Control),
       "child must be Control or a subclass of Control."
@@ -464,12 +470,14 @@ class Control
     local _rootParent
 
     if target["__class"]
-      _rootParent = target.__class.__parent
-      while _rootParent != Control
-        _rootParent = _rootParent.__parent
+      if target.__class != Control
+        _rootParent = target.__class.__parent
+        while _rootParent != Control
+          _rootParent = _rootParent.__parent
     else
       error "target must a class."
-
+      
+    _rootParent = _rootParent or target
     assert (target.__class == Control) or (_rootParent.__class == Control),
       "target must be a Control or a subclass of Control."
 

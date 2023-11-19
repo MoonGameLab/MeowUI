@@ -93,8 +93,8 @@ class Debug extends Singleton
       if @focusControl.boxType == "Polygon" then cy = 160
       else cy = 148
       parent = focusControl\getParent!
-      if parent == nil then pname = "None"
-      else pname = parent.__name
+      if parent == nil then pname = "Control"
+      else pname = parent.__name or "Control"
       Graphics.print "Parent: " .. pname, @x + 10, @y + cy
       Graphics.print "Depth: " .. focusControl.depth, @x + 10, @y + cy + 12
       Graphics.print "#Children: " .. #focusControl.children, @x + 10, @y + cy + 24
