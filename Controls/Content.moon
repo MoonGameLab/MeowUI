@@ -12,10 +12,7 @@ drawRect = =>
   x, y = box\getX!, box\getY!
   local color
 
-  if @focuseResponsive and @isFocused! == false
-    color = @backgroundColorUnFocus
-  else
-    color = @backgroundColor
+  color = @backgroundColor
 
   color[4] = color[4] or @alpha
 
@@ -45,14 +42,14 @@ class Slide extends Control
 
     -- Events
     if @extend
-      @on "UI_MOUSE_DOWN", parent.onMouseDown, parent
-      @on "UI_MOUSE_UP", parent.onMouseUp, parent
+      -- @on "UI_MOUSE_DOWN", parent.onMouseDown, parent
+      -- @on "UI_MOUSE_UP", parent.onMouseUp, parent
       @on "UI_UPDATE", parent.onUpdate, parent
       @on "UI_UN_FOCUS", @onUnFocus, @
 
     else
-      @on "UI_MOUSE_DOWN", @.onMouseDown, @
-      @on "UI_MOUSE_UP", @.onMouseUp, @
+      -- @on "UI_MOUSE_DOWN", @.onMouseDown, @
+      -- @on "UI_MOUSE_UP", @.onMouseUp, @
       @on "UI_UPDATE", @.onUpdate, @
       @on "UI_UN_FOCUS", @onUnFocus, @
       @on "UI_FOCUS", @onFocus, @
@@ -122,8 +119,9 @@ class Content extends Control
 
     @on "UI_DRAW", @onDraw, @
     @on "UI_MOUSE_DOWN", @onMouseDown, @
-    @on "UI_UN_FOCUS", @onUnFocus, @
-    @on "UI_FOCUS", @onFocus, @
+    @on "UI_MOUSE_UP", @onMouseUp, @
+    -- @on "UI_UN_FOCUS", @onUnFocus, @
+    -- @on "UI_FOCUS", @onFocus, @
     @on "UI_UPDATE", @onUpdate, @
     if attachSlides
       @addSlide true, true
@@ -132,6 +130,34 @@ class Content extends Control
 
     if vbar then @attachScrollBarV "Box"
     if hbar then @attachScrollBarH "Box"
+
+
+  onMouseDown: (x, y) =>
+    if @Click
+      @Click!
+    @isPressed = true
+    if @dragParent == false
+      @offsetX = x - @getBoundingBox!\getX!
+      @offsetY = y - @getBoundingBox!\getY!
+    else
+      local parent
+      parent = @
+
+      while parent.getDragParent and parent\getDragParent!
+        parent = parent\getParent!
+    
+      if parent.getExtend
+        if parent\getExtend!
+          @offsetX = x - parent\getParent!\getBoundingBox!\getX!
+          @offsetY = y - parent\getParent!\getBoundingBox!\getY!
+        else
+          @offsetX = x - parent\getBoundingBox!\getX!
+          @offsetY = y - parent\getBoundingBox!\getY!
+
+  onMouseUp: (x, y) =>
+    if @aClick
+      @aClick!
+    @isPressed = false
 
   addSlide: (attach, extend, width = nil, height = nil) =>
     slideIdx = @slidesIdx
@@ -152,6 +178,8 @@ class Content extends Control
       @slides[@slidesIdx]\setHeight height
     else
       @slides[@slidesIdx]\setHeight @getHeight!
+
+      
 
     @slidesIdx += 1
     if attach

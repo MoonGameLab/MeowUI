@@ -1,7 +1,10 @@
+                                [Logs for changes done on CORE modules]
+
 ================================================
 Version 11.4 - Alpha (November 19 - 2023)
 ================================================
-[ADDED][Event][Manager] Ability for a control to notify the parent when *Any event.
+[ADDED](Event)[Manager][Control] Ability for a control to notify the parent when *Any event.
+[FIXED] Bug in assert when we create a Control instance. [c179e9fc1f6f8a0386b9395e8daf68e2584970b4]
 
 ================================================
 Version 11.4 - Alpha (November 14 - 2023)

@@ -54,8 +54,10 @@ class Frame extends Content
     @on "UI_DRAW", @onDraw, @
     @on "UI_FOCUS", @onFocus, @
     @on "UI_UN_FOCUS", @onUnFocus, @
+    @on "UI_MOUSE_DOWN", @onMouseDown, @
 
     @addChild @closeBtn
+    @setDrag true
 
   onDraw: =>
     drawToolBar @
@@ -87,5 +89,12 @@ class Frame extends Content
   onUnFocus: =>
     @focused = false
 
+  isInsideToolBar: (x, y) =>
+    return x >= @getX! and x <= @getX! + @getWidth! and 
+      y >= @getY! and y <= @getY! + @toolBarHeight
+
+  onMouseDown: (x, y, btn) =>
+    if @isInsideToolBar(x, y) 
+      super x, y, btn
 
 Frame
