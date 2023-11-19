@@ -1,4 +1,9 @@
 ================================================
+Version 11.4 - Alpha (November 19 - 2023)
+================================================
+[ADDED][Event][Manager] Ability for a control to notify the parent when *Any event.
+
+================================================
 Version 11.4 - Alpha (November 14 - 2023)
 ================================================
 [BUG] Fixed assets issue in Control when extending from a Control sub_class.

@@ -17,6 +17,9 @@ Chrono     = assert require MeowUI.cwd .. "Core.Chrono"
 dispatch = (control, name, ...) ->
     control.events\dispatch control.events\getEvent(name),
       ...
+    if control\getNotifyParent!
+      p = control\getParent!
+      dispatch p, name, ...
 
 
 -- @local
@@ -88,13 +91,11 @@ class Manager extends Singleton
     if @focusControl == control then return
 
     if @focusControl
-      @focusControl\setFocuse false
       dispatch @focusControl, "UI_UN_FOCUS"
 
     @focusControl = control
 
     if @focusControl
-      @focusControl\setFocuse true
       dispatch @focusControl, "UI_FOCUS"
 
   --- callback function triggered when a mouse button is pressed.
@@ -113,8 +114,11 @@ class Manager extends Singleton
     if hitControl
       dispatch hitControl, "UI_MOUSE_DOWN", x, y, button, isTouch
       @holdControl = hitControl
-
-    @setFocuse hitControl
+      
+    if hitControl
+      @setFocuse hitControl
+    else
+      @setFocuse @focusControl
 
   --- callback function triggered when a mouse button is released.
   -- @tparam number x
