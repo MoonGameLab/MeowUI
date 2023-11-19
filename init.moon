@@ -12,6 +12,17 @@ root = path .. "."
 love = love
 import keyboard from love
 
+os = love.system.getOS!
+local _separator
+
+if os == "Windows"
+  _separator = '\\'
+else
+  _separator = '/'
+
+print root
+_assets = root\gsub '%.', _separator
+
 -- Love config
 keyboard.setKeyRepeat true
 
@@ -24,14 +35,15 @@ export MeowUI = {
   author: "Tourahi Amine"
 }
 
-MeowUI["cwd"]          = cwd
-MeowUI["c_cwd"]        = c_cwd
-MeowUI["root"]         = root
-MeowUI["manager"]      = assert require MeowUI.cwd .. "Core.Manager"
-MeowUI["Control"]      = assert require MeowUI.cwd .. "Core.Control"
-MeowUI["theme"]        = assert(require(MeowUI.root .. "Controls.themes")[MeowUI.defTheme]!)
+MeowUI["cwd"]                  = cwd
+MeowUI["c_cwd"]                = c_cwd
+MeowUI["root"]                 = root
+MeowUI["assets"]               = _assets .. "Controls" .. _separator .. "assets" .. _separator 
+MeowUI["path_seperator"]       = _separator
+MeowUI["manager"]              = assert require MeowUI.cwd .. "Core.Manager"
+MeowUI["Control"]              = assert require MeowUI.cwd .. "Core.Control"
+MeowUI["theme"]                = assert(require(MeowUI.root .. "Controls.themes")[MeowUI.defTheme]!)
 MeowUI["useThirdParty-utf8"]        = true -- utf8.lua - https://github.com/Stepets/utf8.lua
-
 
 if MeowUI["useThirdParty-utf8"] 
   export utf8 = assert require(MeowUI.cwd .. "ThirdParty.utf8")\init!

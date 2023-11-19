@@ -20,6 +20,11 @@ Default =
       stroke: 2
       fontSize: 13
       iconAndTextSpace: 8
+    
+    frame:
+      toolBarColor: {0.161, 0.29, 0.478}
+      toolBarColorUnfocused: {0.62, 0.62, 0.576}
+      contentBackground: {0.082, 0.086, 0.09}
 
     button:
       width: 100
