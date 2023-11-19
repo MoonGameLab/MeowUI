@@ -48,10 +48,10 @@ class Control
     @worldY = 0
     @onTimerDone = nil
     @updateWhenFocused = true
-    @focused = false
     @radius = 0
     @boundingBox = BBoxs[@boxType]!
     @clip = false
+    @notifyParent = false
 
   --- gets control id
   -- @treturn string id
@@ -588,16 +588,6 @@ class Control
   setUpdateWhenFocused: (updateWhenFocused) =>
     @updateWhenFocused = updateWhenFocused
 
-  --- sets focused property
-  -- @tparam bool bool
-  setFocuse: (bool) =>
-    @focused = bool
-
-  --- return focused property 
-  -- @treturn boolean focused
-  isFocused: =>
-    @focused
-
   --- sets control label (Mainly for debug)
   -- @tparam string l
   setLabel: (l) =>
@@ -608,6 +598,11 @@ class Control
   getLabel: =>
     @label
 
+  setNotifyParent: (bool) =>
+    @notifyParent = bool
+
+  getNotifyParent: (bool) =>
+    @notifyParent
 
   --- list of functions to override when boundingbox is of type Box.
   -- @table boxOverrides
