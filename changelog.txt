@@ -7,12 +7,13 @@ Version 11.4 - Alpha (November 24 - 2023)
     * funcs : setMakeTopWhenClicked | getMakeTopWhenClicked | makeTop | rollBackDepth
     * Note : if for some reason you don't want to set the flag and let the Manager handle the depth
         you can call makeTop where needed but make sure to call rollBackDepth on the control when unfocused.
-
+    * commit: e2f926b557ba9d6b0a4bd24206035f4a94c1f8df
 ================================================
 Version 11.4 - Alpha (November 19 - 2023)
 ================================================
 [ADDED](Event)[Manager][Control] Ability for a control to notify the parent when *Any event.
-[FIXED] Bug in assert when we create a Control instance. [c179e9fc1f6f8a0386b9395e8daf68e2584970b4]
+[FIXED] Bug in assert when we create a Control instance. 
+    * commit: c179e9fc1f6f8a0386b9395e8daf68e2584970b4
 
 ================================================
 Version 11.4 - Alpha (November 14 - 2023)
