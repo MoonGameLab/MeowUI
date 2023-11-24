@@ -1,6 +1,14 @@
                                 [Logs for changes done on CORE modules]
 
 ================================================
+Version 11.4 - Alpha (November 24 - 2023)
+================================================
+[ADDED][Manager][Control] floats up a control when clicked && when makeTopWhenClicked flag is true.
+    * funcs : setMakeTopWhenClicked | getMakeTopWhenClicked | makeTop | rollBackDepth
+    * Note : if for some reason you don't want to set the flag and let the Manager handle the depth
+        you can call makeTop where needed but make sure to call rollBackDepth on the control when unfocused.
+
+================================================
 Version 11.4 - Alpha (November 19 - 2023)
 ================================================
 [ADDED](Event)[Manager][Control] Ability for a control to notify the parent when *Any event.

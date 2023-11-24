@@ -45,14 +45,11 @@ class Slide extends Control
       -- @on "UI_MOUSE_DOWN", parent.onMouseDown, parent
       -- @on "UI_MOUSE_UP", parent.onMouseUp, parent
       @on "UI_UPDATE", parent.onUpdate, parent
-      @on "UI_UN_FOCUS", @onUnFocus, @
-
     else
       -- @on "UI_MOUSE_DOWN", @.onMouseDown, @
       -- @on "UI_MOUSE_UP", @.onMouseUp, @
       @on "UI_UPDATE", @.onUpdate, @
-      @on "UI_UN_FOCUS", @onUnFocus, @
-      @on "UI_FOCUS", @onFocus, @
+
 
   getExtend: =>
     @extend
@@ -77,7 +74,7 @@ class Content extends Control
   -- @local
   h_barSide = "bottom"
 
-  new: (label, vbar, hbar, attachSlides) =>
+  new: (label, vbar, hbar, attachSlides = true) =>
     -- Bounding box type
     super "Box", "Content"
 
@@ -117,15 +114,15 @@ class Content extends Control
     @drag = false
     @dragParent = false
 
-    @on "UI_DRAW", @onDraw, @
-    @on "UI_MOUSE_DOWN", @onMouseDown, @
-    @on "UI_MOUSE_UP", @onMouseUp, @
-    -- @on "UI_UN_FOCUS", @onUnFocus, @
-    -- @on "UI_FOCUS", @onFocus, @
-    @on "UI_UPDATE", @onUpdate, @
+
     if attachSlides
       @addSlide true, true
       @onDraw = drawRect -- FIX
+
+    @on "UI_DRAW", @onDraw, @
+    @on "UI_MOUSE_DOWN", @onMouseDown, @
+    @on "UI_MOUSE_UP", @onMouseUp, @
+    @on "UI_UPDATE", @onUpdate, @
     @on "UI_WHELL_MOVE", @onWheelMove, @
 
     if vbar then @attachScrollBarV "Box"

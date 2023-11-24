@@ -48,8 +48,7 @@ class Frame extends Content
       \setStroke 0
       \setNotifyParent true
       \onClick ->
-        nil
-        -- TODO : destruct
+        @destruct MeowUI.manager\getRoot!
 
     @on "UI_DRAW", @onDraw, @
     @on "UI_FOCUS", @onFocus, @
@@ -58,6 +57,7 @@ class Frame extends Content
 
     @addChild @closeBtn
     @setDrag true
+    @setMakeTopWhenClicked true
 
   onDraw: =>
     drawToolBar @
@@ -96,5 +96,9 @@ class Frame extends Content
   onMouseDown: (x, y, btn) =>
     if @isInsideToolBar(x, y) 
       super x, y, btn
+
+  addChild: (child, depth) =>
+    child\setNotifyParent true
+    super child, depth
 
 Frame

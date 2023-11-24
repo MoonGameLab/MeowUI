@@ -92,8 +92,11 @@ class Manager extends Singleton
 
     if @focusControl
       dispatch @focusControl, "UI_UN_FOCUS"
+      if @focusControl\getMakeTopWhenClicked!
+        @focusControl\rollBackDepth!
 
     @focusControl = control
+    if control\getMakeTopWhenClicked! then control\makeTop!
 
     if @focusControl
       dispatch @focusControl, "UI_FOCUS"

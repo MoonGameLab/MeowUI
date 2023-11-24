@@ -21,6 +21,9 @@ BBoxs = {
 }
 
 class Control
+
+  @@curMaxDepth = 0
+
   --- constructor.
   -- @tparam string boxT Bounding box type[Box, Circle, Polygon]
   -- @tparam string __name name of the control
@@ -52,6 +55,7 @@ class Control
     @boundingBox = BBoxs[@boxType]!
     @clip = false
     @notifyParent = false
+    @makeTopWhenClicked = false
 
   --- gets control id
   -- @treturn string id
@@ -267,6 +271,8 @@ class Control
     else child\setDepth @getDepth! + 1
     events = child.events
     events\dispatch events\getEvent "UI_ON_ADD"
+
+    @@curMaxDepth = (child\getDepth! > @@curMaxDepth) and child\getDepth! or @@curMaxDepth
 
   --- setter for the content anchor.
   -- @tparam number x
@@ -611,6 +617,21 @@ class Control
 
   getNotifyParent: (bool) =>
     @notifyParent
+
+  setMakeTopWhenClicked: (bool) =>
+    @makeTopWhenClicked = bool
+
+  getMakeTopWhenClicked: =>
+    @makeTopWhenClicked
+
+  makeTop: =>
+    @originalDepth = @depth
+    @setDepth @@curMaxDepth + 1
+    if @parent then @parent\sortChildren!
+
+  rollBackDepth: =>
+    @setDepth @originalDepth
+    if @parent then @parent\sortChildren!
 
   --- list of functions to override when boundingbox is of type Box.
   -- @table boxOverrides
