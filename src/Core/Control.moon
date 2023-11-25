@@ -630,8 +630,9 @@ class Control
     if @parent then @parent\sortChildren!
 
   rollBackDepth: =>
-    @setDepth @originalDepth
-    if @parent then @parent\sortChildren!
+    if @makeTopWhenClicked
+      @setDepth @originalDepth
+      if @parent then @parent\sortChildren!
 
   --- list of functions to override when boundingbox is of type Box.
   -- @table boxOverrides

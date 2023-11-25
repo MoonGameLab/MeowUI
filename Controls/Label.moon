@@ -130,6 +130,13 @@ class Label extends Control
   setAlpha: (a) =>
     @alpha = a
 
+  setScale: (sx, sy) =>
+    @scaleX = sx
+    @scaleY = sy
+
+  setDrawShadow: (bool) =>
+    @drawBg = bool
+
   setFont: (font, size = @size) =>
     if type(font) == "number" then @font = Graphics.newFont font
     if type(font) == "string" then @font = Graphics.newFont font, size
