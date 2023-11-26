@@ -54,6 +54,7 @@ class Frame extends Content
     @on "UI_FOCUS", @onFocus, @
     @on "UI_UN_FOCUS", @onUnFocus, @
     @on "UI_MOUSE_DOWN", @onMouseDown, @
+    @on "UI_ON_ADD", @onAdd, @
 
     @addChild @closeBtn
     @setDrag true
@@ -100,5 +101,10 @@ class Frame extends Content
   addChild: (child, depth) =>
     child\setNotifyParent true
     super child, depth
+
+  onAdd: =>
+    manager\setFocus @
+    @onFocus!
+
 
 Frame

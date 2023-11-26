@@ -87,7 +87,7 @@ class Manager extends Singleton
 
   --- focuse on given control.
   -- @tparam Control control
-  setFocuse: (control) =>
+  setFocus: (control) =>
     if @focusControl == control then return
 
     if @focusControl
@@ -118,9 +118,9 @@ class Manager extends Singleton
       @holdControl = hitControl
       
     if hitControl
-      @setFocuse hitControl
+      if hitControl\isFocusEnabled! then @setFocus hitControl
     else
-      @setFocuse @focusControl
+      @setFocus @focusControl
 
   --- callback function triggered when a mouse button is released.
   -- @tparam number x

@@ -20,7 +20,6 @@ if os == "Windows"
 else
   _separator = '/'
 
-print root
 _assets = root\gsub '%.', _separator
 
 -- Love config
@@ -40,8 +39,8 @@ MeowUI["c_cwd"]                = c_cwd
 MeowUI["root"]                 = root
 MeowUI["assets"]               = _assets .. "Controls" .. _separator .. "assets" .. _separator 
 MeowUI["path_seperator"]       = _separator
-MeowUI["manager"]              = assert require MeowUI.cwd .. "Core.Manager"
 MeowUI["Control"]              = assert require MeowUI.cwd .. "Core.Control"
+MeowUI["manager"]              = assert require MeowUI.cwd .. "Core.Manager"
 MeowUI["theme"]                = assert(require(MeowUI.root .. "Controls.themes")[MeowUI.defTheme]!)
 MeowUI["useThirdParty-utf8"]        = true -- utf8.lua - https://github.com/Stepets/utf8.lua
 

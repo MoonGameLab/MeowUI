@@ -6,7 +6,7 @@
 MeowUI = MeowUI
 love = love
 
-Control = assert require MeowUI.cwd .. "Core.Control"
+Control  = MeowUI.Control
 Graphics = love.graphics
 
 class Root extends Control

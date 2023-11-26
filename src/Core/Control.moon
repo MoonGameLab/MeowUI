@@ -57,6 +57,8 @@ class Control
     @notifyParent = false
     @makeTopWhenClicked = false
 
+    @focusEnabled = true
+
   --- gets control id
   -- @treturn string id
   getId: =>
@@ -633,6 +635,18 @@ class Control
     if @makeTopWhenClicked
       @setDepth @originalDepth
       if @parent then @parent\sortChildren!
+
+  setFocuseOnAdd: (bool) =>
+    @focuseOnAdd bool
+
+  getFocuseOnAdd: =>
+    @focuseOnAdd
+
+  setFocusEnabled: (bool) =>
+    @focusEnabled = bool
+  
+  isFocusEnabled: =>
+    @focusEnabled
 
   --- list of functions to override when boundingbox is of type Box.
   -- @table boxOverrides
