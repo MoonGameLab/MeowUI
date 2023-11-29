@@ -38,6 +38,7 @@ class Frame extends Content
     @toolBarColor = t.frame.toolBarColor
     @toolBarColorUnfocused = t.frame.toolBarColorUnfocused
     @backgroundColor = t.frame.contentBackground
+    @toolBarTitleColor = t.frame.toolBarTitleColor
 
     @closeBtn = Button "Box"
 
@@ -60,12 +61,18 @@ class Frame extends Content
     @setDrag true
     @setMakeTopWhenClicked true
 
+    @setToolBarTitle label, math.ceil(@toolBarHeight/2)
+
   onDraw: =>
     drawToolBar @
     
     box = @getBoundingBox!
     r, g, b, a = Graphics.getColor!
     boxW, boxH = box\getWidth!, box\getHeight!
+    
+    Graphics.setColor @toolBarTitleColor
+    Graphics.draw @toolBarTitle, box.x + @titleOffSet, box.y + @titleOffSet
+
 
     Graphics.setColor @backgroundColor
     Graphics.rectangle "fill", box.x, box.y + @toolBarHeight, boxW, boxH - @toolBarHeight, @rx, @ry
@@ -105,6 +112,17 @@ class Frame extends Content
   onAdd: =>
     manager\setFocus @
     @onFocus!
+
+  setToolBarTitle: (text = @text, size, font) =>
+    if size and font
+      if type(font) == "number" then @font = Graphics.newFont font
+      if type(font) == "string" then @font = Graphics.newFont font, size
+      @toolBarTitle = Graphics.newText @font, text
+    if size
+      @font = Graphics.newFont size
+      @toolBarTitle = Graphics.newText @font, text
+
+    @titleOffSet = math.floor ((@toolBarHeight-1) / 2) - (size/2)
 
 
 Frame
