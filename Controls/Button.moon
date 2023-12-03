@@ -23,7 +23,6 @@ circleBorder = (box) =>
   if @enabled and @stroke > 0
     oldLineWidth = Graphics.getLineWidth!
     Graphics.setLineWidth @stroke
-    Graphics.setLineStyle @borderLineStyle
     Graphics.setColor @strokeColor
     Graphics.circle "line", box.x, box.y, box\getRadius!
     Graphics.setLineWidth oldLineWidth
@@ -33,7 +32,6 @@ polyBorder = (box) =>
   if @enabled and @stroke > 0
     oldLineWidth = Graphics.getLineWidth!
     Graphics.setLineWidth @stroke
-    Graphics.setLineStyle @borderLineStyle
     Graphics.setColor @strokeColor
     Graphics.polygon "line", box\getVertices!
     Graphics.setLineWidth oldLineWidth
@@ -64,6 +62,7 @@ drawPoly = =>
   r, g, b, a = Graphics.getColor!
   color = currentColor self
 
+  Graphics.setLineStyle @borderLineStyle
   -- Button body
   if @bgImage
     if not @isPressed
@@ -95,8 +94,8 @@ drawPoly = =>
   if @textDrawable
     Graphics.setColor @fontColor
     textW, textH = @textDrawable\getWidth!, @textDrawable\getHeight!
-    x = box.x - textW / 2
-    y = box.y - textH / 2
+    x = math.ceil(box.x - textW / 2)
+    y = math.ceil(box.y - textH / 2)
     Graphics.draw @textDrawable, x, y
 
   Graphics.setColor r, g, b, a
@@ -108,6 +107,8 @@ drawCircle = =>
   r, g, b, a = Graphics.getColor!
   boxR = box\getRadius!
   color = currentColor self
+
+  Graphics.setLineStyle @borderLineStyle
 
   -- Button body
   if @bgImage
@@ -153,6 +154,8 @@ drawRect = =>
     boxW, boxH = box\getWidth!, box\getHeight!
     color = currentColor self
 
+    Graphics.setLineStyle @borderLineStyle
+
     -- Button body
     if @bgImage
       imageW, imageH = @bgImage\getWidth!, @bgImage\getHeight!
@@ -176,7 +179,6 @@ drawRect = =>
     if @enabled and @stroke > 0
       oldLineWidth = Graphics.getLineWidth!
       Graphics.setLineWidth @stroke
-      Graphics.setLineStyle @borderLineStyle
       Graphics.setColor @strokeColor
       Graphics.rectangle "line", box.x, box.y, boxW, boxH, @rx, @ry
       Graphics.setLineWidth oldLineWidth

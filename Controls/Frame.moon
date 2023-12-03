@@ -38,7 +38,6 @@ class Frame extends Content
     @toolBarColor = t.frame.toolBarColor
     @toolBarColorUnfocused = t.frame.toolBarColorUnfocused
     @backgroundColor = t.frame.contentBackground
-    @toolBarTitleColor = t.frame.toolBarTitleColor
 
     @closeBtn = Button "Box"
 
@@ -54,6 +53,7 @@ class Frame extends Content
     @on "UI_DRAW", @onDraw, @
     @on "UI_FOCUS", @onFocus, @
     @on "UI_UN_FOCUS", @onUnFocus, @
+    @on "UI_CLICK", @onClick, @
     @on "UI_MOUSE_DOWN", @onMouseDown, @
     @on "UI_ON_ADD", @onAdd, @
 
@@ -61,18 +61,12 @@ class Frame extends Content
     @setDrag true
     @setMakeTopWhenClicked true
 
-    @setToolBarTitle label, math.ceil(@toolBarHeight/2)
-
   onDraw: =>
     drawToolBar @
     
     box = @getBoundingBox!
     r, g, b, a = Graphics.getColor!
     boxW, boxH = box\getWidth!, box\getHeight!
-    
-    Graphics.setColor @toolBarTitleColor
-    Graphics.draw @toolBarTitle, box.x + @titleOffSet, box.y + @titleOffSet
-
 
     Graphics.setColor @backgroundColor
     Graphics.rectangle "fill", box.x, box.y + @toolBarHeight, boxW, boxH - @toolBarHeight, @rx, @ry
@@ -113,6 +107,11 @@ class Frame extends Content
     manager\setFocus @
     @onFocus!
 
+<<<<<<< HEAD
+  onClick: =>
+    manager\setFocus @
+    @onFocus!
+    
   setToolBarTitle: (text = @text, size, font) =>
     if size and font
       if type(font) == "number" then @font = Graphics.newFont font
@@ -124,5 +123,7 @@ class Frame extends Content
 
     @titleOffSet = math.floor ((@toolBarHeight-1) / 2) - (size/2)
 
+=======
+>>>>>>> parent of 36c498a (Frame toolbar title.)
 
 Frame
