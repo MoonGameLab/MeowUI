@@ -190,8 +190,7 @@ class Control
 
     if @childrenEnabled
       for i = #@children, 1, -1
-        control = @children[i]
-        hitControl = control\hitTest x, y
+        hitControl = @children[i]\hitTest x, y
         if hitControl then return hitControl
 
     if @enabled
@@ -449,6 +448,7 @@ class Control
         @children[i]\setParent nil
         Tremove @children, i
         child.events\dispatch child.events\getEvent "UI_ON_REMOVE"
+        child = nil
         break
 
   --- drops the control children.
