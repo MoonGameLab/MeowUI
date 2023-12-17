@@ -17,7 +17,7 @@ drawRect = =>
   r, g, b, a = Graphics.getColor!
   boxW, boxH = box\getWidth!, box\getHeight!
 
-  colorBk = @backColor
+  colorBk = @strokeColor
   local colorfr
 
   if @checked
@@ -25,6 +25,7 @@ drawRect = =>
   else
     colorfr = @frontColor
 
+  Graphics.setLineStyle @borderLineStyle
   Graphics.setColor colorBk
   Graphics.rectangle "fill", box.x, box.y, boxW, boxH, @rx, @ry
   Graphics.setColor colorfr
@@ -51,7 +52,9 @@ drawCircle = =>
   r, g, b, a = Graphics.getColor!
   boxR = box\getRadius!
 
-  colorBk = @backColor
+  Graphics.setLineStyle @borderLineStyle
+
+  colorBk = @strokeColor
   local colorfr
 
   if @checked
@@ -59,17 +62,20 @@ drawCircle = =>
   else
     colorfr = @frontColor
 
-  Graphics.setColor colorBk
-  Graphics.circle 'fill', box.x, box.y, boxR, @segments
   Graphics.setColor colorfr
-  Graphics.circle 'fill', box.x, box.y, ceil(boxR - @margin), @segments
+  Graphics.circle 'fill', box.x, box.y, boxR
+
+  Graphics.setLineWidth @stroke
+  Graphics.setColor colorBk
+  Graphics.circle 'line', box.x, box.y, boxR
+
   Graphics.setColor r, g, b, a
 
 -- @local
 polyBorder = (box) =>
   oldLineWidth = Graphics.getLineWidth!
   Graphics.setLineWidth @stroke
-  Graphics.setLineStyle "rough"
+  Graphics.setLineStyle @borderLineStyle
   Graphics.setColor @strokeColor
   Graphics.polygon "line", box\getVertices!
   Graphics.setLineWidth oldLineWidth
@@ -113,9 +119,10 @@ class CheckBox extends Control
 
     @backColor = colors.downColor
     @frontColor = colors.upColor
-    @pressedColor = colors.strokeColor
+    @pressedColor = t.checkBox.pressedColor
     @disabledColor = colors.disabledColor
-    @strokeColor = {0, 0, 0}
+    @strokeColor = t.checkBox.borderLineColor
+    @borderLineStyle = t.checkBox.borderLineStyle
     @alpha = 1
     @reverseGroup = false
     @checked = false

@@ -39,10 +39,13 @@ Default =
       height: 25
       rx: 2
       ry: 2
-      margin: 4
+      margin: 3
       radius: 20
       segments: 300
       stroke: 3
+      pressedColor: {0.741, 0.761, 0.831}
+      borderLineColor: {0.361, 0.365, 0.38}
+      borderLineStyle: "smooth"
 
 
     textField:
