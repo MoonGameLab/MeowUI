@@ -9,7 +9,8 @@ colors   = assert require MeowUI.root .. "src.AddOns.Colors"
 tableHasValue = Mixins.tableHasValue
 
 stencilFunc = =>
-  -> Graphics.rectangle "fill", @x, @y, @width, @height
+  bg = @getBoundingBox!
+  -> Graphics.rectangle "fill", bg.x, bg.y, @getWidth!, @getHeight!
 
 class TextInput extends Control
 
@@ -118,7 +119,6 @@ class TextInput extends Control
     if @multiline
       return -- TODO: multiline
     else
-      box = @getBoundingBox!
       @indicatorx = @textx + width
       @indicatory = @texty
 
@@ -185,12 +185,12 @@ class TextInput extends Control
     if @visible == false then return -- keep in mind the Contorl checks if visible only when drawing.
     
     offsetx = @offsetx
-
+    bg = @getBoundingBox!
     if isText == false
       if key == "left"
         if @multiline == false
           @moveIndicator -1
-          if @indicatorx <= @x and @indiNum ~= 0
+          if @indicatorx <= bg.x and @indiNum ~= 0
             currentLine = @lines[@line]
             width = @font\getWidth utf8.sub(currentLine, @indiNum, @indiNum + 1)
             @offsetx = offsetx - width
@@ -209,11 +209,11 @@ class TextInput extends Control
         if @multiline == false
           @moveIndicator 1
           currentLine = @lines[@line]
-          if @indicatorx >= (@x + @width) and @indiNum ~= utf8.len(currentLine)
+          if @indicatorx >= (bg.x + @getWidth!) and @indiNum ~= utf8.len(currentLine)
             width = @font\getWidth utf8.sub(currentLine, @indiNum, @indiNum)
             @offsetx = offsetx + width
           elseif @indiNum == utf8.len(currentLine) and offsetx ~= ((@font\getWidth(currentLine)) - @width + 10) and @font\getWidth(currentLine) + @textoffsetx > @width
-            @offsetx = ((@font\getWidth(currentLine)) - @width + 10)
+            @offsetx = ((@font\getWidth(currentLine)) - @getWidth! + 10)
         else
           -- Todo Multiline
           return
@@ -397,10 +397,10 @@ class TextInput extends Control
     @processKey text, true
 
   drawIndicator: =>
-    if @showIndicator and @isFocused!
+    if @showIndicator and @getFocused!
       r, g, b, a = Graphics.getColor!
       Graphics.setColor colors.black
-      Graphics.rectangle "fill", @indicatorx, @indicatory - 2.5, 1, @height - 5
+      Graphics.rectangle "fill", @indicatorx, @indicatory - 2.5, 1, @getHeight! - 5
       Graphics.setColor r, g, b, a
 
   drawText: =>
@@ -409,24 +409,25 @@ class TextInput extends Control
     Graphics.setFont @font
     Graphics.setColor colors.black
     str = @lines[1]
-    box = @getBoundingBox!
     Graphics.print str, math.floor(@textx), math.floor(@texty)
     Graphics.setColor r, g, b, a
     Graphics.setFont font
     Graphics.setColor r, g, b, a
 
   drawBgBox: =>
+    bg = @getBoundingBox!
     r, g, b, a = Graphics.getColor!
     color = colors.gray
     color[4] = color[4] or @alpha
     Graphics.setColor color
-    Graphics.rectangle "fill", @x - @stroke, @y - @stroke, @width + @stroke*2, @height + @stroke*2, @brx, @bry
+    Graphics.rectangle "fill", bg.x - @stroke, bg.y - @stroke, @getWidth! + @stroke*2, @getHeight! + @stroke*2, @brx, @bry
     Graphics.setColor r, g, b, a 
 
   drawTextBox: =>
+    bg = @getBoundingBox!
     r, g, b, a = Graphics.getColor!
     Graphics.setColor colors.white
-    Graphics.rectangle "fill", @x, @y, @width, @height, @rx, @ry
+    Graphics.rectangle "fill", bg.x, bg.y, @getWidth!, @getHeight!, @rx, @ry
 
   drawTextEffects: =>
     if @allTextSelected
@@ -441,7 +442,6 @@ class TextInput extends Control
       Graphics.setColor colors.white
 
   draw: =>
-
     @drawBgBox!
     Graphics.stencil stencilFunc @
     Graphics.setStencilTest "greater", 0

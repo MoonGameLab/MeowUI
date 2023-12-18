@@ -87,9 +87,6 @@ class Frame extends Content
   setPosition: (x, y) =>
     super x, y
 
-  addChild: (child) =>
-    super child
-
   onFocus: =>
     @focused = true
 
