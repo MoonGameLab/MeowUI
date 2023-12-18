@@ -58,7 +58,8 @@ class Control
     @makeTopWhenClicked = false
 
     @focusEnabled = true
-
+    @focused = false
+    
   --- gets control id
   -- @treturn string id
   getId: =>
@@ -647,6 +648,12 @@ class Control
   
   isFocusEnabled: =>
     @focusEnabled
+
+  setFocused: (bool) =>
+    @focused = bool
+
+  getFocused: =>
+    @focused 
 
   --- list of functions to override when boundingbox is of type Box.
   -- @table boxOverrides

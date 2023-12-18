@@ -14,15 +14,6 @@ Mouse = love.mouse
 Chrono     = assert require MeowUI.cwd .. "Core.Chrono"
 
 -- @local
-dispatch = (control, name, ...) ->
-    control.events\dispatch control.events\getEvent(name),
-      ...
-    if control\getNotifyParent!
-      p = control\getParent!
-      dispatch p, name, ...
-
-
--- @local
 debug = (hitControl) ->
   if hitControl and hitControl._d
     DEBUG\watch hitControl -- TODO: change it to use focusedControl
@@ -32,6 +23,14 @@ debug = (hitControl) ->
     return hitControl
 
 class Manager extends Singleton
+
+  @dispatch: (control, name, ...) =>
+    control.events\dispatch control.events\getEvent(name),
+      ...
+    if control\getNotifyParent!
+      p = control\getParent!
+      @notify p, name, ...
+
 
   --- constructor.
   new: =>
@@ -50,10 +49,11 @@ class Manager extends Singleton
   --- updates the manager.
   -- @tparam number dt
   update: (dt) =>
+    -- if @focusControl then print @focusControl\getId!
     Chrono.getInstance!\update dt
     if @rootControl then @rootControl\update dt
     if @focusControl and @focusControl.updateWhenFocused
-      dispatch @focusControl, "UI_UPDATE", dt
+      @@dispatch @focusControl, "UI_UPDATE", dt
 
   --- draws the manager.
   draw: =>
@@ -75,15 +75,15 @@ class Manager extends Singleton
       hitControl = debug hitControl
 
     if hitControl ~= @hoverControl
-      if @hoverControl then dispatch @hoverControl, "UI_MOUSE_LEAVE"
+      if @hoverControl then @@dispatch @hoverControl, "UI_MOUSE_LEAVE"
 
       @hoverControl = hitControl
 
-      if hitControl then dispatch hitControl, "UI_MOUSE_ENTER"
+      if hitControl then @@dispatch hitControl, "UI_MOUSE_ENTER"
 
-    if @holdControl then dispatch @holdControl, "UI_MOUSE_MOVE", x, y, dx, dy
+    if @holdControl then @@dispatch @holdControl, "UI_MOUSE_MOVE", x, y, dx, dy
     else
-      if @hoverControl then dispatch @hoverControl, "UI_MOUSE_MOVE", x, y, dx, dy
+      if @hoverControl then @@dispatch @hoverControl, "UI_MOUSE_MOVE", x, y, dx, dy
 
   --- focuse on given control.
   -- @tparam Control control
@@ -91,14 +91,24 @@ class Manager extends Singleton
     if @focusControl == control then return
 
     if @focusControl
-      dispatch @focusControl, "UI_UN_FOCUS"
+      @@dispatch @focusControl, "UI_UN_FOCUS"
       @focusControl\rollBackDepth!
+      @focusControl\setFocused false
 
     @focusControl = control
     if control\getMakeTopWhenClicked! then control\makeTop!
 
     if @focusControl
-      dispatch @focusControl, "UI_FOCUS"
+      @@dispatch @focusControl, "UI_FOCUS"
+      @focusControl\setFocused true
+
+  -- ALPHA
+  notify: (control, name) =>
+    switch name
+      when "UI_FOCUS"
+        control\setFocused true
+      when "UI_UN_FOCUS"
+        control\setFocused false
 
   --- callback function triggered when a mouse button is pressed.
   -- @tparam number x
@@ -114,7 +124,7 @@ class Manager extends Singleton
     if MeowUI.debug then hitControl = debug hitControl
 
     if hitControl
-      dispatch hitControl, "UI_MOUSE_DOWN", x, y, button, isTouch
+      @@dispatch hitControl, "UI_MOUSE_DOWN", x, y, button, isTouch
       @holdControl = hitControl
       
     if hitControl
@@ -129,7 +139,7 @@ class Manager extends Singleton
   -- @tparam boolean isTouch
   mousereleased: (x, y, button, isTouch) =>
     if @holdControl
-      dispatch @holdControl, "UI_MOUSE_UP", x, y, button, isTouch
+      @@dispatch @holdControl, "UI_MOUSE_UP", x, y, button, isTouch
       if @rootControl
 
         hitControl = @rootControl\hitTest x, y
@@ -142,12 +152,12 @@ class Manager extends Singleton
             @lastClickControl == @holdControl and
             (Timer.getTime! - @lastClickTime <= 0.4)
 
-            dispatch @holdControl, "UI_DB_CLICK", @holdControl, x, y
+            @@dispatch @holdControl, "UI_DB_CLICK", @holdControl, x, y
             @lastClickControl = nil
             @lastClickTime = 0
           else
 
-            dispatch @holdControl, "UI_CLICK", @holdControl, x, y
+            @@dispatch @holdControl, "UI_CLICK", @holdControl, x, y
             @lastClickControl = @holdControl
             @lastClickTime = Timer.getTime!
 
@@ -164,7 +174,7 @@ class Manager extends Singleton
 
     while hitControl
       @mousemoved Mouse\getX!, Mouse\getY!, 0, 0
-      if dispatch hitControl, "UI_WHELL_MOVE", x, y then return
+      if @@dispatch hitControl, "UI_WHELL_MOVE", x, y then return
       hitControl = hitControl\getParent!
 
   --- callback function triggered when a key is pressed.
@@ -173,17 +183,17 @@ class Manager extends Singleton
   -- @tparam boolean isrepeat
   keypressed: (key, scancode, isrepeat) =>
     if key == "f1" then MeowUI.debug = not MeowUI.debug
-    if @focusControl then dispatch @focusControl, "UI_KEY_DOWN", key, scancode, isrepeat
+    if @focusControl then @@dispatch @focusControl, "UI_KEY_DOWN", key, scancode, isrepeat
 
   --- callback function triggered when a keyboard key is released.
   -- @tparam KeyConstant key
   keyreleased: (key) =>
-    if @focusControl then dispatch @focusControl, "UI_KEY_UP", key
+    if @focusControl then @@dispatch @focusControl, "UI_KEY_UP", key
 
   --- called when text has been entered by the user.
   -- @tparam string text
   textinput: (text) =>
-    if @focusControl then dispatch @focusControl, "UI_TEXT_INPUT", text
+    if @focusControl then @@dispatch @focusControl, "UI_TEXT_INPUT", text
 
   --- resize the root control
   -- @tparam number w
