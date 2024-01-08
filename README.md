@@ -10,7 +10,7 @@ Currently based on LÖVE 11.4 MoonScript 0.5
 
 ​	See : https://github.com/Tourahi/MeowUI-Demo
 
-​	How to make a control <TODO>.
+​	How to make a control TODO.
 
 **Third-party**
 
