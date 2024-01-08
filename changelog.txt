@@ -2,6 +2,19 @@
 
 
 ================================================
+Version 11.4 - Alpha (December 18 - 2023)
+================================================
+[FIXED][Manager][Control]
+    * issue : When we notify the parent that teh child has dispatched an event we dispatch the parent event also
+        and that caused some problems. For example when the child is Focused the parent dispatch the same event
+        since it gets notifyed and it becomes the focused ctrl instead of the child.
+    * solution :
+        ALPHA -> commit: 77f0c70d1ea9396bc7b55596f5c4e729d99c8e3a
+        STILL NEEDS TESTS.
+
+
+
+================================================
 Version 11.4 - Alpha (November 26 - 2023)
 ================================================
 [ADDED][Manager][Control]

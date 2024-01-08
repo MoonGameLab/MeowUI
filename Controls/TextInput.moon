@@ -32,8 +32,8 @@ class TextInput extends Control
     @stroke = common.stroke
     @rx = style.rx
     @ry = style.ry
-    @brx = 0
-    @bry = 0
+    @brx = style.rx
+    @bry = style.ry
 
     @keyDown = "none"
     @limit = 0
@@ -419,6 +419,7 @@ class TextInput extends Control
     r, g, b, a = Graphics.getColor!
     color = colors.gray
     color[4] = color[4] or @alpha
+    Graphics.setLineStyle "smooth"
     Graphics.setColor color
     Graphics.rectangle "fill", bg.x - @stroke, bg.y - @stroke, @getWidth! + @stroke*2, @getHeight! + @stroke*2, @brx, @bry
     Graphics.setColor r, g, b, a 
@@ -426,6 +427,7 @@ class TextInput extends Control
   drawTextBox: =>
     bg = @getBoundingBox!
     r, g, b, a = Graphics.getColor!
+    Graphics.setLineStyle "smooth"
     Graphics.setColor colors.white
     Graphics.rectangle "fill", bg.x, bg.y, @getWidth!, @getHeight!, @rx, @ry
 

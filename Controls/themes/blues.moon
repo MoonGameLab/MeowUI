@@ -49,8 +49,8 @@ Default =
 
 
     textField:
-      rx: 5
-      ry: 5
+      rx: 15
+      ry: 15
       marginCorner: 18
       textAreaColor: { 0.0392156862745, 0.0392156862745, 0.0392156862745 }
       textColor: { 1, 1, 1 }
