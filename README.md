@@ -27,19 +27,19 @@ Button = assert require MeowUI.c_cwd .. "Button"
 
 with love
   .load = ->
-		-- Get the manager (Takes care of all events). <Singleton>
-		export manager = MeowUI.manager
-		-- Get the root control. <Singleton>
-		root = manager\getRoot!
-		
-		-- And lets make a fansy polygon shaped button.
-		bPoly = with Button "Polygon"
-			\setPosition 200, 200
-			\setRadius 25
-			\setSides 6
-		
-		-- Finally add the new button as a child to the root so it can be drawn updated etc...
-		root\addChild frame
+    -- Get the manager (Takes care of all events). <Singleton>
+    export manager = MeowUI.manager
+    -- Get the root control. <Singleton>
+    root = manager\getRoot!
+
+    -- And lets make a fansy polygon shaped button.
+    bPoly = with Button "Polygon"
+      \setPosition 200, 200
+      \setRadius 25
+      \setSides 6
+
+    -- Finally add the new button as a child to the root so it can be drawn updated etc...
+    root\addChild frame
 
   .update = (dt) ->
     manager\update dt
