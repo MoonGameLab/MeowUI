@@ -39,7 +39,7 @@ with love
       \setSides 6
 
     -- Finally add the new button as a child to the root so it can be drawn updated etc...
-    root\addChild frame
+    root\addChild bPoly
 
   .update = (dt) ->
     manager\update dt
