@@ -32,7 +32,7 @@ with love
     -- Get the root control. <Singleton>
     root = manager\getRoot!
 
-    -- And lets make a fansy polygon shaped button.
+    -- And lets make a fancy polygon shaped button.
     bPoly = with Button "Polygon"
       \setPosition 200, 200
       \setRadius 25
