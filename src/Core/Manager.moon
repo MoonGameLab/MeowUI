@@ -24,6 +24,7 @@ debug = (hitControl) ->
 
 class Manager extends Singleton
 
+  -- @local
   @dispatch: (control, name, ...) =>
     control.events\dispatch control.events\getEvent(name),
       ...
@@ -102,7 +103,7 @@ class Manager extends Singleton
       @@dispatch @focusControl, "UI_FOCUS"
       @focusControl\setFocused true
 
-  -- ALPHA
+  -- @local
   notify: (control, name) =>
     switch name
       when "UI_FOCUS"
@@ -128,7 +129,7 @@ class Manager extends Singleton
       @holdControl = hitControl
       
     if hitControl
-      if hitControl\isFocusEnabled! then @setFocus hitControl
+      if hitControl\getFocusEnabled! then @setFocus hitControl
     else
       @setFocus @focusControl
 

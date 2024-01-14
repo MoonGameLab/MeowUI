@@ -615,43 +615,55 @@ class Control
   getLabel: =>
     @label
 
+  --- sets notifyParent
+  -- @tparam bool bool
   setNotifyParent: (bool) =>
     @notifyParent = bool
 
+  --- gets notifyParent
+  -- @tparam bool bool
   getNotifyParent: (bool) =>
     @notifyParent
 
+  -- sets makeTopWhenClicked
+  -- @tparam bool bool
   setMakeTopWhenClicked: (bool) =>
     @makeTopWhenClicked = bool
 
+  -- gets makeTopWhenClicked
+  -- @treturn 
   getMakeTopWhenClicked: =>
     @makeTopWhenClicked
 
+  -- @local
   makeTop: =>
     @originalDepth = @depth
     @setDepth @@curMaxDepth + 1
     if @parent then @parent\sortChildren!
 
+  -- @local
   rollBackDepth: =>
     if @makeTopWhenClicked
       @setDepth @originalDepth
       if @parent then @parent\sortChildren!
 
-  setFocuseOnAdd: (bool) =>
-    @focuseOnAdd bool
-
-  getFocuseOnAdd: =>
-    @focuseOnAdd
-
+  -- enables focus for control
+  -- @tparam bool bool
   setFocusEnabled: (bool) =>
     @focusEnabled = bool
   
-  isFocusEnabled: =>
+  -- gets focusEnabled
+  -- @treturn bool
+  getFocusEnabled: =>
     @focusEnabled
 
+  -- sets focused (Used by Manager)
+  -- @tparam bool bool
   setFocused: (bool) =>
     @focused = bool
 
+  -- gets focused
+  -- @treturn bool
   getFocused: =>
     @focused 
 
