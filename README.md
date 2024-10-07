@@ -10,7 +10,7 @@ Currently based on LÖVE 11.4 MoonScript 0.5
 
 ​	See : https://github.com/Tourahi/MeowUI-Demo
 
-![Scrn](https://github.com/MeowUI/.github/blob/main/public/Scrn.png)	
+![Scrn](https://github.com/MoonGameLab/MeowUI/blob/master/public/Scrn.png)	
 
 **Third-party**
 
