@@ -6,9 +6,15 @@ Inspired by [CatUI](https://github.com/wilhantian/catui), but the core modules w
 
 Currently based on LÖVE 11.4 MoonScript 0.5 
 
+#### DOCS 
+
+https://moongamelab.github.io/MeowUI/
+
 ### Demo
 
 ​	See : https://github.com/Tourahi/MeowUI-Demo
+
+​	Note : Don't forget to clone with "--recurse-submodules" to clone utf8 submodule also.
 
 ![Scrn](https://github.com/MoonGameLab/MeowUI/blob/master/public/Scrn.png)	
 
