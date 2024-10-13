@@ -4,7 +4,9 @@
 
 Inspired by [CatUI](https://github.com/wilhantian/catui), but the core modules were heavily modified. Some inspiration was also taken from [LoveFrames](https://github.com/linux-man/LoveFrames).
 
-Currently based on LÖVE 11.4 MoonScript 0.5 
+Currently based on LÖVE 11.5 MoonScript 0.5
+
+NOTE : You can clone the pre-compiled version from [master-lua](https://github.com/MoonGameLab/MeowUI/tree/master-lua) or get it compressed from release.
 
 #### DOCS 
 
